@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="fragment"
+            type="kr.daejeonuinversity.lungexercise.view.infoinput.fragment.BodyFragment" />
+
+        <variable
+            name="viewmodel"
+            type="kr.daejeonuinversity.lungexercise.viewmodel.BodyViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_weight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tx_input_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_start_frag_tx_birth"
+                android:layout_marginTop="@dimen/margin_top_frag_tx_birth"
+                android:fontFamily="@font/pretendard_semibold"
+                android:text="@string/tx_input_weight"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_tx_input_birth"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_start_frag_edt_weight"
+                android:layout_marginTop="@dimen/margin_top_edt_weight"
+                android:layout_marginEnd="@dimen/margin_end_edt_weight"
+                android:background="@drawable/border_edt_weight"
+                app:layout_constraintEnd_toStartOf="@+id/tx_kg"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tx_input_weight">
+
+                <EditText
+                    android:id="@+id/edt_weight"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_edt_weight"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:textSize="@dimen/size_edt_weight"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@={viewmodel.txEdtWeight}"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tx_kg"
+                android:layout_width="@dimen/width_tx_cm_kg"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_end_tx_kg"
+                android:fontFamily="@font/pretendard_regular"
+                android:gravity="center"
+                android:text="@string/tx_kg"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_tx_kg"
+                app:layout_constraintBottom_toBottomOf="@+id/constraint_weight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/constraint_weight" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_weight">
+
+            <TextView
+                android:id="@+id/tx_input_stature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_start_frag_tx_birth"
+                android:layout_marginTop="@dimen/margin_top_layout_stature"
+                android:fontFamily="@font/pretendard_semibold"
+                android:text="@string/tx_stature"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_tx_input_birth"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_stature"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_start_frag_edt_weight"
+                android:layout_marginTop="@dimen/margin_top_edt_weight"
+                android:layout_marginEnd="@dimen/margin_end_edt_weight"
+                android:background="@drawable/border_edt_weight"
+                app:layout_constraintEnd_toStartOf="@+id/tx_cm"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tx_input_stature">
+
+                <EditText
+                    android:id="@+id/edt_stature"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_edt_weight"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:textSize="@dimen/size_edt_weight"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@={viewmodel.txEdtStature}"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tx_cm"
+                android:layout_width="@dimen/width_tx_cm_kg"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_end_tx_kg"
+                android:fontFamily="@font/pretendard_regular"
+                android:gravity="center"
+                android:text="@string/tx_cm"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_tx_kg"
+                app:layout_constraintBottom_toBottomOf="@+id/constraint_stature"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/constraint_stature" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

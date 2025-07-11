@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    
+    <data>
+        
+        <variable
+            name="fragment"
+            type="kr.daejeonuinversity.lungexercise.view.infoinput.fragment.BirthdayFragment" />
+        
+        <variable
+            name="viewmodel"
+            type="kr.daejeonuinversity.lungexercise.viewmodel.BirthdayViewModel" />
+        
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tx_input_birth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_start_frag_tx_birth"
+            android:layout_marginTop="@dimen/margin_top_frag_tx_birth"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="@string/tx_input_birth"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_tx_input_birth"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_side_frag_tx_birth"
+            android:layout_marginTop="@dimen/margin_top_frag_birth_linear_birth"
+            android:layout_marginEnd="@dimen/margin_side_frag_tx_birth"
+            android:background="@drawable/border_edt_birth"
+            android:orientation="horizontal"
+            android:onClick="@{() -> viewmodel.btnBirthClicked()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tx_input_birth">
+
+            <EditText
+                android:id="@+id/edt_birth"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_edt_birth"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:background="@null"
+                android:focusable="false"
+                android:textColor="@color/black"
+                android:onClick="@{() -> viewmodel.btnBirthClicked()}"
+                android:layout_marginStart="@dimen/margin_side_edt_birth"
+                android:layout_marginEnd="@dimen/margin_side_edt_birth"
+                android:hint="@string/tx_ex_birth" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

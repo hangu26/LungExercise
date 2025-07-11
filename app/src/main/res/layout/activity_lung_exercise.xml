@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="kr.daejeonuinversity.lungexercise.view.lungexercise.LungExerciseActivity" />
+
+        <variable
+            name="viewmodel"
+            type="kr.daejeonuinversity.lungexercise.viewmodel.LungExerciseViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white"
+                app:contentInsetStart="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/size_icon_back"
+                        android:layout_height="@dimen/size_icon_back"
+                        android:layout_marginStart="@dimen/margin_start_icon_back"
+                        android:onClick="@{() -> viewmodel.btnBack()}"
+                        android:src="@drawable/icon_back"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:gravity="center"
+                        android:text="@string/tx_lung_exercise"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_tx_app_bar_input_info"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_breath"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_side_constraint_breath"
+            android:layout_marginTop="@dimen/margin_top_constraint_breath"
+            android:layout_marginEnd="@dimen/margin_side_constraint_breath"
+            android:background="@drawable/border_constraint_breath"
+            android:clickable="true"
+            android:elevation="20dp"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+            <ImageView
+                android:id="@+id/img_breath"
+                android:layout_width="@dimen/size_icon_breath"
+                android:layout_height="@dimen/size_icon_breath"
+                android:layout_marginStart="@dimen/margin_start_icon_breath"
+                android:layout_marginTop="@dimen/margin_vertical_icon_breath"
+                android:layout_marginBottom="@dimen/margin_vertical_icon_breath"
+                android:src="@drawable/icon_breath"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tx_practice_breath_01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_start_tx_practice_breath"
+                android:fontFamily="@font/pretendard_bold"
+                android:textColor="@color/black"
+                android:text="@string/tx_practice_breath"
+                android:textSize="@dimen/size_tx_practice_breath"
+                app:layout_constraintBottom_toTopOf="@+id/tx_practice_breath_02"
+                app:layout_constraintStart_toEndOf="@+id/img_breath"
+                app:layout_constraintTop_toTopOf="@+id/img_breath" />
+
+            <TextView
+                android:id="@+id/tx_practice_breath_02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_start_tx_practice_breath"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/tx_practice_breathing"
+                android:textColor="@color/appBar_title_01"
+                app:layout_constraintBottom_toBottomOf="@+id/img_breath"
+                app:layout_constraintStart_toEndOf="@+id/img_breath"
+                app:layout_constraintTop_toBottomOf="@+id/tx_practice_breath_01" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_video"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_side_constraint_breath"
+            android:layout_marginTop="@dimen/margin_top_constraint_breath"
+            android:layout_marginEnd="@dimen/margin_side_constraint_breath"
+            android:background="@drawable/border_constraint_breath"
+            android:clickable="true"
+            android:elevation="20dp"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraint_breath">
+
+            <ImageView
+                android:id="@+id/img_video"
+                android:layout_width="@dimen/size_icon_breath"
+                android:layout_height="@dimen/size_icon_breath"
+                android:layout_marginStart="@dimen/margin_start_icon_breath"
+                android:layout_marginTop="@dimen/margin_vertical_icon_breath"
+                android:layout_marginBottom="@dimen/margin_vertical_icon_breath"
+                android:src="@drawable/icon_video"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tx_video_01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_start_tx_practice_breath"
+                android:fontFamily="@font/pretendard_bold"
+                android:textColor="@color/black"
+                android:text="@string/tx_practice_video_01"
+                android:textSize="@dimen/size_tx_practice_breath"
+                app:layout_constraintBottom_toTopOf="@+id/tx_video_02"
+                app:layout_constraintStart_toEndOf="@+id/img_video"
+                app:layout_constraintTop_toTopOf="@+id/img_video" />
+
+            <TextView
+                android:id="@+id/tx_video_02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_start_tx_practice_breath"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/tx_practice_video_02"
+                android:textColor="@color/appBar_title_01"
+                app:layout_constraintBottom_toBottomOf="@+id/img_video"
+                app:layout_constraintStart_toEndOf="@+id/img_video"
+                app:layout_constraintTop_toBottomOf="@+id/tx_video_01" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

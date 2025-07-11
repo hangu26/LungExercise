@@ -1,0 +1,35 @@
+package kr.daejeonuinversity.lungexercise.viewmodel
+
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import kr.daejeonuinversity.lungexercise.util.util.HeartRateReceiver
+
+class HeartRateViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val _heartRate = MutableLiveData<Float>()
+    val heartRate: LiveData<Float> get() = _heartRate
+
+    private val _stepCount = MutableLiveData<Int>()
+    val stepCount: LiveData<Int> get() = _stepCount
+
+    private val _spo2 = MutableLiveData<Float>()
+    val spo2: LiveData<Float> get() = _spo2
+
+    private val receiver = HeartRateReceiver(application) { data ->
+        when (data["type"]) {
+            "heart_rate" -> _heartRate.postValue(data["value"] as Float)
+            "step_count" -> _stepCount.postValue(data["value"] as Int)
+            "spo2" -> _spo2.postValue(data["value"] as Float)
+        }
+    }
+
+    fun startReceiving() {
+        receiver.register()
+    }
+
+    fun stopReceiving() {
+        receiver.unregister()
+    }
+}

@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="kr.daejeonuinversity.lungexercise.view.main.MainActivity" />
+
+        <variable
+            name="viewModel"
+            type="kr.daejeonuinversity.lungexercise.viewmodel.MainViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/border_appbar"
+                app:contentInsetStart="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/size_icon_side_bar"
+                        android:layout_height="@dimen/size_icon_side_bar"
+                        android:layout_marginStart="@dimen/margin_start_icon_side_bar"
+                        android:src="@drawable/icon_side_bar"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:text="@string/tx_app_name"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_tx_app_bar_input_info"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:id="@+id/tx_hello_guest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_tx_hello_user"
+            android:layout_marginTop="@dimen/margin_tx_hello_user"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="@string/tx_hello_guest"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_tx_hello_guest"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_side_constraint_btn"
+            android:layout_marginBottom="@dimen/margin_side_constraint_btn"
+            android:layout_marginTop="@dimen/margin_top_constraint_btn"
+            android:layout_marginEnd="@dimen/margin_side_constraint_btn"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tx_hello_guest">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btn_lung_exercise_detail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_main_btn"
+                    android:onClick="@{() -> viewModel.btnLungExerciseDetail()}"
+                    android:clickable="true"
+                    android:elevation="20dp"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/icon_heart"
+                        android:layout_width="@dimen/size_icon_heart"
+                        android:layout_height="@dimen/size_icon_heart"
+                        android:layout_marginStart="@dimen/margin_icon_heart"
+                        android:layout_marginTop="@dimen/margin_icon_heart"
+                        android:src="@drawable/icon_heart"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tx_lung_exercise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_icon_heart"
+                        android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:textColor="@color/black"
+                        android:text="@string/tx_lung_exercise"
+                        android:textSize="@dimen/size_tx_lung_exercise"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/icon_heart" />
+
+                    <TextView
+                        android:id="@+id/tx_exercise_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_icon_heart"
+                        android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                        android:layout_marginBottom="17dp"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:text="@string/tx_exercise_detail"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_tx_lung_exercise"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tx_lung_exercise" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btn_walking_test"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_main_btn"
+                    android:clickable="true"
+                    android:elevation="20dp"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/icon_exercise"
+                        android:layout_width="@dimen/size_icon_heart"
+                        android:layout_height="@dimen/size_icon_heart"
+                        android:layout_marginStart="@dimen/margin_icon_heart"
+                        android:layout_marginTop="@dimen/margin_icon_heart"
+                        android:src="@drawable/icon_exercise"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tx_exercise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_icon_heart"
+                        android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:textColor="@color/black"
+                        android:text="@string/tx_6_min_test"
+                        android:textSize="@dimen/size_tx_lung_exercise"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/icon_exercise" />
+
+                    <TextView
+                        android:id="@+id/tx_exercise_test"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_icon_heart"
+                        android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                        android:layout_marginBottom="17dp"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:text="@string/tx_walking_test"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_tx_lung_exercise"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tx_exercise" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_main_btn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/icon_calculate"
+                        android:layout_width="@dimen/size_icon_heart"
+                        android:layout_height="@dimen/size_icon_heart"
+                        android:layout_marginStart="@dimen/margin_icon_heart"
+                        android:layout_marginTop="@dimen/margin_icon_heart"
+                        android:src="@drawable/icon_calculate"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tx_calculate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_icon_heart"
+                        android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:textColor="@color/black"
+                        android:text="@string/tx_exercise_calculate"
+                        android:textSize="@dimen/size_tx_lung_exercise"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/icon_calculate" />
+
+                    <TextView
+                        android:id="@+id/tx_exercise_calculate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_icon_heart"
+                        android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                        android:layout_marginBottom="17dp"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:text="@string/tx_exercise_detail"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_tx_lung_exercise"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tx_calculate" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_main_btn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/icon_data"
+                        android:layout_width="@dimen/size_icon_heart"
+                        android:layout_height="@dimen/size_icon_heart"
+                        android:layout_marginStart="@dimen/margin_icon_heart"
+                        android:layout_marginTop="@dimen/margin_icon_heart"
+                        android:src="@drawable/icon_data"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tx_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_icon_heart"
+                        android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:textColor="@color/black"
+                        android:text="@string/tx_exercise_data"
+                        android:textSize="@dimen/size_tx_lung_exercise"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/icon_data" />
+
+                    <TextView
+                        android:id="@+id/tx_exercise_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_icon_heart"
+                        android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                        android:layout_marginBottom="17dp"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:text="@string/tx_walking_test"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_tx_lung_exercise"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tx_data" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_main_btn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/icon_edit_profile"
+                        android:layout_width="@dimen/size_icon_heart"
+                        android:layout_height="@dimen/size_icon_heart"
+                        android:layout_marginStart="@dimen/margin_icon_heart"
+                        android:layout_marginTop="@dimen/margin_icon_heart"
+                        android:src="@drawable/icon_edit_profile"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tx_edit_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_icon_heart"
+                        android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:textColor="@color/black"
+                        android:text="@string/tx_edit_profile"
+                        android:textSize="@dimen/size_tx_lung_exercise"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/icon_edit_profile" />
+
+                    <TextView
+                        android:id="@+id/tx_edit_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_icon_heart"
+                        android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                        android:layout_marginBottom="17dp"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:text="@string/tx_edit_information"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_tx_lung_exercise"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tx_edit_profile" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_main_btn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/icon_tip"
+                        android:layout_width="@dimen/size_icon_heart"
+                        android:layout_height="@dimen/size_icon_heart"
+                        android:layout_marginStart="@dimen/margin_icon_heart"
+                        android:layout_marginTop="@dimen/margin_icon_heart"
+                        android:src="@drawable/icon_tip"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tx_tip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_icon_heart"
+                        android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:textColor="@color/black"
+                        android:text="@string/tx_tip"
+                        android:textSize="@dimen/size_tx_lung_exercise"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/icon_tip" />
+
+                    <TextView
+                        android:id="@+id/tx_tip_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_icon_heart"
+                        android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                        android:layout_marginBottom="17dp"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:text="@string/tx_tip_02"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_tx_lung_exercise"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tx_tip" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bottom_nav"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_navigation_height"
+            android:background="@drawable/bottom_border"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.4"/>
+
+            <ImageButton
+                android:id="@+id/ib_home"
+                style="@style/ImageButton.size.icon"
+                android:layout_gravity="top"
+                android:layout_weight="1"
+                android:src="@drawable/icon_home"
+                tools:ignore="UseAppTint" />
+            <!--이미지 버튼 색조 설정, -->
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"/>
+
+            <ImageButton
+                android:id="@+id/ib_exercise"
+                style="@style/ImageButton.size.icon"
+                android:layout_gravity="top"
+                android:layout_weight="1"
+                android:src="@drawable/ib_exercise"
+                tools:ignore="UseAppTint" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"/>
+
+            <ImageButton
+                android:id="@+id/ib_data"
+                style="@style/ImageButton.size.icon"
+                android:layout_gravity="top"
+                android:layout_weight="1"
+                android:src="@drawable/ib_data"
+                tools:ignore="UseAppTint" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"/>
+
+            <ImageButton
+                android:id="@+id/ib_setting"
+                style="@style/ImageButton.size.icon"
+                android:layout_gravity="top"
+                android:layout_weight="1"
+                android:src="@drawable/ib_setting"
+                tools:ignore="UseAppTint" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.4"/>
+
+
+        </LinearLayout>
+
+        <!--
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/tvHeartRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="심박수: "
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tvStepCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="걸음수: "
+                android:textSize="24sp"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/tvSpo2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SpO2: "
+                android:textSize="24sp"
+                android:layout_marginTop="16dp" />
+        </LinearLayout>
+        -->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

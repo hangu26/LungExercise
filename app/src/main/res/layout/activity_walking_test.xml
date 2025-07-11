@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="kr.daejeonuinversity.lungexercise.view.walkingtest.WalkingTestActivity" />
+
+        <variable
+            name="viewmodel"
+            type="kr.daejeonuinversity.lungexercise.viewmodel.WalkingTestViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white"
+                app:contentInsetStart="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/size_icon_back"
+                        android:layout_height="@dimen/size_icon_back"
+                        android:layout_marginStart="@dimen/margin_start_icon_back"
+                        android:onClick="@{() -> viewmodel.btnBack()}"
+                        android:src="@drawable/icon_back"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:gravity="center"
+                        android:text="@string/tx_6_min_test"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_tx_app_bar_input_info"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <kr.daejeonuinversity.lungexercise.util.util.HeartTimerView
+            android:id="@+id/heart_timer_view"
+            android:layout_width="@dimen/size_heart_timer_view"
+            android:layout_height="@dimen/size_heart_timer_view"
+            android:layout_marginTop="@dimen/margin_top_heart_timer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
+
+        <LinearLayout
+            android:id="@+id/linear_btn_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_linear_btn_start_stop"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/heart_timer_view">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_start"
+                android:layout_width="@dimen/width_btn_timer"
+                android:layout_height="@dimen/height_btn_timer"
+                android:layout_weight="1"
+                android:background="@drawable/border_btn_start_timer"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="@{() -> viewmodel.btnStart()}">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:gravity="center"
+                    android:text="@string/tx_start"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_tx_btn_next"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Space
+                android:layout_width="27dp"
+                android:layout_height="match_parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_stop"
+                android:layout_width="@dimen/width_btn_timer"
+                android:layout_height="@dimen/height_btn_timer"
+                android:layout_weight="1"
+                android:background="@drawable/border_btn_stop_timer"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heart_timer_view"
+                android:onClick="@{() -> viewmodel.btnStop()}">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:gravity="center"
+                    android:text="@string/tx_stop"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_tx_btn_next"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_linear_tx_steps_heart"
+            app:layout_constraintEnd_toEndOf="@+id/linear_btn_timer"
+            app:layout_constraintStart_toStartOf="@+id/linear_btn_timer"
+            app:layout_constraintTop_toBottomOf="@+id/linear_btn_timer">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/img_steps"
+                    android:layout_width="@dimen/size_img_steps"
+                    android:layout_height="@dimen/size_img_steps"
+                    android:src="@drawable/icon_step"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tx_steps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top_tx_steps"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="@string/tx_steps"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_tx_steps"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_steps" />
+
+                <TextView
+                    android:id="@+id/tx_step_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_tx_timer_body_state"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tx_steps" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <FrameLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/frame_layout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/img_heart"
+                    android:layout_width="@dimen/size_img_steps"
+                    android:layout_height="@dimen/size_img_steps"
+                    android:src="@drawable/icon_heart_timer"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tx_heart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top_tx_steps"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="초당 심박수"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_tx_steps"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_heart" />
+
+                <TextView
+                    android:id="@+id/tx_heart_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_tx_timer_body_state"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tx_heart" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">LungExercise</string>
+    <string name="tx_app_name">앱 이름</string>
+    <string name="tx_app_bar_input_info">사용자 정보 입력</string>
+    <string name="tx_btn_next">다음으로</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tx_input_birth">생년월일을 입력해 주세요.</string>
+    <string name="tx_ex_year">20000101</string>
+    <string name="tx_ex_month">01</string>
+    <string name="tx_ex_day">01</string>
+    <string name="tx_choice_gender">성별을 선택해주세요.</string>
+    <string name="tx_gender_man">남성</string>
+    <string name="tx_gender_woman">여성</string>
+    <string name="tx_input_weight">체중을 입력해주세요.</string>
+    <string name="tx_kg">kg</string>
+    <string name="tx_stature">신장을 입력해주세요.</string>
+    <string name="tx_cm">cm</string>
+    <string name="tx_hello_guest">게스트님, 안녕하세요</string>
+    <string name="tx_lung_exercise">폐장도인운동법</string>
+    <string name="tx_exercise_detail">운동법 안내</string>
+    <string name="tx_6_min_test">6분 보행검사</string>
+    <string name="tx_walking_test">보행 테스트</string>
+    <string name="tx_exercise_calculate">맞춤형 운동량 \n계산 및 시행</string>
+    <string name="tx_exercise_data">활동량\n</string>
+    <string name="tx_edit_profile">나의 정보 수정</string>
+    <string name="tx_edit_information">정보 수정</string>
+    <string name="tx_tip">도움 되는 정보</string>
+    <string name="tx_tip_02">유용한 팁</string>
+    <string name="tx_ex_birth">2000-01-01</string>
+    <string name="tx_lung_exercise_detail">폐장도인운동 따라하기(동영상)</string>
+    <string name="tx_practice_breath">호흡법 연습</string>
+    <string name="tx_practice_breathing">호흡법을 따로 연습해요!</string>
+    <string name="tx_practice_video_01">폐장도인운동 따라하기(동영상)</string>
+    <string name="tx_practice_video_02">미리 촬영된 폐장도인운동 영상이 재생돼요!</string>
+    <string name="tx_start">시작</string>
+    <string name="tx_stop">중지</string>
+    <string name="tx_steps">걸음 수</string>
+    <string name="tx_lets_practice_breathing">호흡법을 연습해볼까요?</string>
+    <string name="tx_normal_predict">정상 예측지(호기 시간)</string>
+    <string name="tx_confirm_result">결과확인</string>
+    <string name="tx_user_predict">사용자 호기시간</string>
+
+
+</resources>
