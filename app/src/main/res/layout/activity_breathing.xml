@@ -122,6 +122,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/tx_normal_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@{viewmodel.normalTime}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_tx_normal_predict"
+                app:layout_constraintStart_toEndOf="@+id/tx_normal_predict"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ProgressBar
                 android:id="@+id/progress_bar_normal"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -147,6 +158,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/progress_bar_normal" />
 
+            <TextView
+                android:id="@+id/tx_user_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@{viewmodel.userTime}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_tx_normal_predict"
+                app:layout_constraintStart_toEndOf="@+id/tx_user_predict"
+                app:layout_constraintTop_toTopOf="@+id/tx_user_predict"
+                app:layout_constraintBottom_toBottomOf="@+id/tx_user_predict"/>
 
             <ProgressBar
                 android:id="@+id/progress_bar_user"
