@@ -30,6 +30,7 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
     private val time = 8000
     private val userSeconds = 7000
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
