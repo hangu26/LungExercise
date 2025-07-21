@@ -151,6 +151,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linear_walk_heart"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_top_linear_tx_steps_heart"
@@ -248,6 +249,18 @@
 
 
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewmodel.txWalkDistance}"
+            android:fontFamily="@font/pretendard_bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_tx_steps"
+            app:layout_constraintTop_toBottomOf="@+id/linear_walk_heart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

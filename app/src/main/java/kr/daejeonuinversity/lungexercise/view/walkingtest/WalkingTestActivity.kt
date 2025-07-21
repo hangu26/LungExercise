@@ -33,8 +33,8 @@ class WalkingTestActivity :
 
         heartTimerView = binding.heartTimerView
 
-        val miBandReceiver = MiBandReceiver(this)
-        miBandReceiver.scanMiBand()
+//        val miBandReceiver = MiBandReceiver(this)
+//        miBandReceiver.scanMiBand()
 
         initButton()
         observe()

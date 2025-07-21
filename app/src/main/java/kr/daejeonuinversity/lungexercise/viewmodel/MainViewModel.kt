@@ -12,8 +12,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _goToLungExercise = MutableLiveData<Boolean>()
     val goToLungExercise = _goToLungExercise
 
+    private val _btnHistoryClicked = MutableLiveData<Boolean>()
+    val btnHistoryClicked = _btnHistoryClicked
+
+
     fun btnLungExerciseDetail(){
         goToLungExercise.value = true
+    }
+
+    fun btnHistory(){
+        _btnHistoryClicked.value = true
     }
 
 }

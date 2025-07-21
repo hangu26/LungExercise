@@ -12,6 +12,7 @@ import kr.daejeonuinversity.lungexercise.util.util.HeartRateReceiver
 import kr.daejeonuinversity.lungexercise.R
 import kr.daejeonuinversity.lungexercise.databinding.ActivityMainBinding
 import kr.daejeonuinversity.lungexercise.util.base.BaseActivity
+import kr.daejeonuinversity.lungexercise.view.history.HistoryActivity
 import kr.daejeonuinversity.lungexercise.view.lungexercise.LungExerciseActivity
 import kr.daejeonuinversity.lungexercise.view.walkingtest.WalkingTestActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.MainViewModel
@@ -65,6 +66,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun observe() = mViewModel.let { vm ->
+
+        vm.btnHistoryClicked.observe(this@MainActivity){
+            if (it){
+                val intent = Intent(this@MainActivity, HistoryActivity::class.java)
+                startActivityAnimation(intent, this@MainActivity)
+                finish()
+            }
+        }
 
         /**
         vm.heartRate.observe(this) {

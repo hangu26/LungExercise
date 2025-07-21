@@ -87,7 +87,7 @@
     <dimen name="height_btn_close_in_dialog">47dp</dimen>
     <dimen name="margin_top_btn_close_in_dialog">100dp</dimen>
     <dimen name="margin_bottom_btn_close_in_dialog">32dp</dimen>
-    <dimen name="tx_history_data_textview">22sp</dimen>
+    <dimen name="tx_history_data_textview">20sp</dimen>
 
 
 

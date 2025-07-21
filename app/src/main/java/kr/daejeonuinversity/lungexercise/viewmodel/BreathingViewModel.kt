@@ -50,7 +50,8 @@ class BreathingViewModel(private val repository: BreathRepository, application: 
         countJob?.cancel()
         countJob = viewModelScope.launch {
             for (i in 0 until totalSeconds + 1) {
-                _normalTime.postValue(" $i 초")
+                /** 테스트로 인해 _normalTime 잠시 주석 **/
+//                _normalTime.postValue(" $i 초")
                 delay(1000L)
             }
             _isResultAvailable.value = true

@@ -4,10 +4,12 @@ import kr.daejeonuinversity.lungexercise.viewmodel.BirthdayViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.BodyViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.BreathingViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.GenderViewModel
+import kr.daejeonuinversity.lungexercise.viewmodel.HistoryViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.InfoInputViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.LungExerciseViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.MainViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.SplashViewModel
+import kr.daejeonuinversity.lungexercise.viewmodel.VideoViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.WalkingTestViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -22,6 +24,8 @@ val module = module {
     viewModel { BodyViewModel(androidApplication()) }
     viewModel { LungExerciseViewModel(androidApplication()) }
     viewModel { WalkingTestViewModel(androidApplication()) }
-    viewModel { BreathingViewModel(androidApplication()) }
+    viewModel { BreathingViewModel(get(),androidApplication()) }
+    viewModel { HistoryViewModel(get(),androidApplication()) }
+    viewModel { VideoViewModel(androidApplication()) }
 
 }

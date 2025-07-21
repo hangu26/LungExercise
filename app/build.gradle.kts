@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "kr.daejeonuinversity.lungexercise"
-        minSdk = 31
+        minSdk = 29
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -42,7 +42,14 @@ android {
 }
 
 dependencies {
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
+// Room KTX 의존성 추가
+    implementation ("androidx.room:room-runtime:2.6.1")
+    kapt ("androidx.room:room-compiler:2.6.1")
+    implementation ("androidx.room:room-ktx:2.6.1")
+
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.1")
     implementation(project(":miband-sdk-kotlin"))
 
     // 이 SDK가 요구하는 것들

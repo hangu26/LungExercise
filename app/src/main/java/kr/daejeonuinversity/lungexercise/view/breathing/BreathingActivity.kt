@@ -28,7 +28,7 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
     private var progressAnimator: ObjectAnimator? = null
     private var userProgressAnimator: ObjectAnimator? = null
     private val time = 8000
-    private val userSeconds = 9000
+    private val userSeconds = 7000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,7 +111,10 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
 
         progressAnimator?.cancel()
 
-        progressAnimator = ObjectAnimator.ofInt(progressBar, "progress", 0, 100).apply {
+        progressBar.progress = 1000
+
+        /** 테스트용으로 잠깐 주석처리 **/
+        progressAnimator = ObjectAnimator.ofInt(progressBar, "progress", 100, 100).apply {
             duration = time.toLong()
             start()
         }
@@ -145,11 +148,14 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
 
         userProgressAnimator?.cancel()
 
-        userProgressAnimator = ObjectAnimator.ofInt(progressBar, "progress", 0, 100).apply {
-            duration = userSeconds.toLong()
-            start()
-        }
+        // 사용자 시간에 맞춰 0 ~ 87%만 진행되도록 설정 (7초 동안)
+        val maxProgressForUserTime = ((userSeconds.toFloat() / time) * 100).toInt() // 87
 
+        userProgressAnimator =
+            ObjectAnimator.ofInt(progressBar, "progress", 0, maxProgressForUserTime).apply {
+                duration = userSeconds.toLong() // 7초 동안
+                start()
+            }
     }
 
     private fun stopUserProgress() {
