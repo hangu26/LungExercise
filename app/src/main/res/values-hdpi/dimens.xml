@@ -75,6 +75,20 @@
     <dimen name="margin_top_progressbar_in_practice">15dp</dimen>
     <dimen name="margin_top_tx_user_predict">36dp</dimen>
     <dimen name="margin_bottom_btn_start_breath">147dp</dimen>
+    <dimen name="radius_border_result_breathing">11dp</dimen>
+    <dimen name="size_tx_result_breathing">15sp</dimen>
+    <dimen name="margin_top_tx_result_breathing_dialog">32dp</dimen>
+    <dimen name="margin_side_linear_result_time">30dp</dimen>
+    <dimen name="margin_top_linear_result_time">18dp</dimen>
+    <dimen name="width_constraint_result_time_dialog">134dp</dimen>
+    <dimen name="height_constraint_result_time_dialog">47dp</dimen>
+    <dimen name="margint_start_constraint_result_time_dialog">11dp</dimen>
+    <dimen name="width_btn_close_in_dialog">98dp</dimen>
+    <dimen name="height_btn_close_in_dialog">47dp</dimen>
+    <dimen name="margin_top_btn_close_in_dialog">100dp</dimen>
+    <dimen name="margin_bottom_btn_close_in_dialog">32dp</dimen>
+    <dimen name="tx_history_data_textview">22sp</dimen>
+
 
 
 </resources>

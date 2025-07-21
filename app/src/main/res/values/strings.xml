@@ -37,9 +37,26 @@
     <string name="tx_stop">중지</string>
     <string name="tx_steps">걸음 수</string>
     <string name="tx_lets_practice_breathing">호흡법을 연습해볼까요?</string>
-    <string name="tx_normal_predict">정상 예측지(호기 시간)</string>
+    <string name="tx_normal_predict">정상 예측지</string>
     <string name="tx_confirm_result">결과확인</string>
     <string name="tx_user_predict">사용자 호기시간</string>
+    <string name="tx_result_breathing">호흡법 연습 결과</string>
+    <string name="tx_user_breathing_time">사용자 호기시간 :</string>
+    <string name="tx_normal_time">정상 호기 시간 :</string>
+    <string name="tx_achievement_rate">달성률 :</string>
+    <string name="tx_close">닫기</string>
+    <string name="tx_breath_history">호흡 연습 기록</string>
+
+    <string name="tx_total_count_format">총 시행 횟수 : %1$d 회</string>
+    <string name="tx_average_time_format">평균 호기 시간 : %1$d 초</string>
+    <string name="tx_total_time_format">총 호기 시간 : %1$d 초</string>
+    <string name="tx_clear_count_format">성공 횟수 : %1$d 회</string>
+
+    <string name="tx_total_count_empty">총 시행 횟수 : 기록 없음</string>
+    <string name="tx_average_time_empty">평균 호기 시간 : 기록 없음</string>
+    <string name="tx_total_time_empty">총 호기 시간 : 기록 없음</string>
+    <string name="tx_clear_count_empty">성공 횟수 : 기록 없음</string>
+    <string name="tx_remove_breath_data">기록 삭제</string>
 
 
 </resources>

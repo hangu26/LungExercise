@@ -21,6 +21,9 @@
         android:theme="@style/Theme.LungExercise"
         tools:targetApi="31">
         <activity
+            android:name=".view.history.HistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.breathing.BreathingActivity"
             android:exported="false" />
         <activity

@@ -1,5 +1,6 @@
 package kr.daejeonuinversity.lungexercise.view.history
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -19,15 +20,20 @@ import kr.daejeonuinversity.lungexercise.util.base.BaseActivity
 import kr.daejeonuinversity.lungexercise.view.main.MainActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.HistoryViewModel
 import org.koin.android.ext.android.inject
+import java.time.LocalDate
 import java.time.YearMonth
 
 class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_history) {
+
+    private var isClickedDate: LocalDate? = null
 
     private val hViewModel: HistoryViewModel by inject()
     private val calendarAdapter = CalendarAdapter { calendarDay ->
         val day = calendarDay.day ?: return@CalendarAdapter
         val yearMonth = hViewModel.currentYearMonth.value ?: YearMonth.now()
         val clickedDate = yearMonth.atDay(day)
+
+        isClickedDate = clickedDate
 
         hViewModel.loadWeeklyBreathData(clickedDate)
     }
@@ -46,6 +52,7 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
         observe()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun observe() = hViewModel.let { vm ->
         vm.calendarDays.observe(this@HistoryActivity) { days ->
             calendarAdapter.submitList(days)
@@ -58,6 +65,17 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
                 startActivityAnimation(intent, this@HistoryActivity)
                 finish()
 
+            }
+        }
+
+        vm.btnRemoveClicked.observe(this@HistoryActivity) {
+            if (it) {
+                isClickedDate?.let { date ->
+                    vm.removeClickedData(date)
+                    vm.loadWeeklyBreathData(date)
+                    calendarAdapter.removedDataSet(date)
+                }
+                calendarAdapter.notifyDataSetChanged()
             }
         }
 
@@ -78,9 +96,11 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
 
             if (it) {
 
+                binding.constraintTxData.visibility = View.VISIBLE
                 binding.barChart.visibility = View.VISIBLE
 
             } else {
+                binding.constraintTxData.visibility = View.GONE
                 binding.barChart.visibility = View.GONE
             }
 
@@ -89,13 +109,26 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
 
     private fun showBarChart(data: Map<String, Int>) {
         val dayLabels = listOf("일", "월", "화", "수", "목", "금", "토")
-
         val entries = data.entries.mapIndexed { index, entry ->
             BarEntry(index.toFloat(), entry.value.toFloat())
         }
 
+        // 클릭된 날짜 문자열
+        val clickedDateStr = isClickedDate?.toString()
+
+        // 클릭된 날짜 인덱스 찾기
+        val clickedIndex = data.keys.indexOf(clickedDateStr)
+
+        // 색상 리스트 생성 (기본 색상과 클릭된 막대 색상 구분)
+        val defaultColor = ContextCompat.getColor(this, R.color.appBar_title_01)
+        val clickedColor = ContextCompat.getColor(this, R.color.background_clicked_calendar)
+
+        val colors = entries.mapIndexed { index, _ ->
+            if (index == clickedIndex) clickedColor else defaultColor
+        }
+
         val dataSet = BarDataSet(entries, "호흡 횟수").apply {
-            color = ContextCompat.getColor(this@HistoryActivity, R.color.appBar_title_01)
+            this.colors = colors
             valueTextSize = 12f
         }
 
@@ -119,13 +152,13 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
             axisRight.isEnabled = false
 
             axisLeft.apply {
-                axisMinimum = 0f               // Y축 최소값을 1로 설정
+                axisMinimum = 0f
                 axisMaximum = 10f
-                granularity = 1f              // 눈금 간격 1
+                granularity = 1f
                 isGranularityEnabled = true
                 valueFormatter = object : ValueFormatter() {
                     override fun getFormattedValue(value: Float): String {
-                        return value.toInt().toString()   // 정수만 표시
+                        return value.toInt().toString()
                     }
                 }
             }
