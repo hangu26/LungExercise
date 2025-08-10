@@ -18,20 +18,21 @@
     <dimen name="margin_side_frag_tx_birth">14dp</dimen>
     <dimen name="size_tx_input_birth">17sp</dimen>
     <dimen name="size_tx_input_birth_detail">14sp</dimen>
-    <dimen name="margin_top_frag_birth_linear_birth">22dp</dimen>
+    <dimen name="margin_top_frag_birth_linear_birth">42dp</dimen>
     <dimen name="height_edt_birth">54dp</dimen>
     <dimen name="corner_border_birth">12dp</dimen>
     <dimen name="corner_border_main_btn">8dp</dimen>
     <dimen name="margin_side_edt_birth">17dp</dimen>
     <dimen name="size_icon_calendar">21dp</dimen>
-    <dimen name="size_icon_gender_man">123dp</dimen>
+    <dimen name="size_icon_gender_man">55dp</dimen>
     <dimen name="size_tx_gender_man">24sp</dimen>
-    <dimen name="margin_top_tx_gender">16dp</dimen>
+    <dimen name="margin_top_tx_gender">14dp</dimen>
     <dimen name="margin_man_to_woman">20dp</dimen>
     <dimen name="margin_top_edt_weight">17dp</dimen>
     <dimen name="height_edt_weight">49dp</dimen>
     <dimen name="size_edt_weight">18sp</dimen>
-    <dimen name="size_tx_kg">24sp</dimen>
+    <dimen name="size_tx_kg">15sp</dimen>
+    <dimen name="size_tx_cm">15sp</dimen>
     <dimen name="margin_end_tx_kg">22dp</dimen>
     <dimen name="margin_end_edt_weight">22dp</dimen>
     <dimen name="margin_top_layout_stature">22dp</dimen>
@@ -230,7 +231,30 @@
     <dimen name="size_breath_anim_lottie">200dp</dimen>
     <dimen name="margin_top_btn_complete_setting_mask">50dp</dimen>
     <dimen name="margin_bottom_tx_app_name">45dp</dimen>
-    <dimen name="margin_top_constraint_privacy_protection">22dp</dimen>
+    <dimen name="margin_top_constraint_privacy_protection">42dp</dimen>
+    <dimen name="size_constraint_icon_privacy_protection">35dp</dimen>
+    <dimen name="margin_constraint_icon_privacy_protection">22dp</dimen>
+    <dimen name="size_icon_privacy_protect">17dp</dimen>
+    <dimen name="margin_start_tx_privacy_protect">14dp</dimen>
+    <dimen name="margin_top_tx_privacy_protect_detail">5dp</dimen>
+    <dimen name="margin_end_tx_privacy_protect_detail">14dp</dimen>
+    <dimen name="margin_bottom_tx_privacy_protect_detail">22dp</dimen>
+    <dimen name="margin_top_tx_select_your_gender">10dp</dimen>
+    <dimen name="size_tx_select_your_gender">14sp</dimen>
+    <dimen name="radius_border_constraint_man">14dp</dimen>
+    <dimen name="margin_side_constraint_gender_select">20dp</dimen>
+    <dimen name="margin_top_icon_man">22dp</dimen>
+    <dimen name="size_tx_man">17sp</dimen>
+    <dimen name="size_tx_man_detail">13sp</dimen>
+    <dimen name="margin_top_tx_man_detail">6dp</dimen>
+    <dimen name="margin_bottom_tx_man_detail">22dp</dimen>
+    <dimen name="margin_top_constraint_woman">13dp</dimen>
+    <dimen name="margin_top_constraint_gender_select">41dp</dimen>
+    <dimen name="size_icon_weight">20dp</dimen>
+    <dimen name="margin_start_tx_input_weight_to_icon">10dp</dimen>
+    <dimen name="margin_top_tx_input_weight_detail">7dp</dimen>
+    <dimen name="size_tx_input_weight_detail">12sp</dimen>
+    <dimen name="padding_start_edt_weight">19dp</dimen>
 
 
 </resources>

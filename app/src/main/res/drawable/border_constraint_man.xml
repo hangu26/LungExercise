@@ -1,0 +1,22 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 그림자 -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#0A000000" /> <!-- 검은색 4% (#0A = 4% opacity) -->
+            <corners android:radius="@dimen/radius_border_constraint_man"/>
+        </shape>
+    </item>
+
+    <!-- 본래 도형 -->
+    <item android:bottom="2dp"> <!-- 그림자 위로 2dp 띄움 -->
+        <shape android:shape="rectangle">
+            <solid android:color="@color/white"/>
+            <stroke
+                android:width="1dp"
+                android:color="@color/stroke_border_constraint_man"/>
+            <corners android:radius="@dimen/radius_border_constraint_man"/>
+        </shape>
+    </item>
+
+</layer-list>

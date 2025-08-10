@@ -28,18 +28,40 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <ImageView
+                android:id="@+id/icon_weight"
+                android:layout_width="@dimen/size_icon_weight"
+                android:layout_height="@dimen/size_icon_weight"
+                android:layout_marginStart="@dimen/margin_start_frag_tx_birth"
+                android:src="@drawable/icon_weight"
+                app:layout_constraintBottom_toBottomOf="@+id/tx_input_weight"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tx_input_weight" />
+
             <TextView
                 android:id="@+id/tx_input_weight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_start_frag_tx_birth"
+                android:layout_marginStart="@dimen/margin_start_tx_input_weight_to_icon"
                 android:layout_marginTop="@dimen/margin_top_frag_tx_birth"
                 android:fontFamily="@font/pretendard_semibold"
                 android:text="@string/tx_input_weight"
                 android:textColor="@color/black"
                 android:textSize="@dimen/size_tx_input_birth"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_weight"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tx_input_weight_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_tx_input_weight_detail"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/tx_input_weight_detail"
+                android:textColor="@color/color_tx_input_weight_detail"
+                android:textSize="@dimen/size_tx_input_weight_detail"
+                app:layout_constraintStart_toStartOf="@+id/icon_weight"
+                app:layout_constraintTop_toBottomOf="@+id/icon_weight" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraint_weight"
@@ -51,22 +73,24 @@
                 android:background="@drawable/border_edt_weight"
                 app:layout_constraintEnd_toStartOf="@+id/tx_kg"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tx_input_weight">
+                app:layout_constraintTop_toBottomOf="@+id/tx_input_weight_detail">
 
                 <EditText
                     android:id="@+id/edt_weight"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/height_edt_weight"
                     android:background="@null"
-                    android:gravity="center"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:gravity="start|center_vertical"
                     android:inputType="number"
-                    android:textSize="@dimen/size_edt_weight"
+                    android:paddingStart="@dimen/padding_start_edt_weight"
+                    android:text="@={viewmodel.txEdtWeight}"
                     android:textColor="@color/black"
+                    android:textSize="@dimen/size_edt_weight"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="@={viewmodel.txEdtWeight}"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -76,10 +100,10 @@
                 android:layout_width="@dimen/width_tx_cm_kg"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_end_tx_kg"
-                android:fontFamily="@font/pretendard_regular"
+                android:fontFamily="@font/pretendard_bold"
                 android:gravity="center"
                 android:text="@string/tx_kg"
-                android:textColor="@color/black"
+                android:textColor="@color/color_tx_kg"
                 android:textSize="@dimen/size_tx_kg"
                 app:layout_constraintBottom_toBottomOf="@+id/constraint_weight"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -94,18 +118,40 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_weight">
 
+            <ImageView
+                android:id="@+id/icon_height"
+                android:layout_width="@dimen/size_icon_weight"
+                android:layout_height="@dimen/size_icon_weight"
+                android:layout_marginStart="@dimen/margin_start_frag_tx_birth"
+                android:src="@drawable/icon_height"
+                app:layout_constraintBottom_toBottomOf="@+id/tx_input_stature"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tx_input_stature" />
+
             <TextView
                 android:id="@+id/tx_input_stature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_start_frag_tx_birth"
+                android:layout_marginStart="@dimen/margin_start_tx_input_weight_to_icon"
                 android:layout_marginTop="@dimen/margin_top_layout_stature"
                 android:fontFamily="@font/pretendard_semibold"
                 android:text="@string/tx_stature"
                 android:textColor="@color/black"
                 android:textSize="@dimen/size_tx_input_birth"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_height"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tx_input_height_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_tx_input_weight_detail"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/tx_input_height_detail"
+                android:textColor="@color/color_tx_input_weight_detail"
+                android:textSize="@dimen/size_tx_input_weight_detail"
+                app:layout_constraintStart_toStartOf="@+id/icon_height"
+                app:layout_constraintTop_toBottomOf="@+id/icon_height" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraint_stature"
@@ -117,22 +163,24 @@
                 android:background="@drawable/border_edt_weight"
                 app:layout_constraintEnd_toStartOf="@+id/tx_cm"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tx_input_stature">
+                app:layout_constraintTop_toBottomOf="@+id/tx_input_height_detail">
 
                 <EditText
                     android:id="@+id/edt_stature"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/height_edt_weight"
                     android:background="@null"
-                    android:gravity="center"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:gravity="start|center_vertical"
                     android:inputType="number"
-                    android:textSize="@dimen/size_edt_weight"
+                    android:paddingStart="@dimen/padding_start_edt_weight"
+                    android:text="@={viewmodel.txEdtStature}"
                     android:textColor="@color/black"
+                    android:textSize="@dimen/size_edt_weight"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="@={viewmodel.txEdtStature}"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -141,11 +189,11 @@
                 android:layout_width="@dimen/width_tx_cm_kg"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_end_tx_kg"
-                android:fontFamily="@font/pretendard_regular"
+                android:fontFamily="@font/pretendard_bold"
                 android:gravity="center"
                 android:text="@string/tx_cm"
-                android:textColor="@color/black"
-                android:textSize="@dimen/size_tx_kg"
+                android:textColor="@color/color_tx_cm"
+                android:textSize="@dimen/size_tx_cm"
                 app:layout_constraintBottom_toBottomOf="@+id/constraint_stature"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/constraint_stature" />

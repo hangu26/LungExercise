@@ -16,7 +16,7 @@ import org.koin.android.ext.android.inject
 
 class GenderFragment : BaseFragment<FragmentGenderBinding>(R.layout.fragment_gender) {
 
-    private val gViewModel : GenderViewModel by inject()
+    private val gViewModel: GenderViewModel by inject()
 
     override fun initView() {
 
@@ -31,27 +31,75 @@ class GenderFragment : BaseFragment<FragmentGenderBinding>(R.layout.fragment_gen
 
     private fun observe() = gViewModel.let { vm ->
 
-        vm.btnManState.observe(viewLifecycleOwner){
+        vm.btnManState.observe(viewLifecycleOwner) {
             if (it) {
-                binding.iconMan.setImageResource(R.drawable.icon_gender_man_clicked)
-                binding.txMan.setTextColor(ContextCompat.getColor(requireContext(), R.color.appBar_title_01))
+                binding.iconMan.setImageResource(R.drawable.icon_man_clicked)
+                binding.txMan.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                binding.constraintMan.background =
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.border_constraint_gender_clicked
+                    )
+                binding.txManDetail.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.white
+                    )
+                )
                 vm.btnWomanState.postValue(false)
                 (activity as? InfoInputActivity)?.enableConfirmButton()
             } else {
-                binding.iconMan.setImageResource(R.drawable.icon_gender_man)
+                binding.iconMan.setImageResource(R.drawable.icon_man)
                 binding.txMan.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                binding.constraintMan.background =
+                    ContextCompat.getDrawable(requireContext(), R.drawable.border_constraint_man)
+                binding.txManDetail.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.black
+                    )
+                )
             }
         }
 
-        vm.btnWomanState.observe(viewLifecycleOwner){
+        vm.btnWomanState.observe(viewLifecycleOwner) {
             if (it) {
-                binding.iconWoman.setImageResource(R.drawable.icon_gender_woman_clicked)
-                binding.txWoman.setTextColor(ContextCompat.getColor(requireContext(), R.color.appBar_title_01))
+                binding.iconWoman.setImageResource(R.drawable.icon_woman_clicked)
+                binding.txWoman.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.white
+                    )
+                )
+                binding.constraintWoman.background =
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.border_constraint_gender_clicked
+                    )
+                binding.txWomanDetail.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.white
+                    )
+                )
                 vm.btnManState.postValue(false)
                 (activity as? InfoInputActivity)?.enableConfirmButton()
             } else {
-                binding.iconWoman.setImageResource(R.drawable.icon_gender_woman)
-                binding.txWoman.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                binding.iconWoman.setImageResource(R.drawable.icon_woman)
+                binding.txWoman.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.black
+                    )
+                )
+                binding.constraintWoman.background =
+                    ContextCompat.getDrawable(requireContext(), R.drawable.border_constraint_man)
+                binding.txWomanDetail.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.black
+                    )
+                )
             }
         }
 

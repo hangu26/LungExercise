@@ -55,6 +55,16 @@
     <color name="stroke_progressbar_mask_setting">#F3F4F6</color>
     <color name="color_tx_input_birth_detail">#9CA3AF</color>
     <color name="color_border_constraint_privacy_protection">#E5E7EB</color>
+    <color name="color_tx_privacy_protect_detail">#ABB0B9</color>
+    <color name="color_tx_select_your_gender">#6B7280</color>
+    <color name="stroke_border_constraint_man">#E5E7EB</color>
+    <color name="stroke_border_constraint_man_clicked">#5651E9</color>
+    <color name="color_tx_man_detail">#6B7280</color>
+    <color name="color_tx_input_weight_detail">#6B7280</color>
+    <color name="color_tx_kg">#6B7280</color>
+    <color name="color_tx_cm">#6B7280</color>
+
+
 
 
 </resources>

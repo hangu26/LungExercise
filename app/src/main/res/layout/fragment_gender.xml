@@ -21,7 +21,7 @@
         android:background="@color/white">
 
         <TextView
-            android:id="@+id/tx_input_birth"
+            android:id="@+id/tx_select_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_start_frag_tx_birth"
@@ -33,21 +33,38 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <TextView
+            android:id="@+id/tx_select_your_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/margin_top_tx_select_your_gender"
+            android:text="@string/tx_select_your_gender"
+            android:textColor="@color/color_tx_select_your_gender"
+            android:textSize="@dimen/size_tx_select_your_gender"
+            app:layout_constraintStart_toStartOf="@+id/tx_select_gender"
+            app:layout_constraintTop_toBottomOf="@+id/tx_select_gender" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_gender_select"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_side_constraint_gender_select"
+            android:layout_marginTop="@dimen/margin_top_constraint_gender_select"
+            android:layout_marginEnd="@dimen/margin_side_constraint_gender_select"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/tx_select_your_gender">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraint_man"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_man_to_woman"
+                android:background="@drawable/border_constraint_man"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:onClick="@{() -> viewmodel.btnMan()}"
-                app:layout_constraintEnd_toStartOf="@+id/constraint_woman"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -55,7 +72,8 @@
                     android:id="@+id/icon_man"
                     android:layout_width="@dimen/size_icon_gender_man"
                     android:layout_height="@dimen/size_icon_gender_man"
-                    android:src="@drawable/icon_gender_man"
+                    android:layout_marginTop="@dimen/margin_top_icon_man"
+                    android:src="@drawable/icon_man"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -65,30 +83,50 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_top_tx_gender"
-                    android:fontFamily="@font/pretendard_regular"
+                    android:fontFamily="@font/pretendard_bold"
                     android:text="@string/tx_gender_man"
-                    android:textSize="@dimen/size_tx_gender_man"
+                    android:textSize="@dimen/size_tx_man"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/icon_man" />
+
+                <TextView
+                    android:id="@+id/tx_man_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top_tx_man_detail"
+                    android:layout_marginBottom="@dimen/margin_bottom_tx_man_detail"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="@string/tx_select_man"
+                    android:textColor="@color/color_tx_man_detail"
+                    android:textSize="@dimen/size_tx_man_detail"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tx_man" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraint_woman"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_man_to_woman"
+                android:layout_marginTop="@dimen/margin_top_constraint_woman"
+                android:background="@drawable/border_constraint_man"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:onClick="@{() -> viewmodel.btnWoman()}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/constraint_man"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraint_man">
 
                 <ImageView
                     android:id="@+id/icon_woman"
                     android:layout_width="@dimen/size_icon_gender_man"
                     android:layout_height="@dimen/size_icon_gender_man"
-                    android:src="@drawable/icon_gender_woman"
+                    android:layout_marginTop="@dimen/margin_top_icon_man"
+                    android:src="@drawable/icon_woman"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -98,12 +136,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_top_tx_gender"
-                    android:fontFamily="@font/pretendard_regular"
+                    android:fontFamily="@font/pretendard_bold"
                     android:text="@string/tx_gender_woman"
-                    android:textSize="@dimen/size_tx_gender_man"
+                    android:textSize="@dimen/size_tx_man"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/icon_woman" />
+
+                <TextView
+                    android:id="@+id/tx_woman_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top_tx_man_detail"
+                    android:layout_marginBottom="@dimen/margin_bottom_tx_man_detail"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="@string/tx_select_woman"
+                    android:textColor="@color/color_tx_man_detail"
+                    android:textSize="@dimen/size_tx_man_detail"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tx_woman" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
