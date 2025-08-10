@@ -89,10 +89,24 @@
     <dimen name="margin_top_tx_user_predict">29dp</dimen>
     <dimen name="margin_bottom_btn_start_breath">147dp</dimen>
     <dimen name="radius_border_result_breathing">11dp</dimen>
-    <dimen name="size_tx_result_breathing">15sp</dimen>
+    <dimen name="size_tx_result_breathing">22sp</dimen>
+    <dimen name="size_tx_user_time">12sp</dimen>
+    <dimen name="size_tx_real_user_time">10sp</dimen>
+    <dimen name="margin_linear_user_normal_percent">19dp</dimen>
+    <dimen name="margin_end_tx_user_time_data">19dp</dimen>
+    <dimen name="size_tx_user_time_data">25dp</dimen>
+    <dimen name="margin_top_tx_real_user_time">2dp</dimen>
+    <dimen name="margin_bottom_linear_user_time">19dp</dimen>
+
+
+    <dimen name="size_tx_connect_device">15sp</dimen>
     <dimen name="size_tx_available_mask">15sp</dimen>
     <dimen name="size_tx_refresh">15sp</dimen>
-    <dimen name="margin_top_tx_result_breathing_dialog">32dp</dimen>
+    <dimen name="margin_top_tx_result_breathing_dialog">20dp</dimen>
+    <dimen name="margin_top_tx_bluetooth_mask_setting">32dp</dimen>
+    <dimen name="margin_top_tx_connect_bluetooth_mask">32dp</dimen>
+
+
     <dimen name="margin_side_linear_result_time">30dp</dimen>
     <dimen name="margin_side_border_dialog_bluetooth">30dp</dimen>
     <dimen name="margin_top_linear_result_time">18dp</dimen>
@@ -291,6 +305,8 @@
     <dimen name="margin_end_icon_stop_breath">5dp</dimen>
     <dimen name="margin_end_constraint_tx_percent_breathing">20dp</dimen>
     <dimen name="size_tx_progress_breathing">10sp</dimen>
+    <dimen name="margin_top_tx_result_breathing_detail">6dp</dimen>
+    <dimen name="size_border_linear_user_time">18dp</dimen>
 
 
 </resources>

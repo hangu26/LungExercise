@@ -118,6 +118,8 @@
     <string name="tx_zero_second">0초</string>
     <string name="tx_eight_second">8초</string>
     <string name="tx_is_measuring">측정중</string>
+    <string name="tx_result_breathing_detail">오늘의 호흡 연습이 완료되었습니다</string>
+    <string name="tx_real_time">실제 측정된 시간</string>
 
 
 </resources>

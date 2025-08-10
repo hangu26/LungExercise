@@ -69,6 +69,11 @@
     <color name="color_border_constraint_user_time">#F0F3FE</color>
     <color name="color_tx_normal_time">#4F46E5</color>
     <color name="color_border_progress_bar_normal">#5644E6</color>
+    <color name="color_tx_result_breathing_detail">#666666</color>
+    <color name="color_border_linear_user_time">#E8E3FF</color>
+    <color name="color_tx_user_time">#8B45FF</color>
+    <color name="tx_user_time_detail">#888888</color>
+    <color name="color_tx_user_time_data">#8B45FF</color>
 
 
 

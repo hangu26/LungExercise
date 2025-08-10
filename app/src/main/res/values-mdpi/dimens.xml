@@ -89,10 +89,15 @@
     <dimen name="margin_top_tx_user_predict">29dp</dimen>
     <dimen name="margin_bottom_btn_start_breath">147dp</dimen>
     <dimen name="radius_border_result_breathing">11dp</dimen>
-    <dimen name="size_tx_result_breathing">15sp</dimen>
+    <dimen name="size_tx_result_breathing">22sp</dimen>
+    <dimen name="size_tx_connect_device">15sp</dimen>
     <dimen name="size_tx_available_mask">15sp</dimen>
     <dimen name="size_tx_refresh">15sp</dimen>
-    <dimen name="margin_top_tx_result_breathing_dialog">32dp</dimen>
+    <dimen name="margin_top_tx_result_breathing_dialog">20dp</dimen>
+    <dimen name="margin_top_tx_bluetooth_mask_setting">32dp</dimen>
+    <dimen name="margin_top_tx_connect_bluetooth_mask">32dp</dimen>
+
+
     <dimen name="margin_side_linear_result_time">30dp</dimen>
     <dimen name="margin_side_border_dialog_bluetooth">30dp</dimen>
     <dimen name="margin_top_linear_result_time">18dp</dimen>

@@ -18,52 +18,82 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tx_result_breathing_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_tx_result_breathing_detail"
+        android:text="@string/tx_result_breathing_detail"
+        android:textColor="@color/color_tx_result_breathing_detail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_result_breathing" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linear_user_time"
-        android:layout_width="match_parent"
+        android:id="@+id/constraint_user_time"
+        android:layout_width="249dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_side_linear_result_time"
         android:layout_marginTop="@dimen/margin_top_linear_result_time"
         android:layout_marginEnd="@dimen/margin_side_linear_result_time"
+        android:background="@drawable/border_linear_user_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tx_result_breathing">
+        app:layout_constraintTop_toBottomOf="@+id/tx_result_breathing_detail">
 
-        <TextView
-            android:id="@+id/tx_user_time"
+        <LinearLayout
+            android:id="@+id/linear_user_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:fontFamily="@font/pretendard_semibold"
-            android:text="@string/tx_user_breathing_time"
-            android:textColor="@color/appBar_title_02"
-            android:textSize="@dimen/size_tx_result_breathing"
+            android:layout_marginStart="@dimen/margin_linear_user_normal_percent"
+            android:layout_marginTop="@dimen/margin_linear_user_normal_percent"
+            android:layout_marginBottom="@dimen/margin_bottom_linear_user_time"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="@dimen/width_constraint_result_time_dialog"
-            android:layout_height="@dimen/height_constraint_result_time_dialog"
-            android:layout_marginStart="@dimen/margint_start_constraint_result_time_dialog"
-            android:background="@drawable/border_constraint_breath"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tx_user_time"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tx_user_time_data"
+                android:id="@+id/tx_user_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_regular"
-                android:text="10초"
-                android:textSize="@dimen/size_tx_result_breathing"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/tx_user_breathing_time"
+                android:textColor="@color/color_tx_user_time"
+                android:textSize="@dimen/size_tx_user_time"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tx_real_user_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/margin_top_tx_real_user_time"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/tx_real_time"
+                android:textColor="@color/tx_user_time_detail"
+                android:textSize="@dimen/size_tx_real_user_time"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tx_user_time_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_end_tx_user_time_data"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="10초"
+            android:textColor="@color/color_tx_user_time_data"
+            android:textSize="@dimen/size_tx_user_time_data"
+            app:layout_constraintBottom_toBottomOf="@+id/linear_user_time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/linear_user_time" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -76,7 +106,7 @@
         android:layout_marginEnd="@dimen/margin_side_linear_result_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linear_user_time">
+        app:layout_constraintTop_toBottomOf="@+id/constraint_user_time">
 
         <TextView
             android:id="@+id/tx_normal_time"
