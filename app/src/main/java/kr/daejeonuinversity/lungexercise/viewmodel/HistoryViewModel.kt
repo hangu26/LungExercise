@@ -151,14 +151,15 @@ class HistoryViewModel(private val repository: BreathRepository, application: Ap
         val yearMonth = _currentYearMonth.value ?: YearMonth.now()
         val firstDayOfMonth = yearMonth.atDay(1)
         val daysInMonth = yearMonth.lengthOfMonth()
-        val startDayOfWeek = firstDayOfMonth.dayOfWeek.value
+        val startDayOfWeek = firstDayOfMonth.dayOfWeek.value % 7  // 일요일 = 0
 
         val recorded = _recordedDates.value ?: emptySet()
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
         val days = mutableListOf<CalendarDay>()
 
-        for (i in 1 until startDayOfWeek) {
+        // 앞에 빈 칸 채우기
+        for (i in 0 until startDayOfWeek) {
             days.add(CalendarDay(null))
         }
 

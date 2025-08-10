@@ -15,34 +15,106 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ProgressBar
-        android:id="@+id/progress_bar_normal_video"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_breathing"
         android:layout_width="0dp"
-        android:layout_height="@dimen/height_progressbar_normal"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="@dimen/margin_top_progressbar_in_practice"
-        android:layout_marginBottom="25dp"
-        android:alpha="0.5"
-        android:max="100"
-        android:progressDrawable="@drawable/progress_bar_splash"
-        app:layout_constraintBottom_toTopOf="@+id/progress_bar_user_video"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.43" />
-
-    <ProgressBar
-        android:id="@+id/progress_bar_user_video"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/height_progressbar_normal"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="@dimen/margin_top_progressbar_in_practice"
-        android:layout_marginBottom="50dp"
-        android:alpha="0.5"
-        android:max="100"
-        android:progressDrawable="@drawable/progress_bar_splash"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_constraint_breathing"
+        android:layout_marginBottom="@dimen/margin_bottom_constraint_breathing"
+        android:background="@drawable/background_breathing_video"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.43" />
+        app:layout_constraintWidth_percent="0.26">
+
+        <TextView
+            android:id="@+id/tx_normal_breathing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_side_background_breathing_video"
+            android:layout_marginTop="@dimen/padding_vertical_back_breathing_video"
+            android:fontFamily="@font/pretendard_medium"
+            android:text="@string/tx_normal_breathing"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_tx_normal_breathing"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/progress_bar_normal_video"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_progressbar_normal"
+            android:layout_marginStart="@dimen/margin_side_background_breathing_video"
+            android:layout_marginTop="@dimen/padding_vertical_back_breathing_video"
+            android:layout_marginEnd="@dimen/margin_side_background_breathing_video"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/progress_bar_splash_full"
+            app:layout_constraintBottom_toTopOf="@+id/tx_user_breathing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tx_normal_breathing" />
+
+        <TextView
+            android:id="@+id/tx_user_breathing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_side_background_breathing_video"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:text="@string/tx_user_breathing"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_tx_normal_breathing"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progress_bar_normal_video" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar_user_video"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_progressbar_normal"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="@dimen/padding_vertical_back_breathing_video"
+            android:layout_marginEnd="@dimen/margin_side_background_breathing_video"
+            android:layout_marginBottom="@dimen/padding_vertical_back_breathing_video"
+            android:max="100"
+            android:progressDrawable="@drawable/progress_bar_splash"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tx_user_breathing" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_side_background_breathing_video"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="@dimen/padding_vertical_back_breathing_video"
+            app:layout_constraintTop_toBottomOf="@+id/progress_bar_user_video"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/tx_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:textColor="@color/black"
+                android:text="@string/tx_percent_setup"
+                android:textSize="@dimen/size_tx_normal_breathing" />
+
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tx_breathing_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:textColor="@color/black"
+                android:text="@string/tx_second_setup"
+                android:textSize="@dimen/size_tx_normal_breathing" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

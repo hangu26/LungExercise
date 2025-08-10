@@ -1,6 +1,7 @@
 package kr.daejeonuinversity.lungexercise.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -56,7 +57,9 @@ class WalkingTestViewModel(application: Application) : AndroidViewModel(applicat
             "heart_rate" -> _heartRate.postValue(data["value"] as Float)
             "step_count" -> _stepCount.postValue(data["value"] as Int)
             "spo2" -> _spo2.postValue(data["value"] as Float)
+
         }
+
     }
 
     fun startReceiving() {

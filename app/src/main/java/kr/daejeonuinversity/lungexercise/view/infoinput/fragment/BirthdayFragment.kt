@@ -7,6 +7,7 @@ import kr.daejeonuinversity.lungexercise.R
 import kr.daejeonuinversity.lungexercise.databinding.FragmentBirthdayBinding
 import kr.daejeonuinversity.lungexercise.util.base.BaseFragment
 import kr.daejeonuinversity.lungexercise.util.util.ShowCustomDatePicker
+import kr.daejeonuinversity.lungexercise.util.util.UserInfoTempData
 import kr.daejeonuinversity.lungexercise.view.infoinput.InfoInputActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.BirthdayViewModel
 import org.koin.android.ext.android.inject
@@ -36,6 +37,7 @@ class BirthdayFragment : BaseFragment<FragmentBirthdayBinding>(R.layout.fragment
 
                 showCustomDatePicker.showCustomDatePicker(requireContext()) { selectedDate ->
                     binding.edtBirth.setText(selectedDate)
+                    UserInfoTempData.birthday = selectedDate
                     (activity as? InfoInputActivity)?.enableConfirmButton()
                 }
 

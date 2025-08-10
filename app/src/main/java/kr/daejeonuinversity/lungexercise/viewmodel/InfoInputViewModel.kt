@@ -4,9 +4,12 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import kr.daejeonuinversity.lungexercise.data.repository.InfoRepository
 import kr.daejeonuinversity.lungexercise.util.base.NavigationMenu
 
-class InfoInputViewModel(application: Application) : AndroidViewModel(application) {
+class InfoInputViewModel(private val repository : InfoRepository, application: Application) : AndroidViewModel(application) {
 
     private var _btnCLicked = MutableLiveData<Int>(0)
     val btnClicked = _btnCLicked
@@ -15,7 +18,7 @@ class InfoInputViewModel(application: Application) : AndroidViewModel(applicatio
     val pageLoaded: LiveData<Boolean> = _pageLoaded
 
     private val _menu: MutableLiveData<NavigationMenu> =
-        MutableLiveData(NavigationMenu.BIRTHDAY) // 단어 화면으로 초기화
+        MutableLiveData(NavigationMenu.BIRTHDAY)
     val menu: LiveData<NavigationMenu> = _menu
 
     private var _btnNextState = MutableLiveData<Boolean>()
@@ -25,6 +28,14 @@ class InfoInputViewModel(application: Application) : AndroidViewModel(applicatio
 
         if (btnNextState.value == true) _btnCLicked.value = _btnCLicked.value?.plus(1)
 
+    }
+
+    fun saveBirthday(birthdayDate : String, gender : String, stature : Int, weight : Int){
+        viewModelScope.launch {
+
+            repository.insertUserInfo(birthdayDate,gender,stature,weight)
+
+        }
     }
 
     fun changeMenu(menu: NavigationMenu) {

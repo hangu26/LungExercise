@@ -1,0 +1,868 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="kr.daejeonuinversity.lungexercise.view.developer.DeveloperActivity" />
+
+        <variable
+            name="viewmodel"
+            type="kr.daejeonuinversity.lungexercise.viewmodel.DeveloperViewModel" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/white"
+                    app:contentInsetStart="0dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/pretendard_semibold"
+                            android:gravity="center"
+                            android:text="@string/tx_developer_mode"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_appbar_text"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_basic_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_side_constraint_basic_info"
+                android:layout_marginEnd="@dimen/margin_side_constraint_basic_info"
+                android:background="@drawable/border_constraint_basic_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+                <TextView
+                    android:id="@+id/tx_basic_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_tx_basic_info"
+                    android:layout_marginTop="@dimen/margin_tx_basic_info"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="@string/tx_basic_info"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_tx_basic_info"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tx_birth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top_tx_birth"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/tx_birth"
+                    android:textColor="@color/tx_birth"
+                    android:textSize="@dimen/size_tx_birth"
+                    app:layout_constraintStart_toStartOf="@+id/tx_basic_info"
+                    app:layout_constraintTop_toBottomOf="@+id/tx_basic_info" />
+
+                <LinearLayout
+                    android:id="@+id/linear_birth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top_linear_birth"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/padding_side_linear_birth"
+                    android:paddingEnd="@dimen/padding_side_linear_birth"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tx_birth">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/height_linear_birth"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_constraint_birth">
+
+                        <EditText
+                            android:id="@+id/edt_year"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:text="@{viewmodel.txYear}"
+                            android:textColor="@color/color_edt_year"
+                            android:textSize="@dimen/size_edt_year"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <Space
+                        android:layout_width="@dimen/space_width_constraint_birth"
+                        android:layout_height="match_parent" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/height_linear_birth"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_constraint_birth">
+
+                        <EditText
+                            android:id="@+id/edt_month"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:text="@{viewmodel.txMonth}"
+                            android:textColor="@color/color_edt_year"
+                            android:textSize="@dimen/size_edt_year"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <Space
+                        android:layout_width="@dimen/space_width_constraint_birth"
+                        android:layout_height="match_parent" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/height_linear_birth"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_constraint_birth">
+
+                        <EditText
+                            android:id="@+id/edt_day"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:text="@{viewmodel.txDay}"
+                            android:textColor="@color/color_edt_year"
+                            android:textSize="@dimen/size_edt_year"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tx_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_tx_basic_info"
+                    android:layout_marginTop="@dimen/margin_top_tx_gender_constraint"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/tx_gender"
+                    android:textColor="@color/tx_birth"
+                    android:textSize="@dimen/size_tx_birth"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_birth" />
+
+                <LinearLayout
+                    android:id="@+id/linear_gender"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top_linear_birth"
+                    android:layout_marginBottom="@dimen/margin_bottom_linear_gender"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/padding_side_linear_birth"
+                    android:paddingEnd="@dimen/padding_side_linear_birth"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tx_gender">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraint_man"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/height_linear_gender"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_constraint_gender"
+                        android:onClick="@{() -> viewmodel.btnMan()}">
+
+                        <TextView
+                            android:id="@+id/btn_man"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="남성"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/size_edt_year"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <Space
+                        android:layout_width="@dimen/space_width_constraint_gender"
+                        android:layout_height="match_parent" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraint_woman"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/height_linear_gender"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_constraint_gender_not"
+                        android:onClick="@{() -> viewmodel.btnWoman()}">
+
+                        <TextView
+                            android:id="@+id/btn_woman"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="여성"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_edt_year"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_body_specs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_side_constraint_basic_info"
+                android:layout_marginTop="@dimen/margin_top_constraint_basic_info"
+                android:layout_marginEnd="@dimen/margin_side_constraint_basic_info"
+                android:background="@drawable/border_constraint_basic_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraint_basic_info">
+
+                <TextView
+                    android:id="@+id/tx_body_specs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_tx_basic_info"
+                    android:layout_marginTop="@dimen/margin_tx_basic_info"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="@string/tx_body_specs"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_tx_basic_info"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tx_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top_tx_birth"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/tx_body_weight"
+                    android:textColor="@color/tx_birth"
+                    android:textSize="@dimen/size_tx_birth"
+                    app:layout_constraintStart_toStartOf="@+id/tx_body_specs"
+                    app:layout_constraintTop_toBottomOf="@+id/tx_body_specs" />
+
+                <TextView
+                    android:id="@+id/tx_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top_tx_birth"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/tx_height"
+                    android:textColor="@color/tx_birth"
+                    android:textSize="@dimen/size_tx_birth"
+                    app:layout_constraintStart_toStartOf="@+id/constraint_body_height"
+                    app:layout_constraintTop_toBottomOf="@+id/tx_body_specs" />
+
+                <LinearLayout
+                    android:id="@+id/constraint_body_weight"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_linear_birth"
+                    android:layout_marginStart="@dimen/padding_side_linear_birth"
+                    android:layout_marginTop="@dimen/margin_top_linear_specs"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginBottom="@dimen/margin_bottom_constraint_body_weight"
+                    android:background="@drawable/color_border_constraint_body_specs"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/constraint_body_height"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tx_weight">
+
+                    <EditText
+                        android:id="@+id/edt_weight"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="start|center_vertical"
+                        android:inputType="number"
+                        android:paddingStart="@dimen/padding_start_edt_kg"
+                        android:text="@{viewmodel.txWeight}"
+                        android:textColor="@color/color_edt_year"
+                        android:textSize="@dimen/size_edt_year" />
+
+                    <TextView
+                        android:id="@+id/tx_kg"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/margin_end_tx_kg_in_edit_info"
+                        android:layout_weight="0.2"
+                        android:text="@string/tx_kg"
+                        android:textColor="@color/tx_kg_cm" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/constraint_body_height"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_linear_birth"
+                    android:layout_marginStart="@dimen/margin_start_constraint_body_height"
+                    android:layout_marginTop="@dimen/margin_top_linear_specs"
+                    android:layout_marginEnd="@dimen/padding_side_linear_birth"
+                    android:layout_marginBottom="@dimen/margin_bottom_constraint_body_weight"
+                    android:background="@drawable/color_border_constraint_body_specs"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/constraint_body_weight"
+                    app:layout_constraintTop_toBottomOf="@id/tx_height">
+
+                    <EditText
+                        android:id="@+id/edt_height"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="start|center_vertical"
+                        android:inputType="number"
+                        android:paddingStart="@dimen/padding_start_edt_cm"
+                        android:text="@{viewmodel.txHeight}"
+                        android:textColor="@color/color_edt_year"
+                        android:textSize="@dimen/size_edt_year" />
+
+                    <TextView
+                        android:id="@+id/tx_cm"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/margin_end_tx_kg_in_edit_info"
+                        android:layout_weight="0.2"
+                        android:text="@string/tx_cm"
+                        android:textColor="@color/tx_kg_cm" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_breath_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraint_body_specs">
+
+                <!-- 요일 표시 + 달력 + 그래프 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/calendar_constraint"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/margin_top_constraint_calendar"
+                        android:background="@drawable/border_calendar_constraint"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_start_tx_calendar"
+                            android:fontFamily="@font/pretendard_bold"
+                            android:text="@string/tx_calendar"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_tx_calendar"
+                            app:layout_constraintBottom_toBottomOf="@+id/layoutMonth"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/layoutMonth" />
+
+                        <LinearLayout
+                            android:id="@+id/layoutMonth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top_constraint_calendar"
+                            android:layout_marginEnd="@dimen/margin_end_layoutMonth"
+                            android:layout_marginBottom="@dimen/margin_bottom_layoutMonth"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/btnPrevMonth"
+                                android:layout_width="@dimen/size_icon_left_right"
+                                android:layout_height="@dimen/size_icon_left_right"
+                                android:onClick="@{() -> viewmodel.prevMonth()}"
+                                android:src="@drawable/icon_left" />
+
+                            <TextView
+                                android:id="@+id/tvCurrentMonth"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_side_tv_current_month"
+                                android:layout_marginEnd="@dimen/margin_side_tv_current_month"
+                                android:fontFamily="@font/pretendard_bold"
+                                android:paddingHorizontal="16dp"
+                                android:text="@string/tx_calendar_date_setup"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/size_tx_calendar_date"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/btnNextMonth"
+                                android:layout_width="@dimen/size_icon_left_right"
+                                android:layout_height="@dimen/size_icon_left_right"
+                                android:onClick="@{() -> viewmodel.nextMonth()}"
+                                android:src="@drawable/icon_right" />
+                        </LinearLayout>
+
+                        <!-- 요일 텍스트 -->
+                        <LinearLayout
+                            android:id="@+id/layoutWeekDays"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top_layout_week_day"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/layoutMonth">
+
+                            <!-- 일 ~ 토 반복 -->
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Sun"
+                                android:textColor="#E53935"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Mon"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Tue"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Wed"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Thu"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Fri"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Sat"
+                                android:textColor="#1E88E5"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <!-- 달력 -->
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/calendarRecyclerView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top_calendar_recycler"
+                            android:nestedScrollingEnabled="false"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/layoutWeekDays"
+                            tools:listitem="@layout/item_calendar_day" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/graph_constraint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_top_constraint_calendar"
+                        android:layout_marginBottom="@dimen/margin_bottom_graph_constraint"
+                        android:background="@drawable/border_calendar_constraint"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/calendar_constraint">
+
+                        <TextView
+                            android:id="@+id/tx_weekly_breathing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_start_tx_weekly_breathing"
+                            android:layout_marginTop="@dimen/margin_top_tx_weekly_breathing"
+                            android:fontFamily="@font/pretendard_bold"
+                            android:text="@string/tx_weekly_breathing_history"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_tx_weekly_breathing_history"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/btn_stop"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_end_constraint_delete"
+                            android:background="@drawable/border_btn_stop_timer"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:onClick="@{() -> viewmodel.btnRemove()}"
+                            android:paddingStart="@dimen/padding_horizontal_constraint_delete"
+                            android:paddingTop="@dimen/padding_vertical_constraint_delete"
+                            android:paddingEnd="@dimen/padding_horizontal_constraint_delete"
+                            android:paddingBottom="@dimen/padding_vertical_constraint_delete"
+                            app:layout_constraintBottom_toBottomOf="@+id/tx_weekly_breathing"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/tx_weekly_breathing">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/pretendard_bold"
+                                android:gravity="center"
+                                android:text="@string/tx_remove_breath_data"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/size_tx_btn_next"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <!-- 막대 그래프 -->
+                        <com.github.mikephil.charting.charts.BarChart
+                            android:id="@+id/barChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_graph"
+                            android:layout_marginTop="@dimen/margin_top_graph"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tx_weekly_breathing" />
+
+                        <LinearLayout
+                            android:id="@+id/linear_tx_data"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/barChart">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraint_data_01"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_side_constraint_breath_data"
+                                android:layout_marginTop="@dimen/margin_top_constraint_breath_data"
+                                android:layout_marginEnd="@dimen/margin_side_constraint_breath_data"
+                                android:background="@drawable/border_constraint_graph_data">
+
+                                <TextView
+                                    android:id="@+id/tx_all_count"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_tx_all_count"
+                                    android:layout_marginTop="@dimen/margin_tx_all_count"
+                                    android:fontFamily="@font/pretendard_medium"
+                                    android:text="@string/tx_all_breathing_count"
+                                    android:textColor="@color/color_tx_graph_data"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <EditText
+                                    android:id="@+id/tx_total_count"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_top_tx_all_breathing"
+                                    android:layout_marginBottom="@dimen/margin_bottom_tx_total_count"
+                                    android:fontFamily="@font/pretendard_bold"
+                                    android:text="@{viewmodel.txTotalCount}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/tx_history_data_textview"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="@id/tx_all_count"
+                                    app:layout_constraintTop_toBottomOf="@+id/tx_all_count" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraint_data_02"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_side_constraint_breath_data"
+                                android:layout_marginTop="@dimen/margin_top_constraint_breath_data"
+                                android:layout_marginEnd="@dimen/margin_side_constraint_breath_data"
+                                android:background="@drawable/border_constraint_graph_data">
+
+                                <TextView
+                                    android:id="@+id/tx_average"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_tx_all_count"
+                                    android:layout_marginTop="@dimen/margin_tx_all_count"
+                                    android:fontFamily="@font/pretendard_medium"
+                                    android:text="@string/tx_average_time"
+                                    android:textColor="@color/color_tx_graph_data"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <EditText
+                                    android:id="@+id/tx_average_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_top_tx_all_breathing"
+                                    android:layout_marginBottom="@dimen/margin_bottom_tx_total_count"
+                                    android:fontFamily="@font/pretendard_bold"
+                                    android:text="@{viewmodel.txAverageTime}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/tx_history_data_textview"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="@id/tx_average"
+                                    app:layout_constraintTop_toBottomOf="@+id/tx_average" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraint_data_03"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_side_constraint_breath_data"
+                                android:layout_marginTop="@dimen/margin_top_constraint_breath_data"
+                                android:layout_marginEnd="@dimen/margin_side_constraint_breath_data"
+                                android:background="@drawable/border_constraint_graph_data">
+
+                                <TextView
+                                    android:id="@+id/tx_total"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_tx_all_count"
+                                    android:layout_marginTop="@dimen/margin_tx_all_count"
+                                    android:fontFamily="@font/pretendard_medium"
+                                    android:text="@string/tx_total_count"
+                                    android:textColor="@color/color_tx_graph_data"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <EditText
+                                    android:id="@+id/tx_total_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_top_tx_all_breathing"
+                                    android:layout_marginBottom="@dimen/margin_bottom_tx_total_count"
+                                    android:fontFamily="@font/pretendard_bold"
+                                    android:text="@{viewmodel.txTotalTime}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/tx_history_data_textview"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="@id/tx_total"
+                                    app:layout_constraintTop_toBottomOf="@+id/tx_total" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraint_data_04"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_side_constraint_breath_data"
+                                android:layout_marginTop="@dimen/margin_top_constraint_breath_data"
+                                android:layout_marginEnd="@dimen/margin_side_constraint_breath_data"
+                                android:background="@drawable/border_constraint_graph_data">
+
+                                <TextView
+                                    android:id="@+id/tx_clear"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_tx_all_count"
+                                    android:layout_marginTop="@dimen/margin_tx_all_count"
+                                    android:fontFamily="@font/pretendard_medium"
+                                    android:text="@string/tx_total_count"
+                                    android:textColor="@color/color_tx_graph_data"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <EditText
+                                    android:id="@+id/tx_clear_count"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_top_tx_all_breathing"
+                                    android:layout_marginBottom="@dimen/margin_bottom_tx_total_count"
+                                    android:fontFamily="@font/pretendard_bold"
+                                    android:text="@{viewmodel.txClearCount}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/tx_history_data_textview"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="@id/tx_clear"
+                                    app:layout_constraintTop_toBottomOf="@+id/tx_clear" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_decision"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_linear_birth"
+                android:layout_marginBottom="@dimen/margin_bottom_linear_gender"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/padding_side_linear_birth"
+                android:paddingEnd="@dimen/padding_side_linear_birth"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linear_breath_data">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_linear_gender"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_constraint_gender_not">
+
+                    <TextView
+                        android:id="@+id/btn_cancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:onClick="@{() -> viewmodel.btnBack()}"
+                        android:text="취소"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_edt_year"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Space
+                    android:layout_width="@dimen/space_width_constraint_decision"
+                    android:layout_height="match_parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_linear_gender"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_constraint_gender">
+
+                    <TextView
+                        android:id="@+id/btn_save"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:onClick="@{() -> viewmodel.btnSave()}"
+                        android:text="@string/tx_save"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_edt_year"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

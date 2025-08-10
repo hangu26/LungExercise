@@ -41,8 +41,18 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:orientation="horizontal">
+                    
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="7dp"
+                        android:layout_height="28dp"
+                        android:background="@drawable/border_icon_input_info"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tx_input_user_info"/>
 
                     <TextView
+                        android:id="@+id/tx_input_user_info"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/tx_app_bar_input_info"
@@ -74,7 +84,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/appBar_title_01"/>
+                android:background="@drawable/border_progress_input_info_bar"/>
 
             <FrameLayout
                 android:id="@+id/frame_progress_02"

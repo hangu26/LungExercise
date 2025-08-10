@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">LungExercise</string>
-    <string name="tx_app_name">앱 이름</string>
+    <string name="tx_app_name">건강 관리</string>
     <string name="tx_app_bar_input_info">사용자 정보 입력</string>
     <string name="tx_btn_next">다음으로</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -16,7 +16,7 @@
     <string name="tx_kg">kg</string>
     <string name="tx_stature">신장을 입력해주세요.</string>
     <string name="tx_cm">cm</string>
-    <string name="tx_hello_guest">게스트님, 안녕하세요</string>
+    <string name="tx_hello_guest">안녕하세요, 게스트님</string>
     <string name="tx_lung_exercise">폐장도인운동법</string>
     <string name="tx_exercise_detail">운동법 안내</string>
     <string name="tx_6_min_test">6분 보행검사</string>
@@ -56,7 +56,53 @@
     <string name="tx_average_time_empty">평균 호기 시간 : 기록 없음</string>
     <string name="tx_total_time_empty">총 호기 시간 : 기록 없음</string>
     <string name="tx_clear_count_empty">성공 횟수 : 기록 없음</string>
-    <string name="tx_remove_breath_data">기록 삭제</string>
+    <string name="tx_remove_breath_data">삭제</string>
+    <string name="tx_normal_time_count">8초</string>
+    <string name="tx_normal_breathing">정상 호기</string>
+    <string name="tx_user_breathing">사용자 호기</string>
+    <string name="tx_edit_info">나의 정보 수정</string>
+    <string name="tx_percent_setup">0%</string>
+    <string name="tx_second_setup">0 초</string>
+    <string name="tx_calendar_date_setup">2025년 7월</string>
+    <string name="tx_tab_item_setup">호흡 활동량</string>
+    <string name="tx_weekly_breathing_history">주간 호흡 운동 현황</string>
+    <string name="tx_all_breathing_count">총 시행 횟수</string>
+    <string name="tx_average_time">평균 호기 시간</string>
+    <string name="tx_total_count">총 호기 시간</string>
+    <string name="tx_breathing_tip">호흡 운동 팁</string>
+    <string name="tx_breathing_tip_02">규칙적인 호흡 운동은 스트레스 완화와 집중력 향상에 도움이 됩니다. 매일 같은 시간에 운동하는 것을 권장합니다.</string>
+    <string name="tx_activity_record">활동량</string>
+    <string name="tx_hello_guest_02">오늘도 건강한 하루 보내세요!</string>
+    <string name="tx_calendar">달력</string>
+    <string name="tx_basic_info">기본 정보</string>
+    <string name="tx_birth">생년월일</string>
+    <string name="tx_gender">성별</string>
+    <string name="tx_body_specs">신체 정보</string>
+    <string name="tx_body_weight">몸무게</string>
+    <string name="tx_height">키</string>
+    <string name="tx_edit_guide">정보 수정 안내</string>
+    <string name="tx_edit_guide_detail">정확한 건강 관리를 위해 실제 정보를 입력해 주세요. 입력하신 정보는 안전하게 보호됩니다.</string>
+    <string name="tx_save">저장하기</string>
+    <string name="tx_bluetooth_mask">블루투스 마스크</string>
+    <string name="tx_connect_mask">마스크를 연결해보세요</string>
+    <string name="tx_connect">연결</string>
+    <string name="tx_connect_bluetooth_mask">블루투스 마스크 연결</string>
+    <string name="tx_find_smart_mask">스마트 마스크를 찾아 연결하세요</string>
+    <string name="tx_x">x</string>
+    <string name="tx_available_device">사용 가능한 기기</string>
+    <string name="tx_refresh">새로고침</string>
+    <string name="tx_device_name">기종 이름</string>
+    <string name="tx_disconnect">해제</string>
+    <string name="tx_mask_setting">마스크 데이터 설정</string>
+    <string name="tx_mask_setting_detail">마스크 센서 보정을 위해 편안히 숨을 쉬세요</string>
+    <string name="tx_clear_setting">설정 완료</string>
+    <string name="tx_take_a_breath_01">마스크를 착용하고 10초간 자연스럽게 숨을 쉬세요.</string>
+    <string name="tx_take_a_breath_02">센서가 당신의 호흡 패턴을 학습합니다.</string>
+    <string name="tx_complete_setting">설정 완료</string>
+    <string name="tx_next">다음</string>
+    <string name="tx_developer_mode">개발자 모드</string>
+    <string name="tx_app_name_detail">건강한 호흡의 시작</string>
+    <string name="tx_input_birth_detail">YYYY-MM-DD 형식으로 입력해주세요</string>
 
 
 </resources>

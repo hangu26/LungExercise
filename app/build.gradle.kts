@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "kr.daejeonuinversity.lungexercise"
-        minSdk = 29
+        minSdk = 27
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -42,6 +42,8 @@ android {
 }
 
 dependencies {
+
+    implementation ("com.airbnb.android:lottie:6.0.0")
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
 // Room KTX 의존성 추가

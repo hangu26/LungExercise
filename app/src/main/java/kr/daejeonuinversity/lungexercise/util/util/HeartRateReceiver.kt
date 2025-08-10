@@ -17,6 +17,15 @@ class HeartRateReceiver(
         Wearable.getDataClient(context).addListener(this)
             .addOnSuccessListener {
                 Log.d("HeartRateReceiver", "✅ 등록 성공")
+
+                // 노드 연결 상태 확인
+                Wearable.getNodeClient(context).connectedNodes
+                    .addOnSuccessListener { nodes ->
+                        for (node in nodes) {
+                            Log.d("HeartRateReceiver", "🔗 연결된 노드: ${node.displayName}, ${node.id}")
+                        }
+                    }
+
             }
             .addOnFailureListener {
                 Log.e("HeartRateReceiver", "❌ 등록 실패: $it")
@@ -34,6 +43,7 @@ class HeartRateReceiver(
                 val path = item.uri.path ?: continue
                 val dataMap = DataMapItem.fromDataItem(item).dataMap
                 val timestamp = dataMap.getLong("timestamp")
+                Log.e("HeartRateReceiver", "데이터 변화")
 
                 when {
                     path.startsWith("/heart_rate") -> {

@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import kr.daejeonuinversity.lungexercise.R
 import kr.daejeonuinversity.lungexercise.databinding.ActivityWalkingTestBinding
 import kr.daejeonuinversity.lungexercise.util.base.BaseActivity
+import kr.daejeonuinversity.lungexercise.util.util.BackPressedCallback
 import kr.daejeonuinversity.lungexercise.util.util.HeartTimerView
 import kr.daejeonuinversity.lungexercise.util.util.MiBandReceiver
 import kr.daejeonuinversity.lungexercise.view.main.MainActivity
@@ -22,6 +23,7 @@ class WalkingTestActivity :
     private lateinit var heartTimerView: HeartTimerView
     private var countDownTimer: CountDownTimer? = null
     private var totalTime = 6 * 60 * 1000L // 6분
+    private val backPressedCallback = BackPressedCallback(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,7 @@ class WalkingTestActivity :
 
         initButton()
         observe()
+        backPressedCallback.addCallbackActivity(this, MainActivity::class.java)
 
     }
     @SuppressLint("ClickableViewAccessibility")
@@ -84,7 +87,7 @@ class WalkingTestActivity :
         vm.backClicked.observe(this@WalkingTestActivity) {
             if (it) {
                 val intent = Intent(this@WalkingTestActivity, MainActivity::class.java)
-                startActivityAnimation(intent, this@WalkingTestActivity)
+                startActivityBackAnimation(intent, this@WalkingTestActivity)
                 finish()
             }
         }

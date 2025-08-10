@@ -1,7 +1,10 @@
 package kr.daejeonuinversity.lungexercise.util.base
 
 import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +35,21 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutRes: Int) 
     }
 
     abstract fun initView()
+
+    fun startActivityAnimation(intent: Intent, context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val options = ActivityOptions.makeCustomAnimation(
+                context,
+                androidx.appcompat.R.anim.abc_fade_in,
+                androidx.appcompat.R.anim.abc_fade_out
+            )
+            context.startActivity(intent, options.toBundle())
+            activity?.finish()
+        } else {
+            context.startActivity(intent)
+            activity?.finish()
+        }
+    }
 
 
     fun hideKeyboard(activity: Activity) {

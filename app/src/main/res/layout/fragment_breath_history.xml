@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="fragment"
+            type="kr.daejeonuinversity.lungexercise.view.history.fragment.BreathHistoryFragment" />
+
+        <variable
+            name="viewmodel"
+            type="kr.daejeonuinversity.lungexercise.viewmodel.HistoryViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_breath_history">
+
+        <!-- 전체 스크롤 가능하게 만드는 NestedScrollView -->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/background_breath_history"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- NestedScrollView는 반드시 child가 하나여야 하므로 LinearLayout 사용 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- 요일 표시 + 달력 + 그래프 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/calendar_constraint"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/margin_top_constraint_calendar"
+                        android:background="@drawable/border_calendar_constraint"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_start_tx_calendar"
+                            android:fontFamily="@font/pretendard_bold"
+                            android:text="@string/tx_calendar"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_tx_calendar"
+                            app:layout_constraintBottom_toBottomOf="@+id/layoutMonth"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/layoutMonth" />
+
+                        <LinearLayout
+                            android:id="@+id/layoutMonth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top_constraint_calendar"
+                            android:layout_marginEnd="@dimen/margin_end_layoutMonth"
+                            android:layout_marginBottom="@dimen/margin_bottom_layoutMonth"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/btnPrevMonth"
+                                android:layout_width="@dimen/size_icon_left_right"
+                                android:layout_height="@dimen/size_icon_left_right"
+                                android:onClick="@{() -> viewmodel.prevMonth()}"
+                                android:src="@drawable/icon_left" />
+
+                            <TextView
+                                android:id="@+id/tvCurrentMonth"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_side_tv_current_month"
+                                android:layout_marginEnd="@dimen/margin_side_tv_current_month"
+                                android:fontFamily="@font/pretendard_bold"
+                                android:paddingHorizontal="16dp"
+                                android:text="@string/tx_calendar_date_setup"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/size_tx_calendar_date"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/btnNextMonth"
+                                android:layout_width="@dimen/size_icon_left_right"
+                                android:layout_height="@dimen/size_icon_left_right"
+                                android:onClick="@{() -> viewmodel.nextMonth()}"
+                                android:src="@drawable/icon_right" />
+                        </LinearLayout>
+
+                        <!-- 요일 텍스트 -->
+                        <LinearLayout
+                            android:id="@+id/layoutWeekDays"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top_layout_week_day"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/layoutMonth">
+
+                            <!-- 일 ~ 토 반복 -->
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Sun"
+                                android:textColor="#E53935"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Mon"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Tue"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Wed"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Thu"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Fri"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Sat"
+                                android:textColor="#1E88E5"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <!-- 달력 -->
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/calendarRecyclerView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top_calendar_recycler"
+                            android:nestedScrollingEnabled="false"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/layoutWeekDays"
+                            tools:listitem="@layout/item_calendar_day" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/graph_constraint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_top_constraint_calendar"
+                        android:layout_marginBottom="@dimen/margin_bottom_graph_constraint"
+                        android:background="@drawable/border_calendar_constraint"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/calendar_constraint">
+
+                        <TextView
+                            android:id="@+id/tx_weekly_breathing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_start_tx_weekly_breathing"
+                            android:layout_marginTop="@dimen/margin_top_tx_weekly_breathing"
+                            android:fontFamily="@font/pretendard_bold"
+                            android:text="@string/tx_weekly_breathing_history"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_tx_weekly_breathing_history"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/btn_stop"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_end_constraint_delete"
+                            android:background="@drawable/border_btn_stop_timer"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:onClick="@{() -> viewmodel.btnRemove()}"
+                            android:paddingStart="@dimen/padding_horizontal_constraint_delete"
+                            android:paddingTop="@dimen/padding_vertical_constraint_delete"
+                            android:paddingEnd="@dimen/padding_horizontal_constraint_delete"
+                            android:paddingBottom="@dimen/padding_vertical_constraint_delete"
+                            app:layout_constraintBottom_toBottomOf="@+id/tx_weekly_breathing"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/tx_weekly_breathing">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/pretendard_bold"
+                                android:gravity="center"
+                                android:text="@string/tx_remove_breath_data"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/size_tx_btn_next"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <!-- 막대 그래프 -->
+                        <com.github.mikephil.charting.charts.BarChart
+                            android:id="@+id/barChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_graph"
+                            android:layout_marginTop="@dimen/margin_top_graph"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tx_weekly_breathing" />
+
+                        <LinearLayout
+                            android:id="@+id/linear_tx_data"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/barChart">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraint_data_01"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_side_constraint_breath_data"
+                                android:layout_marginTop="@dimen/margin_top_constraint_breath_data"
+                                android:layout_marginEnd="@dimen/margin_side_constraint_breath_data"
+                                android:background="@drawable/border_constraint_graph_data">
+
+                                <TextView
+                                    android:id="@+id/tx_all_count"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_tx_all_count"
+                                    android:layout_marginTop="@dimen/margin_tx_all_count"
+                                    android:fontFamily="@font/pretendard_medium"
+                                    android:text="@string/tx_all_breathing_count"
+                                    android:textColor="@color/color_tx_graph_data"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/tx_total_count"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_top_tx_all_breathing"
+                                    android:layout_marginBottom="@dimen/margin_bottom_tx_total_count"
+                                    android:fontFamily="@font/pretendard_bold"
+                                    android:text="@{viewmodel.txTotalCount}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/tx_history_data_textview"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="@id/tx_all_count"
+                                    app:layout_constraintTop_toBottomOf="@+id/tx_all_count" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraint_data_02"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_side_constraint_breath_data"
+                                android:layout_marginTop="@dimen/margin_top_constraint_breath_data"
+                                android:layout_marginEnd="@dimen/margin_side_constraint_breath_data"
+                                android:background="@drawable/border_constraint_graph_data">
+
+                                <TextView
+                                    android:id="@+id/tx_average"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_tx_all_count"
+                                    android:layout_marginTop="@dimen/margin_tx_all_count"
+                                    android:fontFamily="@font/pretendard_medium"
+                                    android:text="@string/tx_average_time"
+                                    android:textColor="@color/color_tx_graph_data"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/tx_average_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_top_tx_all_breathing"
+                                    android:layout_marginBottom="@dimen/margin_bottom_tx_total_count"
+                                    android:fontFamily="@font/pretendard_bold"
+                                    android:text="@{viewmodel.txAverageTime}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/tx_history_data_textview"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="@id/tx_average"
+                                    app:layout_constraintTop_toBottomOf="@+id/tx_average" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraint_data_03"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_side_constraint_breath_data"
+                                android:layout_marginTop="@dimen/margin_top_constraint_breath_data"
+                                android:layout_marginEnd="@dimen/margin_side_constraint_breath_data"
+                                android:background="@drawable/border_constraint_graph_data">
+
+                                <TextView
+                                    android:id="@+id/tx_total"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_tx_all_count"
+                                    android:layout_marginTop="@dimen/margin_tx_all_count"
+                                    android:fontFamily="@font/pretendard_medium"
+                                    android:text="@string/tx_total_count"
+                                    android:textColor="@color/color_tx_graph_data"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/tx_total_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_top_tx_all_breathing"
+                                    android:layout_marginBottom="@dimen/margin_bottom_tx_total_count"
+                                    android:fontFamily="@font/pretendard_bold"
+                                    android:text="@{viewmodel.txTotalTime}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/tx_history_data_textview"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="@id/tx_total"
+                                    app:layout_constraintTop_toBottomOf="@+id/tx_total" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraint_data_04"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_side_constraint_breath_data"
+                                android:layout_marginTop="@dimen/margin_top_constraint_breath_data"
+                                android:layout_marginEnd="@dimen/margin_side_constraint_breath_data"
+                                android:background="@drawable/border_constraint_graph_data">
+
+                                <TextView
+                                    android:id="@+id/tx_clear"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_tx_all_count"
+                                    android:layout_marginTop="@dimen/margin_tx_all_count"
+                                    android:fontFamily="@font/pretendard_medium"
+                                    android:text="@string/tx_total_count"
+                                    android:textColor="@color/color_tx_graph_data"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/tx_clear_count"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_top_tx_all_breathing"
+                                    android:layout_marginBottom="@dimen/margin_bottom_tx_total_count"
+                                    android:fontFamily="@font/pretendard_bold"
+                                    android:text="@{viewmodel.txClearCount}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/tx_history_data_textview"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="@id/tx_clear"
+                                    app:layout_constraintTop_toBottomOf="@+id/tx_clear" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraint_data_05"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_side_constraint_breath_data"
+                                android:layout_marginTop="@dimen/margin_top_constraint_breath_data"
+                                android:layout_marginEnd="@dimen/margin_side_constraint_breath_data"
+                                android:layout_marginBottom="@dimen/margin_bottom_constraint_data_05"
+                                android:background="@drawable/border_constraint_data_05">
+
+                                <ImageView
+                                    android:id="@+id/icon_breath_tip"
+                                    android:layout_width="@dimen/size_icon_breath_tip"
+                                    android:layout_height="@dimen/size_icon_breath_tip"
+                                    android:layout_marginStart="@dimen/margin_tx_all_count"
+                                    android:layout_marginTop="@dimen/margin_tx_all_count"
+                                    android:src="@drawable/icon_breath_tip"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/tx_tip_01"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_start_tx_tip_01"
+                                    android:fontFamily="@font/pretendard_medium"
+                                    android:text="@string/tx_breathing_tip"
+                                    android:textColor="@color/color_tx_breathing_tip"
+                                    android:textSize="@dimen/size_tx_tip_01"
+                                    app:layout_constraintBottom_toBottomOf="@+id/icon_breath_tip"
+                                    app:layout_constraintStart_toEndOf="@+id/icon_breath_tip"
+                                    app:layout_constraintTop_toTopOf="@+id/icon_breath_tip" />
+
+                                <TextView
+                                    android:id="@+id/tx_tip_02"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_top_tx_all_breathing"
+                                    android:layout_marginEnd="21dp"
+                                    android:layout_marginBottom="@dimen/margin_bottom_tx_total_count"
+                                    android:fontFamily="@font/pretendard_regular"
+                                    android:text="@string/tx_breathing_tip_02"
+                                    android:textColor="@color/color_tx_breathing_tip"
+                                    android:textSize="@dimen/size_tx_tip_02"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="@id/tx_tip_01"
+                                    app:layout_constraintTop_toBottomOf="@+id/tx_tip_01" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

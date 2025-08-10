@@ -92,27 +92,28 @@
 
                     <ImageView
                         android:id="@+id/btnPrevMonth"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/size_icon_left_right"
+                        android:layout_height="@dimen/size_icon_left_right"
                         android:onClick="@{() -> viewmodel.prevMonth()}"
-                        android:src="@drawable/arrow_back" />
+                        android:src="@drawable/icon_left" />
 
                     <TextView
                         android:id="@+id/tvCurrentMonth"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="16dp"
-                        android:text="2025년 7월"
+                        android:text="@string/tx_calendar_date_setup"
+                        android:fontFamily="@font/pretendard_bold"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/size_tx_calendar_date"
                         android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/btnNextMonth"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/size_icon_left_right"
+                        android:layout_height="@dimen/size_icon_left_right"
                         android:onClick="@{() -> viewmodel.nextMonth()}"
-                        android:src="@drawable/arrow_forward" />
+                        android:src="@drawable/icon_right" />
                 </LinearLayout>
 
                 <!-- 요일 표시 + 달력 + 그래프 -->

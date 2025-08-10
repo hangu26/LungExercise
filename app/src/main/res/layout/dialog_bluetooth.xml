@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_result_breathing">
+
+    <TextView
+        android:id="@+id/tx_connect_bluetooth_mask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_side_border_dialog_bluetooth"
+        android:layout_marginTop="@dimen/margin_top_tx_result_breathing_dialog"
+        android:fontFamily="@font/pretendard_semibold"
+        android:text="@string/tx_connect_bluetooth_mask"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_tx_connect_bluetooth_mask"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_cancel_dialog_bluetooth"
+        android:layout_width="@dimen/size_constraint_cancel_dialog_bluetooth"
+        android:layout_height="@dimen/size_constraint_cancel_dialog_bluetooth"
+        android:layout_marginEnd="@dimen/margin_side_border_dialog_bluetooth"
+        android:background="@drawable/border_cancel_dialog_bluetooth"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/tx_connect_bluetooth_mask"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tx_connect_bluetooth_mask">
+
+        <TextView
+            android:id="@+id/tx_x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center_vertical"
+            android:text="@string/tx_x"
+            android:textColor="@color/color_tx_x"
+            android:textSize="@dimen/size_tx_x"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tx_connect_smart_mask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_side_border_dialog_bluetooth"
+        android:layout_marginTop="@dimen/margin_top_tx_connect_smart_mask"
+        android:fontFamily="@font/pretendard_regular"
+        android:text="@string/tx_find_smart_mask"
+        android:textColor="@color/color_tx_x"
+        android:textSize="@dimen/size_tx_connect_smart_mask"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_connect_bluetooth_mask" />
+
+    <FrameLayout
+        android:id="@+id/space_01"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/margin_top_tx_connect_smart_mask"
+        android:background="@color/space_find_smart_mask"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_connect_smart_mask" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linear_available_mask"
+        android:layout_width="@dimen/width_dialog_bluetooth"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_side_border_dialog_bluetooth"
+        android:layout_marginTop="@dimen/margin_top_linear_available_mask"
+        android:layout_marginEnd="@dimen/margin_side_border_dialog_bluetooth"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/space_01">
+
+        <TextView
+            android:id="@+id/tx_available_mask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="@string/tx_available_device"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_tx_available_mask"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btn_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_height_btn_refresh"
+            android:background="@drawable/border_btn_refresh_bluetooth"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/icon_refresh_bluetooth"
+                android:layout_width="@dimen/size_icon_refresh_bluetooth"
+                android:layout_height="@dimen/size_icon_refresh_bluetooth"
+                android:layout_marginStart="@dimen/margin_start_icon_refresh_bluetooth"
+                android:layout_marginEnd="@dimen/margin_end_icon_refresh_bluetooth"
+                android:src="@drawable/icon_refresh"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tx_refresh"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tx_refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_end_tx_refresh"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/tx_refresh"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_tx_refresh"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_refresh_bluetooth"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linear_bluetooth_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_side_border_dialog_bluetooth"
+        android:layout_marginTop="@dimen/margin_top_linear_result_time"
+        android:layout_marginEnd="@dimen/margin_side_border_dialog_bluetooth"
+        android:visibility="gone"
+        android:background="@drawable/border_linear_bluetooth_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_available_mask">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_icon_bluetooth"
+            android:layout_width="@dimen/size_constraint_icon_bluetooth"
+            android:layout_height="@dimen/size_constraint_icon_bluetooth"
+            android:layout_marginStart="@dimen/margin_constraint_icon_bluetooth"
+            android:layout_marginTop="@dimen/margin_constraint_icon_bluetooth"
+            android:layout_marginBottom="@dimen/margin_constraint_icon_bluetooth"
+            android:background="@drawable/border_constraint_bluetooth_white_quadrangle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_bluetooth"
+                android:layout_width="@dimen/size_icon_breath_in_lung_exercise"
+                android:layout_height="@dimen/size_icon_breath_in_lung_exercise"
+                android:src="@drawable/icon_bluetooth"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tx_device_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_start_tx_device_name"
+            android:layout_marginEnd="@dimen/margin_start_tx_device_name"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="@string/tx_device_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_tx_device_name"
+            app:layout_constraintBottom_toBottomOf="@+id/constraint_icon_bluetooth"
+            app:layout_constraintEnd_toStartOf="@+id/constraint_connect_device"
+            app:layout_constraintStart_toEndOf="@+id/constraint_icon_bluetooth"
+            app:layout_constraintTop_toTopOf="@+id/constraint_icon_bluetooth" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_connect_device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_end_constraint_connect_device"
+            android:background="@drawable/border_constraint_bluetooth_white_quadrangle"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tx_connect_device"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_side_tx_connect_device"
+                android:layout_marginTop="@dimen/margin_vertical_tx_connect_device"
+                android:layout_marginEnd="@dimen/margin_side_tx_connect_device"
+                android:layout_marginBottom="@dimen/margin_vertical_tx_connect_device"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/tx_connect"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_tx_result_breathing"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btn_next_dialog"
+        android:layout_width="@dimen/width_btn_close_in_dialog"
+        android:layout_height="@dimen/height_btn_close_in_dialog"
+        android:layout_marginTop="@dimen/margin_top_btn_close_in_dialog"
+        android:layout_marginBottom="@dimen/margin_bottom_btn_close_in_dialog"
+        android:background="@drawable/border_btn_close_dialog_bluetooth"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_bluetooth_list">
+
+        <TextView
+            android:id="@+id/tx_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_bold"
+            android:gravity="center"
+            android:text="@string/tx_next"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_tx_btn_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

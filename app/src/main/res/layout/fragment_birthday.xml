@@ -2,17 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    
+
     <data>
-        
+
         <variable
             name="fragment"
             type="kr.daejeonuinversity.lungexercise.view.infoinput.fragment.BirthdayFragment" />
-        
+
         <variable
             name="viewmodel"
             type="kr.daejeonuinversity.lungexercise.viewmodel.BirthdayViewModel" />
-        
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,34 +32,82 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tx_input_birth_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_start_frag_tx_birth"
+            android:layout_marginTop="@dimen/margin_top_tx_input_birth_detail"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="@string/tx_input_birth_detail"
+            android:textColor="@color/color_tx_input_birth_detail"
+            android:textSize="@dimen/size_tx_input_birth_detail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tx_input_birth" />
+
         <LinearLayout
+            android:id="@+id/linear_select_calendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_side_frag_tx_birth"
             android:layout_marginTop="@dimen/margin_top_frag_birth_linear_birth"
             android:layout_marginEnd="@dimen/margin_side_frag_tx_birth"
             android:background="@drawable/border_edt_birth"
-            android:orientation="horizontal"
             android:onClick="@{() -> viewmodel.btnBirthClicked()}"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tx_input_birth">
+            app:layout_constraintTop_toBottomOf="@+id/tx_input_birth_detail">
 
-            <EditText
-                android:id="@+id/edt_birth"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/height_edt_birth"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:background="@null"
-                android:focusable="false"
-                android:textColor="@color/black"
-                android:onClick="@{() -> viewmodel.btnBirthClicked()}"
-                android:layout_marginStart="@dimen/margin_side_edt_birth"
-                android:layout_marginEnd="@dimen/margin_side_edt_birth"
-                android:hint="@string/tx_ex_birth" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edt_birth"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_edt_birth"
+                    android:layout_marginStart="@dimen/margin_side_edt_birth"
+                    android:layout_marginEnd="@dimen/margin_side_edt_birth"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:focusable="false"
+                    android:gravity="center_vertical"
+                    android:hint="@string/tx_ex_birth"
+                    android:onClick="@{() -> viewmodel.btnBirthClicked()}"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/icon_calendar"
+                    android:layout_width="@dimen/size_icon_calendar"
+                    android:layout_height="@dimen/size_icon_calendar"
+                    android:src="@drawable/icon_calendar"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/edt_birth"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_privacy_protection"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_constraint_privacy_protection"
+            android:background="@drawable/border_constraint_privacy_protection"
+            app:layout_constraintEnd_toEndOf="@+id/linear_select_calendar"
+            app:layout_constraintStart_toStartOf="@+id/linear_select_calendar"
+            app:layout_constraintTop_toBottomOf="@+id/linear_select_calendar">
+
+            border_icon_privacy_protection
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

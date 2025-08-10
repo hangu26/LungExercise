@@ -17,6 +17,7 @@ import kr.daejeonuinversity.lungexercise.R
 import kr.daejeonuinversity.lungexercise.databinding.ActivityHistoryBinding
 import kr.daejeonuinversity.lungexercise.util.adapter.CalendarAdapter
 import kr.daejeonuinversity.lungexercise.util.base.BaseActivity
+import kr.daejeonuinversity.lungexercise.util.util.BackPressedCallback
 import kr.daejeonuinversity.lungexercise.view.main.MainActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.HistoryViewModel
 import org.koin.android.ext.android.inject
@@ -26,6 +27,7 @@ import java.time.YearMonth
 class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_history) {
 
     private var isClickedDate: LocalDate? = null
+    private val backPressedCallback = BackPressedCallback(this)
 
     private val hViewModel: HistoryViewModel by inject()
     private val calendarAdapter = CalendarAdapter { calendarDay ->
@@ -50,6 +52,8 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
         }
 
         observe()
+        backPressedCallback.addCallbackActivity(this, MainActivity::class.java)
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -108,7 +112,7 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_h
     }
 
     private fun showBarChart(data: Map<String, Int>) {
-        val dayLabels = listOf("일", "월", "화", "수", "목", "금", "토")
+        val dayLabels = listOf("월", "화", "수", "목", "금", "토", "일")
         val entries = data.entries.mapIndexed { index, entry ->
             BarEntry(index.toFloat(), entry.value.toFloat())
         }

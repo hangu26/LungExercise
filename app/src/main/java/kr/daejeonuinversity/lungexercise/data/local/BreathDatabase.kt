@@ -1,17 +1,16 @@
 package kr.daejeonuinversity.lungexercise.data.local
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
 import kr.daejeonuinversity.lungexercise.data.local.dao.BreathRecordDao
+import kr.daejeonuinversity.lungexercise.data.local.dao.UserInfoDao
 import kr.daejeonuinversity.lungexercise.data.local.entity.BreathRecord
+import kr.daejeonuinversity.lungexercise.data.local.entity.UserInfo
 
-@Database(entities = [BreathRecord::class], version = 2)
+@Database(entities = [BreathRecord::class, UserInfo::class], version = 3)
 abstract class BreathDatabase : RoomDatabase(){
     abstract fun breathRecordDao() : BreathRecordDao
+    abstract fun userInfoDao(): UserInfoDao
 
     companion object{
 

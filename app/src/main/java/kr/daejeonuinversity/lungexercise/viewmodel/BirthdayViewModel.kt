@@ -9,6 +9,8 @@ class BirthdayViewModel(application: Application) : AndroidViewModel(application
     private var _btnBirthState = MutableLiveData<Boolean>()
     val btnBirthState = _btnBirthState
 
+    val birthdayDate = MutableLiveData<String>()
+
     fun btnBirthClicked(){
         _btnBirthState.value = true
     }

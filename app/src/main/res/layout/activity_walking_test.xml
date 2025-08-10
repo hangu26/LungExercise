@@ -59,7 +59,7 @@
                         android:gravity="center"
                         android:text="@string/tx_6_min_test"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/size_tx_app_bar_input_info"
+                        android:textSize="@dimen/size_appbar_text"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

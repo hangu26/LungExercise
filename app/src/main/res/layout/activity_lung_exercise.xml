@@ -7,7 +7,7 @@
 
         <variable
             name="activity"
-            type="kr.daejeonuinversity.lungexercise.view.lungexercise.LungExerciseActivity" />
+            type="kr.daejeonuinversity.lungexercise.view.exercise.LungExerciseActivity" />
 
         <variable
             name="viewmodel"
@@ -18,7 +18,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/background_lung_exercise_activity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -59,11 +59,33 @@
                         android:gravity="center"
                         android:text="@string/tx_lung_exercise"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/size_tx_app_bar_input_info"
+                        android:textSize="@dimen/size_appbar_text"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraint_bluetooth_black"
+                        android:layout_width="@dimen/size_constraint_bluetooth_black"
+                        android:layout_height="@dimen/size_constraint_bluetooth_black"
+                        android:layout_marginEnd="@dimen/margin_start_icon_back"
+                        android:background="@drawable/border_constraint_bluetooth_black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/icon_bluetooth_black"
+                            android:layout_width="@dimen/size_icon_bluetooth_black"
+                            android:layout_height="@dimen/size_icon_bluetooth_black"
+                            android:src="@drawable/icon_bluetooth_black"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -78,50 +100,62 @@
             android:layout_marginStart="@dimen/margin_side_constraint_breath"
             android:layout_marginTop="@dimen/margin_top_constraint_breath"
             android:layout_marginEnd="@dimen/margin_side_constraint_breath"
-            android:background="@drawable/border_constraint_breath"
+            android:background="@drawable/border_constraint_breath_in_lung_exercise"
             android:clickable="true"
-            android:elevation="20dp"
+            android:elevation="@dimen/elevation_constraint_in_lung_exercise"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
-            <ImageView
-                android:id="@+id/img_breath"
-                android:layout_width="@dimen/size_icon_breath"
-                android:layout_height="@dimen/size_icon_breath"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_img_breath"
+                android:layout_width="@dimen/size_constraint_img_breath"
+                android:layout_height="@dimen/size_constraint_img_breath"
                 android:layout_marginStart="@dimen/margin_start_icon_breath"
                 android:layout_marginTop="@dimen/margin_vertical_icon_breath"
                 android:layout_marginBottom="@dimen/margin_vertical_icon_breath"
-                android:src="@drawable/icon_breath"
+                android:background="@drawable/background_breath_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/img_breath"
+                    android:layout_width="@dimen/size_icon_breath_in_lung_exercise"
+                    android:layout_height="@dimen/size_icon_breath_in_lung_exercise"
+                    android:src="@drawable/icon_exercise_breath"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/tx_practice_breath_01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_start_tx_practice_breath"
+                android:layout_marginStart="@dimen/margin_start_tx_practice_breath_01_02"
                 android:fontFamily="@font/pretendard_bold"
-                android:textColor="@color/black"
                 android:text="@string/tx_practice_breath"
+                android:textColor="@color/black"
                 android:textSize="@dimen/size_tx_practice_breath"
                 app:layout_constraintBottom_toTopOf="@+id/tx_practice_breath_02"
-                app:layout_constraintStart_toEndOf="@+id/img_breath"
-                app:layout_constraintTop_toTopOf="@+id/img_breath" />
+                app:layout_constraintStart_toEndOf="@+id/constraint_img_breath"
+                app:layout_constraintTop_toTopOf="@+id/constraint_img_breath" />
 
             <TextView
                 android:id="@+id/tx_practice_breath_02"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_start_tx_practice_breath"
+                android:layout_marginStart="@dimen/margin_start_tx_practice_breath_01_02"
                 android:fontFamily="@font/pretendard_regular"
                 android:text="@string/tx_practice_breathing"
                 android:textColor="@color/appBar_title_01"
-                app:layout_constraintBottom_toBottomOf="@+id/img_breath"
-                app:layout_constraintStart_toEndOf="@+id/img_breath"
+                app:layout_constraintBottom_toBottomOf="@+id/constraint_img_breath"
+                app:layout_constraintStart_toEndOf="@+id/constraint_img_breath"
                 app:layout_constraintTop_toBottomOf="@+id/tx_practice_breath_01" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -133,51 +167,192 @@
             android:layout_marginStart="@dimen/margin_side_constraint_breath"
             android:layout_marginTop="@dimen/margin_top_constraint_breath"
             android:layout_marginEnd="@dimen/margin_side_constraint_breath"
-            android:background="@drawable/border_constraint_breath"
+            android:background="@drawable/border_constraint_breath_in_lung_exercise"
             android:clickable="true"
-            android:elevation="20dp"
+            android:elevation="@dimen/elevation_constraint_in_lung_exercise"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraint_breath">
 
-            <ImageView
-                android:id="@+id/img_video"
-                android:layout_width="@dimen/size_icon_breath"
-                android:layout_height="@dimen/size_icon_breath"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_img_video"
+                android:layout_width="@dimen/size_constraint_img_breath"
+                android:layout_height="@dimen/size_constraint_img_breath"
                 android:layout_marginStart="@dimen/margin_start_icon_breath"
                 android:layout_marginTop="@dimen/margin_vertical_icon_breath"
                 android:layout_marginBottom="@dimen/margin_vertical_icon_breath"
-                android:src="@drawable/icon_video"
+                android:background="@drawable/background_video_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/img_video"
+                    android:layout_width="@dimen/size_icon_breath_in_lung_exercise"
+                    android:layout_height="@dimen/size_icon_breath_in_lung_exercise"
+                    android:src="@drawable/icon_video_in_lung"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/tx_video_01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_start_tx_practice_breath"
+                android:layout_marginStart="@dimen/margin_start_tx_video_01_02"
                 android:fontFamily="@font/pretendard_bold"
-                android:textColor="@color/black"
                 android:text="@string/tx_practice_video_01"
+                android:textColor="@color/black"
                 android:textSize="@dimen/size_tx_practice_breath"
                 app:layout_constraintBottom_toTopOf="@+id/tx_video_02"
-                app:layout_constraintStart_toEndOf="@+id/img_video"
-                app:layout_constraintTop_toTopOf="@+id/img_video" />
+                app:layout_constraintStart_toEndOf="@+id/constraint_img_video"
+                app:layout_constraintTop_toTopOf="@+id/constraint_img_video" />
 
             <TextView
                 android:id="@+id/tx_video_02"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_start_tx_practice_breath"
+                android:layout_marginStart="@dimen/margin_start_tx_video_01_02"
                 android:fontFamily="@font/pretendard_regular"
                 android:text="@string/tx_practice_video_02"
                 android:textColor="@color/appBar_title_01"
-                app:layout_constraintBottom_toBottomOf="@+id/img_video"
-                app:layout_constraintStart_toEndOf="@+id/img_video"
+                app:layout_constraintBottom_toBottomOf="@+id/constraint_img_video"
+                app:layout_constraintStart_toEndOf="@+id/constraint_img_video"
                 app:layout_constraintTop_toBottomOf="@+id/tx_video_01" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_bluetooth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_side_constraint_breath"
+            android:layout_marginTop="@dimen/margin_top_constraint_breath"
+            android:layout_marginEnd="@dimen/margin_side_constraint_breath"
+            android:background="@drawable/border_constraint_breath_in_lung_exercise"
+            android:elevation="@dimen/elevation_constraint_in_lung_exercise"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraint_video">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_img_bluetooth"
+                android:layout_width="@dimen/size_constraint_img_breath"
+                android:layout_height="@dimen/size_constraint_img_breath"
+                android:layout_marginStart="@dimen/margin_start_icon_breath"
+                android:layout_marginTop="@dimen/margin_vertical_constraint_bluetooth_white"
+                android:layout_marginBottom="@dimen/margin_vertical_constraint_bluetooth_white"
+                android:background="@drawable/border_constraint_bluetooth_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/img_bluetooth"
+                    android:layout_width="@dimen/size_icon_breath_in_lung_exercise"
+                    android:layout_height="@dimen/size_icon_breath_in_lung_exercise"
+                    android:src="@drawable/icon_bluetooth"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tx_bluetooth_01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_start_tx_bluetooth_01_02"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/tx_bluetooth_mask"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_tx_practice_breath"
+                app:layout_constraintBottom_toTopOf="@+id/tx_bluetooth_02"
+                app:layout_constraintStart_toEndOf="@+id/constraint_img_bluetooth"
+                app:layout_constraintTop_toTopOf="@+id/constraint_img_bluetooth" />
+
+            <TextView
+                android:id="@+id/tx_bluetooth_02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_start_tx_bluetooth_01_02"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/tx_connect_mask"
+                android:textColor="@color/appBar_title_01"
+                app:layout_constraintBottom_toBottomOf="@+id/constraint_img_bluetooth"
+                app:layout_constraintStart_toEndOf="@+id/constraint_img_bluetooth"
+                app:layout_constraintTop_toBottomOf="@+id/tx_bluetooth_01" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_connect_mask"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/height_btn_connect_mask"
+                android:layout_marginEnd="@dimen/margin_end_btn_connect_mask"
+                android:background="@drawable/border_constraint_connect_mask"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="@{() -> viewmodel.btnConnect()}"
+                android:paddingStart="@dimen/padding_side_btn_connect_mask"
+                android:paddingEnd="@dimen/padding_side_btn_connect_mask"
+                app:layout_constraintBottom_toBottomOf="@+id/constraint_img_bluetooth"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/constraint_img_bluetooth">
+
+                <TextView
+                    android:id="@+id/tx_connect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/tx_connect"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_tx_connect"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_disconnect_mask"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/height_btn_connect_mask"
+                android:layout_marginEnd="@dimen/margin_end_btn_connect_mask"
+                android:background="@drawable/border_constraint_disconnect"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="@{() -> viewmodel.btnDisconnect()}"
+                android:paddingStart="@dimen/padding_side_btn_connect_mask"
+                android:paddingEnd="@dimen/padding_side_btn_connect_mask"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/constraint_img_bluetooth"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/constraint_img_bluetooth">
+
+                <TextView
+                    android:id="@+id/tx_disconnect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/tx_disconnect"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_tx_connect"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

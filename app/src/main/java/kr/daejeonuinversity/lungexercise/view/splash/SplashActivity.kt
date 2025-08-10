@@ -36,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
 
-            if (isTutorialClear == 0) {
+            if (isTutorialClear == 1) {
                 val intent = Intent(this@SplashActivity, MainActivity::class.java)
 
                 val options = ActivityOptions.makeCustomAnimation(

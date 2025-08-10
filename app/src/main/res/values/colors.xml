@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="appBar_title_01">#6E96ED</color>
+    <color name="btn_next_input_info_able">#6448EA</color>
     <color name="appBar_title_02">#0654FD</color>
     <color name="linear_progress_bar">#E5E7EB</color>
     <color name="border_edit_birth">#D1D5DB</color>
@@ -12,5 +13,48 @@
     <color name="btn_stop_timer">#FF0000</color>
     <color name="background_clicked_calendar">#FF5555</color>
     <color name="frame_layout">#EEEEEE</color>
+    <color name="background_breathing_video">#FFBC00</color>
+    <color name="color_clicked_tab_text">#4F46E5</color>
+    <color name="color_not_clicked_tab_text">#6B7280</color>
+    <color name="color_not_clicked_tab_background">#F3F4F6</color>
+    <color name="background_breath_history">#F9FAFB</color>
+    <color name="background_constraint_graph_data">#F9FAFB</color>
+    <color name="color_tx_graph_data">#6B7280</color>
+    <color name="color_tx_breathing_tip">#0369A1</color>
+    <color name="color_constraint_data_05">#BAE6FD</color>
+    <color name="color_tx_hello_guest_02">#6B7280</color>
+    <color name="background_main">#F9FAFB</color>
+    <color name="stroke_main_btn">#F3F4F6</color>
+    <color name="color_tx_btn_info_02">#6B7280</color>
+    <color name="color_clicked_date">#4F46E5</color>
+    <color name="color_border_constraint_basic_info">#E5E7EB</color>
+    <color name="tx_birth">#6B7280</color>
+    <color name="tx_kg_cm">#6B7280</color>
+    <color name="color_tx_edit_guide">#4F46E5</color>
+    <color name="color_tx_edit_guide_detail">#6B7280</color>
+    <color name="color_border_constraint_birth">#F1F5FF</color>
+    <color name="color_edt_year">#6B7280</color>
+    <color name="color_man_constraint_button">#4F46E5</color>
+    <color name="color_border_constraint_gender_not">#F9FAFB</color>
+    <color name="color_border_constraint_body_specs">#F9FAFB</color>
+    <color name="color_constraint_guide">#E0E7FF</color>
+    <color name="color_stroke_constraint_guide">#C7D2FE</color>
+    <color name="color_border_constraint_bluetooth_black">#F3F4F6</color>
+    <color name="color_border_constraint_bluetooth_white">#4F46E5</color>
+    <color name="color_border_constraint_bluetooth_white_02">#2B60EB</color>
+    <color name="color_border_constraint_connect_bluetooth">#4F46E5</color>
+    <color name="background_lung_exercise_activity">#F9FAFB</color>
+    <color name="color_border_constraint_breath_in_lung_exercise">#F3F4F6</color>
+    <color name="color_border_constraint_disconnect_bluetooth">#FF0000</color>
+    <color name="color_tx_x">#6B7280</color>
+    <color name="color_border_cancel_dialog_bluetooth">#F3F4F6</color>
+    <color name="space_find_smart_mask">#F3F4F6</color>
+    <color name="color_border_btn_refresh_bluetooth">#4F46E5</color>
+    <color name="color_stroke_border_linear_bluetooth_list">#F3F4F6</color>
+    <color name="color_progressbar_mask_setting">#4F46E5</color>
+    <color name="stroke_progressbar_mask_setting">#F3F4F6</color>
+    <color name="color_tx_input_birth_detail">#9CA3AF</color>
+    <color name="color_border_constraint_privacy_protection">#E5E7EB</color>
+
 
 </resources>
