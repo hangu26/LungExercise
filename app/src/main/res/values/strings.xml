@@ -57,7 +57,7 @@
     <string name="tx_total_time_empty">총 호기 시간 : 기록 없음</string>
     <string name="tx_clear_count_empty">성공 횟수 : 기록 없음</string>
     <string name="tx_remove_breath_data">삭제</string>
-    <string name="tx_normal_time_count">8초</string>
+    <string name="tx_normal_time_count">8</string>
     <string name="tx_normal_breathing">정상 호기</string>
     <string name="tx_user_breathing">사용자 호기</string>
     <string name="tx_edit_info">나의 정보 수정</string>
@@ -110,6 +110,14 @@
     <string name="tx_select_woman">여성을 선택합니다</string>
     <string name="tx_input_weight_detail">적절한 운동량 계산을 위해 현재 체중을 정확히 입력해주세요.</string>
     <string name="tx_input_height_detail">개인 맞춤형 운동 강도 설정을 위해 키를 입력해주세요.</string>
+    <string name="tx_do_breathing_detail">깊고 천천히 호흡하며 마음을 진정시켜보세요</string>
+    <string name="tx_normal_time_02">초</string>
+    <string name="tx_recommend_time">권장 호기 시간</string>
+    <string name="tx_user_time_detail">측정된 호기 시간</string>
+    <string name="tx_progress_breathing">진행률</string>
+    <string name="tx_zero_second">0초</string>
+    <string name="tx_eight_second">8초</string>
+    <string name="tx_is_measuring">측정중</string>
 
 
 </resources>

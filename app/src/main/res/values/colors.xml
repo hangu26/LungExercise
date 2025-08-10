@@ -63,6 +63,12 @@
     <color name="color_tx_input_weight_detail">#6B7280</color>
     <color name="color_tx_kg">#6B7280</color>
     <color name="color_tx_cm">#6B7280</color>
+    <color name="color_tx_do_breathing">#4F46E5</color>
+    <color name="color_tx_do_breathing_detail">#9E9E9E</color>
+    <color name="color_border_constraint_normal_time">#F7F5FE</color>
+    <color name="color_border_constraint_user_time">#F0F3FE</color>
+    <color name="color_tx_normal_time">#4F46E5</color>
+    <color name="color_border_progress_bar_normal">#5644E6</color>
 
 
 

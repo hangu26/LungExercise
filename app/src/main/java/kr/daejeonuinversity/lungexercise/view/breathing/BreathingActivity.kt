@@ -51,7 +51,7 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
         observe()
     }
 
-    private fun observe() = bViewModel.let{ vm ->
+    private fun observe() = bViewModel.let { vm ->
         vm.backClicked.observe(this) {
             if (it) {
                 val intent = Intent(this@BreathingActivity, LungExerciseActivity::class.java)
@@ -91,13 +91,30 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
                 if (hasExhaleHandled) return@observe
 
                 when (exhale) {
-                    is ExhaleEvent.Start -> startUserProgress()
+                    is ExhaleEvent.Start -> {
+                        startUserProgress()
+                        binding.txUserTimeDetail.text =
+                            resources.getString(R.string.tx_is_measuring)
+                    }
+
                     is ExhaleEvent.End -> {
                         stopUserProgress()
+                        binding.txUserTimeDetail.text =
+                            resources.getString(R.string.tx_user_time_detail)
+                        vm.btnReset()
                         userSeconds = exhale.duration.toInt()
                         hasExhaleHandled = true
                     }
                 }
+            }
+        }
+
+        vm.btnSettingReset.observe(this@BreathingActivity) {
+            if (it) {
+
+                binding.btnStart.visibility = View.VISIBLE
+                binding.btnStop.visibility = View.GONE
+
             }
         }
 
@@ -112,7 +129,12 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
                         showDialog()
 
                     }
-                    ResultEvent.ShowResultToast -> Toast.makeText(this, "호흡 연습을 완료하세요.", Toast.LENGTH_SHORT).show()
+
+                    ResultEvent.ShowResultToast -> Toast.makeText(
+                        this,
+                        "호흡 연습을 완료하세요.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }

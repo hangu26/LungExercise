@@ -75,149 +75,109 @@
             android:id="@+id/linear_icon_breath"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
-            <ImageView
-                android:id="@+id/img_breath"
-                android:layout_width="@dimen/size_icon_breath"
-                android:layout_height="@dimen/size_icon_breath"
-                android:src="@drawable/icon_breath"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
+                android:id="@+id/tx_do_breathing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/margin_start_icon_breath_in_practice"
+                android:layout_gravity="center"
+                android:fontFamily="@font/pretendard_bold"
                 android:text="@string/tx_lets_practice_breathing"
-                android:textColor="@color/appBar_title_01"
+                android:textColor="@color/color_tx_do_breathing"
                 android:textSize="@dimen/size_tx_lets_breathing" />
+
+            <TextView
+                android:id="@+id/tx_do_breathing_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_top_tx_do_breathing_detail"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/tx_do_breathing_detail"
+                android:textColor="@color/color_tx_do_breathing_detail"
+                android:textSize="@dimen/size_tx_do_breathing_detail" />
 
         </LinearLayout>
 
-
+        <!-- 정상 예측지 constraint -->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
-            android:layout_width="match_parent"
+            android:id="@+id/constraint_normal_time"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_side_normal_result_in_practice"
-            android:layout_marginTop="@dimen/margin_top_normal_result_in_practice"
-            android:layout_marginEnd="@dimen/margin_side_normal_result_in_practice"
+            android:layout_marginStart="@dimen/margin_side_constraint_normal_time"
+            android:layout_marginTop="@dimen/margin_top_constraint_normal_time"
+            android:layout_marginEnd="@dimen/margin_side_constraint_normal_time"
+            android:background="@drawable/border_constraint_normal_time"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linear_icon_breath">
+            app:layout_constraintTop_toBottomOf="@id/linear_icon_breath">
 
             <TextView
                 android:id="@+id/tx_normal_predict"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_regular"
+                android:layout_marginStart="@dimen/margin_start_tx_normal_predict"
+                android:fontFamily="@font/pretendard_semibold"
                 android:text="@string/tx_normal_predict"
                 android:textColor="@color/black"
                 android:textSize="@dimen/size_tx_normal_predict"
+                app:layout_constraintBottom_toBottomOf="@+id/constraint_icon_normal_time"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/constraint_icon_normal_time" />
 
             <TextView
                 android:id="@+id/tx_normal_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_tx_normal_time"
                 android:fontFamily="@font/pretendard_regular"
                 android:text="@string/tx_normal_time_count"
-                android:textColor="@color/black"
-                android:textSize="@dimen/size_tx_normal_predict"
-                app:layout_constraintStart_toEndOf="@+id/tx_normal_predict"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="@dimen/margin_start_tx_normal_second"/>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/progress_bar_normal"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_progressbar_normal"
-                android:layout_marginTop="@dimen/margin_top_progressbar_in_practice"
-                android:background="@drawable/progress_bar_splash_full"
-                android:max="100"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="@color/color_tx_normal_time"
+                android:textSize="@dimen/size_tx_normal_time"
+                app:layout_constraintStart_toStartOf="@+id/tx_normal_predict"
                 app:layout_constraintTop_toBottomOf="@+id/tx_normal_predict" />
 
             <TextView
-                android:id="@+id/tx_user_predict"
+                android:id="@+id/tx_normal_time_02"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_top_tx_user_predict"
+                android:layout_marginStart="5dp"
                 android:fontFamily="@font/pretendard_regular"
-                android:text="@string/tx_user_predict"
-                android:textColor="@color/appBar_title_02"
+                android:text="@string/tx_normal_time_02"
+                android:textColor="@color/black"
                 android:textSize="@dimen/size_tx_normal_predict"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/progress_bar_normal" />
+                app:layout_constraintBottom_toBottomOf="@+id/tx_normal_time"
+                app:layout_constraintStart_toEndOf="@+id/tx_normal_time"
+                app:layout_constraintTop_toTopOf="@+id/tx_normal_time" />
 
             <TextView
-                android:id="@+id/tx_user_time"
+                android:id="@+id/tx_recommend_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_regular"
-                android:text="@{viewmodel.userTime}"
-                android:textColor="@color/black"
-                android:layout_marginStart="5dp"
-                android:textSize="@dimen/size_tx_normal_predict"
-                app:layout_constraintBottom_toBottomOf="@+id/tx_user_predict"
-                app:layout_constraintStart_toEndOf="@+id/tx_user_predict"
-                app:layout_constraintTop_toTopOf="@+id/tx_user_predict" />
-
-            <ProgressBar
-                android:id="@+id/progress_bar_user"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_progressbar_normal"
-                android:layout_marginTop="@dimen/margin_top_progressbar_in_practice"
-                android:max="100"
-                android:progressDrawable="@drawable/progress_bar_splash"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tx_user_predict"
-                tools:progress="50" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_side_normal_result_in_practice"
-            android:layout_marginEnd="@dimen/margin_side_normal_result_in_practice"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+                android:layout_marginTop="@dimen/margin_top_tx_recommend_time"
+                android:text="@string/tx_recommend_time"
+                app:layout_constraintStart_toStartOf="@+id/tx_normal_time"
+                app:layout_constraintTop_toBottomOf="@+id/tx_normal_time_02" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/btn_start"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/height_btn_timer"
-                android:layout_weight="1"
-                android:background="@drawable/border_btn_start_breathing"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:onClick="@{() -> viewmodel.btnStart()}"
-                android:visibility="visible">
+                android:id="@+id/constraint_icon_normal_time"
+                android:layout_width="@dimen/size_constraint_icon_normal_time"
+                android:layout_height="@dimen/size_constraint_icon_normal_time"
+                android:layout_marginTop="@dimen/margin_top_constraint_icon_normal_time"
+                android:layout_marginEnd="@dimen/margin_end_constraint_icon_normal_time"
+                android:background="@drawable/border_square_gradation_purple"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/tx_start"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:gravity="center"
-                    android:text="@string/tx_start"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/size_tx_btn_next"
+                <ImageView
+                    android:id="@+id/icon_star"
+                    android:layout_width="@dimen/size_icon_star"
+                    android:layout_height="@dimen/size_icon_star"
+                    android:src="@drawable/icon_star"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -226,45 +186,303 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/btn_stop"
+                android:id="@+id/progress_bar_normal"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/height_btn_timer"
-                android:layout_weight="1"
-                android:background="@drawable/border_btn_stop_timer"
+                android:layout_height="@dimen/height_progressbar_normal"
+                android:layout_marginTop="@dimen/margin_top_progressbar_in_practice"
+                android:layout_marginBottom="@dimen/margin_bottom_progress_normal_time"
+                android:background="@drawable/progress_bar_normal"
+                android:max="100"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/constraint_icon_normal_time"
+                app:layout_constraintStart_toStartOf="@+id/tx_normal_time"
+                app:layout_constraintTop_toBottomOf="@+id/tx_recommend_time" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--사용자 호기 시간 constraint -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_progress_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_side_constraint_progress_user"
+            android:layout_marginTop="@dimen/margin_top_constraint_progress_user"
+            android:layout_marginEnd="@dimen/margin_side_constraint_progress_user"
+            android:background="@drawable/border_constraint_user_time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraint_normal_time">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_icon_user_time"
+                android:layout_width="@dimen/size_constraint_icon_normal_time"
+                android:layout_height="@dimen/size_constraint_icon_normal_time"
+                android:layout_marginTop="@dimen/margin_top_constraint_icon_user_time"
+                android:layout_marginEnd="@dimen/margin_end_constraint_icon_user_time"
+                android:background="@drawable/border_square_gradation_purple"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/icon_user"
+                    android:layout_width="@dimen/size_icon_star"
+                    android:layout_height="@dimen/size_icon_star"
+                    android:src="@drawable/icon_user"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <TextView
+                android:id="@+id/tx_user_predict"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_start_tx_user_predict"
+                android:fontFamily="@font/pretendard_semibold"
+                android:text="@string/tx_user_predict"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_tx_normal_predict"
+                app:layout_constraintBottom_toBottomOf="@+id/constraint_icon_user_time"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/constraint_icon_user_time" />
+
+            <TextView
+                android:id="@+id/tx_user_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_tx_user_time"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@{viewmodel.userTime}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_tx_normal_predict"
+                app:layout_constraintStart_toStartOf="@+id/tx_user_predict"
+                app:layout_constraintTop_toBottomOf="@+id/tx_user_predict" />
+
+            <TextView
+                android:id="@+id/tx_user_time_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_tx_user_time_detail"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/tx_user_time_detail"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_tx_user_time_detail"
+                app:layout_constraintStart_toStartOf="@+id/tx_user_predict"
+                app:layout_constraintTop_toBottomOf="@+id/tx_user_time" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_tx_percent_breathing"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_constraint_tx_percent_breathing"
+                android:layout_marginEnd="@dimen/margin_end_constraint_tx_percent_breathing"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tx_user_predict"
+                app:layout_constraintTop_toBottomOf="@+id/tx_user_time_detail">
+
+                <TextView
+                    android:id="@+id/tx_progress_breathing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="@string/tx_progress_breathing"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_tx_progress_breathing"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tx_progress_breathing_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="@{viewmodel.txPercent}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_tx_progress_breathing"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ProgressBar
+                android:id="@+id/progress_bar_user"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_progressbar_normal"
+                android:layout_marginTop="@dimen/margin_top_progressbar_in_practice"
+                android:layout_marginEnd="@dimen/margin_end_progress_bar_user"
+                android:max="100"
+                android:progressDrawable="@drawable/progressbar_user"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tx_user_predict"
+                app:layout_constraintTop_toBottomOf="@+id/constraint_tx_percent_breathing"
+                tools:progress="50" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_tx_second_breathing"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_constraint_tx_second_breathing"
+                android:layout_marginBottom="@dimen/margin_bottom_constraint_tx_second_breathing"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/constraint_tx_percent_breathing"
+                app:layout_constraintStart_toStartOf="@+id/tx_user_predict"
+                app:layout_constraintTop_toBottomOf="@+id/progress_bar_user">
+
+                <TextView
+                    android:id="@+id/tx_zero_second"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="@string/tx_zero_second"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_tx_progress_breathing"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tx_eight_second"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="@string/tx_eight_second"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_tx_progress_breathing"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_start_and_result"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/linear_start_and_result"
+            android:layout_marginEnd="@dimen/linear_start_and_result"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraint_progress_user">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_start"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_btn_start_and_result"
+                android:background="@drawable/border_btn_start_breathing"
+                android:clickable="true"
+                android:elevation="@dimen/elevation_btn_start_and_result"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="@{() -> viewmodel.btnStart()}"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/icon_start_breath"
+                        android:layout_width="@dimen/size_icon_stop_breath"
+                        android:layout_height="@dimen/size_icon_stop_breath"
+                        android:layout_marginEnd="@dimen/margin_end_icon_stop_breath"
+                        android:src="@drawable/icon_start_breath"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tx_stop"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tx_start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:gravity="center"
+                        android:text="@string/tx_start"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_tx_btn_next"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_stop"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_btn_start_and_result"
+                android:background="@drawable/border_constraint_stop_breathing"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
                 android:onClick="@{() -> viewmodel.btnStop()}"
                 android:visibility="gone">
 
-                <TextView
-                    android:id="@+id/tx_stop"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/pretendard_bold"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="@string/tx_stop"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/size_tx_btn_next"
+                    android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/icon_stop_breath"
+                        android:layout_width="@dimen/size_icon_stop_breath"
+                        android:layout_height="@dimen/size_icon_stop_breath"
+                        android:layout_marginEnd="@dimen/margin_end_icon_stop_breath"
+                        android:src="@drawable/icon_stop_breath"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tx_stop"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tx_stop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:gravity="center"
+                        android:text="@string/tx_stop"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_tx_btn_next"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5" />
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_between_start_to_result" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btn_result"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/height_btn_timer"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_btn_start_and_result"
                 android:background="@drawable/border_btn_confirm_result"
                 android:clickable="true"
+                android:elevation="@dimen/elevation_btn_start_and_result"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
                 android:onClick="@{() -> viewmodel.btnResult()}">
