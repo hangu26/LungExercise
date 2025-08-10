@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/border_result_breathing">
@@ -31,7 +32,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_user_time"
-        android:layout_width="249dp"
+        android:layout_width="@dimen/dialog_result_breath_constraints_width"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_side_linear_result_time"
         android:layout_marginTop="@dimen/margin_top_linear_result_time"
@@ -98,98 +99,230 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linear_normal_time"
-        android:layout_width="0dp"
+        android:id="@+id/constraint_normal_time"
+        android:layout_width="@dimen/dialog_result_breath_constraints_width"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_side_linear_result_time"
         android:layout_marginTop="@dimen/margin_top_linear_result_time"
         android:layout_marginEnd="@dimen/margin_side_linear_result_time"
+        android:background="@drawable/border_linear_normal_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraint_user_time">
 
-        <TextView
-            android:id="@+id/tx_normal_time"
+        <LinearLayout
+            android:id="@+id/linear_normal_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:fontFamily="@font/pretendard_semibold"
-            android:text="@string/tx_normal_time"
-            android:textColor="@color/black"
-            android:textSize="@dimen/size_tx_result_breathing"
+            android:layout_marginStart="@dimen/margin_linear_user_normal_percent"
+            android:layout_marginTop="@dimen/margin_linear_user_normal_percent"
+            android:layout_marginBottom="@dimen/margin_bottom_linear_user_time"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="@dimen/width_constraint_result_time_dialog"
-            android:layout_height="@dimen/height_constraint_result_time_dialog"
-            android:background="@drawable/border_constraint_breath"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tx_normal_time_data"
+                android:id="@+id/tx_normal_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_regular"
-                android:text="10초"
-                android:textSize="@dimen/size_tx_result_breathing"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/tx_normal_time"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_tx_user_time"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tx_real_normal_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/margin_top_tx_real_user_time"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/tx_real_normal_time_detail"
+                android:textColor="@color/tx_user_time_detail"
+                android:textSize="@dimen/size_tx_real_user_time"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tx_normal_time_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_end_tx_user_time_data"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="10초"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_tx_user_time_data"
+            app:layout_constraintBottom_toBottomOf="@+id/linear_normal_time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/linear_normal_time" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linear_achievement_rate"
-        android:layout_width="0dp"
+        android:id="@+id/constraint_achievement_rate"
+        android:layout_width="@dimen/dialog_result_breath_constraints_width"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_side_linear_result_time"
         android:layout_marginTop="@dimen/margin_top_linear_result_time"
         android:layout_marginEnd="@dimen/margin_side_linear_result_time"
+        android:background="@drawable/border_constraint_achievement_rate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linear_normal_time">
+        app:layout_constraintTop_toBottomOf="@+id/constraint_normal_time">
 
-        <TextView
-            android:id="@+id/tx_achievement_rate"
+        <LinearLayout
+            android:id="@+id/linear_achievement_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:fontFamily="@font/pretendard_semibold"
-            android:text="@string/tx_achievement_rate"
-            android:textColor="@color/black"
-            android:textSize="@dimen/size_tx_result_breathing"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="@dimen/margin_linear_user_normal_percent"
+            android:layout_marginTop="@dimen/margin_linear_user_normal_percent"
+            android:layout_marginBottom="@dimen/margin_bottom_linear_user_time"
+            android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="@dimen/width_constraint_result_time_dialog"
-            android:layout_height="@dimen/height_constraint_result_time_dialog"
-            android:background="@drawable/border_constraint_breath"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tx_percent_data"
+                android:id="@+id/tx_percent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/tx_achievement_rate"
+                android:textColor="@color/color_achievement"
+                android:textSize="@dimen/size_tx_user_time"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tx_percent_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/margin_top_tx_real_user_time"
                 android:fontFamily="@font/pretendard_regular"
-                android:text="88%"
-                android:textSize="@dimen/size_tx_result_breathing"
+                android:text="@string/tx_achievement_rate_detail"
+                android:textColor="@color/tx_user_time_detail"
+                android:textSize="@dimen/size_tx_real_user_time"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tx_percent_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_end_tx_user_time_data"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="90%"
+            android:textColor="@color/color_achievement"
+            android:textSize="@dimen/size_tx_user_time_data"
+            app:layout_constraintBottom_toBottomOf="@+id/linear_achievement_rate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/linear_achievement_rate" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar_achievement"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_progressbar_normal"
+            android:layout_marginTop="@dimen/margin_top_progress_bar_achievement"
+            android:layout_marginBottom="@dimen/margin_bottom_linear_user_time"
+            android:max="100"
+            android:progressDrawable="@drawable/progressbar_achievement"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tx_percent_data"
+            app:layout_constraintStart_toStartOf="@+id/linear_achievement_rate"
+            app:layout_constraintTop_toBottomOf="@+id/linear_achievement_rate"
+            tools:progress="50" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_feedback"
+        android:layout_width="@dimen/dialog_result_breath_constraints_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_side_linear_result_time"
+        android:layout_marginTop="@dimen/margin_top_linear_result_time"
+        android:layout_marginEnd="@dimen/margin_side_linear_result_time"
+        android:background="@drawable/border_constraint_feedback_breath"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraint_achievement_rate">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_icon_feedback"
+            android:layout_width="@dimen/size_constraint_icon_feedback"
+            android:layout_height="@dimen/size_constraint_icon_feedback"
+            android:layout_marginStart="@dimen/margin_start_constraint_icon_feedback"
+            android:layout_marginTop="@dimen/margin_top_constraint_icon_feedback"
+            android:background="@drawable/border_oval_gradation_purple"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/icon_feedback"
+                android:layout_width="@dimen/size_icon_feedback"
+                android:layout_height="@dimen/size_icon_feedback"
+                android:src="@drawable/icon_privacy_protect"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_feedback"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_start_linear_achievement_rate"
+            android:layout_marginEnd="@dimen/margin_end_linear_feedback"
+            android:layout_marginBottom="@dimen/margin_bottom_linear_feedback"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/constraint_icon_feedback"
+            app:layout_constraintTop_toTopOf="@+id/constraint_icon_feedback">
+
+            <TextView
+                android:id="@+id/tx_feedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/tx_feedback"
+                android:textColor="@color/color_tx_feedback"
+                android:textSize="@dimen/size_tx_feedback"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tx_feedback_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/margin_top_tx_feedback_detail"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/tx_feedback_detail"
+                android:textColor="@color/tx_user_time_detail"
+                android:textSize="@dimen/size_tx_real_user_time"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -203,7 +336,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linear_achievement_rate">
+        app:layout_constraintTop_toBottomOf="@+id/constraint_feedback">
 
         <TextView
             android:id="@+id/tx_start"

@@ -71,11 +71,12 @@
     <color name="color_border_progress_bar_normal">#5644E6</color>
     <color name="color_tx_result_breathing_detail">#666666</color>
     <color name="color_border_linear_user_time">#E8E3FF</color>
+    <color name="color_border_linear_normal_time">#FAFAFA</color>
     <color name="color_tx_user_time">#8B45FF</color>
     <color name="tx_user_time_detail">#888888</color>
     <color name="color_tx_user_time_data">#8B45FF</color>
-
-
+    <color name="color_achievement">#FF8C00</color>
+    <color name="color_tx_feedback">#8B45FF</color>
 
 
 </resources>

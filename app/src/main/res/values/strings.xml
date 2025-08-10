@@ -120,6 +120,10 @@
     <string name="tx_is_measuring">측정중</string>
     <string name="tx_result_breathing_detail">오늘의 호흡 연습이 완료되었습니다</string>
     <string name="tx_real_time">실제 측정된 시간</string>
+    <string name="tx_real_normal_time_detail">권장 목표 시간</string>
+    <string name="tx_achievement_rate_detail">목표 대비 성취도</string>
+    <string name="tx_feedback">피드백</string>
+    <string name="tx_feedback_detail">훌륭합니다! 목표를 달성했어요. 꾸준한 연습으로 더 나은 결과를 만들어보세요.</string>
 
 
 </resources>

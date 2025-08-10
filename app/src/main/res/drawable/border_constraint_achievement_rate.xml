@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <solid android:color="@color/color_border_linear_user_time" />
+    <solid android:color="#FFF4E6" />
 
     <stroke
         android:width="1dp"
-        android:color="#E8E3FF" />
+        android:color="#FFE4CC"/>
 
     <corners android:radius="@dimen/size_border_linear_user_time" />
 
