@@ -77,6 +77,8 @@
     <color name="color_tx_user_time_data">#8B45FF</color>
     <color name="color_achievement">#FF8C00</color>
     <color name="color_tx_feedback">#8B45FF</color>
-
+    <color name="color_barchart_default">#8B45FF</color>
+    <color name="color_barchart_clicked">#FF5555</color>
+    FF5555
 
 </resources>

@@ -316,6 +316,9 @@
     <dimen name="margin_top_tx_result_breathing_detail">6dp</dimen>
     <dimen name="size_border_linear_user_time">18dp</dimen>
     <dimen name="margin_top_progress_bar_achievement">12dp</dimen>
+    <dimen name="margin_top_linear_start_and_result">20dp</dimen>
+    <dimen name="size_twenty_five">25dp</dimen>
+
 
 
 </resources>

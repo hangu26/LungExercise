@@ -111,7 +111,7 @@ class BreathHistoryFragment :
         val clickedIndex = data.keys.indexOf(clickedDateStr)
 
         // 색상 리스트 생성 (기본 색상과 클릭된 막대 색상 구분)
-        val defaultColor = ContextCompat.getColor(requireContext(), R.color.appBar_title_01)
+        val defaultColor = ContextCompat.getColor(requireContext(), R.color.color_barchart_default)
         val clickedColor =
             ContextCompat.getColor(requireContext(), R.color.background_clicked_calendar)
 
@@ -135,6 +135,9 @@ class BreathHistoryFragment :
             barWidth = 0.9f
         }
 
+        /** y축 데이터중 가장 큰 값 **/
+        val maxDataValue = barData.yMax
+
         binding.barChart.apply {
             this.data = barData
             setFitBars(true)
@@ -153,7 +156,7 @@ class BreathHistoryFragment :
 
             axisLeft.apply {
                 axisMinimum = 0f
-                axisMaximum = 10f
+                axisMaximum = (maxDataValue * 1.1f).coerceAtLeast(10f)
                 granularity = 1f
                 isGranularityEnabled = true
                 setDrawGridLines(false)         // Y축 그리드 제거

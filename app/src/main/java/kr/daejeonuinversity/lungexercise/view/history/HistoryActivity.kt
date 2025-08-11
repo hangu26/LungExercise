@@ -24,6 +24,7 @@ import org.koin.android.ext.android.inject
 import java.time.LocalDate
 import java.time.YearMonth
 
+/** HistoryRecordActivity로 대체됨 **/
 class HistoryActivity : BaseActivity<ActivityHistoryBinding>(R.layout.activity_history) {
 
     private var isClickedDate: LocalDate? = null

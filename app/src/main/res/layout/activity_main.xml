@@ -24,8 +24,8 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="95dp"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:background="@drawable/border_appbar_user"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -74,16 +74,17 @@
             android:id="@+id/app_bar_user"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:elevation="@dimen/elevation_app_bar_user"
             android:layout_marginStart="@dimen/margin_side_app_bar_user"
-            android:layout_marginEnd="@dimen/margin_side_app_bar_user"
-            android:paddingBottom="@dimen/margin_tx_hello_user"
-            android:paddingTop="@dimen/margin_tx_hello_user"
-            android:background="@drawable/border_appbar_user"
             android:layout_marginTop="@dimen/translation_y_app_bar_user"
+            android:layout_marginEnd="@dimen/margin_side_app_bar_user"
+            android:background="@drawable/border_appbar_user"
+            android:elevation="@dimen/elevation_app_bar_user"
+            android:paddingTop="@dimen/margin_tx_hello_user"
+            android:paddingBottom="@dimen/margin_tx_hello_user"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appBarLayout" >
+            app:layout_constraintTop_toBottomOf="@id/appBarLayout">
 
             <TextView
                 android:id="@+id/tx_hello_guest"
@@ -112,17 +113,19 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!-- app_bar_user gone 처리 -->
         <androidx.core.widget.NestedScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/margin_top_constraint_btn"
+            android:fillViewport="true"
             android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/app_bar_user"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
-            android:fillViewport="true">
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
+            <!-- 텍스트 디테일들 gone 처리 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -174,10 +177,12 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/margin_icon_heart"
                                 android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                                android:layout_marginBottom="@dimen/size_twenty_five"
                                 android:fontFamily="@font/pretendard_bold"
                                 android:text="@string/tx_lung_exercise"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/size_tx_lung_exercise"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/icon_heart" />
 
@@ -192,6 +197,7 @@
                                 android:text="@string/tx_exercise_detail"
                                 android:textColor="@color/color_tx_btn_info_02"
                                 android:textSize="@dimen/size_tx_lung_exercise"
+                                android:visibility="gone"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/tx_lung_exercise" />
@@ -231,10 +237,12 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/margin_icon_heart"
                                 android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                                android:layout_marginBottom="@dimen/size_twenty_five"
                                 android:fontFamily="@font/pretendard_bold"
                                 android:text="@string/tx_6_min_test"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/size_tx_lung_exercise"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/icon_exercise" />
 
@@ -249,6 +257,7 @@
                                 android:text="@string/tx_walking_test"
                                 android:textColor="@color/color_tx_btn_info_02"
                                 android:textSize="@dimen/size_tx_lung_exercise"
+                                android:visibility="gone"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/tx_exercise" />
@@ -291,10 +300,12 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/margin_icon_heart"
                                 android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                                android:layout_marginBottom="@dimen/size_twenty_five"
                                 android:fontFamily="@font/pretendard_bold"
                                 android:text="@string/tx_exercise_calculate"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/size_tx_lung_exercise"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/icon_calculate" />
 
@@ -309,6 +320,7 @@
                                 android:text="@string/tx_exercise_detail"
                                 android:textColor="@color/color_tx_btn_info_02"
                                 android:textSize="@dimen/size_tx_lung_exercise"
+                                android:visibility="gone"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/tx_calculate" />
@@ -348,10 +360,12 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/margin_icon_heart"
                                 android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                                android:layout_marginBottom="@dimen/size_twenty_five"
                                 android:fontFamily="@font/pretendard_bold"
                                 android:text="@string/tx_exercise_data"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/size_tx_lung_exercise"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/icon_data" />
 
@@ -363,9 +377,10 @@
                                 android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
                                 android:layout_marginBottom="17dp"
                                 android:fontFamily="@font/pretendard_regular"
-                                android:text="@string/tx_walking_test"
+                                android:text="@string/tx_exercise_data_detail"
                                 android:textColor="@color/color_tx_btn_info_02"
                                 android:textSize="@dimen/size_tx_lung_exercise"
+                                android:visibility="gone"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/tx_data" />
@@ -390,10 +405,10 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:background="@drawable/border_main_btn"
                             android:clickable="true"
                             android:focusable="true"
                             android:foreground="?attr/selectableItemBackground"
-                            android:background="@drawable/border_main_btn"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
@@ -413,10 +428,13 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/margin_icon_heart"
                                 android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                                android:layout_marginBottom="@dimen/size_twenty_five"
                                 android:fontFamily="@font/pretendard_bold"
+
                                 android:text="@string/tx_edit_profile"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/size_tx_lung_exercise"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/icon_edit_profile" />
 
@@ -431,6 +449,7 @@
                                 android:text="@string/tx_edit_information"
                                 android:textColor="@color/color_tx_btn_info_02"
                                 android:textSize="@dimen/size_tx_lung_exercise"
+                                android:visibility="gone"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/tx_edit_profile" />
@@ -466,10 +485,12 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/margin_icon_heart"
                                 android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                                android:layout_marginBottom="@dimen/size_twenty_five"
                                 android:fontFamily="@font/pretendard_bold"
                                 android:text="@string/tx_tip"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/size_tx_lung_exercise"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/icon_tip" />
 
@@ -484,6 +505,7 @@
                                 android:text="@string/tx_tip_02"
                                 android:textColor="@color/color_tx_btn_info_02"
                                 android:textSize="@dimen/size_tx_lung_exercise"
+                                android:visibility="gone"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/tx_tip" />
@@ -507,6 +529,7 @@
             android:background="@drawable/bottom_border"
             android:gravity="center"
             android:orientation="horizontal"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
