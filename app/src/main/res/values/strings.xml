@@ -123,7 +123,9 @@
     <string name="tx_real_normal_time_detail">권장 목표 시간</string>
     <string name="tx_achievement_rate_detail">목표 대비 성취도</string>
     <string name="tx_feedback">피드백</string>
-    <string name="tx_feedback_detail">훌륭합니다! 목표를 달성했어요. 꾸준한 연습으로 더 나은 결과를 만들어보세요.</string>
+    <string name="tx_feedback_detail">"훌륭합니다! 목표를 성공적으로 달성했어요. 계속 꾸준히 유지하며 건강한 습관을 지켜나가세요."</string>
+    <string name="tx_feedback_detail_up_41">"잘하고 있어요! 조금만 더 힘내서 목표에 도달해봐요."</string>
+    <string name="tx_feedback_detail_under_41">"시작이 반입니다! 꾸준히 연습해서 더 나은 결과를 만들어보세요."</string>
 
 
 </resources>

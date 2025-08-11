@@ -35,12 +35,14 @@ class MyApplication : Application() {
             override fun onStop(owner: LifecycleOwner) {
                 // 앱이 백그라운드로 진입할 때
                 MaskBluetoothManager.disconnect()
+
             }
 
             override fun onStart(owner: LifecycleOwner) {
 
-                val deviceName = "MASK7"  // 실제 연결할 디바이스명
+                val deviceName = "MASK7"
                 MaskBluetoothManager.connectToDevice(applicationContext, deviceName, true)
+
             }
         })
 

@@ -44,15 +44,16 @@ class BreathingDialog(private val context: AppCompatActivity) {
             when (achievementRate.toDouble().roundToInt()) {
 
                 in 0..40 -> {
-                    txFeedbackDetail.text = "\"시작이 반입니다! 꾸준히 연습해서 더 나은 결과를 만들어보세요.\""
+                    txFeedbackDetail.text = context.resources.getString(R.string.tx_feedback_detail_under_41)
                 }
 
                 in 41..99 -> {
-                    txFeedbackDetail.text = "\"잘하고 있어요! 조금만 더 힘내서 목표에 도달해봐요.\""
+                    txFeedbackDetail.text = context.resources.getString(R.string.tx_feedback_detail_up_41)
+
                 }
 
                 else -> {
-                    txFeedbackDetail.text = "\"훌륭합니다! 목표를 성공적으로 달성했어요. 계속 꾸준히 유지하며 건강한 습관을 지켜나가세요.\""
+                    txFeedbackDetail.text = context.resources.getString(R.string.tx_feedback_detail)
                 }
 
             }

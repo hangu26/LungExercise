@@ -26,8 +26,6 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-// BreathingActivity.kt
-// BreathingActivity.kt
 class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activity_breathing) {
 
     private val bViewModel: BreathingViewModel by inject()

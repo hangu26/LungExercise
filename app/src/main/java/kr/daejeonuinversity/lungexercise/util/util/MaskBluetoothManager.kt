@@ -1,6 +1,7 @@
 package kr.daejeonuinversity.lungexercise.util.util
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
@@ -43,7 +44,7 @@ object MaskBluetoothManager {
     private var receiveThread: Thread? = null
 
     private val baselineSamples = mutableListOf<Double>()
-    private val baselineSampleCountLimit = 10
+    private val baselineSampleCountLimit = 15
     private var baseline: Double? = null
 
     private val sensorThreshold = 0.1 // 편차 임계치
@@ -101,6 +102,7 @@ object MaskBluetoothManager {
         }.start()
     }
 
+    @SuppressLint("CommitPrefEdits")
     private fun connecting(device: BluetoothDevice, context: Context) {
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -128,7 +130,6 @@ object MaskBluetoothManager {
             connectCallback?.onConnectFailed("블루투스 연결 실패: ${e.message}")
         }
     }
-
 
 
     private fun startPolling() {
