@@ -104,7 +104,7 @@ class HistoryViewModel(private val repository: BreathRepository, application: Ap
                 _txTotalTime.value =
                     res.getString(R.string.tx_total_time_format, clickedDateData.totalTime / 1000)
                 _txClearCount.value =
-                    res.getString(R.string.tx_clear_count_format) + (clickedDateData.clear) + "회" + "/" + (clickedDateData.totalCount) + "회"
+                    res.getString(R.string.tx_clear_count_format) + (clickedDateData.clear) + "회" + " / " + (clickedDateData.totalCount) + "회"
             } else {
                 _txTotalCount.value = res.getString(R.string.tx_total_count_empty)
                 _txAverageTime.value = res.getString(R.string.tx_average_time_empty)
