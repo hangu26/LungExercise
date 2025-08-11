@@ -50,7 +50,7 @@
     <string name="tx_total_count_format">총 시행 횟수 : %1$d 회</string>
     <string name="tx_average_time_format">평균 호기 시간 : %1$d 초</string>
     <string name="tx_total_time_format">총 호기 시간 : %1$d 초</string>
-    <string name="tx_clear_count_format">성공 횟수 : %1$d 회</string>
+    <string name="tx_clear_count_format">성공 횟수 : </string>
 
     <string name="tx_total_count_empty">총 시행 횟수 : 기록 없음</string>
     <string name="tx_average_time_empty">평균 호기 시간 : 기록 없음</string>
@@ -69,6 +69,7 @@
     <string name="tx_all_breathing_count">총 시행 횟수</string>
     <string name="tx_average_time">평균 호기 시간</string>
     <string name="tx_total_count">총 호기 시간</string>
+    <string name="tx_total_success_count">총 성공 시간</string>
     <string name="tx_breathing_tip">호흡 운동 팁</string>
     <string name="tx_breathing_tip_02">규칙적인 호흡 운동은 스트레스 완화와 집중력 향상에 도움이 됩니다. 매일 같은 시간에 운동하는 것을 권장합니다.</string>
     <string name="tx_activity_record">활동량</string>

@@ -398,7 +398,7 @@
                                     android:layout_marginStart="@dimen/margin_tx_all_count"
                                     android:layout_marginTop="@dimen/margin_tx_all_count"
                                     android:fontFamily="@font/pretendard_medium"
-                                    android:text="@string/tx_total_count"
+                                    android:text="@string/tx_total_success_count"
                                     android:textColor="@color/color_tx_graph_data"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
