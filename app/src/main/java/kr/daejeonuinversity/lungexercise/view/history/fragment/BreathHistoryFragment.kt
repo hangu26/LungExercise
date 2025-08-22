@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -23,7 +24,10 @@ import kr.daejeonuinversity.lungexercise.util.base.BaseFragment
 import kr.daejeonuinversity.lungexercise.util.util.BackPressedCallback
 import kr.daejeonuinversity.lungexercise.view.main.MainActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.HistoryViewModel
+import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.koin.android.ext.android.inject
+import java.io.File
+import java.io.FileOutputStream
 import java.time.LocalDate
 import java.time.YearMonth
 
@@ -69,6 +73,48 @@ class BreathHistoryFragment :
                     calendarAdapter.removedDataSet(date)
                 }
                 calendarAdapter.notifyDataSetChanged()
+            }
+        }
+
+        vm.btnExportClicked.observe(viewLifecycleOwner) {
+            if (it) {
+                val dataList = vm.createExcelContent() // [[헤더], [값들]]
+
+                // 임시 파일 생성 (엑셀 확장자)
+                val file = File(requireContext().cacheDir, "breath_data.xlsx")
+
+                // 워크북 생성
+                val workbook = XSSFWorkbook()
+                val sheet = workbook.createSheet("Breath Data")
+
+                // 데이터 입력
+                for ((rowIndex, rowData) in dataList.withIndex()) {
+                    val row = sheet.createRow(rowIndex)
+                    for ((colIndex, value) in rowData.withIndex()) {
+                        row.createCell(colIndex).setCellValue(value)
+                    }
+                }
+
+                // 파일로 저장
+                FileOutputStream(file).use { fos ->
+                    workbook.write(fos)
+                }
+                workbook.close()
+
+                // FileProvider로 Uri 생성
+                val uri = FileProvider.getUriForFile(
+                    requireContext(),
+                    "${requireContext().packageName}.provider",
+                    file
+                )
+
+                // 공유 인텐트
+                val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                    type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    putExtra(Intent.EXTRA_STREAM, uri)
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
+                startActivity(Intent.createChooser(shareIntent, "엑셀로 내보내기"))
             }
         }
 
