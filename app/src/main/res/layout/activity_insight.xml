@@ -2,22 +2,23 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    
+
     <data>
-        
+
         <variable
             name="activity"
             type="kr.daejeonuinversity.lungexercise.view.insight.InsightActivity" />
-        
+
         <variable
             name="viewmodel"
             type="kr.daejeonuinversity.lungexercise.viewmodel.InsightViewModel" />
-        
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/background_main">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -67,16 +68,321 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_air_quality"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="@dimen/margin_constraint_insight"
+            android:layout_marginTop="@dimen/margin_constraint_insight"
             android:layout_marginEnd="@dimen/margin_constraint_insight"
-            android:layout_marginTop="@dimen/margin_constraint_insight">
+            android:background="@drawable/border_cl_air_quality"
+            android:paddingStart="@dimen/padding_side_cl_air_quality"
+            android:paddingTop="@dimen/padding_vertical_cl_air_quality"
+            android:paddingEnd="@dimen/padding_side_cl_air_quality"
+            android:paddingBottom="@dimen/padding_vertical_cl_air_quality"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+            <TextView
+                android:id="@+id/tx_air_quality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_semibold"
+                android:text="@string/tx_air_quality"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_tx_air_quality"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ic_air_quality_circle"
+                android:layout_width="@dimen/size_ic_air_quality_circle"
+                android:layout_height="@dimen/size_ic_air_quality_circle"
+                android:layout_marginEnd="@dimen/margin_end_ic_air_quality_circle"
+                android:src="@drawable/icon_circle_air_quality_normal"
+                app:layout_constraintBottom_toBottomOf="@+id/tx_air_quality"
+                app:layout_constraintEnd_toStartOf="@+id/tx_quality"
+                app:layout_constraintTop_toTopOf="@+id/tx_air_quality" />
+
+            <TextView
+                android:id="@+id/tx_quality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/tx_normal"
+                android:textColor="@color/color_ic_circle_air_quality_normal"
+                android:textSize="@dimen/size_tx_quality"
+                app:layout_constraintBottom_toBottomOf="@+id/tx_air_quality"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tx_air_quality" />
+
+            <LinearLayout
+                android:id="@+id/linear_air_quality_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_linear_air_quality_container"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tx_air_quality">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_cl_air_quality_detail"
+                        android:paddingStart="@dimen/padding_cl_air_quality_detail"
+                        android:paddingTop="@dimen/padding_cl_air_quality_detail"
+                        android:paddingEnd="@dimen/padding_cl_air_quality_detail"
+                        android:paddingBottom="@dimen/padding_cl_air_quality_detail">
+
+                        <TextView
+                            android:id="@+id/tv_pm10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:text="@string/tv_pm10"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_tx_01_in_cl_air_quality"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_pm10_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top_tx_02_in_cl_air_quality"
+                            android:fontFamily="@font/pretendard_bold"
+                            android:text="@string/tv_pm10_value"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_tx_02_in_cl_air_quality"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_pm10" />
+
+                        <TextView
+                            android:id="@+id/tv_pm10_unit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top_tx_02_in_cl_air_quality"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:text="@string/tv_pm10_unit"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_tx_03_in_cl_air_quality"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_pm10_value" />
+
+                        <ImageView
+                            android:id="@+id/ic_air_quality_01"
+                            android:layout_width="@dimen/size_ic_air_quality"
+                            android:layout_height="@dimen/size_ic_air_quality"
+                            android:src="@drawable/icon_circle_air_quality_good"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_ll_pm_vertical" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_cl_air_quality_detail"
+                        android:paddingStart="@dimen/padding_cl_air_quality_detail"
+                        android:paddingTop="@dimen/padding_cl_air_quality_detail"
+                        android:paddingEnd="@dimen/padding_cl_air_quality_detail"
+                        android:paddingBottom="@dimen/padding_cl_air_quality_detail">
+
+                        <TextView
+                            android:id="@+id/tv_ozone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:text="@string/tv_ozone"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_tx_01_in_cl_air_quality"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_ozone_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top_tx_02_in_cl_air_quality"
+                            android:fontFamily="@font/pretendard_bold"
+                            android:text="@string/tv_pm10_value"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_tx_02_in_cl_air_quality"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_ozone" />
+
+                        <TextView
+                            android:id="@+id/tv_ozone_unit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top_tx_02_in_cl_air_quality"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:text="@string/tv_ozone_unit"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_tx_03_in_cl_air_quality"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_ozone_value" />
+
+                        <ImageView
+                            android:id="@+id/ic_air_quality_02"
+                            android:layout_width="@dimen/size_ic_air_quality"
+                            android:layout_height="@dimen/size_ic_air_quality"
+                            android:src="@drawable/icon_circle_air_quality_good"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+                </LinearLayout>
+                
+                <Space
+                    android:layout_width="@dimen/space_ll_pm_horizontally"
+                    android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="end">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_cl_air_quality_detail"
+                        android:paddingStart="@dimen/padding_cl_air_quality_detail"
+                        android:paddingTop="@dimen/padding_cl_air_quality_detail"
+                        android:paddingEnd="@dimen/padding_cl_air_quality_detail"
+                        android:paddingBottom="@dimen/padding_cl_air_quality_detail">
+
+                        <TextView
+                            android:id="@+id/tv_pm25"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:text="@string/tv_pm25"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_tx_01_in_cl_air_quality"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_pm25_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top_tx_02_in_cl_air_quality"
+                            android:fontFamily="@font/pretendard_bold"
+                            android:text="@string/tv_pm10_value"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_tx_02_in_cl_air_quality"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_pm25" />
+
+                        <TextView
+                            android:id="@+id/tv_pm25_unit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top_tx_02_in_cl_air_quality"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:text="@string/tv_pm10_unit"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_tx_03_in_cl_air_quality"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_pm25_value" />
+
+                        <ImageView
+                            android:id="@+id/ic_air_quality_03"
+                            android:layout_width="@dimen/size_ic_air_quality"
+                            android:layout_height="@dimen/size_ic_air_quality"
+                            android:src="@drawable/icon_circle_air_quality_good"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_ll_pm_vertical" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_cl_air_quality_detail"
+                        android:paddingStart="@dimen/padding_cl_air_quality_detail"
+                        android:paddingTop="@dimen/padding_cl_air_quality_detail"
+                        android:paddingEnd="@dimen/padding_cl_air_quality_detail"
+                        android:paddingBottom="@dimen/padding_cl_air_quality_detail">
+
+                        <TextView
+                            android:id="@+id/tv_no2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:text="@string/tv_no2"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_tx_01_in_cl_air_quality"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_no2_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top_tx_02_in_cl_air_quality"
+                            android:fontFamily="@font/pretendard_bold"
+                            android:text="@string/tv_pm10_value"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_tx_02_in_cl_air_quality"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_no2" />
+
+                        <TextView
+                            android:id="@+id/tv_no2_unit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top_tx_02_in_cl_air_quality"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:text="@string/tv_ozone_unit"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_tx_03_in_cl_air_quality"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_no2_value" />
+
+                        <ImageView
+                            android:id="@+id/ic_air_quality_04"
+                            android:layout_width="@dimen/size_ic_air_quality"
+                            android:layout_height="@dimen/size_ic_air_quality"
+                            android:src="@drawable/icon_circle_air_quality_good"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
