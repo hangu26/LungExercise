@@ -49,6 +49,7 @@
                         android:layout_marginStart="@dimen/margin_start_icon_side_bar"
                         android:layout_marginBottom="23dp"
                         android:src="@drawable/icon_side_bar"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
 
@@ -274,7 +275,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1.1">
+                        android:layout_weight="1">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="0dp"
@@ -462,6 +463,7 @@
                             android:layout_weight="0.1" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/btn_insight"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -511,6 +513,90 @@
                                 app:layout_constraintTop_toBottomOf="@+id/tx_tip" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.1" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/btn_setting"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_main_btn"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/icon_setting"
+                                android:layout_width="@dimen/size_icon_heart"
+                                android:layout_height="@dimen/size_icon_heart"
+                                android:layout_marginStart="@dimen/margin_icon_heart"
+                                android:layout_marginTop="@dimen/margin_icon_heart"
+                                android:src="@drawable/icon_setting"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/tx_setting"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_icon_heart"
+                                android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                                android:layout_marginBottom="@dimen/size_twenty_five"
+                                android:fontFamily="@font/pretendard_bold"
+                                android:text="@string/tx_setting"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/size_tx_lung_exercise"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/icon_setting" />
+
+                            <TextView
+                                android:id="@+id/tx_setting_detail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_icon_heart"
+                                android:layout_marginTop="@dimen/margin_top_tx_lung_exercise"
+                                android:layout_marginBottom="17dp"
+                                android:fontFamily="@font/pretendard_regular"
+                                android:text="@string/tx_edit_information"
+                                android:textColor="@color/color_tx_btn_info_02"
+                                android:textSize="@dimen/size_tx_lung_exercise"
+                                android:visibility="gone"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/tx_setting" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.1" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_main_btn"
+                            android:visibility="invisible"
+                            android:clickable="false"
+                            android:focusable="false"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
 
 
                     </LinearLayout>
