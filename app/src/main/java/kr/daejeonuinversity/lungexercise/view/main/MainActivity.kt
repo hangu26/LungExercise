@@ -20,6 +20,8 @@ import kr.daejeonuinversity.lungexercise.view.editinfo.EditInfoActivity
 import kr.daejeonuinversity.lungexercise.view.history.HistoryActivity
 import kr.daejeonuinversity.lungexercise.view.exercise.LungExerciseActivity
 import kr.daejeonuinversity.lungexercise.view.history.HistoryRecordActivity
+import kr.daejeonuinversity.lungexercise.view.insight.InsightActivity
+import kr.daejeonuinversity.lungexercise.view.setting.SettingActivity
 import kr.daejeonuinversity.lungexercise.view.walkingtest.WalkingTestActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.MainViewModel
 import org.koin.android.ext.android.inject
@@ -160,6 +162,27 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             if (event?.action == MotionEvent.ACTION_UP) {
 
                 val intent = Intent(this@MainActivity, EditInfoActivity::class.java)
+                startActivityAnimation(intent, this@MainActivity)
+                finish()
+            }
+            false
+        }
+
+        binding.btnSetting.setOnTouchListener { v, event ->
+            setTouchAnimation(v, event)
+            if (event?.action == MotionEvent.ACTION_UP) {
+
+                val intent = Intent(this@MainActivity, SettingActivity::class.java)
+                startActivityAnimation(intent, this@MainActivity)
+                finish()
+            }
+            false
+        }
+
+        binding.btnInsight.setOnTouchListener{ v, event ->
+            setTouchAnimation(v,event)
+            if (event?.action == MotionEvent.ACTION_UP){
+                val intent = Intent(this@MainActivity, InsightActivity::class.java)
                 startActivityAnimation(intent, this@MainActivity)
                 finish()
             }
