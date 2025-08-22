@@ -1,5 +1,6 @@
 package kr.daejeonuinversity.lungexercise.util.util
 
+import kr.daejeonuinversity.lungexercise.data.local.repository.PreferenceRepo
 import kr.daejeonuinversity.lungexercise.data.repository.BreathRepository
 import kr.daejeonuinversity.lungexercise.data.repository.DeveloperRepository
 import kr.daejeonuinversity.lungexercise.data.repository.InfoRepository
@@ -9,5 +10,6 @@ import org.koin.dsl.module
 val repositoryModule = module {
     single { BreathRepository(get()) }
     single { InfoRepository(get()) }
+    single { PreferenceRepo(get()) }
     single { DeveloperRepository(get(), get()) }
 }
