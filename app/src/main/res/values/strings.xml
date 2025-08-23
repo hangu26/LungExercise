@@ -128,6 +128,21 @@
     <string name="tx_feedback_detail_up_41">"잘하고 있어요! 조금만 더 힘내서 목표에 도달해봐요."</string>
     <string name="tx_feedback_detail_under_41">"시작이 반입니다! 꾸준히 연습해서 더 나은 결과를 만들어보세요."</string>
     <string name="tx_exercise_data_detail">활동 데이터</string>
+    <string name="tx_export">내보내기</string>
+    <string name="tx_setting">환경설정</string>
+    <string name="tx_video_mask_popup">동영상 마스크 팝업</string>
+    <string name="tx_video_mask_popup_detail">동영상 재생 시 마스크 팝업을 표시합니다</string>
+    <string name="tx_toast_mask_popup">동영상 마스크 팝업이 활성화되었습니다</string>
+    <string name="tx_insight">도움 되는 정보</string>
+    <string name="tx_air_quality">실시간 대기질</string>
+    <string name="tx_normal">보통</string>
+    <string name="tv_pm10">미세먼지</string>
+    <string name="tv_pm10_value">23</string>
+    <string name="tv_pm10_unit">µg/m³</string>
+    <string name="tv_ozone">오존</string>
+    <string name="tv_ozone_unit">ppm</string>
+    <string name="tv_pm25">초미세먼지</string>
+    <string name="tv_no2">이산화질소</string>
 
 
 </resources>

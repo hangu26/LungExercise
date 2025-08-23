@@ -45,6 +45,7 @@
     <color name="color_border_constraint_connect_bluetooth">#4F46E5</color>
     <color name="background_lung_exercise_activity">#F9FAFB</color>
     <color name="color_border_constraint_breath_in_lung_exercise">#F3F4F6</color>
+    <color name="color_border_constraint_mask_popup">#F3F4F6</color>
     <color name="color_border_constraint_disconnect_bluetooth">#FF0000</color>
     <color name="color_tx_x">#6B7280</color>
     <color name="color_border_cancel_dialog_bluetooth">#F3F4F6</color>
@@ -79,6 +80,17 @@
     <color name="color_tx_feedback">#8B45FF</color>
     <color name="color_barchart_default">#8B45FF</color>
     <color name="color_barchart_clicked">#FF5555</color>
-    FF5555
+    <color name="toggle_on">#4F46E5</color>
+    <color name="toggle_off">#C9C9C9</color>
+    <color name="circle_fill">#FFFFFF</color>
+    <color name="circle_stroke">#00000000</color>
+    <color name="bg_mask_popup_toast">#EEF2FF</color>
+    <color name="stroke_mask_popup_toast">#C7D2FE</color>
+    <color name="color_cl_air_quality_detail">#E5E6E7</color>
+    <color name="color_cl_air_quality">#F5F5F5</color>
+    <color name="bg_cl_air_quality">#F9FAFB</color>
+    <color name="color_ic_circle_air_quality_bad">#FF0004</color>
+    <color name="color_ic_circle_air_quality_normal">#FDE047</color>
+    <color name="color_ic_circle_air_quality_good">#10B981</color>
 
 </resources>

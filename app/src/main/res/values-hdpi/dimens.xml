@@ -56,7 +56,9 @@
     <dimen name="size_icon_back">20dp</dimen>
     <dimen name="margin_start_icon_back">17dp</dimen>
     <dimen name="margin_top_constraint_breath">17dp</dimen>
+    <dimen name="margin_top_constraint_mask_popup">17dp</dimen>
     <dimen name="margin_side_constraint_breath">17dp</dimen>
+    <dimen name="margin_side_constraint_mask_popup">17dp</dimen>
     <dimen name="size_icon_breath">51dp</dimen>
     <dimen name="size_icon_breath_in_lung_exercise">27dp</dimen>
     <dimen name="margin_start_icon_breath">17dp</dimen>
@@ -179,6 +181,7 @@
     <dimen name="margin_top_layout_week_day">16dp</dimen>
     <dimen name="radius_border_clicked_date">15dp</dimen>
     <dimen name="radius_border_date">15dp</dimen>
+    <dimen name="radius_mask_popup_toast">13dp</dimen>
     <dimen name="margin_side_constraint_basic_info">17dp</dimen>
     <dimen name="margin_top_constraint_basic_info">17dp</dimen>
     <dimen name="radius_border_constraint_basic_info">13dp</dimen>
@@ -318,7 +321,37 @@
     <dimen name="margin_top_progress_bar_achievement">12dp</dimen>
     <dimen name="margin_top_linear_start_and_result">20dp</dimen>
     <dimen name="size_twenty_five">25dp</dimen>
-
+    <dimen name="margin_top_tx_video_mask_popup_detail">7dp</dimen>
+    <dimen name="margin_vertical_tx_video_mask_popup">32dp</dimen>
+    <dimen name="toggle_width">50dp</dimen>
+    <dimen name="toggle_height">25dp</dimen>
+    <dimen name="toggle_radius">46dp</dimen>
+    <dimen name="toggle_circle_size">25dp</dimen>
+    <dimen name="toggle_circle_stroke_width">5dp</dimen>
+    <dimen name="margin_end_switch_mask_popup">17dp</dimen>
+    <dimen name="size_toast_icon_mask_popup">17dp</dimen>
+    <dimen name="margin_start_toast_text_icon_mask_popup">10dp</dimen>
+    <dimen name="size_toast_text_icon_mask_popup">12sp</dimen>
+    <dimen name="margin_constraint_insight">17dp</dimen>
+    <dimen name="radius_cl_air_quality_detail">13dp</dimen>
+    <dimen name="radius_cl_air_quality">13dp</dimen>
+    <dimen name="size_tx_air_quality">18sp</dimen>
+    <dimen name="padding_vertical_cl_air_quality">20dp</dimen>
+    <dimen name="padding_side_cl_air_quality">22dp</dimen>
+    <dimen name="size_ic_air_quality_circle">13dp</dimen>
+    <dimen name="size_tx_quality">16sp</dimen>
+    <dimen name="margin_end_ic_air_quality_circle">9dp</dimen>
+    <dimen name="margin_top_linear_air_quality_container">17dp</dimen>
+    <dimen name="padding_cl_air_quality_detail">14dp</dimen>
+    <dimen name="size_tx_01_in_cl_air_quality">13sp</dimen>
+    <dimen name="size_tx_03_in_cl_air_quality">13sp</dimen>
+    <dimen name="size_tx_02_in_cl_air_quality">20sp</dimen>
+    <dimen name="width_cl_air_quality">157dp</dimen>
+    <dimen name="margin_top_tx_02_in_cl_air_quality">4dp</dimen>
+    <dimen name="margin_start_ic_air_quality">28dp</dimen>
+    <dimen name="size_ic_air_quality">50dp</dimen>
+    <dimen name="space_ll_pm_vertical">13dp</dimen>
+    <dimen name="space_ll_pm_horizontally">14dp</dimen>
 
 
 </resources>
