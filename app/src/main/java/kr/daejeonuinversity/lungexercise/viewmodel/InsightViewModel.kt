@@ -8,9 +8,11 @@ import androidx.lifecycle.MutableLiveData
 class InsightViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _btnBackState = MutableLiveData<Boolean>()
-    val btnBackState : LiveData<Boolean> = _btnBackState
+    val btnBackState: LiveData<Boolean> = _btnBackState
 
-    fun btnBack(){
+    val txPm10Value = MutableLiveData<String>()
+
+    fun btnBack() {
         _btnBackState.value = true
     }
 

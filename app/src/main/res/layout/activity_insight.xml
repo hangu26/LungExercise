@@ -159,7 +159,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_top_tx_02_in_cl_air_quality"
                             android:fontFamily="@font/pretendard_bold"
-                            android:text="@string/tv_pm10_value"
+                            android:text="@{viewmodel.txPm10Value}"
                             android:textColor="@color/black"
                             android:textSize="@dimen/size_tx_02_in_cl_air_quality"
                             app:layout_constraintStart_toStartOf="parent"
@@ -380,7 +380,6 @@
 
 
                 </LinearLayout>
-
 
             </LinearLayout>
 
