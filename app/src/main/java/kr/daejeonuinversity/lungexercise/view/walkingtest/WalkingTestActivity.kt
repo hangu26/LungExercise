@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.MotionEvent
+import android.view.View
 import kr.daejeonuinversity.lungexercise.R
 import kr.daejeonuinversity.lungexercise.databinding.ActivityWalkingTestBinding
 import kr.daejeonuinversity.lungexercise.util.base.BaseActivity
@@ -24,6 +25,8 @@ class WalkingTestActivity :
     private var countDownTimer: CountDownTimer? = null
     private var totalTime = 6 * 60 * 1000L // 6분
     private val backPressedCallback = BackPressedCallback(this)
+    private var remainingTime: Long = totalTime
+    private var isRunning = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,33 +38,36 @@ class WalkingTestActivity :
 
         heartTimerView = binding.heartTimerView
 
-//        val miBandReceiver = MiBandReceiver(this)
-//        miBandReceiver.scanMiBand()
-
         initButton()
         observe()
         backPressedCallback.addCallbackActivity(this, MainActivity::class.java)
 
     }
+
     @SuppressLint("ClickableViewAccessibility")
     fun initButton() {
 
         binding.btnStart.setOnTouchListener { v, event ->
-            setTouchAnimation(v,event)
+            setTouchAnimation(v, event)
 
             if (event?.action == MotionEvent.ACTION_UP) {
 
-                startTimer()
+                if (!isRunning) {
+                    startTimer() // 처음 실행 또는 pause 후 resume
 
-                wViewModel.heartRate.observe(this) {
-                    binding.txHeartRate.text = "$it"
+                    wViewModel.heartRate.observe(this) {
+                        binding.txHeartRate.text = "$it"
+                    }
+
+                    wViewModel.stepCount.observe(this) {
+                        binding.txStepCount.text = "$it"
+                    }
+
+                    wViewModel.startReceiving()
+
                 }
 
-                wViewModel.stepCount.observe(this) {
-                    binding.txStepCount.text = "$it"
-                }
 
-                wViewModel.startReceiving()
 
             }
 
@@ -69,16 +75,37 @@ class WalkingTestActivity :
         }
 
         binding.btnStop.setOnTouchListener { v, event ->
-            setTouchAnimation(v,event)
+            setTouchAnimation(v, event)
+
+            if (event?.action == MotionEvent.ACTION_UP) {
+
+                if (isRunning) {
+                    pauseTimer()
+                    wViewModel.stopReceiving()
+                }
+
+
+            }
+
+            false
+        }
+
+        binding.btnReset.setOnTouchListener { v, event ->
+
+            setTouchAnimation(v, event)
 
             if (event?.action == MotionEvent.ACTION_UP) {
 
                 stopTimer()
                 wViewModel.stopReceiving()
+                binding.txStepCount.text = "0"
+                binding.txHeartRate.text = "0"
+                binding.txDistanceValue.text = "0"
 
             }
 
             false
+
         }
 
     }
@@ -96,6 +123,8 @@ class WalkingTestActivity :
 
             if (it) {
 
+                binding.btnStart.visibility = View.GONE
+                binding.btnStop.visibility = View.VISIBLE
 
 
             }
@@ -106,40 +135,61 @@ class WalkingTestActivity :
 
             if (it) {
 
-                stopTimer()
-                vm.stopReceiving()
+                binding.btnStart.visibility = View.VISIBLE
+                binding.btnStop.visibility = View.GONE
+
+            }
+
+        }
+
+        vm.btnResetState.observe(this@WalkingTestActivity) {
+
+            if (it) {
+
+                binding.btnStart.visibility = View.VISIBLE
+                binding.btnStop.visibility = View.GONE
 
             }
 
         }
 
 
-
     }
 
     private fun startTimer() {
-        countDownTimer = object : CountDownTimer(totalTime, 1000) {
+        countDownTimer = object : CountDownTimer(remainingTime, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                val remaining = millisUntilFinished
-                val percentage = remaining.toFloat() / totalTime
-                val minutes = (remaining / 1000) / 60
-                val seconds = (remaining / 1000) % 60
+                remainingTime = millisUntilFinished
+                val percentage = remainingTime.toFloat() / totalTime
+                val minutes = (remainingTime / 1000) / 60
+                val seconds = (remainingTime / 1000) % 60
                 val timeText = String.format("%02d:%02d", minutes, seconds)
 
                 heartTimerView.updateProgress(percentage, timeText)
             }
 
             override fun onFinish() {
+                remainingTime = 0L
+                isRunning = false
                 heartTimerView.updateProgress(0f, "00:00")
             }
         }.also {
             it.start()
         }
+        isRunning = true
+    }
+
+    private fun pauseTimer() {
+        countDownTimer?.cancel()
+        countDownTimer = null
+        isRunning = false
     }
 
     private fun stopTimer() {
         countDownTimer?.cancel()
         countDownTimer = null
+        remainingTime = totalTime
+        isRunning = false
         heartTimerView.updateProgress(1f, "06:00") // 초기 상태로 리셋
     }
 

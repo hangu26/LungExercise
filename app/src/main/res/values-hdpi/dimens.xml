@@ -70,16 +70,17 @@
     <dimen name="margin_vertical_constraint_bluetooth_white">25dp</dimen>
     <dimen name="size_tx_practice_breath">17sp</dimen>
     <dimen name="margin_start_tx_practice_breath">25dp</dimen>
-    <dimen name="size_heart_timer_view">200dp</dimen>
-    <dimen name="margin_top_heart_timer">74dp</dimen>
-    <dimen name="margin_top_linear_btn_start_stop">35dp</dimen>
+    <dimen name="size_heart_timer_view">242dp</dimen>
+    <dimen name="margin_top_heart_timer">22dp</dimen>
+    <dimen name="margin_top_linear_btn_start_stop">22dp</dimen>
     <dimen name="width_btn_timer">120dp</dimen>
     <dimen name="height_btn_timer">64dp</dimen>
     <dimen name="size_img_steps">38dp</dimen>
     <dimen name="size_tx_steps">19sp</dimen>
     <dimen name="margin_top_tx_steps">11dp</dimen>
-    <dimen name="margin_top_linear_tx_steps_heart">41dp</dimen>
+    <dimen name="margin_top_linear_tx_steps_heart">22dp</dimen>
     <dimen name="size_tx_timer_body_state">27sp</dimen>
+    <dimen name="size_tx_timer_body_state_distance">24sp</dimen>
     <dimen name="size_tx_lets_breathing">20sp</dimen>
     <dimen name="margin_start_icon_breath_in_practice">8dp</dimen>
     <dimen name="margin_top_normal_result_in_practice">31dp</dimen>
@@ -352,6 +353,15 @@
     <dimen name="size_ic_air_quality">50dp</dimen>
     <dimen name="space_ll_pm_vertical">13dp</dimen>
     <dimen name="space_ll_pm_horizontally">14dp</dimen>
+    <dimen name="space_cl_start_to_reset">14dp</dimen>
+    <dimen name="padding_side_ll_walk_heart">22dp</dimen>
+    <dimen name="radius_border_cl_walking_values">12dp</dimen>
+    <dimen name="space_horizontally_cl_walking_values">9dp</dimen>
+    <dimen name="padding_vertical_cl_walking_values">12dp</dimen>
+    <dimen name="padding_side_ll_btn_timer">22dp</dimen>
+    <dimen name="margin_end_tx_pm_values">8dp</dimen>
+    <dimen name="size_tx_dust_state">11sp</dimen>
+    <dimen name="space_dust_ic_to_text">5dp</dimen>
 
 
 </resources>

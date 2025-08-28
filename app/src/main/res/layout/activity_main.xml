@@ -468,6 +468,9 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/border_main_btn"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 

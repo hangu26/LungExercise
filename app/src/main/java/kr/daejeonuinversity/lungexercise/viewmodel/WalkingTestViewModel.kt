@@ -18,6 +18,9 @@ class WalkingTestViewModel(application: Application) : AndroidViewModel(applicat
     private val _btnStopState = MutableLiveData<Boolean>()
     val btnStopState : LiveData<Boolean> = _btnStopState
 
+    private val _btnResetState = MutableLiveData<Boolean>()
+    val btnResetState : LiveData<Boolean> = _btnResetState
+
     private val _heartRate = MutableLiveData<Float>()
     val heartRate: LiveData<Float> get() = _heartRate
 
@@ -27,12 +30,12 @@ class WalkingTestViewModel(application: Application) : AndroidViewModel(applicat
     private val _spo2 = MutableLiveData<Float>()
     val spo2: LiveData<Float> get() = _spo2
 
-    val txWalkDistance = MutableLiveData<String>()
+    val txWalkDistance = MutableLiveData<String>("0")
 
     init {
         _stepCount.observeForever { count ->
             val distance = count * 0.7 // 평균 보폭 0.7m
-            txWalkDistance.postValue("현재 보행 거리 : ${String.format("%.1f m", distance)}")
+            txWalkDistance.postValue(String.format("%.1f m", distance))
         }
     }
 
@@ -49,6 +52,12 @@ class WalkingTestViewModel(application: Application) : AndroidViewModel(applicat
     fun btnStop(){
 
         _btnStopState.value = true
+
+    }
+
+    fun btnReset(){
+
+        _btnResetState.value = true
 
     }
 

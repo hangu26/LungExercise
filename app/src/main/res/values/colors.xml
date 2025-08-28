@@ -92,5 +92,10 @@
     <color name="color_ic_circle_air_quality_bad">#FF0004</color>
     <color name="color_ic_circle_air_quality_normal">#FDE047</color>
     <color name="color_ic_circle_air_quality_good">#10B981</color>
+    <color name="color_timer_walking">#4F46E5</color>
+    <color name="color_background_cl_walking_values">#F8FAFC</color>
+    <color name="color_tx_dust_state">#0369A1</color>
+
+
 
 </resources>

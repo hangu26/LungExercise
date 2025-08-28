@@ -1,5 +1,8 @@
 package kr.daejeonuinversity.lungexercise.util.util
 
+import com.google.gson.GsonBuilder
+import kr.daejeonuinversity.lungexercise.data.remote.api.AirKoreaApi
+import kr.daejeonuinversity.lungexercise.data.remote.api.RetrofitClient
 import kr.daejeonuinversity.lungexercise.viewmodel.BirthdayViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.BodyViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.BreathingViewModel
@@ -17,11 +20,18 @@ import kr.daejeonuinversity.lungexercise.viewmodel.SplashViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.VideoViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.WalkHistoryViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.WalkingTestViewModel
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 val module = module {
+
+    single<AirKoreaApi> { RetrofitClient.api }
+
     viewModel { SplashViewModel(androidApplication()) }
     viewModel { MainViewModel(androidApplication()) }
     viewModel { InfoInputViewModel(get(),androidApplication()) }
@@ -38,6 +48,6 @@ val module = module {
     viewModel { WalkHistoryViewModel(androidApplication()) }
     viewModel { DeveloperViewModel(get(),androidApplication()) }
     viewModel { SettingViewModel(androidApplication(),get()) }
-    viewModel { InsightViewModel(androidApplication()) }
+    viewModel { InsightViewModel(androidApplication(), get()) }
 
 }

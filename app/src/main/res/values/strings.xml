@@ -137,12 +137,14 @@
     <string name="tx_air_quality">실시간 대기질</string>
     <string name="tx_normal">보통</string>
     <string name="tv_pm10">미세먼지</string>
-    <string name="tv_pm10_value">23</string>
+    <string name="tv_pm10_value">0</string>
     <string name="tv_pm10_unit">µg/m³</string>
     <string name="tv_ozone">오존</string>
     <string name="tv_ozone_unit">ppm</string>
     <string name="tv_pm25">초미세먼지</string>
     <string name="tv_no2">이산화질소</string>
+    <string name="tx_distance">거리</string>
+    <string name="tx_reset">리셋</string>
 
 
 </resources>
