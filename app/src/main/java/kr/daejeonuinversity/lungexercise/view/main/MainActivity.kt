@@ -15,6 +15,7 @@ import kr.daejeonuinversity.lungexercise.R
 import kr.daejeonuinversity.lungexercise.databinding.ActivityMainBinding
 import kr.daejeonuinversity.lungexercise.util.base.BaseActivity
 import kr.daejeonuinversity.lungexercise.util.util.BackPressedCallback
+import kr.daejeonuinversity.lungexercise.view.breathing.TestBreathActivity
 import kr.daejeonuinversity.lungexercise.view.developer.DeveloperActivity
 import kr.daejeonuinversity.lungexercise.view.editinfo.EditInfoActivity
 import kr.daejeonuinversity.lungexercise.view.history.HistoryActivity
@@ -183,6 +184,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             setTouchAnimation(v,event)
             if (event?.action == MotionEvent.ACTION_UP){
                 val intent = Intent(this@MainActivity, InsightActivity::class.java)
+                startActivityAnimation(intent, this@MainActivity)
+                finish()
+            }
+            false
+        }
+
+        binding.btnTestBreath.setOnTouchListener{ v, event ->
+            setTouchAnimation(v,event)
+            if (event?.action == MotionEvent.ACTION_UP){
+                val intent = Intent(this@MainActivity, TestBreathActivity::class.java)
                 startActivityAnimation(intent, this@MainActivity)
                 finish()
             }
