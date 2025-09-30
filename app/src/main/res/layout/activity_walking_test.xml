@@ -73,8 +73,8 @@
 
         <kr.daejeonuinversity.lungexercise.util.util.HeartTimerView
             android:id="@+id/heart_timer_view"
-            android:layout_width="@dimen/size_heart_timer_view"
-            android:layout_height="@dimen/size_heart_timer_view"
+            android:layout_width="@dimen/size_heart_timer_view_02"
+            android:layout_height="@dimen/size_heart_timer_view_02"
             android:layout_marginTop="@dimen/margin_top_heart_timer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -210,6 +210,39 @@
                     android:fontFamily="@font/pretendard_bold"
                     android:gravity="center"
                     android:text="@string/tx_reset"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_tx_btn_next"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_cl_start_to_reset" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_result"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_btn_timer"
+                android:layout_weight="1"
+                android:background="@drawable/border_btn_reset_timer"
+                android:visibility="gone"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="@{() -> viewmodel.btnResult()}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heart_timer_view">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:gravity="center"
+                    android:text="@string/tx_confirm_result"
                     android:textColor="@color/white"
                     android:textSize="@dimen/size_tx_btn_next"
                     app:layout_constraintBottom_toBottomOf="parent"

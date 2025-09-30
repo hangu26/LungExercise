@@ -5,8 +5,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import com.google.android.gms.wearable.Wearable
 import kr.daejeonuinversity.lungexercise.R
 import kr.daejeonuinversity.lungexercise.databinding.ActivityWalkingTestBinding
 import kr.daejeonuinversity.lungexercise.util.base.BaseActivity
@@ -14,8 +16,12 @@ import kr.daejeonuinversity.lungexercise.util.util.BackPressedCallback
 import kr.daejeonuinversity.lungexercise.util.util.HeartTimerView
 import kr.daejeonuinversity.lungexercise.util.util.MiBandReceiver
 import kr.daejeonuinversity.lungexercise.view.main.MainActivity
+import kr.daejeonuinversity.lungexercise.view.walkingtest.result.WalkingResultActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.WalkingTestViewModel
 import org.koin.android.ext.android.inject
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class WalkingTestActivity :
     BaseActivity<ActivityWalkingTestBinding>(R.layout.activity_walking_test) {
@@ -23,10 +29,11 @@ class WalkingTestActivity :
     private val wViewModel: WalkingTestViewModel by inject()
     private lateinit var heartTimerView: HeartTimerView
     private var countDownTimer: CountDownTimer? = null
-    private var totalTime = 6 * 60 * 1000L // 6분
+    private var totalTime = 2 * 30 * 1000L // 6분
     private val backPressedCallback = BackPressedCallback(this)
     private var remainingTime: Long = totalTime
     private var isRunning = false
+    private var userWeight = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +73,6 @@ class WalkingTestActivity :
                     wViewModel.startReceiving()
 
                 }
-
 
 
             }
@@ -111,6 +117,9 @@ class WalkingTestActivity :
     }
 
     private fun observe() = wViewModel.let { vm ->
+
+        vm.fetchUserInfo()
+
         vm.backClicked.observe(this@WalkingTestActivity) {
             if (it) {
                 val intent = Intent(this@WalkingTestActivity, MainActivity::class.java)
@@ -125,7 +134,7 @@ class WalkingTestActivity :
 
                 binding.btnStart.visibility = View.GONE
                 binding.btnStop.visibility = View.VISIBLE
-
+                sendStartSignalToWatch()
 
             }
 
@@ -148,12 +157,86 @@ class WalkingTestActivity :
 
                 binding.btnStart.visibility = View.VISIBLE
                 binding.btnStop.visibility = View.GONE
+                sendResetMessageToWatch()
+
+                vm.isReset()
+
+            }
+
+        }
+
+        vm.isEndedState.observe(this@WalkingTestActivity) {
+
+            if (it) {
+
+                binding.btnResult.visibility = View.VISIBLE
+
+            }
+
+        }
+
+        vm.btnResultState.observe(this@WalkingTestActivity) {
+
+            if (it) {
+
+                val intent = Intent(this@WalkingTestActivity, WalkingResultActivity::class.java)
+
+                val distance = vm.txWalkDistance.value ?: "0 m"
+                val calories = vm.calories.value ?: 0.0
+                val steps = vm.stepCount.value ?: 0
+
+                vm.saveData()
+
+                intent.putExtra("distance", distance)
+                intent.putExtra("calories", calories)
+                intent.putExtra("steps", steps)
+
+                Log.d("칼로리", "넘기는 데이터 -> 거리: $distance, 칼로리: $calories, 걸음 수: $steps")
+                sendResetMessageToWatch()
+                startActivityAnimation(intent, this@WalkingTestActivity)
+                finish()
 
             }
 
         }
 
 
+
+    }
+
+    // MessageClient를 통해 시계에 메시지 전송
+    private fun sendStartSignalToWatch() {
+        val nodeClient = Wearable.getNodeClient(this)
+        val messageClient = Wearable.getMessageClient(this)
+
+        nodeClient.connectedNodes.addOnSuccessListener { nodes ->
+            nodes.forEach { node ->
+                messageClient.sendMessage(node.id, "/start_heart_rate_service", byteArrayOf())
+                    .addOnSuccessListener {
+                        Log.d("PhoneApp", "시작 신호 전송 성공")
+                    }
+                    .addOnFailureListener {
+                        Log.e("PhoneApp", "시작 신호 전송 실패", it)
+                    }
+            }
+        }
+    }
+
+
+    private fun sendResetMessageToWatch() {
+        Wearable.getNodeClient(this).connectedNodes.addOnSuccessListener { nodes ->
+            for (node in nodes) {
+                Wearable.getMessageClient(this).sendMessage(
+                    node.id,
+                    "/reset_step_count", // 워치에서 수신하는 path
+                    ByteArray(0)
+                ).addOnSuccessListener {
+                    Log.d("시계 걸음 수 초기화", "📤 워치 걸음수 초기화 메시지 전송 성공")
+                }.addOnFailureListener {
+                    Log.e("시계 걸음 수 초기화", "❌ 워치 초기화 메시지 전송 실패", it)
+                }
+            }
+        }
     }
 
     private fun startTimer() {
@@ -170,8 +253,9 @@ class WalkingTestActivity :
 
             override fun onFinish() {
                 remainingTime = 0L
-                isRunning = false
-                heartTimerView.updateProgress(0f, "00:00")
+                stopTimer()
+                wViewModel.stopReceiving()
+                wViewModel.isEnded()
             }
         }.also {
             it.start()

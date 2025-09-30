@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="kr.daejeonuinversity.lungexercise.view.fitplan.FitPlanActivity" />
+
+        <variable
+            name="viewmodel"
+            type="kr.daejeonuinversity.lungexercise.viewmodel.FitPlanViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white"
+                app:contentInsetStart="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/size_icon_back"
+                        android:layout_height="@dimen/size_icon_back"
+                        android:layout_marginStart="@dimen/margin_start_icon_back"
+                        android:onClick="@{() -> viewmodel.btnBack()}"
+                        android:src="@drawable/icon_back"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:gravity="center"
+                        android:text="@string/tx_practice_breath"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_appbar_text"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_tx_fit_plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+            <TextView
+                android:id="@+id/tx_do_breathing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/tx_calculate_exercise"
+                android:textColor="@color/color_tx_do_breathing"
+                android:textSize="@dimen/size_tx_lets_breathing" />
+
+            <TextView
+                android:id="@+id/tx_do_breathing_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_top_tx_do_breathing_detail"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/tx_calculate_exercise_detail"
+                android:textColor="@color/color_tx_do_breathing_detail"
+                android:textSize="@dimen/size_tx_do_breathing_detail" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_exercise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_constraint_insight"
+            android:layout_marginTop="@dimen/margin_constraint_insight"
+            android:layout_marginEnd="@dimen/margin_constraint_insight"
+            android:background="@drawable/border_cl_air_quality"
+            android:elevation="@dimen/elevation_cl_exercise"
+            android:paddingStart="@dimen/padding_side_cl_air_quality"
+            android:paddingTop="@dimen/padding_vertical_cl_air_quality"
+            android:paddingEnd="@dimen/padding_side_cl_air_quality"
+            android:paddingBottom="@dimen/padding_vertical_cl_air_quality"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linear_tx_fit_plan">
+
+            <TextView
+                android:id="@+id/tx_intensity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tx_intensity"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_exercise_intensity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_edt_weight"
+                android:background="@drawable/border_edt_weight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tx_intensity">
+
+                <EditText
+                    android:id="@+id/edt_exercise_intensity"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_edt_weight"
+                    android:layout_marginEnd="@dimen/margin_end_edt_exercise_intensity"
+                    android:background="@null"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:gravity="start|center_vertical"
+                    android:inputType="number"
+                    android:paddingStart="@dimen/padding_start_edt_weight"
+                    android:text="@={viewmodel.txEdtIntensity}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_edt_weight"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tx_exercise_intensity_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_end_tx_exercise_intensity_unit"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/tx_exercise_intensity_unit"
+                    android:textColor="@color/color_tx_intensity_unit"
+                    android:textSize="@dimen/size_tx_exercise_intensity_unit"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tx_exercise_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_tx_exercise_time"
+                android:text="@string/tx_exercise_time"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cl_exercise_intensity" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_exercise_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_edt_weight"
+                android:background="@drawable/border_edt_weight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tx_exercise_time">
+
+                <EditText
+                    android:id="@+id/edt_exercise_time"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_edt_weight"
+                    android:layout_marginEnd="@dimen/margin_end_edt_exercise_intensity"
+                    android:background="@null"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:gravity="start|center_vertical"
+                    android:inputType="number"
+                    android:paddingStart="@dimen/padding_start_edt_weight"
+                    android:text="@={viewmodel.txEdtTime}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_edt_weight"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tx_exercise_time_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_end_tx_exercise_intensity_unit"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/tx_exercise_intensity_unit"
+                    android:textColor="@color/color_tx_intensity_unit"
+                    android:textSize="@dimen/size_tx_exercise_intensity_unit"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_tx_exercise_notice"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/tx_exercise_notice"
+                android:textColor="@color/color_tx_notice"
+                android:textSize="@dimen/size_tx_exercise_notice"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cl_exercise_time" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_execute_exercise"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_cl_execute_exercise"
+            android:background="@drawable/border_btn_next_unable"
+            android:onClick="@{() -> viewmodel.btnNext()}"
+            android:clickable="false"
+            android:enabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/margin_bottom_btn_next"
+            android:layout_marginStart="@dimen/margin_side_btn_next"
+            android:layout_marginEnd="@dimen/margin_side_btn_next">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_bold"
+                android:gravity="center"
+                android:text="@string/tx_execute_exercise"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_tx_btn_next"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

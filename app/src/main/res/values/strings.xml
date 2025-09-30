@@ -120,6 +120,8 @@
     <string name="tx_eight_second">8초</string>
     <string name="tx_is_measuring">측정중</string>
     <string name="tx_result_breathing_detail">오늘의 호흡 연습이 완료되었습니다</string>
+    <string name="tx_result_walking_detail">오늘의 6분 보행 검사가 완료되었습니다</string>
+
     <string name="tx_real_time">실제 측정된 시간</string>
     <string name="tx_real_normal_time_detail">권장 목표 시간</string>
     <string name="tx_achievement_rate_detail">목표 대비 성취도</string>
@@ -145,6 +147,22 @@
     <string name="tv_no2">이산화질소</string>
     <string name="tx_distance">거리</string>
     <string name="tx_reset">리셋</string>
+    <string name="tx_calculate_exercise">운동량 계산</string>
+    <string name="tx_calculate_exercise_detail">맞춤형 운동량을 계산해보세요</string>
+    <string name="tx_intensity">운동강도</string>
+    <string name="tx_exercise_intensity_unit">%</string>
+    <string name="tx_exercise_time">운동시간</string>
+    <string name="tx_exercise_notice">* 계산 결과는 개인차에 따라 다를 수 있습니다</string>
+    <string name="tx_execute_exercise">시행</string>
+    <string name="tx_speed_km">속도 (km/h)</string>
+    <string name="tx_distance_km">거리 (km)</string>
+    <string name="tx_calorie">칼로리 (kcal)</string>
+    <string name="tx_recommend_distance">추천 보행 거리 (km)</string>
+    <string name="tx_total_meter">총 거리</string>
+    <string name="tx_total_meter_detail">대략적인 총 거리</string>
+    <string name="tx_walking_test_result">6분 보행검사 결과</string>
+    <string name="tx_user_calorie">칼로리</string>
+    <string name="tx_total_steps">총 걸음 수</string>
 
 
 </resources>

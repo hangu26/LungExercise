@@ -191,10 +191,11 @@ class LungExerciseActivity :
         }
     }
 
+    /** 마스크 마다 처리 필요. 수정 예정 **/
     private fun showBluetoothDialog() {
         bluetoothFragment = BluetoothFragment(
             onConnectClick = { connectImmediately ->
-                MaskBluetoothManager.connectToDevice(this, deviceName = "MASK7", connectImmediately)
+                MaskBluetoothManager.connectToDevice(this, deviceName = "MASK2", connectImmediately)
                 if (connectImmediately) {
                     Toast.makeText(this, "연결중입니다...", Toast.LENGTH_SHORT).show()
                 }

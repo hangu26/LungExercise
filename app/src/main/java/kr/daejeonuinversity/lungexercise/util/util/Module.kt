@@ -8,6 +8,8 @@ import kr.daejeonuinversity.lungexercise.viewmodel.BodyViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.BreathingViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.DeveloperViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.EditInfoViewModel
+import kr.daejeonuinversity.lungexercise.viewmodel.FitExerciseViewModel
+import kr.daejeonuinversity.lungexercise.viewmodel.FitPlanViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.GenderViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.HistoryRecordViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.HistoryViewModel
@@ -19,6 +21,7 @@ import kr.daejeonuinversity.lungexercise.viewmodel.SettingViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.SplashViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.VideoViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.WalkHistoryViewModel
+import kr.daejeonuinversity.lungexercise.viewmodel.WalkingResultViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.WalkingTestViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -39,7 +42,7 @@ val module = module {
     viewModel { GenderViewModel(androidApplication()) }
     viewModel { BodyViewModel(androidApplication()) }
     viewModel { LungExerciseViewModel(androidApplication()) }
-    viewModel { WalkingTestViewModel(androidApplication()) }
+    viewModel { WalkingTestViewModel(get(),get(),androidApplication()) }
     viewModel { BreathingViewModel(get(),androidApplication()) }
     viewModel { HistoryViewModel(get(),androidApplication()) }
     viewModel { VideoViewModel(androidApplication()) }
@@ -49,5 +52,8 @@ val module = module {
     viewModel { DeveloperViewModel(get(),androidApplication()) }
     viewModel { SettingViewModel(androidApplication(),get()) }
     viewModel { InsightViewModel(androidApplication(), get()) }
+    viewModel { FitPlanViewModel(androidApplication())}
+    viewModel { FitExerciseViewModel(androidApplication()) }
+    viewModel { WalkingResultViewModel(androidApplication()) }
 
 }

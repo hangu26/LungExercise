@@ -278,9 +278,13 @@
                         android:layout_weight="1">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/btn_fit_plan"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
                             android:background="@drawable/border_main_btn"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">

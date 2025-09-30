@@ -20,6 +20,7 @@ import kr.daejeonuinversity.lungexercise.view.developer.DeveloperActivity
 import kr.daejeonuinversity.lungexercise.view.editinfo.EditInfoActivity
 import kr.daejeonuinversity.lungexercise.view.history.HistoryActivity
 import kr.daejeonuinversity.lungexercise.view.exercise.LungExerciseActivity
+import kr.daejeonuinversity.lungexercise.view.fitplan.FitPlanActivity
 import kr.daejeonuinversity.lungexercise.view.history.HistoryRecordActivity
 import kr.daejeonuinversity.lungexercise.view.insight.InsightActivity
 import kr.daejeonuinversity.lungexercise.view.setting.SettingActivity
@@ -141,6 +142,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             if (event?.action == MotionEvent.ACTION_UP) {
 
                 val intent = Intent(this@MainActivity, WalkingTestActivity::class.java)
+                startActivityAnimation(intent, this@MainActivity)
+                finish()
+            }
+            false
+        }
+
+        binding.btnFitPlan.setOnTouchListener { v, event ->
+            setTouchAnimation(v, event)
+            if (event?.action == MotionEvent.ACTION_UP) {
+
+                val intent = Intent(this@MainActivity, FitPlanActivity::class.java)
                 startActivityAnimation(intent, this@MainActivity)
                 finish()
             }
