@@ -10,6 +10,7 @@ import kr.daejeonuinversity.lungexercise.viewmodel.DeveloperViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.EditInfoViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.FitExerciseViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.FitPlanViewModel
+import kr.daejeonuinversity.lungexercise.viewmodel.FitResultViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.GenderViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.HistoryRecordViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.HistoryViewModel
@@ -52,8 +53,9 @@ val module = module {
     viewModel { DeveloperViewModel(get(),androidApplication()) }
     viewModel { SettingViewModel(androidApplication(),get()) }
     viewModel { InsightViewModel(androidApplication(), get()) }
-    viewModel { FitPlanViewModel(androidApplication())}
-    viewModel { FitExerciseViewModel(androidApplication()) }
+    viewModel { FitPlanViewModel(get(),get(),androidApplication())}
+    viewModel { FitExerciseViewModel(get(),androidApplication()) }
     viewModel { WalkingResultViewModel(androidApplication()) }
+    viewModel { FitResultViewModel(androidApplication()) }
 
 }

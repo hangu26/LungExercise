@@ -20,6 +20,7 @@ val databaseModule = module {
     single { get<BreathDatabase>().breathRecordDao() }
     single { get<BreathDatabase>().userInfoDao() }
     single { get<BreathDatabase>().sixMinuteWalkTestDao() }
+    single { get<BreathDatabase>().heartRateWarning() }
 }
 
 val MIGRATION_2_3 = object : Migration(2, 3) {

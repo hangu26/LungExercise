@@ -71,6 +71,7 @@
     <dimen name="size_tx_practice_breath">17sp</dimen>
     <dimen name="margin_start_tx_practice_breath">25dp</dimen>
     <dimen name="size_heart_timer_view">242dp</dimen>
+    <dimen name="size_heart_timer_view_02">182dp</dimen>
     <dimen name="size_30_timer_view">182dp</dimen>
     <dimen name="margin_top_heart_timer">22dp</dimen>
     <dimen name="margin_top_linear_btn_start_stop">22dp</dimen>
@@ -97,6 +98,8 @@
     <dimen name="size_tx_timer_body_state">27sp</dimen>
     <dimen name="size_tx_timer_body_state_distance">24sp</dimen>
     <dimen name="size_tx_lets_breathing">20sp</dimen>
+    <dimen name="size_tx_success_exercise">22sp</dimen>
+
     <dimen name="margin_start_icon_breath_in_practice">8dp</dimen>
     <dimen name="margin_top_normal_result_in_practice">31dp</dimen>
     <dimen name="margin_side_normal_result_in_practice">44dp</dimen>
@@ -109,10 +112,15 @@
     <dimen name="radius_border_result_breathing">11dp</dimen>
     <dimen name="size_tx_result_breathing">22sp</dimen>
     <dimen name="size_tx_user_time">12sp</dimen>
+    <dimen name="size_tx_total_meter_calorie_steps">15sp</dimen>
+
+
     <dimen name="size_tx_recommend_distance">16sp</dimen>
     <dimen name="size_tx_feedback">10sp</dimen>
     <dimen name="margin_end_linear_feedback">19dp</dimen>
     <dimen name="size_tx_real_user_time">10sp</dimen>
+    <dimen name="size_tx_total_meter_detail">13sp</dimen>
+
     <dimen name="margin_linear_user_normal_percent">19dp</dimen>
     <dimen name="margin_start_linear_achievement_rate">9dp</dimen>
     <dimen name="dialog_result_breath_constraints_width">270dp</dimen>
@@ -190,7 +198,7 @@
     <dimen name="size_appbar_text">17sp</dimen>
     <dimen name="size_app_name">22sp</dimen>
     <dimen name="elevation_app_bar_user">30dp</dimen>
-    <dimen name="elevation_cl_exercise">15dp</dimen>
+    <dimen name="elevation_cl_exercise">5dp</dimen>
     <dimen name="margin_side_app_bar_user">14dp</dimen>
     <dimen name="translation_y_app_bar_user">-20dp</dimen>
     <dimen name="margin_end_layoutMonth">24dp</dimen>
@@ -389,6 +397,8 @@
     <dimen name="size_tx_exercise_notice">13sp</dimen>
     <dimen name="margin_top_tx_exercise_notice">20dp</dimen>
     <dimen name="height_cl_execute_exercise">64dp</dimen>
+    <dimen name="height_cl_meter_calorie_steps">103dp</dimen>
+    <dimen name="size_ic_check_blue">90dp</dimen>
 
 
 </resources>

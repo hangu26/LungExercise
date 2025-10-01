@@ -2,396 +2,436 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    
+
     <data>
-        
+
         <variable
             name="activity"
             type="kr.daejeonuinversity.lungexercise.view.fitexercise.FitExerciseActivity" />
-        
+
         <variable
             name="viewmodel"
             type="kr.daejeonuinversity.lungexercise.viewmodel.FitExerciseViewModel" />
-        
+
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:background="@color/white">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayout"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/white"
-                app:contentInsetStart="0dp">
+                android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:orientation="horizontal">
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/white"
+                    app:contentInsetStart="0dp">
 
-                    <ImageView
-                        android:layout_width="@dimen/size_icon_back"
-                        android:layout_height="@dimen/size_icon_back"
-                        android:layout_marginStart="@dimen/margin_start_icon_back"
-                        android:onClick="@{() -> viewmodel.btnBack()}"
-                        android:src="@drawable/icon_back"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/pretendard_semibold"
-                        android:gravity="center"
-                        android:text="@string/tx_6_min_test"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/size_appbar_text"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_gravity="start"
+                        android:orientation="horizontal">
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <ImageView
+                            android:layout_width="@dimen/size_icon_back"
+                            android:layout_height="@dimen/size_icon_back"
+                            android:layout_marginStart="@dimen/margin_start_icon_back"
+                            android:onClick="@{() -> viewmodel.btnBack()}"
+                            android:src="@drawable/icon_back"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.appcompat.widget.Toolbar>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/pretendard_semibold"
+                            android:gravity="center"
+                            android:text="@string/tx_fit_exercise"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_appbar_text"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-        </com.google.android.material.appbar.AppBarLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <kr.daejeonuinversity.lungexercise.util.util.RecommendWalkTimer
-            android:id="@+id/recommend_walk_timer"
-            android:layout_width="@dimen/size_30_timer_view"
-            android:layout_height="@dimen/size_30_timer_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
+                </androidx.appcompat.widget.Toolbar>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_recommend_distance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:layout_marginTop="@dimen/margin_top_cl_recommend_distance"
-            android:layout_marginEnd="22dp"
-            android:background="@drawable/border_cl_recommend_distance"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recommend_walk_timer">
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <kr.daejeonuinversity.lungexercise.util.util.RecommendWalkTimer
+                android:id="@+id/recommend_walk_timer"
+                android:layout_width="@dimen/size_30_timer_view"
+                android:layout_height="@dimen/size_30_timer_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_recommend_distance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_side_cl_recommend_distance"
+                android:layout_marginTop="@dimen/margin_top_cl_recommend_distance"
+                android:layout_marginEnd="@dimen/margin_side_cl_recommend_distance"
+                android:background="@drawable/border_cl_recommend_distance"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recommend_walk_timer">
 
                 <TextView
                     android:id="@+id/tx_recommend_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginTop="@dimen/margin_top_tx_recommend_distance"
                     android:fontFamily="@font/pretendard_bold"
                     android:text="@string/tx_recommend_distance"
                     android:textColor="@color/black"
                     android:textSize="@dimen/size_tx_recommend_distance"
-                    android:layout_marginTop="11dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_bold"
-                android:text="5.2"
-                android:textColor="@color/app_color"
-                android:textSize="17sp"
-                android:layout_marginBottom="11dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tx_recommend_distance" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_distance_speed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_top_ll_distance_speed"
-            android:paddingStart="@dimen/padding_side_ll_walk_heart"
-            android:paddingEnd="@dimen/padding_side_ll_walk_heart"
-            app:layout_constraintEnd_toEndOf="@+id/linear_btn_timer"
-            app:layout_constraintStart_toStartOf="@+id/linear_btn_timer"
-            app:layout_constraintTop_toBottomOf="@+id/cl_recommend_distance">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/border_cl_walking_test_values"
-                android:paddingTop="@dimen/padding_vertical_cl_walking_values"
-                android:paddingBottom="@dimen/padding_vertical_cl_walking_values">
-
-                <TextView
-                    android:id="@+id/tx_distance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_top_tx_distance"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:text="@string/tx_distance_km"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/size_tx_distance"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tx_distance_value"
+                    android:id="@+id/tx_fit_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:text="@{viewmodel.txWalkDistance}"
-                    android:textColor="@color/app_color"
-                    android:textSize="@dimen/size_tx_distance_value"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tx_distance" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <Space
-                android:layout_width="@dimen/space_horizontally_cl_walking_values"
-                android:layout_height="match_parent" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/border_cl_walking_test_values"
-                android:paddingTop="@dimen/padding_vertical_cl_walking_values"
-                android:paddingBottom="@dimen/padding_vertical_cl_walking_values">
-
-                <TextView
-                    android:id="@+id/tx_speed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_top_tx_steps"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:text="@string/tx_speed_km"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/size_tx_speed"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <TextView
-                    android:id="@+id/tx_speed_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_top_tx_fit_distance"
                     android:fontFamily="@font/pretendard_bold"
                     android:text="0"
                     android:textColor="@color/app_color"
-                    android:textSize="@dimen/size_tx_speed_value"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tx_speed" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_kcal_walk"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_top_ll_kcal_walk"
-            android:paddingStart="@dimen/padding_side_ll_walk_heart"
-            android:paddingEnd="@dimen/padding_side_ll_walk_heart"
-            app:layout_constraintEnd_toEndOf="@+id/linear_btn_timer"
-            app:layout_constraintStart_toStartOf="@+id/linear_btn_timer"
-            app:layout_constraintTop_toBottomOf="@+id/ll_distance_speed">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/border_cl_walking_test_values"
-                android:paddingTop="@dimen/padding_vertical_cl_walking_values"
-                android:paddingBottom="@dimen/padding_vertical_cl_walking_values">
-
-                <TextView
-                    android:id="@+id/tx_calorie"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_top_tx_steps"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:text="@string/tx_calorie"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/size_tx_calorie"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <TextView
-                    android:id="@+id/tx_calorie_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:text="0"
-                    android:textColor="@color/app_color"
-                    android:textSize="@dimen/size_tx_calorie_value"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tx_calorie" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <Space
-                android:layout_width="@dimen/space_horizontally_cl_walking_values"
-                android:layout_height="match_parent" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/border_cl_walking_test_values"
-                android:paddingTop="@dimen/padding_vertical_cl_walking_values"
-                android:paddingBottom="@dimen/padding_vertical_cl_walking_values">
-
-                <TextView
-                    android:id="@+id/tx_steps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_top_tx_steps"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:text="@string/tx_steps"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/size_tx_steps_in_fit"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <TextView
-                    android:id="@+id/tx_step_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:text="0"
-                    android:textColor="@color/app_color"
-                    android:textSize="@dimen/size_tx_steps_value_in_fit"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tx_steps" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linear_btn_timer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_top_linear_btn_start_stop"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/padding_side_ll_btn_timer"
-            android:paddingEnd="@dimen/padding_side_ll_btn_timer"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ll_kcal_walk">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/btn_start"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_btn_timer"
-                android:layout_weight="1"
-                android:background="@drawable/border_btn_start_breathing"
-                android:clickable="true"
-                android:elevation="@dimen/elevation_btn_start_and_result"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:onClick="@{() -> viewmodel.btnStart()}"
-                android:visibility="visible">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
+                    android:textSize="@dimen/size_tx_fit_distance"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toBottomOf="@+id/tx_recommend_distance" />
 
-                    <ImageView
-                        android:id="@+id/icon_start_breath"
-                        android:layout_width="@dimen/size_icon_stop_breath"
-                        android:layout_height="@dimen/size_icon_stop_breath"
-                        android:layout_marginEnd="@dimen/margin_end_icon_stop_breath"
-                        android:src="@drawable/icon_start_breath" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_distance_speed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_ll_distance_speed"
+                android:paddingStart="@dimen/padding_side_ll_walk_heart"
+                android:paddingEnd="@dimen/padding_side_ll_walk_heart"
+                app:layout_constraintEnd_toEndOf="@+id/linear_btn_timer"
+                app:layout_constraintStart_toStartOf="@+id/linear_btn_timer"
+                app:layout_constraintTop_toBottomOf="@+id/cl_recommend_distance">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_cl_walking_test_values"
+                    android:paddingTop="@dimen/padding_vertical_cl_walking_values"
+                    android:paddingBottom="@dimen/padding_vertical_cl_walking_values">
 
                     <TextView
-                        android:id="@+id/tx_start"
+                        android:id="@+id/tx_distance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_top_tx_distance"
                         android:fontFamily="@font/pretendard_bold"
-                        android:gravity="center"
-                        android:text="@string/tx_start"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/size_tx_btn_next" />
-
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/btn_stop"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_btn_timer"
-                android:layout_weight="1"
-                android:background="@drawable/border_btn_stop_timer"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:onClick="@{() -> viewmodel.btnStop()}"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/heart_timer_view">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/icon_stop_breath"
-                        android:layout_width="@dimen/size_icon_stop_breath"
-                        android:layout_height="@dimen/size_icon_stop_breath"
-                        android:layout_marginEnd="@dimen/margin_end_icon_stop_breath"
-                        android:src="@drawable/icon_stop_breath"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/tx_stop"
+                        android:text="@string/tx_distance_km"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_tx_distance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tx_stop"
+                        android:id="@+id/tx_distance_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="@{viewmodel.txWalkDistance}"
+                        android:textColor="@color/app_color"
+                        android:textSize="@dimen/size_tx_distance_value"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tx_distance" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Space
+                    android:layout_width="@dimen/space_horizontally_cl_walking_values"
+                    android:layout_height="match_parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_cl_walking_test_values"
+                    android:paddingTop="@dimen/padding_vertical_cl_walking_values"
+                    android:paddingBottom="@dimen/padding_vertical_cl_walking_values">
+
+                    <TextView
+                        android:id="@+id/tx_speed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_top_tx_steps"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="@string/tx_heart_rate"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_tx_speed"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tx_heart_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="0"
+                        android:textColor="@color/app_color"
+                        android:textSize="@dimen/size_tx_speed_value"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tx_speed" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_kcal_walk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_ll_kcal_walk"
+                android:paddingStart="@dimen/padding_side_ll_walk_heart"
+                android:paddingEnd="@dimen/padding_side_ll_walk_heart"
+                app:layout_constraintEnd_toEndOf="@+id/linear_btn_timer"
+                app:layout_constraintStart_toStartOf="@+id/linear_btn_timer"
+                app:layout_constraintTop_toBottomOf="@+id/ll_distance_speed">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_cl_walking_test_values"
+                    android:paddingTop="@dimen/padding_vertical_cl_walking_values"
+                    android:paddingBottom="@dimen/padding_vertical_cl_walking_values">
+
+                    <TextView
+                        android:id="@+id/tx_calorie"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_top_tx_steps"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="@string/tx_calorie"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_tx_calorie"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tx_calorie_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="0"
+                        android:textColor="@color/app_color"
+                        android:textSize="@dimen/size_tx_calorie_value"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tx_calorie" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Space
+                    android:layout_width="@dimen/space_horizontally_cl_walking_values"
+                    android:layout_height="match_parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_cl_walking_test_values"
+                    android:paddingTop="@dimen/padding_vertical_cl_walking_values"
+                    android:paddingBottom="@dimen/padding_vertical_cl_walking_values">
+
+                    <TextView
+                        android:id="@+id/tx_steps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_top_tx_steps"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="@string/tx_steps"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_tx_steps_in_fit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tx_step_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="0"
+                        android:textColor="@color/app_color"
+                        android:textSize="@dimen/size_tx_steps_value_in_fit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tx_steps" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_btn_timer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_linear_btn_start_stop"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/padding_side_ll_btn_timer"
+                android:paddingEnd="@dimen/padding_side_ll_btn_timer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_kcal_walk">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btn_start"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_btn_timer"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_btn_start_breathing"
+                    android:clickable="true"
+                    android:elevation="@dimen/elevation_btn_start_and_result"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:onClick="@{() -> viewmodel.btnStart()}"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/icon_start_breath"
+                            android:layout_width="@dimen/size_icon_stop_breath"
+                            android:layout_height="@dimen/size_icon_stop_breath"
+                            android:layout_marginEnd="@dimen/margin_end_icon_stop_breath"
+                            android:src="@drawable/icon_start_breath" />
+
+                        <TextView
+                            android:id="@+id/tx_start"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/pretendard_bold"
+                            android:gravity="center"
+                            android:text="@string/tx_start"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/size_tx_btn_next" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btn_stop"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_btn_timer"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_btn_stop_timer"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:onClick="@{() -> viewmodel.btnStop()}"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/heart_timer_view">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/icon_stop_breath"
+                            android:layout_width="@dimen/size_icon_stop_breath"
+                            android:layout_height="@dimen/size_icon_stop_breath"
+                            android:layout_marginEnd="@dimen/margin_end_icon_stop_breath"
+                            android:src="@drawable/icon_stop_breath"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/tx_stop"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tx_stop"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/pretendard_bold"
+                            android:gravity="center"
+                            android:text="@string/tx_stop"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/size_tx_btn_next"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_cl_start_to_reset" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btn_reset"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_btn_timer"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_btn_reset_timer"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:onClick="@{() -> viewmodel.btnReset()}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/heart_timer_view">
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/pretendard_bold"
                         android:gravity="center"
-                        android:text="@string/tx_stop"
+                        android:text="@string/tx_reset"
                         android:textColor="@color/white"
                         android:textSize="@dimen/size_tx_btn_next"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -399,44 +439,48 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_cl_start_to_reset" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/space_cl_start_to_reset" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btn_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_btn_timer"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_btn_reset_timer"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:onClick="@{() -> viewmodel.btnResult()}"
+                    android:visibility="gone">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/btn_reset"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_btn_timer"
-                android:layout_weight="1"
-                android:background="@drawable/border_btn_reset_timer"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:onClick="@{() -> viewmodel.btnReset()}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/heart_timer_view">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:gravity="center"
+                        android:text="@string/tx_confirm_result"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_tx_btn_next"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/pretendard_bold"
-                    android:gravity="center"
-                    android:text="@string/tx_reset"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/size_tx_btn_next"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_cl_start_to_reset" />
 
-        </LinearLayout>
+            </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
 
 </layout>

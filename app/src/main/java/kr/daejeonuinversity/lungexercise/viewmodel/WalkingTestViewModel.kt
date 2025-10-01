@@ -43,7 +43,7 @@ class WalkingTestViewModel(private val repository: InfoRepository, private val w
     private val _spo2 = MutableLiveData<Float>()
     val spo2: LiveData<Float> get() = _spo2
 
-    val txWalkDistance = MutableLiveData<String>("0")
+    val txWalkDistance = MutableLiveData<String>("0.0m")
 
     private var userWeight: Double? = null
 

@@ -20,6 +20,7 @@ import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import kr.daejeonuinversity.lungexercise.R
+import kotlin.math.roundToInt
 
 abstract class BaseActivity<T: ViewDataBinding>(@LayoutRes val layoutRes: Int)
     : AppCompatActivity() {
@@ -140,5 +141,23 @@ abstract class BaseActivity<T: ViewDataBinding>(@LayoutRes val layoutRes: Int)
         }
     }
 
+    /** 맞춤형 운동
+     * 추천 거리가 1km 미만이면 m로 표시, 1km 이상이면 km로 표시 함수 **/
+    fun formatDistance(distance: Double) : String {
+        return if (distance < 1000) {
+            String.format("%.0f m", distance)   // 1km 미만 → 미터
+        } else {
+            String.format("%.1f km", distance / 1000.0)  // 1km 이상 → 킬로미터
+        }
+    }
+
+    fun formatDistanceKm(distanceKm: Double): String {
+        return if (distanceKm < 1) {
+            val distanceM = (distanceKm * 1000).roundToInt()
+            "$distanceM m"
+        } else {
+            String.format("%.1f km", distanceKm)
+        }
+    }
 
 }

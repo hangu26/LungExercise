@@ -215,7 +215,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_end_tx_exercise_intensity_unit"
                     android:fontFamily="@font/pretendard_medium"
-                    android:text="@string/tx_exercise_intensity_unit"
+                    android:text="@string/tx_exercise_time_unit"
                     android:textColor="@color/color_tx_intensity_unit"
                     android:textSize="@dimen/size_tx_exercise_intensity_unit"
                     app:layout_constraintBottom_toBottomOf="parent"

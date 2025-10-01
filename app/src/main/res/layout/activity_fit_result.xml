@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="kr.daejeonuinversity.lungexercise.view.fitexercise.result.FitResultActivity" />
+
+        <variable
+            name="viewmodel"
+            type="kr.daejeonuinversity.lungexercise.viewmodel.FitResultViewModel" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/white"
+                    app:contentInsetStart="0dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/size_icon_back"
+                            android:layout_height="@dimen/size_icon_back"
+                            android:layout_marginStart="@dimen/margin_start_icon_back"
+                            android:onClick="@{() -> viewmodel.btnBack()}"
+                            android:src="@drawable/icon_back"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/pretendard_semibold"
+                            android:gravity="center"
+                            android:text="@string/tx_fit_exercise"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_appbar_text"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.appcompat.widget.Toolbar>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/ic_check_blue"
+                android:layout_width="@dimen/size_ic_check_blue"
+                android:layout_height="@dimen/size_ic_check_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="false"
+                app:lottie_rawRes="@raw/checkblue" />
+
+            <LinearLayout
+                android:id="@+id/ll_tx_success_plan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ic_check_blue">
+
+                <TextView
+                    android:id="@+id/tx_success_exercise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="@string/tx_success_exercise"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_tx_success_exercise" />
+
+                <TextView
+                    android:id="@+id/tx_cureent_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_top_tx_do_breathing_detail"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="현재 날짜"
+                    android:textColor="@color/color_tx_do_breathing_detail"
+                    android:textSize="@dimen/size_tx_do_breathing_detail" />
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_fit_total_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_side_cl_fit_total_time"
+                android:layout_marginTop="@dimen/margin_top_cl_fit_total_time"
+                android:layout_marginEnd="@dimen/margin_side_cl_fit_total_time"
+                android:background="@drawable/border_cl_recommend_distance"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_tx_success_plan">
+
+                <TextView
+                    android:id="@+id/tx_total_fit_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="@dimen/margin_top_tx_total_fit_time"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="30:00"
+                    android:textColor="@color/app_color"
+                    android:textSize="@dimen/size_tx_total_fit_time"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tx_total_fit_time_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_bottom_tx_total_fit_time_unit"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="@string/tx_total_fit_exercise_time"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_tx_total_fit_time_unit"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tx_total_fit_time" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_fit_achievement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_side_cl_fit_total_time"
+                android:layout_marginTop="@dimen/margin_top_cl_fit_total_time"
+                android:layout_marginEnd="@dimen/margin_side_cl_fit_total_time"
+                android:background="@drawable/border_cl_recommend_distance"
+                app:layout_constraintEnd_toEndOf="@+id/cl_fit_total_time"
+                app:layout_constraintStart_toStartOf="@+id/cl_fit_total_time"
+                app:layout_constraintTop_toBottomOf="@+id/cl_fit_total_time">
+
+                <TextView
+                    android:id="@+id/tx_fit_achievement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_start_tx_fit_achievement"
+                    android:layout_marginTop="@dimen/margin_top_tx_fit_achievement"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="@string/tx_achievement"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_tx_fit_achievement"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/ll_achievement_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/margin_end_ll_achievement_value"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="@+id/tx_fit_achievement"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tx_fit_achievement">
+
+                    <ImageView
+                        android:id="@+id/ic_achievement"
+                        android:layout_width="@dimen/size_ic_achievement"
+                        android:layout_height="@dimen/size_ic_achievement"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/border_ic_fit_achievement" />
+
+                    <Space
+                        android:layout_width="@dimen/space_ic_achievement"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:id="@+id/tx_achievement_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="76%"
+                        android:textColor="@color/app_color"
+                        android:textSize="@dimen/size_tx_achievement_value" />
+
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/progress_bar_achievement"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_progressbar_normal"
+                    android:layout_marginTop="@dimen/margin_top_progress_bar_achievement"
+                    android:max="100"
+                    android:progressDrawable="@drawable/progressbar_fit_achievement"
+                    app:layout_constraintEnd_toEndOf="@+id/ll_achievement_value"
+                    app:layout_constraintStart_toStartOf="@+id/tx_fit_achievement"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_achievement_value"
+                    tools:progress="50" />
+
+                <TextView
+                    android:id="@+id/tx_start_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top_progress_bar_achievement"
+                    android:layout_marginBottom="@dimen/margin_bottom_tx_0_to_target"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="0km"
+                    android:textColor="@color/color_tx_0_to_target"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/progress_bar_achievement"
+                    app:layout_constraintTop_toBottomOf="@+id/progress_bar_achievement" />
+
+                <TextView
+                    android:id="@+id/tx_target_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top_progress_bar_achievement"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="목표 : 5km"
+                    android:textColor="@color/color_tx_0_to_target"
+                    app:layout_constraintEnd_toEndOf="@+id/progress_bar_achievement"
+                    app:layout_constraintTop_toBottomOf="@+id/progress_bar_achievement" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_distance_heart_rate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_ll_distance_heart_rate"
+                android:paddingStart="@dimen/padding_side_ll_walk_heart"
+                android:paddingEnd="@dimen/padding_side_ll_walk_heart"
+                app:layout_constraintEnd_toEndOf="@+id/cl_fit_total_time"
+                app:layout_constraintStart_toStartOf="@+id/cl_fit_total_time"
+                app:layout_constraintTop_toBottomOf="@+id/cl_fit_achievement">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_cl_walking_test_values"
+                    android:paddingTop="@dimen/padding_vertical_cl_walking_values"
+                    android:paddingBottom="@dimen/padding_vertical_cl_walking_values">
+
+                    <TextView
+                        android:id="@+id/tx_distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="@string/tx_total_distance_km"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_tx_distance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tx_distance_value" />
+
+                    <TextView
+                        android:id="@+id/tx_distance_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_top_tx_distance"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="0"
+                        android:textColor="@color/app_color"
+                        android:textSize="@dimen/size_tx_distance_value"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Space
+                    android:layout_width="@dimen/space_horizontally_cl_walking_values"
+                    android:layout_height="match_parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_cl_walking_test_values"
+                    android:paddingTop="@dimen/padding_vertical_cl_walking_values"
+                    android:paddingBottom="@dimen/padding_vertical_cl_walking_values">
+
+                    <TextView
+                        android:id="@+id/tx_average_heart_rate_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="@string/tx_average_heart_rate"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_tx_speed"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tx_average_heart_rate" />
+
+                    <TextView
+                        android:id="@+id/tx_average_heart_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_top_tx_steps"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="0"
+                        android:textColor="@color/app_color"
+                        android:textSize="@dimen/size_tx_speed_value"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_kcal_walk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_ll_kcal_walk"
+                android:paddingStart="@dimen/padding_side_ll_walk_heart"
+                android:paddingEnd="@dimen/padding_side_ll_walk_heart"
+                app:layout_constraintEnd_toEndOf="@+id/cl_fit_total_time"
+                app:layout_constraintStart_toStartOf="@+id/cl_fit_total_time"
+                app:layout_constraintTop_toBottomOf="@+id/ll_distance_heart_rate">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_cl_walking_test_values"
+                    android:paddingTop="@dimen/padding_vertical_cl_walking_values"
+                    android:paddingBottom="@dimen/padding_vertical_cl_walking_values">
+
+                    <TextView
+                        android:id="@+id/tx_calorie"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="@string/tx_calorie"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_tx_calorie"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tx_calorie_value" />
+
+                    <TextView
+                        android:id="@+id/tx_calorie_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_top_tx_steps"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="0"
+                        android:textColor="@color/app_color"
+                        android:textSize="@dimen/size_tx_calorie_value"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Space
+                    android:layout_width="@dimen/space_horizontally_cl_walking_values"
+                    android:layout_height="match_parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_cl_walking_test_values"
+                    android:paddingTop="@dimen/padding_vertical_cl_walking_values"
+                    android:paddingBottom="@dimen/padding_vertical_cl_walking_values">
+
+                    <TextView
+                        android:id="@+id/tx_steps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="@string/tx_steps"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_tx_steps_in_fit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tx_step_count" />
+
+                    <TextView
+                        android:id="@+id/tx_step_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_top_tx_steps"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="0"
+                        android:textColor="@color/app_color"
+                        android:textSize="@dimen/size_tx_steps_value_in_fit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_risk_pulse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_cl_risk_pulse"
+                android:background="@drawable/border_cl_recommend_distance"
+                app:layout_constraintEnd_toEndOf="@+id/cl_fit_total_time"
+                app:layout_constraintStart_toStartOf="@+id/cl_fit_total_time"
+                app:layout_constraintTop_toBottomOf="@+id/ll_kcal_walk">
+
+                <TextView
+                    android:id="@+id/tx_risk_pulse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_start_tx_fit_achievement"
+                    android:layout_marginTop="@dimen/margin_top_tx_fit_achievement"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="@string/tx_risk_pulse"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_tx_fit_achievement"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/ll_risk_pulse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/margin_end_ll_achievement_value"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="@+id/tx_risk_pulse"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tx_risk_pulse">
+
+                    <ImageView
+                        android:id="@+id/ic_risk_pulse"
+                        android:layout_width="@dimen/size_ic_risk_pulse"
+                        android:layout_height="@dimen/size_ic_risk_pulse"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/border_ic_risk_pulse" />
+
+                    <Space
+                        android:layout_width="@dimen/space_ic_achievement"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:id="@+id/tx_risk_pulse_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="3회"
+                        android:textColor="@color/color_risk_pulse"
+                        android:textSize="@dimen/size_tx_achievement_value" />
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_text_risk_step"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top_cl_text_risk_step"
+                    app:layout_constraintEnd_toEndOf="@+id/ll_risk_pulse"
+                    app:layout_constraintStart_toStartOf="@+id/tx_risk_pulse"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_risk_pulse">
+
+                    <TextView
+                        android:id="@+id/tx_safety"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:text="@string/tx_safety"
+                        android:textColor="@color/color_risk_step"
+                        android:textSize="@dimen/size_tx_safety"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tx_caution"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:text="@string/tx_caution"
+                        android:textColor="@color/color_risk_step"
+                        android:textSize="@dimen/size_tx_caution"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tx_danger"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:text="@string/tx_danger"
+                        android:textColor="@color/color_risk_step"
+                        android:textSize="@dimen/size_tx_caution"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <SeekBar
+                    android:id="@+id/risk_seek_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_progressbar_normal"
+                    android:layout_marginTop="@dimen/margin_top_risk_seek_bar"
+                    android:layout_marginBottom="@dimen/margin_bottom_progress_bar_risk_pulse"
+                    android:max="10"
+                    android:progress="5"
+                    android:progressDrawable="@drawable/seekbar_progress"
+                    android:thumb="@drawable/seekbar_thumb"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/ll_risk_pulse"
+                    app:layout_constraintStart_toStartOf="@+id/tx_risk_pulse"
+                    app:layout_constraintTop_toBottomOf="@+id/cl_text_risk_step" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>
