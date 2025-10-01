@@ -58,6 +58,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             )
         }
 
+        mViewModel.startReceiving()
+
         initButton()
         observe()
 

@@ -5,6 +5,14 @@ import kr.daejeonuinversity.lungexercise.data.local.entity.SixMinuteWalkTest
 
 class SixWalkTestRepository(private val dao: SixMinuteWalkTestDao) {
 
+    suspend fun getSixDataByDate(date: String): List<SixMinuteWalkTest> {
+        return dao.getSixDataByDate(date)
+    }
+
+    suspend fun getAllRecordedDates(): List<String> {
+        return dao.getAllRecord()
+    }
+
     suspend fun getLastRecord(): SixMinuteWalkTest? {
         return dao.getLastRecord()
     }

@@ -84,6 +84,12 @@ class FitExerciseViewModel(
         }
     }
 
+    fun saveFitResultData(time : Int, userDistance : Double, calorie : Double, heartWaringCount : Int, totalWalkCount : Int, date : String) = viewModelScope.launch {
+
+        repository.insertFitResultData(time, userDistance, calorie, heartWaringCount, totalWalkCount, date)
+
+    }
+
     fun setUserInfo(weight: Double, durationMinutes: Int, age: Int) {
         userWeight = weight
         testDurationMinutes = durationMinutes
@@ -210,7 +216,7 @@ class FitExerciseViewModel(
     /** 심박수 위험도 알림 **/
     private fun checkHeartRateWarning(currentHR: Float) {
 //        val maxHR = 220 - userAge
-        val maxHR = 140 - userAge
+        val maxHR = 220 - userAge
         if (currentHR >= maxHR * 0.85) {
             warningCount++
 

@@ -9,6 +9,10 @@ import kr.daejeonuinversity.lungexercise.data.local.entity.SixMinuteWalkTest
 
 @Dao
 interface SixMinuteWalkTestDao {
+
+    @Query("SELECT * FROM six_minute_walk_test WHERE date = :date ORDER BY id DESC")
+    suspend fun getSixDataByDate(date: String): List<SixMinuteWalkTest>
+
     @Query("SELECT * FROM six_minute_walk_test ORDER BY id DESC LIMIT 1")
     suspend fun getLastRecord(): SixMinuteWalkTest?
 

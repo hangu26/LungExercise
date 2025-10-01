@@ -37,25 +37,25 @@ val module = module {
     single<AirKoreaApi> { RetrofitClient.api }
 
     viewModel { SplashViewModel(androidApplication()) }
-    viewModel { MainViewModel(androidApplication()) }
-    viewModel { InfoInputViewModel(get(),androidApplication()) }
+    viewModel { MainViewModel(get(),androidApplication()) }
+    viewModel { InfoInputViewModel(get(), androidApplication()) }
     viewModel { BirthdayViewModel(androidApplication()) }
     viewModel { GenderViewModel(androidApplication()) }
     viewModel { BodyViewModel(androidApplication()) }
     viewModel { LungExerciseViewModel(androidApplication()) }
-    viewModel { WalkingTestViewModel(get(),get(),androidApplication()) }
-    viewModel { BreathingViewModel(get(),androidApplication()) }
-    viewModel { HistoryViewModel(get(),androidApplication()) }
+    viewModel { WalkingTestViewModel(get(), get(), androidApplication()) }
+    viewModel { BreathingViewModel(get(), androidApplication()) }
+    viewModel { HistoryViewModel(get(), androidApplication()) }
     viewModel { VideoViewModel(androidApplication()) }
-    viewModel { EditInfoViewModel(get(),androidApplication()) }
+    viewModel { EditInfoViewModel(get(), androidApplication()) }
     viewModel { HistoryRecordViewModel(androidApplication()) }
-    viewModel { WalkHistoryViewModel(androidApplication()) }
-    viewModel { DeveloperViewModel(get(),androidApplication()) }
-    viewModel { SettingViewModel(androidApplication(),get()) }
+    viewModel { WalkHistoryViewModel(get(),get(),get(), androidApplication()) }
+    viewModel { DeveloperViewModel(get(), androidApplication()) }
+    viewModel { SettingViewModel(androidApplication(), get()) }
     viewModel { InsightViewModel(androidApplication(), get()) }
-    viewModel { FitPlanViewModel(get(),get(),androidApplication())}
-    viewModel { FitExerciseViewModel(get(),androidApplication()) }
-    viewModel { WalkingResultViewModel(androidApplication()) }
-    viewModel { FitResultViewModel(androidApplication()) }
+    viewModel { FitPlanViewModel(get(), get(), androidApplication()) }
+    viewModel { FitExerciseViewModel(get(), androidApplication()) }
+    viewModel { WalkingResultViewModel(get(),androidApplication()) }
+    viewModel { FitResultViewModel(get(), androidApplication()) }
 
 }

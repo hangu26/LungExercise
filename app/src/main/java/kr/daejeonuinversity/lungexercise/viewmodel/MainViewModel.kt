@@ -1,6 +1,7 @@
 package kr.daejeonuinversity.lungexercise.viewmodel
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.bluetooth.BluetoothAdapter
@@ -17,11 +18,14 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kr.daejeonuinversity.lungexercise.util.util.HeartRateReceiver
+import kr.daejeonuinversity.lungexercise.data.local.dao.StepIntervalDao
+import kr.daejeonuinversity.lungexercise.util.util.StepReceiver
 import java.io.IOException
+import java.util.Calendar
 import java.util.UUID
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+@SuppressLint("StaticFieldLeak")
+class MainViewModel(private val dao : StepIntervalDao, application: Application) : AndroidViewModel(application) {
 
     private val _goToLungExercise = MutableLiveData<Boolean>()
     val goToLungExercise = _goToLungExercise
@@ -36,6 +40,25 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun btnHistory() {
         _btnHistoryClicked.value = true
+    }
+
+    val stepReceiver = StepReceiver(application,dao) { steps, intervalStart ->
+        // intervalStart 구간에 steps가 들어올 때마다 로그
+        val cal = Calendar.getInstance().apply { timeInMillis = intervalStart }
+        val startStr = String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE))
+        val endCal = cal.clone() as Calendar
+        endCal.add(Calendar.MINUTE, 30)
+        val endStr = String.format("%02d:%02d", endCal.get(Calendar.HOUR_OF_DAY), endCal.get(Calendar.MINUTE))
+
+        Log.d("StepReceiver", "📱 실시간 로그: $startStr ~ $endStr 걸음수: $steps")
+    }
+
+    fun startReceiving() {
+        stepReceiver.register()
+    }
+
+    fun stopReceiving() {
+        stepReceiver.unregister()
     }
 
     private val _breathData = MutableLiveData<String>()
@@ -173,7 +196,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val dataType = packet[1].toInt() and 0xFF
         if (dataType != 0x01) return
 
-        val airflow1 = (packet[3].toInt() and 0xFF) * 256 + (packet[4].toInt() and 0xFF)  // MSB, LSB 조합
+        val airflow1 =
+            (packet[3].toInt() and 0xFF) * 256 + (packet[4].toInt() and 0xFF)  // MSB, LSB 조합
         val airflow2 = (packet[5].toInt() and 0xFF) * 256 + (packet[6].toInt() and 0xFF)
         val airflow3 = (packet[7].toInt() and 0xFF) * 256 + (packet[8].toInt() and 0xFF)
 

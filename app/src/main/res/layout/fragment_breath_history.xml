@@ -251,7 +251,6 @@
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/btn_stop"
                             android:layout_width="wrap_content"
@@ -284,7 +283,6 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
                         <!-- 막대 그래프 -->
                         <com.github.mikephil.charting.charts.BarChart

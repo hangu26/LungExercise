@@ -8,7 +8,10 @@
     <dimen name="margin_start_tx_app_bar">29dp</dimen>
     <dimen name="height_input_info_linear_progress">4dp</dimen>
     <dimen name="radius_progress_btn_next">10dp</dimen>
+    <dimen name="radius_border_retry_exercise">20dp</dimen>
     <dimen name="size_tx_btn_next">12sp</dimen>
+    <dimen name="size_tx_retry_exercise">18sp</dimen>
+
     <dimen name="margin_side_btn_next">22dp</dimen>
     <dimen name="margin_bottom_btn_next">38dp</dimen>
     <dimen name="margin_top_frag_tx_birth">44dp</dimen>
@@ -75,6 +78,8 @@
     <dimen name="size_30_timer_view">182dp</dimen>
     <dimen name="margin_top_heart_timer">22dp</dimen>
     <dimen name="margin_top_linear_btn_start_stop">22dp</dimen>
+    <dimen name="margin_top_ll_btn_retry_home">22dp</dimen>
+
     <dimen name="width_btn_timer">120dp</dimen>
     <dimen name="height_btn_timer">64dp</dimen>
     <dimen name="size_img_steps">38dp</dimen>
@@ -93,6 +98,7 @@
     <dimen name="margin_top_tx_distance">11dp</dimen>
     <dimen name="margin_top_linear_tx_steps_heart">11dp</dimen>
     <dimen name="margin_top_ll_distance_speed">9dp</dimen>
+    <dimen name="margin_top_ll_distance_heart_rate">11dp</dimen>
 
     <dimen name="margin_top_ll_kcal_walk">11dp</dimen>
     <dimen name="size_tx_timer_body_state">27sp</dimen>
@@ -143,7 +149,10 @@
     <dimen name="margin_side_border_dialog_bluetooth">30dp</dimen>
     <dimen name="margin_top_linear_result_time">18dp</dimen>
     <dimen name="margin_top_cl_recommend_distance">9dp</dimen>
+    <dimen name="margin_top_cl_fit_total_time">11dp</dimen>
+    <dimen name="margin_top_cl_risk_pulse">11dp</dimen>
 
+    <dimen name="margin_side_cl_fit_total_time">22dp</dimen>
     <dimen name="width_constraint_result_time_dialog">134dp</dimen>
     <dimen name="height_constraint_result_time_dialog">47dp</dimen>
     <dimen name="margint_start_constraint_result_time_dialog">11dp</dimen>
@@ -174,6 +183,7 @@
     <dimen name="radius_constraint_privacy_protection">14dp</dimen>
     <dimen name="radius_appbar_user">16dp</dimen>
     <dimen name="margin_top_constraint_calendar">21dp</dimen>
+    <dimen name="margin_top_cl_fit_calendar">11dp</dimen>
     <dimen name="margin_top_constraint_data">21dp</dimen>
     <dimen name="size_tx_weekly_breathing_history">16sp</dimen>
     <dimen name="margin_top_tx_weekly_breathing">20dp</dimen>
@@ -348,6 +358,9 @@
     <dimen name="size_border_linear_user_time">18dp</dimen>
     <dimen name="size_border_cl_recommend_distance">12dp</dimen>
     <dimen name="margin_top_progress_bar_achievement">12dp</dimen>
+    <dimen name="margin_top_risk_seek_bar">6dp</dimen>
+    <dimen name="margin_top_cl_text_risk_step">6dp</dimen>
+
     <dimen name="margin_top_linear_start_and_result">20dp</dimen>
     <dimen name="size_twenty_five">25dp</dimen>
     <dimen name="margin_top_tx_video_mask_popup_detail">7dp</dimen>
@@ -399,6 +412,32 @@
     <dimen name="height_cl_execute_exercise">64dp</dimen>
     <dimen name="height_cl_meter_calorie_steps">103dp</dimen>
     <dimen name="size_ic_check_blue">90dp</dimen>
+    <dimen name="margin_side_cl_recommend_distance">22dp</dimen>
+    <dimen name="margin_top_tx_recommend_distance">22dp</dimen>
+    <dimen name="margin_top_tx_fit_distance">22dp</dimen>
+    <dimen name="size_tx_fit_distance">32sp</dimen>
+    <dimen name="size_tx_total_fit_time">32sp</dimen>
+    <dimen name="size_tx_total_fit_time_unit">15sp</dimen>
+    <dimen name="margin_top_tx_total_fit_time">22dp</dimen>
+    <dimen name="margin_top_tx_fit_achievement">22dp</dimen>
+    <dimen name="margin_start_tx_fit_achievement">15dp</dimen>
+    <dimen name="margin_end_ll_achievement_value">15dp</dimen>
+
+    <dimen name="margin_bottom_tx_total_fit_time_unit">22dp</dimen>
+    <dimen name="size_tx_fit_achievement">21sp</dimen>
+    <dimen name="size_ic_achievement">16dp</dimen>
+    <dimen name="size_ic_risk_pulse">10dp</dimen>
+    <dimen name="space_ic_achievement">11dp</dimen>
+    <dimen name="size_tx_achievement_value">21sp</dimen>
+    <dimen name="margin_bottom_tx_0_to_target">22dp</dimen>
+    <dimen name="margin_bottom_progress_bar_risk_pulse">22dp</dimen>
+    <dimen name="margin_bottom_risk_seek_bar">11dp</dimen>
+
+    <dimen name="width_thumb">6dp</dimen>
+    <dimen name="height_thumb">28dp</dimen>
+    <dimen name="size_tx_safety">12sp</dimen>
+    <dimen name="size_tx_caution">12sp</dimen>
+    <dimen name="margin_bottom_ll_calendar_fit_data">22dp</dimen>
 
 
 </resources>

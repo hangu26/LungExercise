@@ -8,7 +8,10 @@
     <dimen name="margin_start_tx_app_bar">29dp</dimen>
     <dimen name="height_input_info_linear_progress">4dp</dimen>
     <dimen name="radius_progress_btn_next">10dp</dimen>
+    <dimen name="radius_border_retry_exercise">20dp</dimen>
     <dimen name="size_tx_btn_next">12sp</dimen>
+    <dimen name="size_tx_retry_exercise">18sp</dimen>
+
     <dimen name="margin_side_btn_next">22dp</dimen>
     <dimen name="margin_bottom_btn_next">38dp</dimen>
     <dimen name="margin_top_frag_tx_birth">44dp</dimen>
@@ -75,6 +78,8 @@
     <dimen name="size_30_timer_view">182dp</dimen>
     <dimen name="margin_top_heart_timer">22dp</dimen>
     <dimen name="margin_top_linear_btn_start_stop">22dp</dimen>
+    <dimen name="margin_top_ll_btn_retry_home">22dp</dimen>
+
     <dimen name="width_btn_timer">120dp</dimen>
     <dimen name="height_btn_timer">64dp</dimen>
     <dimen name="size_img_steps">38dp</dimen>
@@ -123,10 +128,23 @@
     <dimen name="size_tx_total_meter_detail">13sp</dimen>
 
     <dimen name="margin_linear_user_normal_percent">19dp</dimen>
+    <dimen name="margin_start_ll_tx_current_steps">19dp</dimen>
+    <dimen name="margin_side_cl_today_target">19dp</dimen>
+    <dimen name="margin_top_cl_today_target">18dp</dimen>
+
     <dimen name="margin_start_linear_achievement_rate">9dp</dimen>
     <dimen name="dialog_result_breath_constraints_width">270dp</dimen>
     <dimen name="margin_end_tx_user_time_data">19dp</dimen>
-    <dimen name="size_tx_user_time_data">25dp</dimen>
+    <dimen name="margin_end_tx_current_steps_unit">19dp</dimen>
+
+    <dimen name="margin_end_tx_current_steps_value">4dp</dimen>
+    <dimen name="margin_end_tx_target_distance">4dp</dimen>
+    <dimen name="margin_end_tx_target_distance_unit">17dp</dimen>
+    <dimen name="margin_vertical_tx_remain_steps">17dp</dimen>
+
+    <dimen name="size_tx_current_steps_value">32sp</dimen>
+    <dimen name="size_tx_current_steps_unit">12sp</dimen>
+
     <dimen name="margin_top_tx_real_user_time">2dp</dimen>
     <dimen name="margin_top_tx_feedback_detail">3dp</dimen>
     <dimen name="size_constraint_icon_feedback">18dp</dimen>
@@ -141,6 +159,8 @@
     <dimen name="margin_top_tx_bluetooth_mask_setting">32dp</dimen>
     <dimen name="margin_top_tx_connect_bluetooth_mask">32dp</dimen>
     <dimen name="margin_side_linear_result_time">30dp</dimen>
+    <dimen name="margin_side_cl_user_meter">15dp</dimen>
+
     <dimen name="margin_side_border_dialog_bluetooth">30dp</dimen>
     <dimen name="margin_top_linear_result_time">18dp</dimen>
     <dimen name="margin_top_cl_recommend_distance">9dp</dimen>
@@ -178,6 +198,7 @@
     <dimen name="radius_constraint_privacy_protection">14dp</dimen>
     <dimen name="radius_appbar_user">16dp</dimen>
     <dimen name="margin_top_constraint_calendar">21dp</dimen>
+    <dimen name="margin_top_cl_fit_calendar">11dp</dimen>
     <dimen name="margin_top_constraint_data">21dp</dimen>
     <dimen name="size_tx_weekly_breathing_history">16sp</dimen>
     <dimen name="margin_top_tx_weekly_breathing">20dp</dimen>
@@ -350,10 +371,15 @@
     <dimen name="size_tx_progress_breathing">10sp</dimen>
     <dimen name="margin_top_tx_result_breathing_detail">6dp</dimen>
     <dimen name="size_border_linear_user_time">18dp</dimen>
+    <dimen name="size_border_cl_target_steps">18dp</dimen>
     <dimen name="size_border_cl_recommend_distance">12dp</dimen>
     <dimen name="margin_top_progress_bar_achievement">12dp</dimen>
     <dimen name="margin_top_risk_seek_bar">6dp</dimen>
     <dimen name="margin_top_cl_text_risk_step">6dp</dimen>
+    <dimen name="margin_tx_today_target">17dp</dimen>
+    <dimen name="margin_top_tx_progress_step">11dp</dimen>
+    <dimen name="margin_tx_target_distance">16sp</dimen>
+    <dimen name="margin_tx_target_distance_unit">9sp</dimen>
 
     <dimen name="margin_top_linear_start_and_result">20dp</dimen>
     <dimen name="size_twenty_five">25dp</dimen>
@@ -407,9 +433,9 @@
     <dimen name="height_cl_meter_calorie_steps">103dp</dimen>
     <dimen name="size_ic_check_blue">90dp</dimen>
     <dimen name="margin_side_cl_recommend_distance">22dp</dimen>
-    <dimen name="margin_top_tx_recommend_distance">11dp</dimen>
-    <dimen name="margin_top_tx_fit_distance">11dp</dimen>
-    <dimen name="size_tx_fit_distance">17sp</dimen>
+    <dimen name="margin_top_tx_recommend_distance">22dp</dimen>
+    <dimen name="margin_top_tx_fit_distance">22dp</dimen>
+    <dimen name="size_tx_fit_distance">32sp</dimen>
     <dimen name="size_tx_total_fit_time">32sp</dimen>
     <dimen name="size_tx_total_fit_time_unit">15sp</dimen>
     <dimen name="margin_top_tx_total_fit_time">22dp</dimen>
@@ -425,10 +451,19 @@
     <dimen name="size_tx_achievement_value">21sp</dimen>
     <dimen name="margin_bottom_tx_0_to_target">22dp</dimen>
     <dimen name="margin_bottom_progress_bar_risk_pulse">22dp</dimen>
+    <dimen name="margin_bottom_risk_seek_bar">11dp</dimen>
+
     <dimen name="width_thumb">6dp</dimen>
     <dimen name="height_thumb">28dp</dimen>
     <dimen name="size_tx_safety">12sp</dimen>
     <dimen name="size_tx_caution">12sp</dimen>
+    <dimen name="margin_bottom_ll_calendar_fit_data">22dp</dimen>
+    <dimen name="padding_side_walk_history">15dp</dimen>
+    <dimen name="size_tx_progress_step">10sp</dimen>
+    <dimen name="size_tx_remain_steps">16sp</dimen>
+    <dimen name="size_tx_current_steps">16sp</dimen>
+    <dimen name="margin_bottom_cl_today_target">19dp</dimen>
+    <dimen name="margin_side_ll_six_walk_calendar">15dp</dimen>
 
 
 </resources>

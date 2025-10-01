@@ -51,7 +51,7 @@
     <string name="tx_average_time_format">평균 호기 시간 : %1$d 초</string>
     <string name="tx_total_time_format">총 호기 시간 : %1$d 초</string>
     <string name="tx_clear_count_format">성공 횟수 : </string>
-
+    <string name="tx_not_recorded">기록 없음</string>
     <string name="tx_total_count_empty">총 시행 횟수 : 기록 없음</string>
     <string name="tx_average_time_empty">평균 호기 시간 : 기록 없음</string>
     <string name="tx_total_time_empty">총 호기 시간 : 기록 없음</string>
@@ -175,6 +175,16 @@
     <string name="tx_safety">안전</string>
     <string name="tx_caution">주의</string>
     <string name="tx_danger">위험</string>
+    <string name="tx_total_exercise_time">총 운동시간</string>
+    <string name="tx_total_distance">총 보행 거리</string>
+    <string name="tx_retry_exercise">다시 운동하기</string>
+    <string name="tx_to_home">홈으로 돌아가기</string>
+    <string name="tx_activity_status">활동량</string>
+    <string name="tx_total_calories">총 소모 칼로리</string>
+    <string name="tx_current_steps">현재 걸음 수</string>
+    <string name="tx_step_unit">걸음</string>
+    <string name="tx_today_target">오늘의 목표</string>
+    <string name="tx_progress_step">진행률</string>
 
 
 </resources>

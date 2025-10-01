@@ -28,6 +28,7 @@
         android:theme="@style/Theme.LungExercise"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
             android:name=".view.fitexercise.result.FitResultActivity"
             android:exported="false" />
@@ -95,6 +96,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

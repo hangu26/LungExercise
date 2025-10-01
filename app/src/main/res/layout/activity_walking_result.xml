@@ -15,291 +15,604 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:background="@color/background_breath_history">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+        <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayout"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/white"
-                app:contentInsetStart="0dp">
+                android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:orientation="horizontal">
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/white"
+                    app:contentInsetStart="0dp">
 
-                    <ImageView
-                        android:layout_width="@dimen/size_icon_back"
-                        android:layout_height="@dimen/size_icon_back"
-                        android:layout_marginStart="@dimen/margin_start_icon_back"
-                        android:onClick="@{() -> viewmodel.btnBack()}"
-                        android:src="@drawable/icon_back"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/size_icon_back"
+                            android:layout_height="@dimen/size_icon_back"
+                            android:layout_marginStart="@dimen/margin_start_icon_back"
+                            android:onClick="@{() -> viewmodel.btnBack()}"
+                            android:src="@drawable/icon_back"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/pretendard_semibold"
+                            android:gravity="center"
+                            android:text="@string/tx_6_min_test"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_appbar_text"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.appcompat.widget.Toolbar>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <TextView
+                android:id="@+id/tx_result_walking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_tx_result_breathing_dialog"
+                android:fontFamily="@font/pretendard_semibold"
+                android:text="@string/tx_walking_test_result"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_tx_result_breathing"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appBarLayout"/>
+
+            <TextView
+                android:id="@+id/tx_result_walking_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_tx_result_breathing_detail"
+                android:text="@string/tx_result_walking_detail"
+                android:textColor="@color/color_tx_result_breathing_detail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tx_result_walking" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_user_meter"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_cl_meter_calorie_steps"
+                android:layout_marginStart="@dimen/margin_side_linear_result_time"
+                android:layout_marginTop="@dimen/margin_top_linear_result_time"
+                android:layout_marginEnd="@dimen/margin_side_linear_result_time"
+                android:background="@drawable/border_linear_user_time"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tx_result_walking_detail">
+
+                <LinearLayout
+                    android:id="@+id/linear_user_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_linear_user_normal_percent"
+                    android:layout_marginTop="@dimen/margin_linear_user_normal_percent"
+                    android:layout_marginBottom="@dimen/margin_bottom_linear_user_time"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tx_total_meter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="@string/tx_total_meter"
+                        android:textColor="@color/color_tx_meter_calorie"
+                        android:textSize="@dimen/size_tx_total_meter_calorie_steps"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:id="@+id/tx_total_meter_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/pretendard_semibold"
-                        android:gravity="center"
-                        android:text="@string/tx_6_min_test"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/size_appbar_text"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/margin_top_tx_real_user_time"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:text="@string/tx_total_meter_detail"
+                        android:textColor="@color/color_tx_total_meter_detail"
+                        android:textSize="@dimen/size_tx_total_meter_detail"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tx_distance_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_end_tx_user_time_data"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="0 m"
+                    android:textColor="@color/color_tx_meter_calorie"
+                    android:textSize="@dimen/size_tx_user_time_data"
+                    app:layout_constraintBottom_toBottomOf="@+id/linear_user_time"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/linear_user_time" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_user_calorie"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_cl_meter_calorie_steps"
+                android:layout_marginStart="@dimen/margin_side_linear_result_time"
+                android:layout_marginTop="@dimen/margin_top_linear_result_time"
+                android:layout_marginEnd="@dimen/margin_side_linear_result_time"
+                android:background="@drawable/border_linear_normal_time"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cl_user_meter">
+
+                <LinearLayout
+                    android:id="@+id/ll_user_calorie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_linear_user_normal_percent"
+                    android:layout_marginTop="@dimen/margin_linear_user_normal_percent"
+                    android:layout_marginBottom="@dimen/margin_bottom_linear_user_time"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tx_user_calorie"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="@string/tx_user_calorie"
+                        android:textColor="@color/color_tx_meter_calorie"
+                        android:textSize="@dimen/size_tx_total_meter_calorie_steps"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tx_user_calorie_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_end_tx_user_time_data"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="0 kcal"
+                    android:textColor="@color/color_tx_meter_calorie"
+                    android:textSize="@dimen/size_tx_user_time_data"
+                    app:layout_constraintBottom_toBottomOf="@+id/ll_user_calorie"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ll_user_calorie" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_user_steps"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_cl_meter_calorie_steps"
+                android:layout_marginStart="@dimen/margin_side_linear_result_time"
+                android:layout_marginTop="@dimen/margin_top_linear_result_time"
+                android:layout_marginEnd="@dimen/margin_side_linear_result_time"
+                android:background="@drawable/border_constraint_achievement_rate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cl_user_calorie">
+
+                <LinearLayout
+                    android:id="@+id/ll_total_steps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_linear_user_normal_percent"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TextView
+                        android:id="@+id/tx_total_steps_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="@string/tx_total_steps"
+                        android:textColor="@color/color_achievement"
+                        android:textSize="@dimen/size_tx_total_meter_calorie_steps"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tx_steps_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_end_tx_user_time_data"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="0"
+                    android:textColor="@color/color_achievement"
+                    android:textSize="@dimen/size_tx_user_time_data"
+                    app:layout_constraintBottom_toBottomOf="@+id/ll_total_steps"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ll_total_steps" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_six_walk_calendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cl_user_steps"
+                android:layout_marginStart="@dimen/margin_side_ll_six_walk_calendar"
+                android:layout_marginEnd="@dimen/margin_side_ll_six_walk_calendar">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/padding_side_walk_history"
+                    android:paddingEnd="@dimen/padding_side_walk_history">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/calendar_constraint"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/margin_top_constraint_calendar"
+                        android:background="@drawable/border_calendar_constraint"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_start_tx_calendar"
+                            android:fontFamily="@font/pretendard_bold"
+                            android:text="@string/tx_calendar"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_tx_calendar"
+                            app:layout_constraintBottom_toBottomOf="@+id/layoutMonth"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/layoutMonth" />
+
+                        <LinearLayout
+                            android:id="@+id/layoutMonth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top_constraint_calendar"
+                            android:layout_marginEnd="@dimen/margin_end_layoutMonth"
+                            android:layout_marginBottom="@dimen/margin_bottom_layoutMonth"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/btnPrevMonth"
+                                android:layout_width="@dimen/size_icon_left_right"
+                                android:layout_height="@dimen/size_icon_left_right"
+                                android:onClick="@{() -> viewmodel.prevMonth()}"
+                                android:src="@drawable/icon_left" />
+
+                            <TextView
+                                android:id="@+id/tvCurrentMonth"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_side_tv_current_month"
+                                android:layout_marginEnd="@dimen/margin_side_tv_current_month"
+                                android:fontFamily="@font/pretendard_bold"
+                                android:paddingHorizontal="16dp"
+                                android:text="@string/tx_calendar_date_setup"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/size_tx_calendar_date"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/btnNextMonth"
+                                android:layout_width="@dimen/size_icon_left_right"
+                                android:layout_height="@dimen/size_icon_left_right"
+                                android:onClick="@{() -> viewmodel.nextMonth()}"
+                                android:src="@drawable/icon_right" />
+                        </LinearLayout>
+
+                        <!-- 요일 텍스트 -->
+                        <LinearLayout
+                            android:id="@+id/layoutWeekDays"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top_layout_week_day"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/layoutMonth">
+
+                            <!-- 일 ~ 토 반복 -->
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Sun"
+                                android:textColor="#E53935"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Mon"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Tue"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Wed"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Thu"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Fri"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Sat"
+                                android:textColor="#1E88E5"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <!-- 달력 -->
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/calendarRecyclerView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top_calendar_recycler"
+                            android:nestedScrollingEnabled="false"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/layoutWeekDays"
+                            tools:listitem="@layout/item_calendar_day" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/graph_constraint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_top_constraint_calendar"
+                        android:layout_marginBottom="@dimen/margin_bottom_graph_constraint"
+                        android:background="@drawable/border_calendar_constraint"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/calendar_constraint">
+
+                        <LinearLayout
+                            android:id="@+id/linear_tx_data"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraint_data_01"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_side_constraint_breath_data"
+                                android:layout_marginTop="@dimen/margin_top_constraint_breath_data"
+                                android:layout_marginEnd="@dimen/margin_side_constraint_breath_data"
+                                android:background="@drawable/border_constraint_graph_data">
+
+                                <TextView
+                                    android:id="@+id/tx_all_count"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_tx_all_count"
+                                    android:layout_marginTop="@dimen/margin_tx_all_count"
+                                    android:fontFamily="@font/pretendard_medium"
+                                    android:text="@string/tx_total_distance"
+                                    android:textColor="@color/color_tx_graph_data"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/tx_total_count_value"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_top_tx_all_breathing"
+                                    android:layout_marginBottom="@dimen/margin_bottom_tx_total_count"
+                                    android:fontFamily="@font/pretendard_bold"
+                                    android:text="@{viewmodel.txSelectedTotalDistance}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/tx_history_data_textview"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="@id/tx_all_count"
+                                    app:layout_constraintTop_toBottomOf="@+id/tx_all_count" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraint_data_02"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_side_constraint_breath_data"
+                                android:layout_marginTop="@dimen/margin_top_constraint_breath_data"
+                                android:layout_marginEnd="@dimen/margin_side_constraint_breath_data"
+                                android:background="@drawable/border_constraint_graph_data">
+
+                                <TextView
+                                    android:id="@+id/tx_total_steps"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_tx_all_count"
+                                    android:layout_marginTop="@dimen/margin_tx_all_count"
+                                    android:fontFamily="@font/pretendard_medium"
+                                    android:text="@string/tx_total_steps"
+                                    android:textColor="@color/color_tx_graph_data"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/tx_total_steps_value"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_top_tx_all_breathing"
+                                    android:layout_marginBottom="@dimen/margin_bottom_tx_total_count"
+                                    android:fontFamily="@font/pretendard_bold"
+                                    android:text="@{viewmodel.txSelectedTotalSteps}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/tx_history_data_textview"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="@id/tx_total_steps"
+                                    app:layout_constraintTop_toBottomOf="@+id/tx_total_steps" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraint_data_03"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_side_constraint_breath_data"
+                                android:layout_marginBottom="@dimen/margin_top_constraint_breath_data"
+                                android:layout_marginTop="@dimen/margin_top_constraint_breath_data"
+                                android:layout_marginEnd="@dimen/margin_side_constraint_breath_data"
+                                android:background="@drawable/border_constraint_graph_data">
+
+                                <TextView
+                                    android:id="@+id/tx_total_calories"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_tx_all_count"
+                                    android:layout_marginTop="@dimen/margin_tx_all_count"
+                                    android:fontFamily="@font/pretendard_medium"
+                                    android:text="@string/tx_total_calories"
+                                    android:textColor="@color/color_tx_graph_data"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/tx_total_calories_value"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_top_tx_all_breathing"
+                                    android:layout_marginBottom="@dimen/margin_bottom_tx_total_count"
+                                    android:fontFamily="@font/pretendard_bold"
+                                    android:text="@{viewmodel.txSelectedTotalCalories}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/tx_history_data_textview"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="@id/tx_total_calories"
+                                    app:layout_constraintTop_toBottomOf="@+id/tx_total_calories" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.appcompat.widget.Toolbar>
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <TextView
-            android:id="@+id/tx_result_walking"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_top_tx_result_breathing_dialog"
-            android:fontFamily="@font/pretendard_semibold"
-            android:text="@string/tx_walking_test_result"
-            android:textColor="@color/black"
-            android:textSize="@dimen/size_tx_result_breathing"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"/>
-
-        <TextView
-            android:id="@+id/tx_result_walking_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_top_tx_result_breathing_detail"
-            android:text="@string/tx_result_walking_detail"
-            android:textColor="@color/color_tx_result_breathing_detail"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tx_result_walking" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_user_meter"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_cl_meter_calorie_steps"
-            android:layout_marginStart="@dimen/margin_side_linear_result_time"
-            android:layout_marginTop="@dimen/margin_top_linear_result_time"
-            android:layout_marginEnd="@dimen/margin_side_linear_result_time"
-            android:background="@drawable/border_linear_user_time"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tx_result_walking_detail">
-
-            <LinearLayout
-                android:id="@+id/linear_user_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_linear_user_normal_percent"
-                android:layout_marginTop="@dimen/margin_linear_user_normal_percent"
-                android:layout_marginBottom="@dimen/margin_bottom_linear_user_time"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/tx_total_meter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@string/tx_total_meter"
-                    android:textColor="@color/color_tx_meter_calorie"
-                    android:textSize="@dimen/size_tx_total_meter_calorie_steps"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tx_total_meter_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="@dimen/margin_top_tx_real_user_time"
-                    android:fontFamily="@font/pretendard_regular"
-                    android:text="@string/tx_total_meter_detail"
-                    android:textColor="@color/color_tx_total_meter_detail"
-                    android:textSize="@dimen/size_tx_total_meter_detail"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tx_distance_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_end_tx_user_time_data"
-                android:fontFamily="@font/pretendard_bold"
-                android:text="0 m"
-                android:textColor="@color/color_tx_meter_calorie"
-                android:textSize="@dimen/size_tx_user_time_data"
-                app:layout_constraintBottom_toBottomOf="@+id/linear_user_time"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/linear_user_time" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_user_calorie"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_cl_meter_calorie_steps"
-            android:layout_marginStart="@dimen/margin_side_linear_result_time"
-            android:layout_marginTop="@dimen/margin_top_linear_result_time"
-            android:layout_marginEnd="@dimen/margin_side_linear_result_time"
-            android:background="@drawable/border_linear_normal_time"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cl_user_meter">
-
-            <LinearLayout
-                android:id="@+id/ll_user_calorie"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_linear_user_normal_percent"
-                android:layout_marginTop="@dimen/margin_linear_user_normal_percent"
-                android:layout_marginBottom="@dimen/margin_bottom_linear_user_time"
-                android:orientation="vertical"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_close"
+                android:layout_width="@dimen/width_btn_close_in_dialog"
+                android:layout_height="@dimen/height_btn_close_in_dialog"
+                android:layout_marginTop="@dimen/margin_top_btn_close_in_dialog"
+                android:layout_marginBottom="@dimen/margin_bottom_btn_close_in_dialog"
+                android:background="@drawable/border_btn_start_breathing"
+                android:onClick="@{() -> viewmodel.btnClose()}"
+                app:layout_constraintTop_toBottomOf="@+id/ll_six_walk_calendar"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
-                    android:id="@+id/tx_user_calorie"
+                    android:id="@+id/tx_start"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@string/tx_user_calorie"
-                    android:textColor="@color/color_tx_meter_calorie"
-                    android:textSize="@dimen/size_tx_total_meter_calorie_steps"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:gravity="center"
+                    android:text="@string/tx_close"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_tx_btn_next"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tx_user_calorie_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_end_tx_user_time_data"
-                android:fontFamily="@font/pretendard_bold"
-                android:text="0 kcal"
-                android:textColor="@color/color_tx_meter_calorie"
-                android:textSize="@dimen/size_tx_user_time_data"
-                app:layout_constraintBottom_toBottomOf="@+id/ll_user_calorie"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/ll_user_calorie" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_user_steps"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_cl_meter_calorie_steps"
-            android:layout_marginStart="@dimen/margin_side_linear_result_time"
-            android:layout_marginTop="@dimen/margin_top_linear_result_time"
-            android:layout_marginEnd="@dimen/margin_side_linear_result_time"
-            android:background="@drawable/border_constraint_achievement_rate"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cl_user_calorie">
-
-            <LinearLayout
-                android:id="@+id/ll_total_steps"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_linear_user_normal_percent"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
-
-                <TextView
-                    android:id="@+id/tx_total_steps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@string/tx_total_steps"
-                    android:textColor="@color/color_achievement"
-                    android:textSize="@dimen/size_tx_total_meter_calorie_steps"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tx_steps_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_end_tx_user_time_data"
-                android:fontFamily="@font/pretendard_bold"
-                android:text="0"
-                android:textColor="@color/color_achievement"
-                android:textSize="@dimen/size_tx_user_time_data"
-                app:layout_constraintBottom_toBottomOf="@+id/ll_total_steps"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/ll_total_steps" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btn_close"
-            android:layout_width="@dimen/width_btn_close_in_dialog"
-            android:layout_height="@dimen/height_btn_close_in_dialog"
-            android:layout_marginTop="@dimen/margin_top_btn_close_in_dialog"
-            android:layout_marginBottom="@dimen/margin_bottom_btn_close_in_dialog"
-            android:background="@drawable/border_btn_start_breathing"
-            android:onClick="@{() -> viewmodel.btnClose()}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cl_user_steps">
-
-            <TextView
-                android:id="@+id/tx_start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_bold"
-                android:gravity="center"
-                android:text="@string/tx_close"
-                android:textColor="@color/white"
-                android:textSize="@dimen/size_tx_btn_next"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </layout>

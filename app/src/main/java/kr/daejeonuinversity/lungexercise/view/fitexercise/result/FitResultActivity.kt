@@ -5,15 +5,21 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.animation.LinearInterpolator
+import androidx.recyclerview.widget.GridLayoutManager
 import kr.daejeonuinversity.lungexercise.R
 import kr.daejeonuinversity.lungexercise.databinding.ActivityFitResultBinding
+import kr.daejeonuinversity.lungexercise.util.adapter.CalendarAdapter
 import kr.daejeonuinversity.lungexercise.util.base.BaseActivity
 import kr.daejeonuinversity.lungexercise.util.util.BackPressedCallback
 import kr.daejeonuinversity.lungexercise.view.fitexercise.FitExerciseActivity
 import kr.daejeonuinversity.lungexercise.view.fitplan.FitPlanActivity
+import kr.daejeonuinversity.lungexercise.view.main.MainActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.FitResultViewModel
 import org.koin.android.ext.android.inject
+import java.time.LocalDate
+import java.time.YearMonth
 import kotlin.math.roundToInt
 
 class FitResultActivity : BaseActivity<ActivityFitResultBinding>(R.layout.activity_fit_result) {
@@ -21,6 +27,21 @@ class FitResultActivity : BaseActivity<ActivityFitResultBinding>(R.layout.activi
     private val fViewModel: FitResultViewModel by inject()
     private val backPressedCallback = BackPressedCallback(this)
     private var progressAnimator: ObjectAnimator? = null
+    private var isClickedDate: LocalDate? = null
+
+    private val calendarAdapter = CalendarAdapter { calendarDay ->
+        val day = calendarDay.day ?: return@CalendarAdapter
+        val yearMonth = fViewModel.currentYearMonth.value ?: YearMonth.now()
+        val clickedDate = yearMonth.atDay(day)
+
+        isClickedDate = clickedDate
+
+        binding.scrollView.post {
+            binding.scrollView.fullScroll(View.FOCUS_DOWN)
+        }
+
+        fViewModel.loadFitExerciseData(clickedDate)
+    }
 
     private lateinit var args: FitResultArgs
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,13 +64,18 @@ class FitResultActivity : BaseActivity<ActivityFitResultBinding>(R.layout.activi
 
     @SuppressLint("SetTextI18n")
     private fun init() {
-        binding.riskSeekBar.progress = args.currentWarningCount.coerceIn(0, binding.riskSeekBar.max)
+
+        binding.apply {
+            riskSeekBar.progress = args.currentWarningCount.coerceIn(0, binding.riskSeekBar.max)
+            calendarRecyclerView.layoutManager = GridLayoutManager(this@FitResultActivity, 7)
+            calendarRecyclerView.adapter = calendarAdapter
+        }
 
         val fitDistanceKm = args.fitDistance / 1000.0
         val distanceM = args.userDistance.toDouble()
         val distanceKm = distanceM / 1000.0
         val avgHeartRate = args.avgHeartRate
-        val avgHeartRateValue = String.format("%.1f km", avgHeartRate)
+        val avgHeartRateValue = String.format("%.1f", avgHeartRate)
 
 
         // 목표 달성률 계산
@@ -88,6 +114,29 @@ class FitResultActivity : BaseActivity<ActivityFitResultBinding>(R.layout.activi
 
     private fun observe() = fViewModel.let { vm ->
 
+        vm.calendarDays.observe(this@FitResultActivity) { days ->
+            calendarAdapter.submitList(days)
+        }
+
+        vm.currentYearMonth.observe(this@FitResultActivity) { yearMonth ->
+            val text = "${yearMonth.monthValue}월 ${yearMonth.year}"
+            binding.tvCurrentMonth.text = text
+        }
+
+        vm.fetchFitExerciseData()
+
+        vm.graphVisibility.observe(this@FitResultActivity) {
+
+            if (it) {
+
+                binding.graphConstraint.visibility = View.VISIBLE
+
+            } else {
+                binding.graphConstraint.visibility = View.GONE
+            }
+
+        }
+
         vm.backClicked.observe(this@FitResultActivity) {
             if (it) {
                 val intent = Intent(this@FitResultActivity, FitExerciseActivity::class.java).apply {
@@ -99,6 +148,17 @@ class FitResultActivity : BaseActivity<ActivityFitResultBinding>(R.layout.activi
                 }
                 startActivityBackAnimation(intent, this@FitResultActivity)
                 finish()
+            }
+        }
+
+        vm.btnHomeState.observe(this@FitResultActivity){
+
+            if (it){
+
+                val intent = Intent(this@FitResultActivity, MainActivity::class.java)
+                startActivityAnimation(intent,this@FitResultActivity)
+                finish()
+
             }
         }
 

@@ -106,6 +106,9 @@
     <color name="color_tx_0_to_target">#64748B</color>
     <color name="color_risk_pulse">#EF4444</color>
     <color name="color_risk_step">#64748B</color>
+    <color name="color_target_distance">#7C3AED</color>
+    <color name="color_tx_progress_step">#6B7280</color>
+    <color name="color_tx_remain_steps">#6E3CD0</color>
 
 
 

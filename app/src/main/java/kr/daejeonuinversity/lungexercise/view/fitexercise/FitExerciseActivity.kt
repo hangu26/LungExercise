@@ -55,7 +55,7 @@ class FitExerciseActivity :
 
         }
 
-
+        /** 개발자 모드 **/
         binding.clRecommendDistance.setOnClickListener {
             clickCount++
 
@@ -79,10 +79,11 @@ class FitExerciseActivity :
                 intent.putExtra("steps", 120)
                 intent.putExtra("avgHeartRate", 168.5)
 
-                startActivityAnimation(intent,this@FitExerciseActivity)
+                startActivityAnimation(intent, this@FitExerciseActivity)
                 finish()
             }
         }
+
         recommendWalkTimer = binding.recommendWalkTimer
 
         init()
@@ -91,8 +92,8 @@ class FitExerciseActivity :
         observe()
     }
 
-    private fun init() = with(intent){
-
+    private fun init() = with(intent) {
+        sendResetMessageToWatch() // 액티비티 들어오면 워치 걸음수 초기화
         age = getIntExtra("userAge", 0)
         weight = getDoubleExtra("userWeight", 0.0)
         latestDistance = getDoubleExtra("latestDistance", 0.0)
@@ -263,24 +264,34 @@ class FitExerciseActivity :
 
                 val avgHR = updateAverageHeartRate()
 
-                // "123.4 m" 문자열을 Double 값(m 단위)으로 변환
                 val distanceValue = distanceStr.replace(" m", "").trim().toDoubleOrNull() ?: 0.0
 
-                // 기존 데이터들
-                intent.putExtra("userAge", age)
-                intent.putExtra("userWeight", weight)
-                intent.putExtra("latestDistance", latestDistance)
-                intent.putExtra("timer", timer)
-                intent.putExtra("fitDistance", fitDistance)
-                intent.putExtra("currentDate", currentDate)
-                intent.putExtra("currentWarningCount", vm.currentWarningCount.value ?: 0)
+                val warningCount = vm.currentWarningCount.value ?: 0
 
-                // distance를 m 단위(Double)로 보내기
-                intent.putExtra("distance", distanceValue)
+                intent.apply {
+                    putExtra("userAge", age)
+                    putExtra("userWeight", weight)
+                    putExtra("latestDistance", latestDistance)
+                    putExtra("timer", timer)
+                    putExtra("fitDistance", fitDistance)
+                    putExtra("currentDate", currentDate)
+                    putExtra("currentWarningCount", warningCount)
+                    putExtra("distance", distanceValue)
+                    putExtra("calories", calories)
+                    putExtra("steps", steps)
+                    putExtra("avgHeartRate", avgHR)
+                }
 
-                intent.putExtra("calories", calories)
-                intent.putExtra("steps", steps)
-                intent.putExtra("avgHeartRate", avgHR)
+                val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+
+                vm.saveFitResultData(
+                    timer,
+                    distanceValue,
+                    calories,
+                    warningCount,
+                    steps,
+                    date
+                )
 
                 sendResetMessageToWatch()
                 startActivityAnimation(intent, this@FitExerciseActivity)

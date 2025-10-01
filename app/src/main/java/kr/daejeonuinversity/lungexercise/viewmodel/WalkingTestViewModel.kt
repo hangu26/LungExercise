@@ -176,9 +176,9 @@ class WalkingTestViewModel(private val repository: InfoRepository, private val w
         val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
         viewModelScope.launch {
-            val lastRecord = wRepository.getLastRecord()
-            if (lastRecord == null) {
-                // 처음 기록
+            val recordsToday = wRepository.getSixDataByDate(currentDate) // 오늘 날짜 데이터
+            if (recordsToday.isEmpty()) {
+                // 오늘 처음 기록
                 val record = SixMinuteWalkTest(
                     totalCount = 1,
                     date = currentDate,
@@ -189,10 +189,10 @@ class WalkingTestViewModel(private val repository: InfoRepository, private val w
                 )
                 wRepository.insert(record)
             } else {
-                // 기존 기록이 있으면 누적
+                // 오늘 이미 기록이 있으면 누적
+                val lastRecord = recordsToday.last()
                 val updatedRecord = lastRecord.copy(
                     totalCount = lastRecord.totalCount + 1,
-                    date = currentDate,
                     totalDistance = lastRecord.totalDistance + distance,
                     latestDistance = distance,
                     totalSteps = lastRecord.totalSteps + steps,
@@ -201,6 +201,7 @@ class WalkingTestViewModel(private val repository: InfoRepository, private val w
                 wRepository.update(updatedRecord)
             }
         }
+
     }
 
 
