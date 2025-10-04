@@ -48,7 +48,7 @@ val module = module {
     viewModel { HistoryViewModel(get(), androidApplication()) }
     viewModel { VideoViewModel(androidApplication()) }
     viewModel { EditInfoViewModel(get(), androidApplication()) }
-    viewModel { HistoryRecordViewModel(androidApplication()) }
+    viewModel { HistoryRecordViewModel(get(),androidApplication()) }
     viewModel { WalkHistoryViewModel(get(),get(),get(), androidApplication()) }
     viewModel { DeveloperViewModel(get(), androidApplication()) }
     viewModel { SettingViewModel(androidApplication(), get()) }

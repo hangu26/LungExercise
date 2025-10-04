@@ -20,4 +20,7 @@ interface StepIntervalDao {
     @Query("SELECT DISTINCT date FROM step_intervals")
     suspend fun getAllDates(): List<String>
 
+    @Query("DELETE FROM step_intervals WHERE intervalStart = :intervalStart")
+    suspend fun deleteByIntervalStart(intervalStart: Long)
+
 }

@@ -110,6 +110,14 @@ class WalkHistoryViewModel(
         }
     }
 
+    fun delete(){
+        viewModelScope.launch {
+
+            repository.deleteByIntervalStart(1759361400000L)
+
+        }
+    }
+
     fun fetchActivityData() {
         viewModelScope.launch {
             val dates = repository.getAllRecordedDates()

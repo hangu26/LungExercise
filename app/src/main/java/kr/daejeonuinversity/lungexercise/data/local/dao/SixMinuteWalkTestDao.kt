@@ -24,4 +24,8 @@ interface SixMinuteWalkTestDao {
 
     @Update
     suspend fun update(record: SixMinuteWalkTest)
+
+    @Query("DELETE FROM six_minute_walk_test WHERE date = :date")
+    suspend fun deleteByDate(date: String)
+
 }

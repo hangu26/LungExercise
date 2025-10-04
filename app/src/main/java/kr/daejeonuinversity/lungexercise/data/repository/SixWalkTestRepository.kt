@@ -17,6 +17,8 @@ class SixWalkTestRepository(private val dao: SixMinuteWalkTestDao) {
         return dao.getLastRecord()
     }
 
+    suspend fun deleteByDate(date: String) = dao.deleteByDate(date)
+
     suspend fun insert(record: SixMinuteWalkTest) {
         dao.insert(record)
     }

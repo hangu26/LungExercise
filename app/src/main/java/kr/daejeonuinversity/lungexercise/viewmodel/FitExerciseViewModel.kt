@@ -96,7 +96,6 @@ class FitExerciseViewModel(
         userAge = age
     }
 
-    // 타이머에서 매 초마다 호출
     fun updateElapsedTime(seconds: Int) {
         elapsedTimeSeconds = seconds
         _stepCount.value?.let { steps ->
@@ -123,7 +122,6 @@ class FitExerciseViewModel(
             else -> 7.0
         }
 
-        // 지난 시간 대비 칼로리 계산
         val kcal = mets * weight * (elapsedHours - lastElapsedHours)
         accumulatedCalories += kcal
         lastElapsedHours = elapsedHours
@@ -170,6 +168,7 @@ class FitExerciseViewModel(
     fun isReset() {
 
         _isEndedState.value = false
+        elapsedTimeSeconds = 0
         _stepCount.postValue(0)
         _calories.postValue(0.0)
         initialStepCount = null

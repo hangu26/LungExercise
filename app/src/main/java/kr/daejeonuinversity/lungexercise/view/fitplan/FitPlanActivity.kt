@@ -39,6 +39,8 @@ class FitPlanActivity : BaseActivity<ActivityFitPlanBinding>(R.layout.activity_f
 
     private fun observe() = fViewModel.let { vm ->
 
+//        vm.deleteRecordByDate("2025-10-03")
+
         vm.fetchUserInfo()
 
         vm.backClicked.observe(this@FitPlanActivity) {
@@ -73,6 +75,8 @@ class FitPlanActivity : BaseActivity<ActivityFitPlanBinding>(R.layout.activity_f
 
                 val age = vm.userAge.value ?: 0
                 val weight = vm.userWeight.value?.toDouble() ?: 0.0
+                val height = vm.userHeight.value?.toDouble() ?: 0.0
+
                 val latestDistance = vm.latestDistance.value ?: 0.0
                 val timer = vm.txEdtTime.value?.toString()?.toInt() ?: 0
                 val intensity = vm.txEdtIntensity.value?.toString()?.toDouble() ?: 0.0
@@ -96,9 +100,14 @@ class FitPlanActivity : BaseActivity<ActivityFitPlanBinding>(R.layout.activity_f
 
                 intent.putExtra("userAge", age)
                 intent.putExtra("userWeight", weight)
+                intent.putExtra("userHeight", height)
+
                 intent.putExtra("latestDistance", latestDistance)
                 intent.putExtra("timer", timer)
                 intent.putExtra("fitDistance", fitDistance)
+
+                Log.e("6분 보행검사 마지막 거리", "$latestDistance")
+                Log.e("6분 보행검사 마지막 거리", "$fitDistance")
 
                 startActivityAnimation(intent, this@FitPlanActivity)
                 finish()

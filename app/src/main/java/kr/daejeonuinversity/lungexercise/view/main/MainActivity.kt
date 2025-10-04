@@ -58,7 +58,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             )
         }
 
-        mViewModel.startReceiving()
+//        mViewModel.startReceiving()
 
         initButton()
         observe()
@@ -67,6 +67,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 //        checkBluetoothConnectPermissionAndConnect()
         backPressedCallback.doubleBackToExit(this)
 
+    }
+
+    override fun onStart() = mViewModel.let{ vm ->
+        super.onStart()
+        vm.startReceiving()
+        vm.requestStepsFromWatch()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mViewModel.stopReceiving()
     }
 
     private fun handleRapidClicks(

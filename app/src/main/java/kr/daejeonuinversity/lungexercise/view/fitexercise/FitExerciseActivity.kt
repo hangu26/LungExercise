@@ -21,6 +21,7 @@ import kr.daejeonuinversity.lungexercise.view.main.MainActivity
 import kr.daejeonuinversity.lungexercise.view.walkingtest.result.WalkingResultActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.FitExerciseViewModel
 import org.koin.android.ext.android.inject
+import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -36,6 +37,7 @@ class FitExerciseActivity :
     private var isRunning = false
     var age = 0
     var weight = 0.0
+    var height = 0.0
     var latestDistance = 0.0
     var timer = 0
     var fitDistance = 0.0
@@ -96,6 +98,7 @@ class FitExerciseActivity :
         sendResetMessageToWatch() // 액티비티 들어오면 워치 걸음수 초기화
         age = getIntExtra("userAge", 0)
         weight = getDoubleExtra("userWeight", 0.0)
+        height = getDoubleExtra("userHeight", 0.0)
         latestDistance = getDoubleExtra("latestDistance", 0.0)
         timer = getIntExtra("timer", 0)
         fitDistance = getDoubleExtra("fitDistance", 0.0)
@@ -222,7 +225,7 @@ class FitExerciseActivity :
 
                 binding.btnStart.visibility = View.VISIBLE
                 binding.btnStop.visibility = View.GONE
-
+                sendStopMessageToWatch()
             }
 
         }
@@ -271,6 +274,7 @@ class FitExerciseActivity :
                 intent.apply {
                     putExtra("userAge", age)
                     putExtra("userWeight", weight)
+                    putExtra("userHeight", height)
                     putExtra("latestDistance", latestDistance)
                     putExtra("timer", timer)
                     putExtra("fitDistance", fitDistance)
@@ -323,10 +327,14 @@ class FitExerciseActivity :
     private fun sendStartSignalToWatch() {
         val nodeClient = Wearable.getNodeClient(this)
         val messageClient = Wearable.getMessageClient(this)
+        val exerciseTime = timer * 60 * 1000L // 분 → 밀리초
+
+        // Long을 ByteArray로 변환
+        val payload = ByteBuffer.allocate(Long.SIZE_BYTES).putLong(exerciseTime).array()
 
         nodeClient.connectedNodes.addOnSuccessListener { nodes ->
             nodes.forEach { node ->
-                messageClient.sendMessage(node.id, "/start_heart_rate_service", byteArrayOf())
+                messageClient.sendMessage(node.id, "/start_heart_rate_service", payload)
                     .addOnSuccessListener {
                         Log.d("PhoneApp", "시작 신호 전송 성공")
                     }
@@ -336,6 +344,7 @@ class FitExerciseActivity :
             }
         }
     }
+
 
     private fun sendHeartRateWarningToWatch() {
         val nodeClient = Wearable.getNodeClient(this)
@@ -365,6 +374,22 @@ class FitExerciseActivity :
                     Log.d("시계 걸음 수 초기화", "📤 워치 걸음수 초기화 메시지 전송 성공")
                 }.addOnFailureListener {
                     Log.e("시계 걸음 수 초기화", "❌ 워치 초기화 메시지 전송 실패", it)
+                }
+            }
+        }
+    }
+
+    private fun sendStopMessageToWatch() {
+        Wearable.getNodeClient(this).connectedNodes.addOnSuccessListener { nodes ->
+            for (node in nodes) {
+                Wearable.getMessageClient(this).sendMessage(
+                    node.id,
+                    "/stop_step_count", // 워치에서 수신하는 path
+                    ByteArray(0)
+                ).addOnSuccessListener {
+                    Log.d("시계 걸음 수 정지", "📤 워치 걸음수 초기화 메시지 전송 성공")
+                }.addOnFailureListener {
+                    Log.e("시계 걸음 수 정지", "❌ 워치 초기화 메시지 전송 실패", it)
                 }
             }
         }

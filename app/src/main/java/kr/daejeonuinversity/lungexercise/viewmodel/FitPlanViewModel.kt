@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kr.daejeonuinversity.lungexercise.data.repository.InfoRepository
 import kr.daejeonuinversity.lungexercise.data.repository.SixWalkTestRepository
@@ -35,6 +36,9 @@ class FitPlanViewModel(private val repository: InfoRepository, private val wRepo
     private val _userWeight = MutableLiveData<Int>()
     val userWeight = _userWeight
 
+    private val _userHeight = MutableLiveData<Int>()
+    val userHeight = _userHeight
+
     private val _latestDistance = MutableLiveData<Double>()
     val latestDistance: LiveData<Double> = _latestDistance
 
@@ -44,6 +48,12 @@ class FitPlanViewModel(private val repository: InfoRepository, private val wRepo
         _backClicked.value = true
     }
 
+    fun deleteRecordByDate(date: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            wRepository.deleteByDate(date)
+        }
+    }
+
     fun fetchUserInfo() {
         viewModelScope.launch {
             val data = repository.getUserDates()
@@ -51,6 +61,9 @@ class FitPlanViewModel(private val repository: InfoRepository, private val wRepo
 
             val weight = data?.weight?.toInt()
             _userWeight.postValue(weight)
+
+            val height = data?.height?.toInt()
+            _userHeight.postValue(height)
 
             val age = calculateUserAge()
             _userAge.postValue(age ?: 0) // null일 경우 0 처리

@@ -19,4 +19,8 @@ class TotalStepRepository(private val dao: StepIntervalDao) {
         return dao.getIntervalsByDate(today)
     }
 
+    suspend fun deleteByIntervalStart(id: Long) {
+        dao.deleteByIntervalStart(id)
+    }
+
 }

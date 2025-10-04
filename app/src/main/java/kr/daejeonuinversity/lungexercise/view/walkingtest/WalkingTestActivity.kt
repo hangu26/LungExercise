@@ -53,7 +53,7 @@ class WalkingTestActivity :
 
     @SuppressLint("ClickableViewAccessibility")
     fun initButton() {
-
+        sendResetMessageToWatch()
         binding.btnStart.setOnTouchListener { v, event ->
             setTouchAnimation(v, event)
 
@@ -146,6 +146,7 @@ class WalkingTestActivity :
 
                 binding.btnStart.visibility = View.VISIBLE
                 binding.btnStop.visibility = View.GONE
+                sendStopMessageToWatch()
 
             }
 
@@ -234,6 +235,22 @@ class WalkingTestActivity :
                     Log.d("시계 걸음 수 초기화", "📤 워치 걸음수 초기화 메시지 전송 성공")
                 }.addOnFailureListener {
                     Log.e("시계 걸음 수 초기화", "❌ 워치 초기화 메시지 전송 실패", it)
+                }
+            }
+        }
+    }
+
+    private fun sendStopMessageToWatch() {
+        Wearable.getNodeClient(this).connectedNodes.addOnSuccessListener { nodes ->
+            for (node in nodes) {
+                Wearable.getMessageClient(this).sendMessage(
+                    node.id,
+                    "/stop_step_count", // 워치에서 수신하는 path
+                    ByteArray(0)
+                ).addOnSuccessListener {
+                    Log.d("시계 걸음 수 정지", "📤 워치 걸음수 초기화 메시지 전송 성공")
+                }.addOnFailureListener {
+                    Log.e("시계 걸음 수 정지", "❌ 워치 초기화 메시지 전송 실패", it)
                 }
             }
         }
