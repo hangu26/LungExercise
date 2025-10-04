@@ -1,13 +1,20 @@
 package kr.daejeonuinversity.lungexercise.view.exercise
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import kr.daejeonuinversity.lungexercise.R
 import kr.daejeonuinversity.lungexercise.databinding.ActivityLungExerciseBinding
@@ -39,12 +46,34 @@ class LungExerciseActivity :
             lifecycleOwner = this@LungExerciseActivity
         }
 
+        printPairedDevices(this)
+
         setupClickListeners()
         initView()
         observe()
         setupBluetoothCallbacks()
         checkAndRequestBluetoothPermissions()
         backPressedCallback.addCallbackActivity(this, MainActivity::class.java)
+    }
+
+    @SuppressLint("MissingPermission")
+    fun printPairedDevices(context: Context) {
+        if (ActivityCompat.checkSelfPermission(
+                context,
+                Manifest.permission.BLUETOOTH_CONNECT
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // 권한이 없으면 요청하거나 그냥 return
+            Log.e("페어링된 기기", "BLUETOOTH_CONNECT 권한 없음")
+            return
+        }
+
+        val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
+        val pairedDevices: Set<BluetoothDevice>? = bluetoothAdapter?.bondedDevices
+
+        pairedDevices?.forEach { device ->
+            Log.d("페어링된 기기", "이름: ${device.name}, 주소: ${device.address}")
+        }
     }
 
     private fun initView() {
