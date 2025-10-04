@@ -97,33 +97,106 @@ class WalkHistoryFragment :
 
     }
 
+    /** 기존 차트 함수 **/
+
+    /**
     private fun showStepBarChart(intervals: List<StepIntervalEntity>) {
-        // 0~23시 전체 시간 단위로 데이터 합산
-        val entries = (0..23).map { hour ->
-            val stepsSum = intervals.filter { entity ->
+    // 0~23시 전체 시간 단위로 데이터 합산
+    val entries = (0..23).map { hour ->
+    val stepsSum = intervals.filter { entity ->
+    val cal = Calendar.getInstance().apply { timeInMillis = entity.intervalStart }
+    val hourOfDay = cal.get(Calendar.HOUR_OF_DAY)
+    hourOfDay == hour
+    }.sumOf { it.steps }
+    BarEntry(hour.toFloat(), stepsSum.toFloat())
+    }
+
+    // X축 라벨: 2시간 간격만 표시, 나머지는 빈 문자열
+    val xAxisLabels = (0..23).map { hour ->
+    if (hour % 2 == 0) "${hour}시" else ""
+    }
+
+    val dataSet = BarDataSet(entries, "걸음 수").apply {
+    color = ContextCompat.getColor(requireContext(), R.color.color_barchart_default)
+    valueTextSize = 12f
+    valueFormatter = object : ValueFormatter() {
+    override fun getFormattedValue(value: Float): String {
+    return value.toInt().toString()
+    }
+    }
+    }
+
+    val barData = BarData(dataSet).apply { barWidth = 0.9f }
+    val maxDataValue = barData.yMax
+
+    binding.barChart.apply {
+    data = barData
+    setFitBars(true)
+    description.isEnabled = false
+
+    xAxis.apply {
+    position = XAxis.XAxisPosition.BOTTOM
+    granularity = 1f
+    isGranularityEnabled = true
+    valueFormatter = IndexAxisValueFormatter(xAxisLabels)
+    setDrawGridLines(false)
+    setDrawAxisLine(false)
+    }
+
+    axisRight.isEnabled = false
+
+    axisLeft.apply {
+    axisMinimum = 0f
+    axisMaximum = (maxDataValue * 1.1f).coerceAtLeast(10f)
+    granularity = 1f
+    isGranularityEnabled = true
+    setDrawGridLines(false)
+    setDrawAxisLine(false)
+    valueFormatter = object : ValueFormatter() {
+    override fun getFormattedValue(value: Float): String {
+    return value.toInt().toString()
+    }
+    }
+    }
+
+    setScaleEnabled(false)
+    animateY(800)
+    invalidate()
+    }
+    }
+     **/
+
+    /** 임시 차트 함수 **/
+    private fun showStepBarChart(intervals: List<StepIntervalEntity>) {
+        // 0시~24시 30분 단위 구간 생성
+        val allIntervals = mutableListOf<Pair<String, Float>>() // Pair<라벨, 걸음수>
+
+        intervals.forEach { entity ->
+            if (entity.steps > 0) { // 0이 아닌 구간만 추가
                 val cal = Calendar.getInstance().apply { timeInMillis = entity.intervalStart }
-                val hourOfDay = cal.get(Calendar.HOUR_OF_DAY)
-                hourOfDay == hour
-            }.sumOf { it.steps }
-            BarEntry(hour.toFloat(), stepsSum.toFloat())
+                val hour = cal.get(Calendar.HOUR_OF_DAY)
+                val minute = cal.get(Calendar.MINUTE)
+                val label = if (minute == 0) "${hour}시" else "${hour}:30"
+                allIntervals.add(label to entity.steps.toFloat())
+            }
         }
 
-        // X축 라벨: 2시간 간격만 표시, 나머지는 빈 문자열
-        val xAxisLabels = (0..23).map { hour ->
-            if (hour % 2 == 0) "${hour}시" else ""
+        val entries = allIntervals.mapIndexed { index, pair ->
+            BarEntry(index.toFloat(), pair.second)
         }
+
+        val labels = allIntervals.map { it.first }
 
         val dataSet = BarDataSet(entries, "걸음 수").apply {
             color = ContextCompat.getColor(requireContext(), R.color.color_barchart_default)
             valueTextSize = 12f
             valueFormatter = object : ValueFormatter() {
-                override fun getFormattedValue(value: Float): String {
-                    return value.toInt().toString()
-                }
+                override fun getFormattedValue(value: Float): String = value.toInt().toString()
             }
         }
 
         val barData = BarData(dataSet).apply { barWidth = 0.9f }
+
         val maxDataValue = barData.yMax
 
         binding.barChart.apply {
@@ -135,13 +208,12 @@ class WalkHistoryFragment :
                 position = XAxis.XAxisPosition.BOTTOM
                 granularity = 1f
                 isGranularityEnabled = true
-                valueFormatter = IndexAxisValueFormatter(xAxisLabels)
+                valueFormatter = IndexAxisValueFormatter(labels)
                 setDrawGridLines(false)
                 setDrawAxisLine(false)
             }
 
             axisRight.isEnabled = false
-
             axisLeft.apply {
                 axisMinimum = 0f
                 axisMaximum = (maxDataValue * 1.1f).coerceAtLeast(10f)
@@ -150,9 +222,7 @@ class WalkHistoryFragment :
                 setDrawGridLines(false)
                 setDrawAxisLine(false)
                 valueFormatter = object : ValueFormatter() {
-                    override fun getFormattedValue(value: Float): String {
-                        return value.toInt().toString()
-                    }
+                    override fun getFormattedValue(value: Float): String = value.toInt().toString()
                 }
             }
 
@@ -161,6 +231,8 @@ class WalkHistoryFragment :
             invalidate()
         }
     }
+
+
 
     private fun startUserProgress(achievementRate: Int) {
         val progressBar = binding.progressBarAchievement
