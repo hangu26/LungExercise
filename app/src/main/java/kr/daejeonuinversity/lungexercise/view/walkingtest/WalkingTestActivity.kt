@@ -19,6 +19,7 @@ import kr.daejeonuinversity.lungexercise.view.main.MainActivity
 import kr.daejeonuinversity.lungexercise.view.walkingtest.result.WalkingResultActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.WalkingTestViewModel
 import org.koin.android.ext.android.inject
+import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -205,7 +206,8 @@ class WalkingTestActivity :
 
     }
 
-    // MessageClient를 통해 시계에 메시지 전송
+    /** 
+     * 기존 방식 워치 통신 함수
     private fun sendStartSignalToWatch() {
         val nodeClient = Wearable.getNodeClient(this)
         val messageClient = Wearable.getMessageClient(this)
@@ -213,6 +215,28 @@ class WalkingTestActivity :
         nodeClient.connectedNodes.addOnSuccessListener { nodes ->
             nodes.forEach { node ->
                 messageClient.sendMessage(node.id, "/start_heart_rate_service", byteArrayOf())
+                    .addOnSuccessListener {
+                        Log.d("PhoneApp", "시작 신호 전송 성공")
+                    }
+                    .addOnFailureListener {
+                        Log.e("PhoneApp", "시작 신호 전송 실패", it)
+                    }
+            }
+        }
+    }
+
+    **/
+    
+    private fun sendStartSignalToWatch() {
+        val nodeClient = Wearable.getNodeClient(this)
+        val messageClient = Wearable.getMessageClient(this)
+        val exerciseTime = 6 * 60 * 1000L
+
+        val payload = ByteBuffer.allocate(Long.SIZE_BYTES).putLong(exerciseTime).array()
+
+        nodeClient.connectedNodes.addOnSuccessListener { nodes ->
+            nodes.forEach { node ->
+                messageClient.sendMessage(node.id, "/start_heart_rate_service", payload)
                     .addOnSuccessListener {
                         Log.d("PhoneApp", "시작 신호 전송 성공")
                     }
