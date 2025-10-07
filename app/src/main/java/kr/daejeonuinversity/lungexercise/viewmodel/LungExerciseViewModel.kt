@@ -21,7 +21,7 @@ class LungExerciseViewModel(application: Application) : AndroidViewModel(applica
     val btnDisconnectState : LiveData<Boolean> = _btnDisconnectState
 
     fun setIsConnected(value: Boolean) {
-        _isConnected.value = value
+        _isConnected.postValue(value)
     }
 
     fun btnBack(){

@@ -135,6 +135,8 @@
     <dimen name="margin_start_linear_achievement_rate">9dp</dimen>
     <dimen name="dialog_result_breath_constraints_width">270dp</dimen>
     <dimen name="margin_end_tx_user_time_data">19dp</dimen>
+    <dimen name="size_tx_user_time_data">25dp</dimen>
+
     <dimen name="margin_end_tx_current_steps_unit">19dp</dimen>
 
     <dimen name="margin_end_tx_current_steps_value">4dp</dimen>
@@ -163,6 +165,8 @@
 
     <dimen name="margin_side_border_dialog_bluetooth">30dp</dimen>
     <dimen name="margin_top_linear_result_time">18dp</dimen>
+    <dimen name="margin_top_item_device_list">5dp</dimen>
+
     <dimen name="margin_top_cl_recommend_distance">9dp</dimen>
     <dimen name="margin_top_cl_fit_total_time">11dp</dimen>
     <dimen name="margin_top_cl_risk_pulse">11dp</dimen>
@@ -174,7 +178,7 @@
     <dimen name="width_btn_close_in_dialog">98dp</dimen>
     <dimen name="height_btn_close_in_dialog">47dp</dimen>
     <dimen name="margin_top_btn_close_in_dialog">50dp</dimen>
-    <dimen name="margin_top_btn_close_in_bluetooth_dialog">100dp</dimen>
+    <dimen name="margin_top_btn_close_in_bluetooth_dialog">50dp</dimen>
     <dimen name="margin_bottom_btn_close_in_dialog">32dp</dimen>
     <dimen name="tx_history_data_textview">20sp</dimen>
     <dimen name="margin_start_tx_normal_second">5dp</dimen>
@@ -464,6 +468,7 @@
     <dimen name="size_tx_current_steps">16sp</dimen>
     <dimen name="margin_bottom_cl_today_target">19dp</dimen>
     <dimen name="margin_side_ll_six_walk_calendar">15dp</dimen>
+    <dimen name="height_linear_bluetooth_list">250dp</dimen>
 
 
 </resources>

@@ -18,6 +18,7 @@ import kr.daejeonuinversity.lungexercise.R
 import kr.daejeonuinversity.lungexercise.databinding.ActivitySettingBinding
 import kr.daejeonuinversity.lungexercise.util.base.BaseActivity
 import kr.daejeonuinversity.lungexercise.util.util.BackPressedCallback
+import kr.daejeonuinversity.lungexercise.util.util.CustomToastPopup
 import kr.daejeonuinversity.lungexercise.view.exercise.LungExerciseActivity
 import kr.daejeonuinversity.lungexercise.view.main.MainActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.SettingViewModel
@@ -96,25 +97,8 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
 
     @SuppressLint("RestrictedApi")
     private fun showMaskPopupToast() {
-        val snackbar = Snackbar.make(binding.root, "", Snackbar.LENGTH_SHORT)
-        val customLayout = layoutInflater.inflate(R.layout.custom_mask_popup_toast, null)
-        customLayout.findViewById<TextView>(R.id.toast_text_icon_mask_popup).text =
-            "동영상 마스크 팝업이 활성화되었습니다"
-
-        val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
-        snackbarLayout.apply {
-            background = null
-            elevation = 0f
-            setPadding(0, 0, 0, 0)
-            layoutParams = (layoutParams as FrameLayout.LayoutParams).apply {
-                width = FrameLayout.LayoutParams.WRAP_CONTENT
-                gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
-                bottomMargin = 100
-            }
-            addView(customLayout, 0)
-        }
-        snackbar.duration = 350
-        snackbar.show()
+        val customToast = CustomToastPopup(binding.root, layoutInflater)
+        customToast.showMaskPopupToast("동영상 마스크 팝업이 활성화되었습니다")
     }
 
 }
