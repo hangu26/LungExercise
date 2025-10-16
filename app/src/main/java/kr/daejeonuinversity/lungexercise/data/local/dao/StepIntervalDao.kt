@@ -17,7 +17,7 @@ interface StepIntervalDao {
     @Query("SELECT * FROM step_intervals WHERE date = :date ORDER BY intervalStart ASC")
     suspend fun getStepsByDate(date: String): List<StepIntervalEntity>
 
-    @Query("SELECT DISTINCT date FROM step_intervals")
+    @Query("SELECT DISTINCT date FROM step_intervals WHERE steps > 0")
     suspend fun getAllDates(): List<String>
 
     @Query("DELETE FROM step_intervals WHERE intervalStart = :intervalStart")
