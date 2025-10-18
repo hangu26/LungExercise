@@ -30,7 +30,8 @@ class WalkingTestActivity :
     private val wViewModel: WalkingTestViewModel by inject()
     private lateinit var heartTimerView: HeartTimerView
     private var countDownTimer: CountDownTimer? = null
-    private var totalTime = 2 * 30 * 1000L // 6분
+//    private var totalTime = 2 * 30 * 1000L // 1분
+    private var totalTime = 6 * 60 * 1000L // 6분
     private val backPressedCallback = BackPressedCallback(this)
     private var remainingTime: Long = totalTime
     private var isRunning = false
