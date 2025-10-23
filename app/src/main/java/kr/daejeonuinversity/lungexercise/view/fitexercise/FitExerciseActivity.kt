@@ -29,6 +29,7 @@ import java.util.Locale
 class FitExerciseActivity :
     BaseActivity<ActivityFitExerciseBinding>(R.layout.activity_fit_exercise) {
 
+    private var lastElapsedSeconds = 0 // 클래스 변수로 선언
     private val backPressedCallback = BackPressedCallback(this)
     private var totalTime: Long = 0
     private lateinit var recommendWalkTimer: RecommendWalkTimer
@@ -132,6 +133,14 @@ class FitExerciseActivity :
 
             if (event?.action == MotionEvent.ACTION_UP) {
 
+                remainingTime = totalTime
+
+                val minutes = (totalTime / 1000) / 60
+                val seconds = (totalTime / 1000) % 60
+                val timeText = String.format("%02d:%02d", minutes, seconds)
+
+                recommendWalkTimer.updateProgress(1f, timeText)
+
                 if (!isRunning) {
                     startTimer() // 처음 실행 또는 pause 후 resume
 
@@ -208,6 +217,18 @@ class FitExerciseActivity :
 
             if (it) {
 
+                remainingTime = totalTime
+
+                val minutes = (totalTime / 1000) / 60
+                val seconds = (totalTime / 1000) % 60
+                val timeText = String.format("%02d:%02d", minutes, seconds)
+
+                recommendWalkTimer.updateProgress(1f, timeText)
+
+                vm.isReset()
+
+                sendResetMessageToWatch()
+
                 binding.btnStart.visibility = View.GONE
                 binding.btnStop.visibility = View.VISIBLE
                 val date = System.currentTimeMillis()
@@ -224,8 +245,12 @@ class FitExerciseActivity :
             if (it) {
 
                 binding.btnStart.visibility = View.VISIBLE
+                binding.btnResult.visibility = View.VISIBLE
+                binding.txStart.text = "다시하기"
                 binding.btnStop.visibility = View.GONE
                 sendStopMessageToWatch()
+                vm.isEnded()
+
             }
 
         }
@@ -251,6 +276,32 @@ class FitExerciseActivity :
 
                 binding.btnResult.visibility = View.VISIBLE
 
+                val distanceStr = vm.txWalkDistance.value ?: "0 m"
+                val calories = vm.calories.value ?: 0.0
+                val steps = vm.stepCount.value ?: 0
+
+                val distanceValue = distanceStr.replace(" m", "").trim().toDoubleOrNull() ?: 0.0
+
+                val warningCount = vm.currentWarningCount.value ?: 0
+
+                val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+
+                val elapsedSeconds = ((totalTime - remainingTime) / 1000 + 1).toInt()
+
+                Log.e("운동한 시간" , elapsedSeconds.toString())
+
+                /**
+                 * timer -> elapsedSeconds 저장으로 변경(실제 운동 시간)
+                 * **/
+                vm.saveFitResultData(
+                    elapsedSeconds,
+                    distanceValue,
+                    calories,
+                    warningCount,
+                    steps,
+                    date
+                )
+
             } else {
                 binding.btnResult.visibility = View.GONE
             }
@@ -271,11 +322,15 @@ class FitExerciseActivity :
 
                 val warningCount = vm.currentWarningCount.value ?: 0
 
+                val elapsedSeconds = ((totalTime - remainingTime + 500) / 1000).toInt()
+                Log.e("운동한 시간" , elapsedSeconds.toString())
+
                 intent.apply {
                     putExtra("userAge", age)
                     putExtra("userWeight", weight)
                     putExtra("userHeight", height)
                     putExtra("latestDistance", latestDistance)
+                    putExtra("elapsedSeconds", elapsedSeconds)
                     putExtra("timer", timer)
                     putExtra("fitDistance", fitDistance)
                     putExtra("currentDate", currentDate)
@@ -288,15 +343,16 @@ class FitExerciseActivity :
 
                 val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
+                /**
                 vm.saveFitResultData(
-                    timer,
-                    distanceValue,
-                    calories,
-                    warningCount,
-                    steps,
-                    date
+                timer,
+                distanceValue,
+                calories,
+                warningCount,
+                steps,
+                date
                 )
-
+                 **/
                 sendResetMessageToWatch()
                 startActivityAnimation(intent, this@FitExerciseActivity)
                 finish()
@@ -409,16 +465,25 @@ class FitExerciseActivity :
                 recommendWalkTimer.updateProgress(percentage, timeText)
 
                 // ✅ 여기서 ViewModel에 경과 시간 전달
-                val elapsedSeconds = ((totalTime - remainingTime) / 1000).toInt()
-                fViewModel.updateElapsedTime(elapsedSeconds)
+                lastElapsedSeconds = ((totalTime - remainingTime + 500) / 1000).toInt()
+                fViewModel.updateElapsedTime(lastElapsedSeconds)
 
             }
 
             override fun onFinish() {
-                remainingTime = 0L
-                stopTimer()
+
                 fViewModel.stopReceiving()
+
+                val elapsedSeconds = (totalTime / 1000).toInt()
+
+                binding.btnStart.visibility = View.VISIBLE
+                binding.txStart.text = "다시하기"
+                binding.btnStop.visibility = View.GONE
+
                 fViewModel.isEnded()
+                stopTimer()
+                // ✅ 마지막에 남은 시간 초기화
+                remainingTime = 0L
             }
         }.also {
             it.start()

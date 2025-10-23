@@ -27,11 +27,14 @@ import java.util.Locale
 class WalkingTestActivity :
     BaseActivity<ActivityWalkingTestBinding>(R.layout.activity_walking_test) {
 
+    companion object {
+        private const val TEST_DURATION_MS = 6 * 60 * 1000L
+    }
+
     private val wViewModel: WalkingTestViewModel by inject()
     private lateinit var heartTimerView: HeartTimerView
     private var countDownTimer: CountDownTimer? = null
-//    private var totalTime = 2 * 30 * 1000L // 1분
-    private var totalTime = 6 * 60 * 1000L // 6분
+    private var totalTime = TEST_DURATION_MS
     private val backPressedCallback = BackPressedCallback(this)
     private var remainingTime: Long = totalTime
     private var isRunning = false
@@ -60,6 +63,10 @@ class WalkingTestActivity :
             setTouchAnimation(v, event)
 
             if (event?.action == MotionEvent.ACTION_UP) {
+
+                remainingTime = TEST_DURATION_MS
+
+                heartTimerView.updateProgress(1f, "06:00") // 초기 상태로 리셋
 
                 if (!isRunning) {
                     startTimer() // 처음 실행 또는 pause 후 resume
@@ -134,8 +141,18 @@ class WalkingTestActivity :
 
             if (it) {
 
+                remainingTime = TEST_DURATION_MS
+
+                heartTimerView.updateProgress(1f, "06:00") // 초기 상태로 리셋
+
+                vm.isReset()
+
+                sendResetMessageToWatch()
+
                 binding.btnStart.visibility = View.GONE
+                binding.btnResult.visibility = View.GONE
                 binding.btnStop.visibility = View.VISIBLE
+
                 sendStartSignalToWatch()
 
             }
@@ -147,8 +164,13 @@ class WalkingTestActivity :
             if (it) {
 
                 binding.btnStart.visibility = View.VISIBLE
+                binding.btnResult.visibility = View.VISIBLE
+                binding.txStart.text = "다시하기"
                 binding.btnStop.visibility = View.GONE
                 sendStopMessageToWatch()
+                vm.isEnded()
+
+                vm.saveData()
 
             }
 
@@ -188,8 +210,6 @@ class WalkingTestActivity :
                 val calories = vm.calories.value ?: 0.0
                 val steps = vm.stepCount.value ?: 0
 
-                vm.saveData()
-
                 intent.putExtra("distance", distance)
                 intent.putExtra("calories", calories)
                 intent.putExtra("steps", steps)
@@ -204,30 +224,29 @@ class WalkingTestActivity :
         }
 
 
-
     }
 
-    /** 
+    /**
      * 기존 방식 워치 통신 함수
     private fun sendStartSignalToWatch() {
-        val nodeClient = Wearable.getNodeClient(this)
-        val messageClient = Wearable.getMessageClient(this)
+    val nodeClient = Wearable.getNodeClient(this)
+    val messageClient = Wearable.getMessageClient(this)
 
-        nodeClient.connectedNodes.addOnSuccessListener { nodes ->
-            nodes.forEach { node ->
-                messageClient.sendMessage(node.id, "/start_heart_rate_service", byteArrayOf())
-                    .addOnSuccessListener {
-                        Log.d("PhoneApp", "시작 신호 전송 성공")
-                    }
-                    .addOnFailureListener {
-                        Log.e("PhoneApp", "시작 신호 전송 실패", it)
-                    }
-            }
-        }
+    nodeClient.connectedNodes.addOnSuccessListener { nodes ->
+    nodes.forEach { node ->
+    messageClient.sendMessage(node.id, "/start_heart_rate_service", byteArrayOf())
+    .addOnSuccessListener {
+    Log.d("PhoneApp", "시작 신호 전송 성공")
+    }
+    .addOnFailureListener {
+    Log.e("PhoneApp", "시작 신호 전송 실패", it)
+    }
+    }
+    }
     }
 
-    **/
-    
+     **/
+
     private fun sendStartSignalToWatch() {
         val nodeClient = Wearable.getNodeClient(this)
         val messageClient = Wearable.getMessageClient(this)

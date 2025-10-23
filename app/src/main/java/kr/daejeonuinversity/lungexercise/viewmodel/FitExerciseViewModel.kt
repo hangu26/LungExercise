@@ -73,6 +73,10 @@ class FitExerciseViewModel(
     private var warningCount = 0
     private val WARNING_THRESHOLD = 2  // 2번 연속 기준
     private var lastWarningTime = 0L
+
+    private val _elapsedTime = MutableLiveData<Int>()
+    val elapsedTime: LiveData<Int> get() = _elapsedTime
+
     init {
         _stepCount.observeForever { steps ->
             val distanceM = steps * 0.7 // 평균 보폭 0.7m
@@ -97,6 +101,7 @@ class FitExerciseViewModel(
     }
 
     fun updateElapsedTime(seconds: Int) {
+        _elapsedTime.value = seconds
         elapsedTimeSeconds = seconds
         _stepCount.value?.let { steps ->
             val distanceM = steps * 0.7

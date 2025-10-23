@@ -91,14 +91,15 @@ class FitResultViewModel(private val repository: FitExerciseRepository, applicat
     }
 
     private fun formatTime(totalMinutes: Int): String {
-        return if (totalMinutes < 60) {
-            "$totalMinutes 분"
-        } else {
-            val hours = totalMinutes / 60
-            val minutes = totalMinutes % 60
-            if (minutes == 0) "$hours 시간"
-            else "$hours 시간 $minutes 분"
-        }
+        val hours = totalMinutes / 3600
+        val minutes = (totalMinutes % 3600) / 60
+        val secs = totalMinutes % 60
+
+        return buildString {
+            if (hours > 0) append("${hours}시간 ")
+            if (minutes > 0) append("${minutes}분 ")
+            if (secs > 0 || (hours == 0 && minutes == 0)) append("${secs}초")
+        }.trim()
     }
 
     private fun formatDistance(distanceM: Double): String {

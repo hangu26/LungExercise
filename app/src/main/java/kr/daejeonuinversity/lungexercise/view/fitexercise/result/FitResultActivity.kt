@@ -94,13 +94,15 @@ class FitResultActivity : BaseActivity<ActivityFitResultBinding>(R.layout.activi
 
         val startDistance = if (fitDistanceKm < 1) "0m" else "0km"
 
+        val elapsedSeconds = intent.getIntExtra("elapsedSeconds", 0)
+
         // UI 업데이트
         binding.apply {
             txAchievementValue.text = "$achievementPercent %"
             txTargetDistance.text = "목표 : $fitDistanceText"
             txStartDistance.text = startDistance
             txRiskPulseCount.text = "${args.currentWarningCount}회"
-            txTotalFitTime.text = "${args.timer} 분"
+            txTotalFitTime.text = formatSecondsToTime(elapsedSeconds)
             txCureentDate.text = args.currentDate
             txDistanceValue.text = userDistanceText
             txCalorieValue.text = args.userCalories.toString()
@@ -109,6 +111,18 @@ class FitResultActivity : BaseActivity<ActivityFitResultBinding>(R.layout.activi
         }
 
         startUserProgress(achievementPercent)
+    }
+
+    private fun formatSecondsToTime(seconds: Int): String {
+        val hours = seconds / 3600
+        val minutes = (seconds % 3600) / 60
+        val secs = seconds % 60
+
+        return buildString {
+            if (hours > 0) append("${hours}시간 ")
+            if (minutes > 0) append("${minutes}분 ")
+            if (secs > 0 || (hours == 0 && minutes == 0)) append("${secs}초")
+        }.trim()
     }
 
 

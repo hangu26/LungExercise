@@ -411,7 +411,8 @@
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/space_cl_start_to_reset" />
+                    android:layout_height="@dimen/space_cl_start_to_reset"
+                    android:visibility="gone"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/btn_reset"
@@ -419,6 +420,7 @@
                     android:layout_height="@dimen/height_btn_timer"
                     android:layout_weight="1"
                     android:background="@drawable/border_btn_reset_timer"
+                    android:visibility="gone"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
