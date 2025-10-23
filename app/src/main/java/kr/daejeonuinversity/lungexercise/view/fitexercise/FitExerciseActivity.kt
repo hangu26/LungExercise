@@ -286,7 +286,7 @@ class FitExerciseActivity :
 
                 val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
-                val elapsedSeconds = ((totalTime - remainingTime) / 1000 + 1).toInt()
+                val elapsedSeconds = ((totalTime - remainingTime) / 1000).toInt()
 
                 Log.e("운동한 시간" , elapsedSeconds.toString())
 
@@ -458,8 +458,9 @@ class FitExerciseActivity :
 
                 remainingTime = millisUntilFinished
                 val percentage = remainingTime.toFloat() / totalTime
-                val minutes = (remainingTime / 1000) / 60
-                val seconds = (remainingTime / 1000) % 60
+                val totalSeconds = ((remainingTime + 500) / 1000).toInt()
+                val minutes = totalSeconds / 60
+                val seconds = totalSeconds % 60
                 val timeText = String.format("%02d:%02d", minutes, seconds)
 
                 recommendWalkTimer.updateProgress(percentage, timeText)

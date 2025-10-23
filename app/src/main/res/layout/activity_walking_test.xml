@@ -99,7 +99,6 @@
                 android:layout_weight="1"
                 android:background="@drawable/border_btn_start_breathing"
                 android:clickable="true"
-                android:elevation="@dimen/elevation_btn_start_and_result"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
                 android:onClick="@{() -> viewmodel.btnStart()}"
@@ -223,7 +222,8 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/space_cl_start_to_reset" />
+                android:layout_height="@dimen/space_cl_start_to_reset"
+                android:background="@color/white"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btn_result"
