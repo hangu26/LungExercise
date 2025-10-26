@@ -235,7 +235,7 @@ class FitExerciseActivity :
                 val dateFormat = SimpleDateFormat("yyyy년MM월dd일", Locale.getDefault())
                 currentDate = dateFormat.format(Date(date))
                 sendStartSignalToWatch()
-
+                sendLaunchSignalToWatch()
             }
 
         }

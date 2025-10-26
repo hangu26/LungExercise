@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
@@ -19,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.google.android.gms.wearable.Wearable
 import kr.daejeonuinversity.lungexercise.R
 import kotlin.math.roundToInt
 
@@ -100,8 +102,6 @@ abstract class BaseActivity<T: ViewDataBinding>(@LayoutRes val layoutRes: Int)
             }
         }
     }
-
-
     private fun onBluetoothPermissionsGranted() {
         // 권한 허용 후 실행할 코드 작성 (예: 블루투스 초기화)
         // 여기서 바로 블루투스 연결 시도해도 됨
@@ -166,6 +166,23 @@ abstract class BaseActivity<T: ViewDataBinding>(@LayoutRes val layoutRes: Int)
             "$distanceM m"
         } else {
             String.format("%.1f km", distanceKm)
+        }
+    }
+
+    fun sendLaunchSignalToWatch() {
+        val nodeClient = Wearable.getNodeClient(this)
+        val messageClient = Wearable.getMessageClient(this)
+
+        nodeClient.connectedNodes.addOnSuccessListener { nodes ->
+            nodes.forEach { node ->
+                messageClient.sendMessage(node.id, "/launch_app", null)
+                    .addOnSuccessListener {
+                        Log.d("PhoneApp", "워치 앱 실행 신호 전송 성공")
+                    }
+                    .addOnFailureListener {
+                        Log.e("PhoneApp", "워치 앱 실행 신호 전송 실패", it)
+                    }
+            }
         }
     }
 
