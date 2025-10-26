@@ -28,7 +28,7 @@ class WalkingTestActivity :
     BaseActivity<ActivityWalkingTestBinding>(R.layout.activity_walking_test) {
 
     companion object {
-        private const val TEST_DURATION_MS = 1 * 60 * 1000L
+        private const val TEST_DURATION_MS = 6 * 60 * 1000L
     }
 
     private val wViewModel: WalkingTestViewModel by inject()
