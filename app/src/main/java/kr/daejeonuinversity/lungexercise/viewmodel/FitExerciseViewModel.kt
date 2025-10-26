@@ -63,6 +63,9 @@ class FitExerciseViewModel(
     private val _isEndedState = MutableLiveData<Boolean>()
     val isEndedState: LiveData<Boolean> = _isEndedState
 
+    private val _isFinished = MutableLiveData<Boolean>()
+    val isFinished: LiveData<Boolean> = _isFinished
+
     private val _btnResultState = MutableLiveData<Boolean>()
     val btnResultState: LiveData<Boolean> = _btnResultState
 
@@ -149,6 +152,10 @@ class FitExerciseViewModel(
 
         _btnStopState.value = true
 
+    }
+
+    fun isFinish(){
+        _isFinished.value = true
     }
 
     fun btnReset() {

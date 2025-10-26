@@ -308,6 +308,52 @@ class FitExerciseActivity :
 
         }
 
+        vm.isFinished.observe(this@FitExerciseActivity){
+
+            if (it) {
+
+                binding.btnResult.visibility = View.VISIBLE
+                binding.btnStart.visibility = View.VISIBLE
+                binding.btnResult.visibility = View.VISIBLE
+                binding.txStart.text = "다시하기"
+                binding.btnStop.visibility = View.GONE
+                sendStopMessageToWatch()
+
+                val distanceStr = vm.txWalkDistance.value ?: "0 m"
+                val calories = vm.calories.value ?: 0.0
+                val steps = vm.stepCount.value ?: 0
+
+                val distanceValue = distanceStr.replace(" m", "").trim().toDoubleOrNull() ?: 0.0
+
+                val warningCount = vm.currentWarningCount.value ?: 0
+
+                val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+
+                val elapsedSeconds = ((totalTime - remainingTime + 1000) / 1000).toInt()
+
+                Log.e("운동한 시간" , elapsedSeconds.toString())
+
+                /**
+                 * timer -> elapsedSeconds 저장으로 변경(실제 운동 시간)
+                 * **/
+                vm.saveFitResultData(
+                    elapsedSeconds,
+                    distanceValue,
+                    calories,
+                    warningCount,
+                    steps,
+                    date
+                )
+
+
+            }else{
+
+                binding.btnResult.visibility = View.GONE
+
+            }
+
+        }
+
         vm.btnResultState.observe(this@FitExerciseActivity) {
             if (it) {
                 val intent = Intent(this@FitExerciseActivity, FitResultActivity::class.java)
@@ -480,7 +526,7 @@ class FitExerciseActivity :
                 binding.btnStart.visibility = View.VISIBLE
                 binding.txStart.text = "다시하기"
                 binding.btnStop.visibility = View.GONE
-                fViewModel.btnStop()
+                fViewModel.isFinish()
                 stopTimer()
                 // ✅ 마지막에 남은 시간 초기화
                 remainingTime = 0L
