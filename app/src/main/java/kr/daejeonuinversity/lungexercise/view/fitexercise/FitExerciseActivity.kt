@@ -286,7 +286,7 @@ class FitExerciseActivity :
 
                 val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
-                val elapsedSeconds = ((totalTime - remainingTime) / 1000).toInt()
+                val elapsedSeconds = ((totalTime - remainingTime + 500) / 1000).toInt()
 
                 Log.e("운동한 시간" , elapsedSeconds.toString())
 
@@ -466,7 +466,7 @@ class FitExerciseActivity :
                 recommendWalkTimer.updateProgress(percentage, timeText)
 
                 // ✅ 여기서 ViewModel에 경과 시간 전달
-                lastElapsedSeconds = ((totalTime - remainingTime + 500) / 1000).toInt()
+                lastElapsedSeconds = ((totalTime - remainingTime) / 1000).toInt()
                 fViewModel.updateElapsedTime(lastElapsedSeconds)
 
             }
@@ -480,8 +480,7 @@ class FitExerciseActivity :
                 binding.btnStart.visibility = View.VISIBLE
                 binding.txStart.text = "다시하기"
                 binding.btnStop.visibility = View.GONE
-
-                fViewModel.isEnded()
+                fViewModel.btnStop()
                 stopTimer()
                 // ✅ 마지막에 남은 시간 초기화
                 remainingTime = 0L

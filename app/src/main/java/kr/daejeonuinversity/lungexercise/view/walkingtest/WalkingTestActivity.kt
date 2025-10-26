@@ -28,7 +28,7 @@ class WalkingTestActivity :
     BaseActivity<ActivityWalkingTestBinding>(R.layout.activity_walking_test) {
 
     companion object {
-        private const val TEST_DURATION_MS = 6 * 60 * 1000L
+        private const val TEST_DURATION_MS = 1 * 60 * 1000L
     }
 
     private val wViewModel: WalkingTestViewModel by inject()
@@ -49,7 +49,7 @@ class WalkingTestActivity :
         }
 
         heartTimerView = binding.heartTimerView
-
+        sendLaunchSignalToWatch()
         initButton()
         observe()
         backPressedCallback.addCallbackActivity(this, MainActivity::class.java)
@@ -247,6 +247,23 @@ class WalkingTestActivity :
 
      **/
 
+    private fun sendLaunchSignalToWatch() {
+        val nodeClient = Wearable.getNodeClient(this)
+        val messageClient = Wearable.getMessageClient(this)
+
+        nodeClient.connectedNodes.addOnSuccessListener { nodes ->
+            nodes.forEach { node ->
+                messageClient.sendMessage(node.id, "/launch_app", null)
+                    .addOnSuccessListener {
+                        Log.d("PhoneApp", "워치 앱 실행 신호 전송 성공")
+                    }
+                    .addOnFailureListener {
+                        Log.e("PhoneApp", "워치 앱 실행 신호 전송 실패", it)
+                    }
+            }
+        }
+    }
+
     private fun sendStartSignalToWatch() {
         val nodeClient = Wearable.getNodeClient(this)
         val messageClient = Wearable.getMessageClient(this)
@@ -317,6 +334,7 @@ class WalkingTestActivity :
                 remainingTime = 0L
                 stopTimer()
                 wViewModel.stopReceiving()
+                wViewModel.btnStop()
                 wViewModel.isEnded()
             }
         }.also {

@@ -83,15 +83,24 @@ abstract class BaseActivity<T: ViewDataBinding>(@LayoutRes val layoutRes: Int)
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
         if (requestCode == BLUETOOTH_PERMISSION_CODE) {
             val allGranted = grantResults.all { it == PackageManager.PERMISSION_GRANTED }
-            if (allGranted) {
-                onBluetoothPermissionsGranted()
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                // Android 12 이상: BLUETOOTH_CONNECT 권한 필요
+                if (allGranted) {
+                    onBluetoothPermissionsGranted()
+                } else {
+                    Toast.makeText(this, "블루투스 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
+                }
             } else {
-                Toast.makeText(this, "블루투스 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
+                // Android 11 이하: 위치 권한 등만 확인하면 됨
+                onBluetoothPermissionsGranted()
             }
         }
     }
+
 
     private fun onBluetoothPermissionsGranted() {
         // 권한 허용 후 실행할 코드 작성 (예: 블루투스 초기화)

@@ -65,23 +65,27 @@ class LungExerciseActivity :
 
     @SuppressLint("MissingPermission")
     fun printPairedDevices(context: Context) {
-        if (ActivityCompat.checkSelfPermission(
-                context,
-                Manifest.permission.BLUETOOTH_CONNECT
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // 권한이 없으면 요청하거나 그냥 return
-            Log.e("페어링된 기기", "BLUETOOTH_CONNECT 권한 없음")
-            return
+        val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
+        if (bluetoothAdapter == null) return
+
+        // Android 12 이상이면 BLUETOOTH_CONNECT 체크
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (ActivityCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.BLUETOOTH_CONNECT
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                Log.e("페어링된 기기", "BLUETOOTH_CONNECT 권한 없음")
+                return
+            }
         }
 
-        val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
-        val pairedDevices: Set<BluetoothDevice>? = bluetoothAdapter?.bondedDevices
-
+        val pairedDevices: Set<BluetoothDevice>? = bluetoothAdapter.bondedDevices
         pairedDevices?.forEach { device ->
             Log.d("페어링된 기기", "이름: ${device.name}, 주소: ${device.address}")
         }
     }
+
 
     private fun initView() {
         updateConnectionUI(MaskBluetoothManager.isConnectedPublic)
@@ -182,16 +186,35 @@ class LungExerciseActivity :
     }
 
     private fun discoverPairedDevices() {
-        val devices = if (ActivityCompat.checkSelfPermission(
-                this, Manifest.permission.BLUETOOTH_CONNECT
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            emptyList<BluetoothDevice>()
-        } else {
-            BluetoothAdapter.getDefaultAdapter()?.bondedDevices?.toList() ?: emptyList()
+        val devices = when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+                // Android 12 이상: BLUETOOTH_CONNECT 필요
+                if (ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.BLUETOOTH_CONNECT
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    emptyList<BluetoothDevice>()
+                } else {
+                    BluetoothAdapter.getDefaultAdapter()?.bondedDevices?.toList() ?: emptyList()
+                }
+            }
+
+            else -> {
+                // Android 11 이하: BLUETOOTH 권한만으로 접근 가능
+                BluetoothAdapter.getDefaultAdapter()?.bondedDevices?.toList() ?: emptyList()
+            }
         }
+
+        // 로그 확인
+        Log.d("페어링된 기기", "총 디바이스 수: ${devices.size}")
+        devices.forEach { device ->
+            Log.d("페어링된 기기", "디바이스 이름: ${device.name}, 주소: ${device.address}")
+        }
+
         bluetoothFragment?.setDevices(devices)
     }
+
 
     private fun setupBluetoothCallbacks() {
         MaskBluetoothManager.connectCallback = object : MaskBluetoothManager.ConnectCallback {
