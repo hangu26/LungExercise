@@ -198,6 +198,8 @@ object MaskBluetoothManager {
         val airflowValues = listOf(airflow1, airflow2, airflow3)
         val avgFlow = airflowValues.average()
 
+        logDynamicPressure(avgFlow)
+
         if (baseline == null) {
             baselineSamples.add(avgFlow)
             if (baselineSamples.size >= baselineSampleCountLimit) {
@@ -242,6 +244,28 @@ object MaskBluetoothManager {
 
             breathingEventListener?.onExhaleEnd(exhaleDuration)
         }
+    }
+
+    /** 압력값 로그 함수 **/
+    private fun logDynamicPressure(rawVelocity: Double) {
+        val idleRaw = 21761.0   // 0 m/s (바람 없을 때)
+
+        // 이 값을 바람을 불었을 때 나오는 최저치에 가깝게 맞출수록
+        // 압력 수치가 더 민감하고 크게 올라갑니다.
+        val minRaw = 21000.0
+
+        val maxVelocity = 15.0
+        val rho = 1.18
+
+        // 1. 속도 계산
+        var v = ((idleRaw - rawVelocity) / (idleRaw - minRaw)) * maxVelocity
+        if (v < 0) v = 0.0
+        if (v > maxVelocity) v = maxVelocity
+
+        // 2. 압력 계산 (사진 공식)
+        val pressure = 0.5 * rho * Math.pow(v, 2.0)
+
+        Log.d("PressureSensor", "Raw: ${rawVelocity.toInt()} -> 속도: ${String.format("%.2f", v)} m/s -> 압력: ${String.format("%.2f", pressure)} Pa")
     }
 
     fun disconnect() {
