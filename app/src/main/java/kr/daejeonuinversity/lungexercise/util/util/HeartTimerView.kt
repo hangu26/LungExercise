@@ -8,13 +8,15 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.content.ContextCompat
+import kr.daejeonuinversity.lungexercise.R
 
 class HeartTimerView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : View(context, attrs) {
 
     private val paint = Paint().apply {
-        color = Color.parseColor("#7BA4FF") // 원 색상
+        color = ContextCompat.getColor(context,R.color.color_timer_walking)
         style = Paint.Style.STROKE
         strokeWidth = 25f
         isAntiAlias = true

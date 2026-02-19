@@ -1,0 +1,10 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <!-- 세로로 길게 만들기 -->
+    <size
+        android:width="@dimen/width_thumb"
+        android:height="@dimen/height_thumb"/>
+
+    <solid android:color="#FFFFFF"/>
+
+</shape>

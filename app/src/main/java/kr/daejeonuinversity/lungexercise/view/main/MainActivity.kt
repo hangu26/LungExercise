@@ -15,11 +15,15 @@ import kr.daejeonuinversity.lungexercise.R
 import kr.daejeonuinversity.lungexercise.databinding.ActivityMainBinding
 import kr.daejeonuinversity.lungexercise.util.base.BaseActivity
 import kr.daejeonuinversity.lungexercise.util.util.BackPressedCallback
+import kr.daejeonuinversity.lungexercise.view.breathing.TestBreathActivity
 import kr.daejeonuinversity.lungexercise.view.developer.DeveloperActivity
 import kr.daejeonuinversity.lungexercise.view.editinfo.EditInfoActivity
 import kr.daejeonuinversity.lungexercise.view.history.HistoryActivity
 import kr.daejeonuinversity.lungexercise.view.exercise.LungExerciseActivity
+import kr.daejeonuinversity.lungexercise.view.fitplan.FitPlanActivity
 import kr.daejeonuinversity.lungexercise.view.history.HistoryRecordActivity
+import kr.daejeonuinversity.lungexercise.view.insight.InsightActivity
+import kr.daejeonuinversity.lungexercise.view.setting.SettingActivity
 import kr.daejeonuinversity.lungexercise.view.walkingtest.WalkingTestActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.MainViewModel
 import org.koin.android.ext.android.inject
@@ -54,6 +58,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             )
         }
 
+//        mViewModel.startReceiving()
+
         initButton()
         observe()
 
@@ -61,6 +67,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 //        checkBluetoothConnectPermissionAndConnect()
         backPressedCallback.doubleBackToExit(this)
 
+    }
+
+    override fun onStart() = mViewModel.let{ vm ->
+        super.onStart()
+        vm.startReceiving()
+        vm.requestStepsFromWatch()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mViewModel.stopReceiving()
     }
 
     private fun handleRapidClicks(
@@ -144,6 +161,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             false
         }
 
+        binding.btnFitPlan.setOnTouchListener { v, event ->
+            setTouchAnimation(v, event)
+            if (event?.action == MotionEvent.ACTION_UP) {
+
+                val intent = Intent(this@MainActivity, FitPlanActivity::class.java)
+                startActivityAnimation(intent, this@MainActivity)
+                finish()
+            }
+            false
+        }
+
         binding.btnHistory.setOnTouchListener { v, event ->
             setTouchAnimation(v, event)
             if (event?.action == MotionEvent.ACTION_UP) {
@@ -160,6 +188,37 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             if (event?.action == MotionEvent.ACTION_UP) {
 
                 val intent = Intent(this@MainActivity, EditInfoActivity::class.java)
+                startActivityAnimation(intent, this@MainActivity)
+                finish()
+            }
+            false
+        }
+
+        binding.btnSetting.setOnTouchListener { v, event ->
+            setTouchAnimation(v, event)
+            if (event?.action == MotionEvent.ACTION_UP) {
+
+                val intent = Intent(this@MainActivity, SettingActivity::class.java)
+                startActivityAnimation(intent, this@MainActivity)
+                finish()
+            }
+            false
+        }
+
+        binding.btnInsight.setOnTouchListener{ v, event ->
+            setTouchAnimation(v,event)
+            if (event?.action == MotionEvent.ACTION_UP){
+                val intent = Intent(this@MainActivity, InsightActivity::class.java)
+                startActivityAnimation(intent, this@MainActivity)
+                finish()
+            }
+            false
+        }
+
+        binding.btnTestBreath.setOnTouchListener{ v, event ->
+            setTouchAnimation(v,event)
+            if (event?.action == MotionEvent.ACTION_UP){
+                val intent = Intent(this@MainActivity, TestBreathActivity::class.java)
                 startActivityAnimation(intent, this@MainActivity)
                 finish()
             }

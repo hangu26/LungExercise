@@ -6,11 +6,11 @@
     android:background="@drawable/border_result_breathing">
 
     <TextView
-        android:id="@+id/tx_connect_bluetooth_mask"
+        android:id="@+id/tx_bluetooth_mask_setting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_side_border_dialog_bluetooth"
-        android:layout_marginTop="@dimen/margin_top_tx_result_breathing_dialog"
+        android:layout_marginTop="@dimen/margin_top_tx_bluetooth_mask_setting"
         android:fontFamily="@font/pretendard_semibold"
         android:text="@string/tx_mask_setting"
         android:textColor="@color/black"
@@ -27,9 +27,9 @@
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
-        app:layout_constraintBottom_toBottomOf="@+id/tx_connect_bluetooth_mask"
+        app:layout_constraintBottom_toBottomOf="@+id/tx_bluetooth_mask_setting"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tx_connect_bluetooth_mask">
+        app:layout_constraintTop_toTopOf="@+id/tx_bluetooth_mask_setting">
 
         <TextView
             android:id="@+id/tx_x"
@@ -58,7 +58,7 @@
         android:textColor="@color/color_tx_x"
         android:textSize="@dimen/size_tx_connect_smart_mask"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tx_connect_bluetooth_mask" />
+        app:layout_constraintTop_toBottomOf="@+id/tx_bluetooth_mask_setting" />
 
     <FrameLayout
         android:id="@+id/space_01"

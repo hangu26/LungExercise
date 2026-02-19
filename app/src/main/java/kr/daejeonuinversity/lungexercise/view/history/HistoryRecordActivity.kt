@@ -69,6 +69,17 @@ class HistoryRecordActivity :
         backPressedCallback.addCallbackActivity(this, MainActivity::class.java)
     }
 
+    override fun onStart() = hViewModel.let{ vm ->
+        super.onStart()
+        vm.startReceiving()
+        vm.requestStepsFromWatch()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        hViewModel.stopReceiving()
+    }
+
     private fun observe() = hViewModel.let{ vm ->
 
         vm.btnBackState.observe(this@HistoryRecordActivity){

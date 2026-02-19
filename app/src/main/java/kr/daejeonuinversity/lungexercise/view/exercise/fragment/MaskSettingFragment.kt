@@ -56,6 +56,9 @@ class MaskSettingFragment(
             isClickable = false
             isFocusable = false
         }
+        binding.constraintCancelDialogBluetooth.setOnClickListener {
+            dismiss()
+        }
 
         startProgressAnimation()
     }

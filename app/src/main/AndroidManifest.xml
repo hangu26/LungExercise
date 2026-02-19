@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Android 12 이상에서 필요한 권한 -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
         android:name="android.permission.BLUETOOTH_SCAN"
         android:required="false" />
@@ -12,6 +13,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:name=".util.base.MyApplication"
@@ -23,7 +26,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LungExercise"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <activity
+            android:name=".view.fitexercise.result.FitResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.walkingtest.result.WalkingResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.fitexercise.FitExerciseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.fitplan.FitPlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.breathing.TestBreathActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.insight.InsightActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.setting.SettingActivity"
+            android:exported="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
         <activity
             android:name=".view.developer.DeveloperActivity"
             android:exported="false" />
@@ -59,6 +96,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

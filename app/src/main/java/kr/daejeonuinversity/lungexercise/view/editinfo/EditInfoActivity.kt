@@ -1,9 +1,16 @@
 package kr.daejeonuinversity.lungexercise.view.editinfo
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
+import android.view.WindowManager
+import android.widget.LinearLayout
+import android.widget.NumberPicker
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import kr.daejeonuinversity.lungexercise.R
 import kr.daejeonuinversity.lungexercise.data.local.entity.UserInfo
@@ -14,6 +21,7 @@ import kr.daejeonuinversity.lungexercise.view.main.MainActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.EditInfoViewModel
 import org.koin.android.ext.android.inject
 import java.time.LocalDate
+import java.util.Calendar
 
 class EditInfoActivity : BaseActivity<ActivityEditInfoBinding>(R.layout.activity_edit_info) {
 
@@ -60,6 +68,36 @@ class EditInfoActivity : BaseActivity<ActivityEditInfoBinding>(R.layout.activity
             setGenderBackground(gender == "man")
         }
 
+        vm.edtDayClickState.observe(this) {
+            showNumberPickerDialog(
+                title = "일 선택",
+                minValue = 1,
+                maxValue = 31,
+                defaultValue = Calendar.getInstance().get(Calendar.DAY_OF_MONTH),
+                formatTwoDigits = true
+            ) { day -> binding.edtDay.setText(day) }
+        }
+
+        vm.edtMonthClickState.observe(this) {
+            showNumberPickerDialog(
+                title = "월 선택",
+                minValue = 1,
+                maxValue = 12,
+                defaultValue = Calendar.getInstance().get(Calendar.MONTH) + 1, // 월은 0부터 시작
+                formatTwoDigits = true
+            ) { month -> binding.edtMonth.setText(month) }
+        }
+
+        vm.edtYearClickState.observe(this) {
+            showNumberPickerDialog(
+                title = "년도 선택",
+                minValue = 1900,
+                maxValue = Calendar.getInstance().get(Calendar.YEAR),
+                defaultValue = Calendar.getInstance().get(Calendar.YEAR)
+            ) { year -> binding.edtYear.setText(year) }
+        }
+
+
         vm.btnSaveState.observe(this@EditInfoActivity) {
             if (it) {
                 val yearStr = binding.edtYear.text.toString()
@@ -94,12 +132,54 @@ class EditInfoActivity : BaseActivity<ActivityEditInfoBinding>(R.layout.activity
                 vm.saveData(userInfo)
 
                 val intent = Intent(this@EditInfoActivity, MainActivity::class.java)
-                startActivityBackAnimation(intent,this@EditInfoActivity)
+                startActivityBackAnimation(intent, this@EditInfoActivity)
                 finish()
 
             }
         }
     }
+
+    private fun showNumberPickerDialog(
+        title: String,
+        minValue: Int,
+        maxValue: Int,
+        defaultValue: Int,
+        formatTwoDigits: Boolean = false,
+        onValueSelected: (String) -> Unit
+    ) {
+        val picker = NumberPicker(this).apply {
+            this.minValue = minValue
+            this.maxValue = maxValue
+            this.value = defaultValue
+        }
+
+        val dialog = AlertDialog.Builder(this)
+            .setTitle(title)
+            .setView(picker)
+            .setPositiveButton("확인") { _, _ ->
+                val formattedValue = if (formatTwoDigits) {
+                    String.format("%02d", picker.value)
+                } else {
+                    picker.value.toString()
+                }
+                onValueSelected(formattedValue)
+            }
+            .setNegativeButton("취소", null)
+            .create()
+
+        dialog.show()
+
+        dialog.window?.setLayout(
+            (resources.displayMetrics.widthPixels * 0.7).toInt(),
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+
+        val negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+        val layoutParams = negativeButton.layoutParams as LinearLayout.LayoutParams
+        layoutParams.gravity = Gravity.START
+        negativeButton.layoutParams = layoutParams
+    }
+
 
     private fun isValidDateInput(): Boolean {
         val yearStr = binding.edtYear.text.toString()

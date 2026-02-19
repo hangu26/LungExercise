@@ -70,6 +70,7 @@
                         android:layout_width="@dimen/size_constraint_bluetooth_black"
                         android:layout_height="@dimen/size_constraint_bluetooth_black"
                         android:layout_marginEnd="@dimen/margin_start_icon_back"
+                        android:visibility="gone"
                         android:background="@drawable/border_constraint_bluetooth_black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

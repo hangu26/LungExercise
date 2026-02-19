@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
@@ -19,7 +20,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.google.android.gms.wearable.Wearable
 import kr.daejeonuinversity.lungexercise.R
+import kotlin.math.roundToInt
 
 abstract class BaseActivity<T: ViewDataBinding>(@LayoutRes val layoutRes: Int)
     : AppCompatActivity() {
@@ -82,16 +85,23 @@ abstract class BaseActivity<T: ViewDataBinding>(@LayoutRes val layoutRes: Int)
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
         if (requestCode == BLUETOOTH_PERMISSION_CODE) {
             val allGranted = grantResults.all { it == PackageManager.PERMISSION_GRANTED }
-            if (allGranted) {
-                onBluetoothPermissionsGranted()
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                // Android 12 이상: BLUETOOTH_CONNECT 권한 필요
+                if (allGranted) {
+                    onBluetoothPermissionsGranted()
+                } else {
+                    Toast.makeText(this, "블루투스 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
+                }
             } else {
-                Toast.makeText(this, "블루투스 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
+                // Android 11 이하: 위치 권한 등만 확인하면 됨
+                onBluetoothPermissionsGranted()
             }
         }
     }
-
     private fun onBluetoothPermissionsGranted() {
         // 권한 허용 후 실행할 코드 작성 (예: 블루투스 초기화)
         // 여기서 바로 블루투스 연결 시도해도 됨
@@ -140,5 +150,40 @@ abstract class BaseActivity<T: ViewDataBinding>(@LayoutRes val layoutRes: Int)
         }
     }
 
+    /** 맞춤형 운동
+     * 추천 거리가 1km 미만이면 m로 표시, 1km 이상이면 km로 표시 함수 **/
+    fun formatDistance(distance: Double) : String {
+        return if (distance < 1000) {
+            String.format("%.0f m", distance)   // 1km 미만 → 미터
+        } else {
+            String.format("%.1f km", distance / 1000.0)  // 1km 이상 → 킬로미터
+        }
+    }
+
+    fun formatDistanceKm(distanceKm: Double): String {
+        return if (distanceKm < 1) {
+            val distanceM = (distanceKm * 1000).roundToInt()
+            "$distanceM m"
+        } else {
+            String.format("%.1f km", distanceKm)
+        }
+    }
+
+    fun sendLaunchSignalToWatch() {
+        val nodeClient = Wearable.getNodeClient(this)
+        val messageClient = Wearable.getMessageClient(this)
+
+        nodeClient.connectedNodes.addOnSuccessListener { nodes ->
+            nodes.forEach { node ->
+                messageClient.sendMessage(node.id, "/launch_app", null)
+                    .addOnSuccessListener {
+                        Log.d("PhoneApp", "워치 앱 실행 신호 전송 성공")
+                    }
+                    .addOnFailureListener {
+                        Log.e("PhoneApp", "워치 앱 실행 신호 전송 실패", it)
+                    }
+            }
+        }
+    }
 
 }

@@ -24,6 +24,9 @@ class HistoryViewModel(private val repository: BreathRepository, application: Ap
     private val _btnRemoveClicked = MutableLiveData<Boolean>()
     val btnRemoveClicked: LiveData<Boolean> = _btnRemoveClicked
 
+    private val _btnExportClicked = MutableLiveData<Boolean>()
+    val btnExportClicked: LiveData<Boolean> = _btnExportClicked
+
     private val _calendarDays = MutableLiveData<List<CalendarDay>>()
     val calendarDays: LiveData<List<CalendarDay>> = _calendarDays
 
@@ -104,7 +107,7 @@ class HistoryViewModel(private val repository: BreathRepository, application: Ap
                 _txTotalTime.value =
                     res.getString(R.string.tx_total_time_format, clickedDateData.totalTime / 1000)
                 _txClearCount.value =
-                    res.getString(R.string.tx_clear_count_format, clickedDateData.clear)
+                    res.getString(R.string.tx_clear_count_format) + " ${clickedDateData.clear}" + "회" + " / " + (clickedDateData.totalCount) + "회"
             } else {
                 _txTotalCount.value = res.getString(R.string.tx_total_count_empty)
                 _txAverageTime.value = res.getString(R.string.tx_average_time_empty)
@@ -130,14 +133,42 @@ class HistoryViewModel(private val repository: BreathRepository, application: Ap
         _backClicked.value = true
     }
 
-    fun btnRemove(){
+    fun btnRemove() {
 
         _btnRemoveClicked.value = true
 
+    }
+
+    fun btnExport() {
+
+        _btnExportClicked.value = true
 
     }
 
-    fun removeClickedData(isClickedDate : LocalDate){
+    fun createExcelContent(): List<List<String>> {
+        val headers = listOf("총횟수", "평균시간(s)", "총시간(s)", "클리어/총횟수")
+
+        val values = listOf(
+            _txTotalCount.value ?: "",
+            _txAverageTime.value ?: "",
+            _txTotalTime.value ?: "",
+            _txClearCount.value ?: ""
+        )
+
+        val data = mutableListOf<List<String>>()
+        data.add(headers)
+
+        // 데이터가 모두 비어있으면 빈 행 추가
+        if (values.all { it.isBlank() }) {
+            data.add(listOf("", "", "", ""))
+        } else {
+            data.add(values)
+        }
+
+        return data
+    }
+
+    fun removeClickedData(isClickedDate: LocalDate) {
 
         viewModelScope.launch {
 

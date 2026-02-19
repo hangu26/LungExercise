@@ -3,6 +3,7 @@ package kr.daejeonuinversity.lungexercise.view.exercise.fragment
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.res.Configuration
 import android.net.Uri
@@ -53,6 +54,9 @@ class VideoDialogFragment : DialogFragment(), MaskBluetoothManager.BreathingEven
         dialog.setContentView(view)
         val orientation = resources.configuration.orientation
 
+        val maskPopupVisibility = context?.getSharedPreferences("Mask Popup", Context.MODE_PRIVATE)
+            ?.getBoolean("mask popup", false)
+
         val file = File(requireContext().getExternalFilesDir(null), "lungexercise.mp4")
         Log.d("파일 경로", "경로: ${file.absolutePath}, 존재 여부: ${file.exists()}")
         // View 초기화
@@ -102,7 +106,7 @@ class VideoDialogFragment : DialogFragment(), MaskBluetoothManager.BreathingEven
                 override fun run() {
                     val currentPos = exoPlayer.currentPosition
                     if (currentPos >= 150_000L) {
-                        if (constraintBreathing.visibility != View.VISIBLE) {
+                        if (maskPopupVisibility == true) {
                             constraintBreathing.visibility = View.VISIBLE
                         }
                     } else {

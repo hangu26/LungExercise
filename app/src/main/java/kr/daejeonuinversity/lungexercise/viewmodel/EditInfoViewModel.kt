@@ -43,6 +43,35 @@ class EditInfoViewModel(private val repository: InfoRepository, application: App
     private var _genderState = MutableLiveData<String>()
     val genderState: LiveData<String> = _genderState
 
+    private var _edtDayClickState = MutableLiveData<Boolean>()
+    val edtDayClickState: LiveData<Boolean> = _edtDayClickState
+
+    private var _edtMonthClickState = MutableLiveData<Boolean>()
+    val edtMonthClickState: LiveData<Boolean> = _edtMonthClickState
+
+    private var _edtYearClickState = MutableLiveData<Boolean>()
+    val edtYearClickState: LiveData<Boolean> = _edtYearClickState
+
+    fun edtDayClicked(){
+
+        _edtDayClickState.value = true
+
+    }
+
+    fun edtMonthClicked(){
+
+        _edtMonthClickState.value = true
+
+    }
+
+    fun edtYearClicked(){
+
+        _edtYearClickState.value = true
+
+    }
+
+
+
     fun btnBack() {
 
         _btnBackState.value = true

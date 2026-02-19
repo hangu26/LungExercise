@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kr.daejeonuinversity.lungexercise.R
 import kr.daejeonuinversity.lungexercise.databinding.DialogBluetoothBinding
 
+/**
 class BluetoothDialog(
     private val context: AppCompatActivity,
     private val onConnectClick: (Boolean) -> Unit
@@ -69,3 +70,4 @@ class BluetoothDialog(
     }
 
 }
+**/

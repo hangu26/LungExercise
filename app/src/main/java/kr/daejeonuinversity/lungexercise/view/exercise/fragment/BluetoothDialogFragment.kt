@@ -1,28 +1,35 @@
 package kr.daejeonuinversity.lungexercise.view.exercise.fragment
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Dialog
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import kr.daejeonuinversity.lungexercise.R
 import kr.daejeonuinversity.lungexercise.databinding.DialogBluetoothBinding
+import kr.daejeonuinversity.lungexercise.util.adapter.PairedDeviceAdapter
+import kr.daejeonuinversity.lungexercise.util.util.CustomToastPopup
 
-class BluetoothFragment(
-    private val onConnectClick: (Boolean) -> Unit,
-    private val onNextClick: () -> Unit
-) : DialogFragment() {
+class BluetoothFragment : DialogFragment() {
 
     private var _binding: DialogBluetoothBinding? = null
     private val binding get() = _binding!!
 
-    // 상태 저장용 변수
-    private var currentStatusText: String? = null
-    private var bluetoothListVisible: Boolean = false
-    private var nextDialogVisible: Boolean = false
+    private lateinit var adapter: PairedDeviceAdapter
+    private var pendingDevices: List<BluetoothDevice>? = null
+    private var pendingNextVisibility: Boolean? = null
+    var onConnectClick: ((BluetoothDevice) -> Unit)? = null
+    var onNextClick: Boolean = false
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = Dialog(requireContext())
@@ -49,57 +56,64 @@ class BluetoothFragment(
             setBackgroundDrawableResource(R.drawable.border_result_breathing)
         }
 
-        // 초기 UI 상태 반영
-        currentStatusText?.let {
-            binding.txDeviceName.text = it
-        }
-        binding.linearBluetoothList.visibility =
-            if (bluetoothListVisible) View.VISIBLE else View.GONE
-
-        binding.btnNextDialog.visibility =
-            if (nextDialogVisible) View.VISIBLE else View.INVISIBLE
-
-        binding.apply {
-            constraintConnectDevice.setOnClickListener {
-                onConnectClick(true)
-            }
-            btnRefresh.setOnClickListener {
-                onConnectClick(false)
-            }
-            btnNextDialog.setOnClickListener {
-                onNextClick()
-            }
-            constraintCancelDialogBluetooth.setOnClickListener {
-                dismiss()
-            }
+        adapter = PairedDeviceAdapter(requireContext()) { device ->
+            onConnectClick?.invoke(device)
         }
 
-        // 콜백 호출 초기화
-        onConnectClick(false)
+        binding.linearBluetoothList.adapter = adapter
+        binding.linearBluetoothList.layoutManager = LinearLayoutManager(context)
+
+        binding.btnNextDialog.setOnClickListener {
+            dialog?.dismiss()
+        }
+
+        // Fragment가 준비되면 pendingDevices 처리
+        pendingDevices?.let {
+            adapter.setDevices(it)
+            pendingDevices = null
+        }
+
+        pendingNextVisibility?.let {
+            updateNextButtonState(it)
+            pendingNextVisibility = null
+        }
+
+        binding.constraintCancelDialogBluetooth.setOnClickListener { dismiss() }
     }
 
-    fun setStatusText(text: String) {
-        currentStatusText = text
-        if (isAdded && _binding != null) {
-            binding.txDeviceName.text = text
-            binding.linearBluetoothList.visibility =
-                if (text.startsWith("연결할 디바이스 발견")) View.VISIBLE else View.GONE
+    fun setDevices(devices: List<BluetoothDevice>) {
+        if (::adapter.isInitialized) {
+            adapter.setDevices(devices)
+        } else {
+            pendingDevices = devices
         }
     }
 
-    fun setBluetoothListVisible(visible: Boolean) {
-        bluetoothListVisible = visible
-        if (isAdded && _binding != null) {
-            binding.linearBluetoothList.visibility = if (visible) View.VISIBLE else View.GONE
+    fun visibilityBtnNext(isAble: Boolean) {
+        if (_binding == null) {
+            pendingNextVisibility = isAble
+            return
+        }
+
+        updateNextButtonState(isAble)
+    }
+
+    private fun updateNextButtonState(isAble: Boolean) {
+        if (isAble) {
+            binding.btnNextDialog.visibility = View.VISIBLE
+            showMaskPopupToast("연결에 성공했습니다.")
+            onNextClick = true
+        } else {
+            binding.btnNextDialog.visibility = View.INVISIBLE
+            showMaskPopupToast("연결에 실패했습니다.")
+            onNextClick = false
         }
     }
 
-    fun setNextDialogVisible(visible: Boolean) {
-
-        nextDialogVisible = visible
-        if (isAdded && _binding != null) {
-            binding.btnNextDialog.visibility = if (visible) View.VISIBLE else View.INVISIBLE
-        }
+    @SuppressLint("RestrictedApi")
+    private fun showMaskPopupToast(text : String) {
+        val customToast = CustomToastPopup(binding.root, layoutInflater)
+        customToast.showMaskPopupToast(text)
     }
 
     override fun onDestroyView() {
@@ -107,4 +121,7 @@ class BluetoothFragment(
         _binding = null
     }
 }
+
+
+
 

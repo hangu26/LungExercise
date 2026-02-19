@@ -219,6 +219,39 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/btn_export"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_end_constraint_delete"
+                            android:background="@drawable/border_btn_start_breathing"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:onClick="@{() -> viewmodel.btnExport()}"
+                            android:paddingStart="@dimen/padding_horizontal_constraint_delete"
+                            android:paddingTop="@dimen/padding_vertical_constraint_delete"
+                            android:paddingEnd="@dimen/padding_horizontal_constraint_delete"
+                            android:paddingBottom="@dimen/padding_vertical_constraint_delete"
+                            app:layout_constraintBottom_toBottomOf="@+id/tx_weekly_breathing"
+                            app:layout_constraintEnd_toStartOf="@+id/btn_stop"
+                            app:layout_constraintTop_toTopOf="@+id/tx_weekly_breathing">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/pretendard_bold"
+                                android:gravity="center"
+                                android:text="@string/tx_export"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/size_tx_btn_next"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/btn_stop"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -250,7 +283,6 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
                         <!-- 막대 그래프 -->
                         <com.github.mikephil.charting.charts.BarChart
@@ -398,7 +430,7 @@
                                     android:layout_marginStart="@dimen/margin_tx_all_count"
                                     android:layout_marginTop="@dimen/margin_tx_all_count"
                                     android:fontFamily="@font/pretendard_medium"
-                                    android:text="@string/tx_total_count"
+                                    android:text="@string/tx_total_success_count"
                                     android:textColor="@color/color_tx_graph_data"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />

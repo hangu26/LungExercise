@@ -27,8 +27,6 @@ import kr.daejeonuinversity.lungexercise.util.util.MaskBluetoothManager
 import java.io.IOException
 import java.util.UUID
 
-// BreathingViewModel.kt
-// BreathingViewModel.kt
 class BreathingViewModel(private val repository: BreathRepository, application: Application) :
     AndroidViewModel(application), MaskBluetoothManager.BreathingEventListener {
 
@@ -43,6 +41,13 @@ class BreathingViewModel(private val repository: BreathRepository, application: 
 
     private val _userTime = MutableLiveData<String>("0 초")
     val userTime: LiveData<String> get() = _userTime
+
+    private val _txPercent = MutableLiveData<String>("0 %")
+    val txPercent: LiveData<String> get() = _txPercent
+
+    private val _btnSettingReset = MutableLiveData<Boolean>(false)
+    val btnSettingReset: LiveData<Boolean> get() = _btnSettingReset
+
 
     private val _isResultAvailable = MutableLiveData(false)
     val isResultAvailable: LiveData<Boolean> get() = _isResultAvailable
@@ -72,6 +77,12 @@ class BreathingViewModel(private val repository: BreathRepository, application: 
         isStarted = false
         _btnStopState.value = true
         stopExhaleCounting()
+    }
+
+    fun btnReset(){
+        _btnSettingReset.value = true
+        _btnStartState.value = false
+        _btnStopState.value = false
     }
 
     fun btnBack() {
@@ -106,6 +117,8 @@ class BreathingViewModel(private val repository: BreathRepository, application: 
             var seconds = 0
             while (true) {
                 _userTime.postValue("$seconds 초")
+                val percent = ((seconds * 100) / 8).coerceAtMost(100)
+                _txPercent.postValue("$percent %")
                 seconds++
                 delay(1000L)
             }

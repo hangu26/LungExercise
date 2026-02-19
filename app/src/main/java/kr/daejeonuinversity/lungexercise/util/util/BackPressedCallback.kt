@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.FragmentActivity
 import kr.daejeonuinversity.lungexercise.R
+import kr.daejeonuinversity.lungexercise.view.fitexercise.result.FitResultArgs
 
 class BackPressedCallback(private val activity: FragmentActivity) {
 
@@ -34,6 +35,39 @@ class BackPressedCallback(private val activity: FragmentActivity) {
         }
         activity.onBackPressedDispatcher.addCallback(activity, callback)
     }
+
+    fun intentCallbackActivity(
+        context: Activity,
+        toActivity: Class<out Activity>,
+        args: FitResultArgs
+    ) {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val intent = Intent(context, toActivity).apply {
+                    putExtra("userAge", args.age)
+                    putExtra("userWeight", args.weight)
+                    putExtra("latestDistance", args.latestDistance)
+                    putExtra("timer", args.timer)
+                    putExtra("fitDistance", args.fitDistance)
+                    putExtra("currentDate", args.currentDate)
+                    putExtra("currentWarningCount", args.currentWarningCount)
+                    putExtra("distance", args.userDistance)
+                    putExtra("calories", args.userCalories)
+                    putExtra("steps", args.userSteps)
+                }
+
+                val options = ActivityOptions.makeCustomAnimation(
+                    context,
+                    R.anim.slide_in_left,
+                    R.anim.slide_out_right
+                )
+                context.startActivity(intent, options.toBundle())
+                context.finish()
+            }
+        }
+        activity.onBackPressedDispatcher.addCallback(activity, callback)
+    }
+
 
     fun finishActivity(context: Activity){
 

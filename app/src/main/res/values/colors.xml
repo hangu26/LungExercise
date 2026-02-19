@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="app_color">#4F46E5</color>
     <color name="appBar_title_01">#6E96ED</color>
     <color name="btn_next_input_info_able">#6448EA</color>
     <color name="appBar_title_02">#0654FD</color>
@@ -45,6 +46,7 @@
     <color name="color_border_constraint_connect_bluetooth">#4F46E5</color>
     <color name="background_lung_exercise_activity">#F9FAFB</color>
     <color name="color_border_constraint_breath_in_lung_exercise">#F3F4F6</color>
+    <color name="color_border_constraint_mask_popup">#F3F4F6</color>
     <color name="color_border_constraint_disconnect_bluetooth">#FF0000</color>
     <color name="color_tx_x">#6B7280</color>
     <color name="color_border_cancel_dialog_bluetooth">#F3F4F6</color>
@@ -63,7 +65,50 @@
     <color name="color_tx_input_weight_detail">#6B7280</color>
     <color name="color_tx_kg">#6B7280</color>
     <color name="color_tx_cm">#6B7280</color>
-
+    <color name="color_tx_do_breathing">#4F46E5</color>
+    <color name="color_tx_success_exercise">#4F46E5</color>
+    <color name="color_tx_do_breathing_detail">#9E9E9E</color>
+    <color name="color_border_constraint_normal_time">#F7F5FE</color>
+    <color name="color_border_constraint_user_time">#F0F3FE</color>
+    <color name="color_tx_normal_time">#4F46E5</color>
+    <color name="color_border_progress_bar_normal">#5644E6</color>
+    <color name="color_tx_result_breathing_detail">#666666</color>
+    <color name="color_border_linear_user_time">#E8E3FF</color>
+    <color name="color_border_linear_normal_time">#FAFAFA</color>
+    <color name="color_border_cl_recommend_distance">#F8FAFC</color>
+    <color name="color_tx_user_time">#8B45FF</color>
+    <color name="tx_user_time_detail">#888888</color>
+    <color name="color_tx_total_meter_detail">#888888</color>
+    <color name="color_tx_user_time_data">#8B45FF</color>
+    <color name="color_tx_meter_calorie">#8B45FF</color>
+    <color name="color_achievement">#FF8C00</color>
+    <color name="color_tx_feedback">#8B45FF</color>
+    <color name="color_barchart_default">#8B45FF</color>
+    <color name="color_barchart_clicked">#FF5555</color>
+    <color name="toggle_on">#4F46E5</color>
+    <color name="toggle_off">#C9C9C9</color>
+    <color name="circle_fill">#FFFFFF</color>
+    <color name="circle_stroke">#00000000</color>
+    <color name="bg_mask_popup_toast">#EEF2FF</color>
+    <color name="stroke_mask_popup_toast">#C7D2FE</color>
+    <color name="color_cl_air_quality_detail">#E5E6E7</color>
+    <color name="color_cl_air_quality">#F5F5F5</color>
+    <color name="color_cl_fit_plan">#F5F5F5</color>
+    <color name="bg_cl_air_quality">#F9FAFB</color>
+    <color name="color_ic_circle_air_quality_bad">#FF0004</color>
+    <color name="color_ic_circle_air_quality_normal">#FDE047</color>
+    <color name="color_ic_circle_air_quality_good">#10B981</color>
+    <color name="color_timer_walking">#4F46E5</color>
+    <color name="color_tx_intensity_unit">#4F46E5</color>
+    <color name="color_background_cl_walking_values">#F8FAFC</color>
+    <color name="color_tx_dust_state">#0369A1</color>
+    <color name="color_tx_notice">#9CA3AF</color>
+    <color name="color_tx_0_to_target">#64748B</color>
+    <color name="color_risk_pulse">#EF4444</color>
+    <color name="color_risk_step">#64748B</color>
+    <color name="color_target_distance">#7C3AED</color>
+    <color name="color_tx_progress_step">#6B7280</color>
+    <color name="color_tx_remain_steps">#6E3CD0</color>
 
 
 
