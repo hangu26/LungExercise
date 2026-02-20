@@ -1,5 +1,5 @@
 package kr.daejeonuinversity.lungexercise.util.base
 
 enum class NavigationMenu {
-    BIRTHDAY, GENDER, BODY
+    BIRTHDAY, GENDER, BODY, Screening, Initial, Visit
 }

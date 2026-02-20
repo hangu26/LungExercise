@@ -17,6 +17,9 @@ import kr.daejeonuinversity.lungexercise.util.util.UserInfoTempData
 import kr.daejeonuinversity.lungexercise.view.infoinput.fragment.BirthdayFragment
 import kr.daejeonuinversity.lungexercise.view.infoinput.fragment.BodyFragment
 import kr.daejeonuinversity.lungexercise.view.infoinput.fragment.GenderFragment
+import kr.daejeonuinversity.lungexercise.view.infoinput.fragment.InitialFragment
+import kr.daejeonuinversity.lungexercise.view.infoinput.fragment.ScreeningFragment
+import kr.daejeonuinversity.lungexercise.view.infoinput.fragment.VisitFragment
 import kr.daejeonuinversity.lungexercise.view.main.MainActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.BirthdayViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.BodyViewModel
@@ -53,34 +56,70 @@ class InfoInputActivity : BaseActivity<ActivityInfoInputBinding>(R.layout.activi
                 NavigationMenu.BIRTHDAY -> navigateBirthDay()
                 NavigationMenu.GENDER -> navigateGender()
                 NavigationMenu.BODY -> navigateBody()
+                NavigationMenu.Screening -> navigateScreeningNum()
+                NavigationMenu.Initial -> navigateInitial()
+                NavigationMenu.Visit -> navigateVisit()
             }
         }
 
         vm.btnClicked.observe(this@InfoInputActivity) {
 
             when (it) {
+
                 0 -> {
-                    vm.changeMenu(NavigationMenu.BIRTHDAY)
+                    vm.changeMenu(NavigationMenu.Initial)
+                    vm.btnNextState.postValue(false)
                     binding.frameProgress01.setBackgroundResource(R.drawable.border_progress_input_info_bar)
                 }
 
                 1 -> {
+                    vm.changeMenu(NavigationMenu.BIRTHDAY)
+                    vm.btnNextState.postValue(false)
+                    binding.frameProgress01.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                    binding.frameProgress02.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                }
+
+                2 -> {
                     vm.changeMenu(NavigationMenu.GENDER)
                     vm.btnNextState.postValue(false)
                     binding.frameProgress01.setBackgroundResource(R.drawable.border_progress_input_info_bar)
                     binding.frameProgress02.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                    binding.frameProgress03.setBackgroundResource(R.drawable.border_progress_input_info_bar)
 
                 }
 
-                2 -> {
+                3 -> {
                     vm.changeMenu(NavigationMenu.BODY)
                     vm.btnNextState.postValue(false)
                     binding.frameProgress01.setBackgroundResource(R.drawable.border_progress_input_info_bar)
                     binding.frameProgress02.setBackgroundResource(R.drawable.border_progress_input_info_bar)
                     binding.frameProgress03.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                    binding.frameProgress04.setBackgroundResource(R.drawable.border_progress_input_info_bar)
                 }
 
-                3 -> {
+                4 -> {
+                    vm.changeMenu(NavigationMenu.Screening)
+                    vm.btnNextState.postValue(false)
+                    binding.frameProgress01.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                    binding.frameProgress02.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                    binding.frameProgress03.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                    binding.frameProgress04.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                    binding.frameProgress05.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                }
+
+                5 -> {
+                    vm.changeMenu(NavigationMenu.Visit)
+                    vm.btnNextState.postValue(false)
+                    binding.frameProgress01.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                    binding.frameProgress02.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                    binding.frameProgress03.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                    binding.frameProgress04.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                    binding.frameProgress05.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                    binding.frameProgress06.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                }
+
+
+                6 -> {
 
                     val birthday = UserInfoTempData.birthday
                     val gender = UserInfoTempData.gender
@@ -145,6 +184,24 @@ class InfoInputActivity : BaseActivity<ActivityInfoInputBinding>(R.layout.activi
 
     private fun navigateBody(bundle: Bundle? = null) {
         changeFragment(BodyFragment(), bundle)
+
+    }
+
+    /** 스크리닝 등록번호 프래그먼트 **/
+    private fun navigateScreeningNum(bundle: Bundle? = null) {
+        changeFragment(ScreeningFragment(), bundle)
+
+    }
+
+    /** 이니셜 프래그먼트 **/
+    private fun navigateInitial(bundle: Bundle? = null) {
+        changeFragment(InitialFragment(), bundle)
+
+    }
+
+    /** 방문일 프래그먼트 **/
+    private fun navigateVisit(bundle: Bundle? = null) {
+        changeFragment(VisitFragment(), bundle)
 
     }
 

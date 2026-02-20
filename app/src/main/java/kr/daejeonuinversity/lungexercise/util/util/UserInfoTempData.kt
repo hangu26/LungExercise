@@ -5,6 +5,9 @@ object UserInfoTempData {
     var gender: String = ""
     var stature: Int = 0
     var weight: Int = 0
+    var screeningNum: String = ""
+    var initial: String = ""
+    var visit: String = ""
 
     fun clear() {
         birthday = ""

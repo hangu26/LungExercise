@@ -333,6 +333,7 @@
     <dimen name="margin_top_constraint_woman">13dp</dimen>
     <dimen name="margin_top_constraint_gender_select">41dp</dimen>
     <dimen name="size_icon_weight">20dp</dimen>
+    <dimen name="size_icon_badge">20dp</dimen>
     <dimen name="margin_start_tx_input_weight_to_icon">10dp</dimen>
     <dimen name="margin_top_tx_input_weight_detail">7dp</dimen>
     <dimen name="size_tx_input_weight_detail">12sp</dimen>

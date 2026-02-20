@@ -15,12 +15,15 @@ import kr.daejeonuinversity.lungexercise.viewmodel.GenderViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.HistoryRecordViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.HistoryViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.InfoInputViewModel
+import kr.daejeonuinversity.lungexercise.viewmodel.InitialViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.InsightViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.LungExerciseViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.MainViewModel
+import kr.daejeonuinversity.lungexercise.viewmodel.ScreeningViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.SettingViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.SplashViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.VideoViewModel
+import kr.daejeonuinversity.lungexercise.viewmodel.VisitViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.WalkHistoryViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.WalkingResultViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.WalkingTestViewModel
@@ -42,6 +45,9 @@ val module = module {
     viewModel { BirthdayViewModel(androidApplication()) }
     viewModel { GenderViewModel(androidApplication()) }
     viewModel { BodyViewModel(androidApplication()) }
+    viewModel { ScreeningViewModel(androidApplication()) }
+    viewModel { InitialViewModel(androidApplication()) }
+    viewModel { VisitViewModel(androidApplication()) }
     viewModel { LungExerciseViewModel(androidApplication()) }
     viewModel { WalkingTestViewModel(get(), get(), androidApplication()) }
     viewModel { BreathingViewModel(get(), androidApplication()) }
