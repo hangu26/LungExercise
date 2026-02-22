@@ -97,7 +97,10 @@ class EditInfoViewModel(private val repository: InfoRepository, application: App
                 userInfo.birthday,
                 userInfo.gender,
                 userInfo.height,
-                userInfo.weight
+                userInfo.weight,
+                userInfo.screeningNum,
+                userInfo.initial,
+                userInfo.visit
             )
         }
     }

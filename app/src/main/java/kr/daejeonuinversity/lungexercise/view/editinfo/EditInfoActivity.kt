@@ -17,6 +17,7 @@ import kr.daejeonuinversity.lungexercise.data.local.entity.UserInfo
 import kr.daejeonuinversity.lungexercise.databinding.ActivityEditInfoBinding
 import kr.daejeonuinversity.lungexercise.util.base.BaseActivity
 import kr.daejeonuinversity.lungexercise.util.util.BackPressedCallback
+import kr.daejeonuinversity.lungexercise.util.util.UserInfoTempData
 import kr.daejeonuinversity.lungexercise.view.main.MainActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.EditInfoViewModel
 import org.koin.android.ext.android.inject
@@ -126,7 +127,10 @@ class EditInfoActivity : BaseActivity<ActivityEditInfoBinding>(R.layout.activity
                     birthday = yearStr + monthStr + dayStr,
                     gender = genderStr,
                     weight = weightStr.toInt(),
-                    height = heightStr.toInt()
+                    height = heightStr.toInt(),
+                    screeningNum = UserInfoTempData.screeningNum,
+                    initial = UserInfoTempData.initial,
+                    visit = UserInfoTempData.initial
                 )
 
                 vm.saveData(userInfo)

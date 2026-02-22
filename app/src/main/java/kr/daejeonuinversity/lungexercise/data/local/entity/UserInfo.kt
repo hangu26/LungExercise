@@ -9,5 +9,8 @@ data class UserInfo(
     val birthday : String,
     val gender: String,
     val height: Int,
-    val weight: Int
+    val weight: Int,
+    val screeningNum : String = "",
+    val initial : String = "",
+    val visit : String = ""
 )

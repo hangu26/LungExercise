@@ -13,7 +13,7 @@ val databaseModule = module {
             BreathDatabase::class.java,
             "breath_database"
         )
-            .fallbackToDestructiveMigration()
+            .addMigrations(MIGRATION_10_11) // 마이그레이션 추가
             .build()
     }
 
@@ -23,7 +23,15 @@ val databaseModule = module {
     single { get<BreathDatabase>().heartRateWarning() }
     single { get<BreathDatabase>().fitResult() }
     single { get<BreathDatabase>().stepIntervalDao() }
+}
 
+val MIGRATION_10_11 = object : Migration(10, 11) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        // 새 컬럼 추가, 기존 데이터 보존
+        database.execSQL("ALTER TABLE user_info ADD COLUMN screeningNum TEXT NOT NULL DEFAULT ''")
+        database.execSQL("ALTER TABLE user_info ADD COLUMN initial TEXT NOT NULL DEFAULT ''")
+        database.execSQL("ALTER TABLE user_info ADD COLUMN visit TEXT NOT NULL DEFAULT ''")
+    }
 }
 
 val MIGRATION_2_3 = object : Migration(2, 3) {

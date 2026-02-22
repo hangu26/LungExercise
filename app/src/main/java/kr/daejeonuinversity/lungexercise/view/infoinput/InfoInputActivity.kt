@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import kr.daejeonuinversity.lungexercise.R
+import kr.daejeonuinversity.lungexercise.data.local.entity.UserInfo
 import kr.daejeonuinversity.lungexercise.databinding.ActivityInfoInputBinding
 import kr.daejeonuinversity.lungexercise.util.base.BaseActivity
 import kr.daejeonuinversity.lungexercise.util.base.NavigationMenu
@@ -125,11 +126,15 @@ class InfoInputActivity : BaseActivity<ActivityInfoInputBinding>(R.layout.activi
                     val gender = UserInfoTempData.gender
                     val height = UserInfoTempData.stature
                     val weight = UserInfoTempData.weight
+                    val screeningNum = UserInfoTempData.screeningNum
+                    val initial = UserInfoTempData.initial
+                    val visit = UserInfoTempData.visit
+
                     Log.d(
                         "InfoInput",
-                        "Birthday: $birthday, Gender: $gender, Height: $height, Weight: $weight"
+                        "Birthday: $birthday, Gender: $gender, Height: $height, Weight: $weight, 스크리닝 : $screeningNum, 이니셜 : $initial, 방문일 : $visit"
                     )
-                    vm.saveBirthday(birthday, gender, height, weight)
+                    vm.saveBirthday(birthday, gender, height, weight,screeningNum, initial,visit)
 
                     getSharedPreferences("tutorial", Context.MODE_PRIVATE).edit()
                         .putInt("isClear", 1).apply()
