@@ -307,11 +307,11 @@ class LungExerciseActivity :
     }
 
     override fun onExhaleStart() {
-        // TODO: 필요시 구현
     }
 
-    override fun onExhaleEnd(durationMs: Long) {
-        // TODO: 필요시 구현
+    override fun onExhaleEnd(durationMs: Long, fvc: Double, fev1: Double, ratio: Double) {
+
     }
+
 
 }

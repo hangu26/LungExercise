@@ -172,10 +172,13 @@ class VideoDialogFragment : DialogFragment(), MaskBluetoothManager.BreathingEven
         }
     }
 
-    override fun onExhaleEnd(durationMs: Long) {
+    override fun onExhaleEnd(durationMs: Long, fvc: Double, fev1: Double, ratio: Double) {
         activity?.runOnUiThread {
             userProgressAnimator?.cancel()
             userTimerHandler?.removeCallbacks(userTimerRunnable ?: Runnable {})
+
+            // 예: textViewFVC.text = String.format("%.2f L", fvc)
+            // Log.d("폐기능검사", "FVC: $fvc, FEV1: $fev1, Ratio: $ratio")
         }
     }
 

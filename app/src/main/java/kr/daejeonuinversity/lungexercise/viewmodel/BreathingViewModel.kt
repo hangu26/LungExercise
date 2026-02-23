@@ -103,12 +103,18 @@ class BreathingViewModel(private val repository: BreathRepository, application: 
         startExhaleCounting()
     }
 
-    override fun onExhaleEnd(durationMs: Long) {
+    override fun onExhaleEnd(durationMs: Long, fvc: Double, fev1: Double, ratio: Double) {
         if (!isStarted) return
+
+        // 이벤트로 전송 (필요 시 ExhaleEvent.End에 fvc, fev1 등을 포함하도록 수정 가능)
         _exhaleEvent.postValue(Event(ExhaleEvent.End(durationMs)))
+
         stopExhaleCounting()
         _isResultAvailable.postValue(true)
         isStarted = false
+
+        // 로그로 확인하고 싶다면 추가
+        // Log.d("폐기능검사", "결과 수신 - FVC: $fvc, FEV1: $fev1")
     }
 
     private fun startExhaleCounting() {
