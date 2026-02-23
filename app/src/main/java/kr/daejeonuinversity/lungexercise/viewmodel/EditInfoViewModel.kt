@@ -22,6 +22,15 @@ class EditInfoViewModel(private val repository: InfoRepository, application: App
     private var _txYear = MutableLiveData<String>()
     val txYear: LiveData<String> = _txYear
 
+    private var _txScreening = MutableLiveData<String>()
+    val txScreening: LiveData<String> = _txScreening
+
+    private var _txInitial = MutableLiveData<String>()
+    val txInitial: LiveData<String> = _txInitial
+
+    private var _txVisit = MutableLiveData<String>()
+    val txVisit: LiveData<String> = _txVisit
+
     private var _txMonth = MutableLiveData<String>()
     val txMonth: LiveData<String> = _txMonth
 
@@ -51,6 +60,13 @@ class EditInfoViewModel(private val repository: InfoRepository, application: App
 
     private var _edtYearClickState = MutableLiveData<Boolean>()
     val edtYearClickState: LiveData<Boolean> = _edtYearClickState
+
+    private var _btnVisitState = MutableLiveData<Boolean>()
+    val btnVisitState = _btnVisitState
+
+    fun btnVisitClicked(){
+        _btnVisitState.value = true
+    }
 
     fun edtDayClicked(){
 
@@ -110,6 +126,10 @@ class EditInfoViewModel(private val repository: InfoRepository, application: App
         viewModelScope.launch {
 
             val data = repository.getUserDates()
+
+            _txScreening.value = data?.screeningNum ?: ""
+            _txInitial.value = data?.initial ?: ""
+            _txVisit.value = data?.visit ?: ""
 
             val birthday = data?.birthday ?: ""
             if (birthday.length == 8) {

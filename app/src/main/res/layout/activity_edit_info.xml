@@ -15,9 +15,13 @@
 
     </data>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/white">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -92,6 +96,157 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tx_screening"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_tx_screening"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/tx_screening_number"
+                android:textColor="@color/tx_birth"
+                android:textSize="@dimen/size_tx_birth"
+                app:layout_constraintStart_toStartOf="@+id/tx_basic_info"
+                app:layout_constraintTop_toBottomOf="@+id/tx_basic_info" />
+
+            <LinearLayout
+                android:id="@+id/linear_screening"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_linear_screening"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/padding_side_linear_screening"
+                android:paddingEnd="@dimen/padding_side_linear_screening"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tx_screening">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_linear_birth"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_constraint_birth">
+
+                    <EditText
+                        android:id="@+id/edt_screening"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@{viewmodel.txScreening}"
+                        android:textColor="@color/color_edt_screening"
+                        android:textSize="@dimen/size_edt_screening"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tx_initial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_tx_initial"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/tx_initial"
+                android:textColor="@color/tx_initial"
+                android:textSize="@dimen/size_tx_initial"
+                app:layout_constraintStart_toStartOf="@+id/tx_basic_info"
+                app:layout_constraintTop_toBottomOf="@+id/linear_screening" />
+
+            <LinearLayout
+                android:id="@+id/linear_initial"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_linear_initial"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/padding_side_linear_initial"
+                android:paddingEnd="@dimen/padding_side_linear_initial"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tx_initial">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_linear_birth"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_constraint_birth">
+
+                    <EditText
+                        android:id="@+id/edt_initial"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:inputType="text|textCapCharacters"
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                        android:text="@{viewmodel.txInitial}"
+                        android:textColor="@color/color_edt_initial"
+                        android:textSize="@dimen/size_edt_initial"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tx_visit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_tx_visit"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/tx_visit"
+                android:textColor="@color/tx_visit"
+                android:textSize="@dimen/size_tx_visit"
+                app:layout_constraintStart_toStartOf="@+id/tx_basic_info"
+                app:layout_constraintTop_toBottomOf="@+id/linear_initial" />
+
+            <LinearLayout
+                android:id="@+id/linear_visit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_linear_visit"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/padding_side_linear_visit"
+                android:paddingEnd="@dimen/padding_side_linear_visit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tx_visit">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_linear_birth"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_constraint_birth">
+
+                    <EditText
+                        android:id="@+id/edt_visit"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/height_edt_birth"
+                        android:layout_marginStart="@dimen/margin_side_edt_birth"
+                        android:layout_marginEnd="@dimen/margin_side_edt_birth"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:focusable="false"
+                        android:gravity="center_vertical"
+                        android:text="@{viewmodel.txVisit}"
+                        android:onClick="@{() -> viewmodel.btnVisitClicked()}"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <TextView
                 android:id="@+id/tx_birth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -101,7 +256,7 @@
                 android:textColor="@color/tx_birth"
                 android:textSize="@dimen/size_tx_birth"
                 app:layout_constraintStart_toStartOf="@+id/tx_basic_info"
-                app:layout_constraintTop_toBottomOf="@+id/tx_basic_info" />
+                app:layout_constraintTop_toBottomOf="@+id/linear_visit" />
 
             <LinearLayout
                 android:id="@+id/linear_birth"
@@ -474,7 +629,7 @@
             android:id="@+id/linear_decision"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_top_linear_birth"
+            android:layout_marginTop="@dimen/margin_bottom_linear_gender"
             android:layout_marginBottom="@dimen/margin_bottom_linear_gender"
             android:orientation="horizontal"
             android:paddingStart="@dimen/padding_side_linear_birth"
@@ -535,5 +690,7 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </layout>

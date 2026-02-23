@@ -17,7 +17,9 @@ import kr.daejeonuinversity.lungexercise.data.local.entity.UserInfo
 import kr.daejeonuinversity.lungexercise.databinding.ActivityEditInfoBinding
 import kr.daejeonuinversity.lungexercise.util.base.BaseActivity
 import kr.daejeonuinversity.lungexercise.util.util.BackPressedCallback
+import kr.daejeonuinversity.lungexercise.util.util.ShowCustomDatePicker
 import kr.daejeonuinversity.lungexercise.util.util.UserInfoTempData
+import kr.daejeonuinversity.lungexercise.view.infoinput.InfoInputActivity
 import kr.daejeonuinversity.lungexercise.view.main.MainActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.EditInfoViewModel
 import org.koin.android.ext.android.inject
@@ -65,6 +67,20 @@ class EditInfoActivity : BaseActivity<ActivityEditInfoBinding>(R.layout.activity
             }
         }
 
+        vm.btnVisitState.observe(this@EditInfoActivity){
+
+            if (it){
+
+                val showCustomDatePicker = ShowCustomDatePicker()
+
+                showCustomDatePicker.showCustomDatePicker(this) { selectedDate ->
+                    binding.edtVisit.setText(selectedDate)
+                }
+
+            }
+
+        }
+
         vm.genderState.observe(this@EditInfoActivity) { gender ->
             setGenderBackground(gender == "man")
         }
@@ -107,6 +123,9 @@ class EditInfoActivity : BaseActivity<ActivityEditInfoBinding>(R.layout.activity
                 val genderStr = vm.genderState.value ?: "man"
                 val weightStr = binding.edtWeight.text.toString()
                 val heightStr = binding.edtHeight.text.toString()
+                val screeningStr = binding.edtScreening.text.toString()
+                val initialStr = binding.edtInitial.text.toString()
+                val visitStr = binding.edtVisit.text.toString()
 
                 if (yearStr.isBlank() || monthStr.isBlank() || dayStr.isBlank()) {
                     Toast.makeText(this, "년, 월, 일을 모두 입력해주세요.", Toast.LENGTH_SHORT).show()
@@ -128,9 +147,9 @@ class EditInfoActivity : BaseActivity<ActivityEditInfoBinding>(R.layout.activity
                     gender = genderStr,
                     weight = weightStr.toInt(),
                     height = heightStr.toInt(),
-                    screeningNum = UserInfoTempData.screeningNum,
-                    initial = UserInfoTempData.initial,
-                    visit = UserInfoTempData.initial
+                    screeningNum = screeningStr,
+                    initial = initialStr,
+                    visit = visitStr
                 )
 
                 vm.saveData(userInfo)

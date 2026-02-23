@@ -193,6 +193,9 @@
     <string name="tx_input_initial">이니셜을 입력해주세요.</string>
     <string name="tx_input_initial_detail">영문 이니셜 3자를 입력해주세요. 예: 홍길동 → HGD</string>
     <string name="tx_input_visit">방문일을 입력해 주세요.</string>
+    <string name="tx_screening_number">스크리닝 번호</string>
+    <string name="tx_initial">이니셜</string>
+    <string name="tx_visit">방문일</string>
 
 
 </resources>

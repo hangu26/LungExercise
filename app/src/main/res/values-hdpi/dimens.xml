@@ -248,15 +248,37 @@
     <dimen name="margin_start_tx_edit_guide">8dp</dimen>
     <dimen name="margin_bottom_tx_edit_guide_detail">18dp</dimen>
     <dimen name="padding_side_linear_birth">18dp</dimen>
+    <dimen name="padding_side_linear_screening">18dp</dimen>
+    <dimen name="padding_side_linear_initial">18dp</dimen>
+    <dimen name="padding_side_linear_visit">18dp</dimen>
+
+
     <dimen name="size_tx_birth">14sp</dimen>
+    <dimen name="size_tx_initial">14sp</dimen>
+    <dimen name="size_tx_visit">14sp</dimen>
     <dimen name="size_tx_edit_guide_detail">12sp</dimen>
     <dimen name="margin_top_tx_birth">13dp</dimen>
+    <dimen name="margin_top_tx_screening">13dp</dimen>
+    <dimen name="margin_top_tx_initial">13dp</dimen>
+    <dimen name="margin_top_tx_visit">13dp</dimen>
+
+
     <dimen name="margin_top_tx_edit_guide_detail">5dp</dimen>
     <dimen name="margin_top_tx_gender_constraint">13dp</dimen>
     <dimen name="radius_border_constraint_birth">6dp</dimen>
     <dimen name="margin_top_linear_birth">8dp</dimen>
+    <dimen name="margin_top_linear_screening">8dp</dimen>
+    <dimen name="margin_top_linear_initial">8dp</dimen>
+    <dimen name="margin_top_linear_visit">8dp</dimen>
+
+
     <dimen name="margin_top_linear_specs">8dp</dimen>
     <dimen name="size_edt_year">12sp</dimen>
+    <dimen name="size_edt_screening">12sp</dimen>
+    <dimen name="size_edt_initial">12sp</dimen>
+    <dimen name="size_edt_visit">12sp</dimen>
+
+
     <dimen name="space_width_constraint_birth">6dp</dimen>
     <dimen name="space_width_constraint_body_specs">12dp</dimen>
     <dimen name="space_width_constraint_gender">6dp</dimen>
