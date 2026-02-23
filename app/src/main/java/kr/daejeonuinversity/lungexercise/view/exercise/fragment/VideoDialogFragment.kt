@@ -172,13 +172,16 @@ class VideoDialogFragment : DialogFragment(), MaskBluetoothManager.BreathingEven
         }
     }
 
-    override fun onExhaleEnd(durationMs: Long, fvc: Double, fev1: Double, ratio: Double) {
+    override fun onExhaleEnd(durationMs: Long, fvc: Double, fev1: Double, ratio: Double, pressure: Double) {
         activity?.runOnUiThread {
             userProgressAnimator?.cancel()
             userTimerHandler?.removeCallbacks(userTimerRunnable ?: Runnable {})
 
-            // 예: textViewFVC.text = String.format("%.2f L", fvc)
-            // Log.d("폐기능검사", "FVC: $fvc, FEV1: $fev1, Ratio: $ratio")
+            // 로그에 호기압력(pressure)도 나오도록 추가해두면 확인하기 좋습니다.
+            Log.d("폐기능검사", "UI 업데이트 수신 - FVC: $fvc, FEV1: $fev1, Ratio: $ratio, Pressure: $pressure")
+
+            // 나중에 화면에 띄우고 싶다면 이런 식으로 사용하세요.
+            // binding.tvPressure.text = String.format("%.2f Pa", pressure)
         }
     }
 

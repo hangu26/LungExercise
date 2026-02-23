@@ -18,8 +18,8 @@ object MaskBluetoothManager {
 
     interface BreathingEventListener {
         fun onExhaleStart()
-        // 기존 인터페이스에 폐기능 결과값 추가
-        fun onExhaleEnd(durationMs: Long, fvc: Double, fev1: Double, ratio: Double)
+        // fvc, fev1, ratio에 이어 pressure(압력) 추가
+        fun onExhaleEnd(durationMs: Long, fvc: Double, fev1: Double, ratio: Double, pressure: Double)
     }
 
     private var breathingEventListener: BreathingEventListener? = null
@@ -32,24 +32,22 @@ object MaskBluetoothManager {
     private var bluetoothSocket: BluetoothSocket? = null
 
     private val deviceName = "MASK7"
-    private val uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB") // SPP UUID
+    private val uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
 
     private var isConnected = false
-    val isConnectedPublic: Boolean
-        get() = isConnected
+    val isConnectedPublic: Boolean get() = isConnected
 
     private var connectedDeviceName: String? = null
-    val connectedDeviceNamePublic: String?
-        get() = connectedDeviceName
+    val connectedDeviceNamePublic: String? get() = connectedDeviceName
 
     private var receiveThread: Thread? = null
-    private var pollingThread: Thread? = null // 변수명 명시적 변경
+    private var pollingThread: Thread? = null
 
     private val baselineSamples = mutableListOf<Double>()
     private val baselineSampleCountLimit = 15
     private var baseline: Double? = null
 
-    private val sensorThreshold = 0.1 // 편차 임계치
+    private val sensorThreshold = 0.1
 
     private var isInhaling = false
     private var inhaleStartTime = 0L
@@ -57,9 +55,11 @@ object MaskBluetoothManager {
     var isExhaling = false
     private var exhaleStartTime = 0L
 
-    // [추가] 폐기능 계산용 변수
+    // 폐기능 및 압력 계산용 변수
     private val currentExhaleSamples = mutableListOf<Double>()
-    private const val MASK_AREA_M2 = 0.0005 // 단면적 (사용자 환경에 맞게 조정 가능)
+    private val currentPressureSamples = mutableListOf<Double>()
+    private const val MASK_AREA_M2 = 0.0005 // 단면적 예시
+    private const val POLLING_INTERVAL_MS = 30L // 정밀 측정을 위한 샘플링 주기
 
     interface ConnectCallback {
         fun onDeviceFound(deviceName: String)
@@ -96,9 +96,7 @@ object MaskBluetoothManager {
                 connectCallback?.onDeviceFound(device.name)
             }
 
-            if (connectImmediately) {
-                connecting(device, context)
-            }
+            if (connectImmediately) connecting(device, context)
         }.start()
     }
 
@@ -106,9 +104,7 @@ object MaskBluetoothManager {
     private fun connecting(device: BluetoothDevice, context: Context) {
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                    return
-                }
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) return
             }
             bluetoothSocket = device.createRfcommSocketToServiceRecord(uuid)
             bluetoothSocket?.connect()
@@ -131,18 +127,14 @@ object MaskBluetoothManager {
         pollingThread = Thread {
             while (isConnected) {
                 sendBoardDataRequest()
-                // FEV1 계산을 위해 샘플링 주기를 30ms로 상향 (기존 1000ms는 너무 느림)
-                Thread.sleep(30)
+                try { Thread.sleep(POLLING_INTERVAL_MS) } catch (e: InterruptedException) { break }
             }
         }
         pollingThread?.start()
     }
 
     private fun sendBoardDataRequest() {
-        val command = byteArrayOf(
-            0xf0.toByte(), 0x01, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00, 0x00, 0x0d
-        )
+        val command = byteArrayOf(0xf0.toByte(), 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0d)
         try {
             bluetoothSocket?.outputStream?.write(command)
         } catch (e: IOException) {
@@ -155,16 +147,13 @@ object MaskBluetoothManager {
             try {
                 val inputStream = bluetoothSocket?.inputStream ?: return@Thread
                 val buffer = ByteArray(1024)
-                var bytes: Int
                 val readBuffer = mutableListOf<Byte>()
 
                 while (isConnected) {
-                    bytes = inputStream.read(buffer)
+                    val bytes = inputStream.read(buffer)
                     if (bytes <= 0) continue
 
-                    for (i in 0 until bytes) {
-                        readBuffer.add(buffer[i])
-                    }
+                    for (i in 0 until bytes) readBuffer.add(buffer[i])
 
                     while (readBuffer.size >= 11) {
                         if (readBuffer[0] == 0xF0.toByte() && readBuffer[10] == 0x0D.toByte()) {
@@ -195,6 +184,7 @@ object MaskBluetoothManager {
         val airflowValues = listOf(airflow1.toDouble(), airflow2.toDouble(), airflow3.toDouble())
         val avgFlow = airflowValues.average()
 
+        // 기존 로그 유지
         logDynamicPressure(avgFlow)
 
         if (baseline == null) {
@@ -209,53 +199,60 @@ object MaskBluetoothManager {
         val deviation = avgFlow - baseline!!
         Log.d("마스크 응답", "airflow 평균: $avgFlow, baseline: $baseline, 편차: $deviation")
 
-        // 들이마심 감지 (기존 유지)
+        // 들이마심 감지 (기존 로직 유지)
         if (!isInhaling && deviation > sensorThreshold) {
             isInhaling = true
             inhaleStartTime = System.currentTimeMillis()
             Log.d("숨 감지", "들이마심 감지! airflow=$avgFlow, 편차=$deviation")
         }
-
         if (isInhaling && deviation <= sensorThreshold) {
             isInhaling = false
-            val inhaleEndTime = System.currentTimeMillis()
-            val durationSec = (inhaleEndTime - inhaleStartTime) / 1000.0
-            Log.d("숨 감지", "들이마심 종료, 지속시간: $durationSec 초")
+            Log.d("숨 감지", "들이마심 종료, 지속시간: ${(System.currentTimeMillis() - inhaleStartTime) / 1000.0} 초")
         }
 
         // 내쉬기 감지 (기존 유지 + 데이터 수집 추가)
         if (!isExhaling && deviation < -sensorThreshold) {
             isExhaling = true
             exhaleStartTime = System.currentTimeMillis()
-            currentExhaleSamples.clear() // 샘플 초기화
+            currentExhaleSamples.clear()
+            currentPressureSamples.clear()
             Log.d("숨 감지", "내쉬는 중 감지! airflow=$avgFlow, 편차=$deviation")
             breathingEventListener?.onExhaleStart()
         }
 
         if (isExhaling) {
-            // 내쉬는 동안 유량 샘플을 지속적으로 리스트에 추가
             currentExhaleSamples.add(calculateFlowLps(avgFlow))
+            currentPressureSamples.add(calculateCurrentPressurePa(avgFlow))
 
             if (deviation >= -sensorThreshold) {
                 isExhaling = false
-                val exhaleDuration = System.currentTimeMillis() - exhaleStartTime
-                Log.d("숨 감지", "내쉬기 종료, 지속시간: ${exhaleDuration / 1000.0} 초")
-
-                // 폐기능 검사 결과 계산 및 로그 출력
-                processLungFunctionData(exhaleDuration)
+                processLungFunctionData(System.currentTimeMillis() - exhaleStartTime)
             }
         }
     }
 
+    // 유량 변환 (L/s)
     private fun calculateFlowLps(raw: Double): Double {
         val idleRaw = 21761.0
         val minRaw = 21000.0
         val maxVelocity = 15.0
         var v = ((idleRaw - raw) / (idleRaw - minRaw)) * maxVelocity
         v = v.coerceIn(0.0, maxVelocity)
-        return (MASK_AREA_M2 * v) * 1000.0 // L/s
+        return (MASK_AREA_M2 * v) * 1000.0
     }
 
+    // 현재 압력 계산 (Pa)
+    private fun calculateCurrentPressurePa(raw: Double): Double {
+        val idleRaw = 21761.0
+        val minRaw = 21000.0
+        val maxVelocity = 15.0
+        val rho = 1.18
+        var v = ((idleRaw - raw) / (idleRaw - minRaw)) * maxVelocity
+        v = v.coerceIn(0.0, maxVelocity)
+        return 0.5 * rho * v.pow(2.0)
+    }
+
+    // 폐기능검사 데이터 처리 및 전용 로그 출력
     private fun processLungFunctionData(durationMs: Long) {
         if (currentExhaleSamples.isEmpty()) return
         val dt = (durationMs / 1000.0) / currentExhaleSamples.size
@@ -263,15 +260,17 @@ object MaskBluetoothManager {
         val samplesInOneSec = (1.0 / dt).toInt()
         val fev1 = currentExhaleSamples.take(samplesInOneSec).sum() * dt
         val ratio = if (fvc > 0) (fev1 / fvc) * 100 else 0.0
+        val avgPressure = if (currentPressureSamples.isNotEmpty()) currentPressureSamples.average() else 0.0
 
-        // 요청하신 전용 로그 추가
         Log.d("폐기능검사", "================================")
         Log.d("폐기능검사", "FVC(L): ${"%.2f".format(fvc)}")
         Log.d("폐기능검사", "FEV1(L): ${"%.2f".format(fev1)}")
         Log.d("폐기능검사", "FEV1/FVC(%%): ${"%.1f".format(ratio)}%")
+        Log.d("폐기능검사", "평균 호기압력(Pa): ${"%.2f".format(avgPressure)}")
+        Log.d("폐기능검사", "측정 시간: ${durationMs}ms")
         Log.d("폐기능검사", "================================")
 
-        breathingEventListener?.onExhaleEnd(durationMs, fvc, fev1, ratio)
+        breathingEventListener?.onExhaleEnd(durationMs, fvc, fev1, ratio, avgPressure)
     }
 
     private fun logDynamicPressure(rawVelocity: Double) {

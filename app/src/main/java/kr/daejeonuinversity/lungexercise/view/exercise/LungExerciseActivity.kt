@@ -309,8 +309,11 @@ class LungExerciseActivity :
     override fun onExhaleStart() {
     }
 
-    override fun onExhaleEnd(durationMs: Long, fvc: Double, fev1: Double, ratio: Double) {
+    override fun onExhaleEnd(durationMs: Long, fvc: Double, fev1: Double, ratio: Double, pressure: Double) {
+        // 이제 이 안에서 fvc, fev1, ratio 뿐만 아니라 pressure(호기압력) 데이터도 사용할 수 있습니다.
 
+        // 예시: 로그로 확인하기
+        Log.d("폐기능검사", "결과 수신 -> FVC: $fvc, FEV1: $fev1, Pressure: $pressure")
     }
 
 
