@@ -20,6 +20,7 @@ import kr.daejeonuinversity.lungexercise.view.infoinput.fragment.BodyFragment
 import kr.daejeonuinversity.lungexercise.view.infoinput.fragment.GenderFragment
 import kr.daejeonuinversity.lungexercise.view.infoinput.fragment.InitialFragment
 import kr.daejeonuinversity.lungexercise.view.infoinput.fragment.ScreeningFragment
+import kr.daejeonuinversity.lungexercise.view.infoinput.fragment.SmokingFragment
 import kr.daejeonuinversity.lungexercise.view.infoinput.fragment.VisitFragment
 import kr.daejeonuinversity.lungexercise.view.main.MainActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.BirthdayViewModel
@@ -60,6 +61,7 @@ class InfoInputActivity : BaseActivity<ActivityInfoInputBinding>(R.layout.activi
                 NavigationMenu.Screening -> navigateScreeningNum()
                 NavigationMenu.Initial -> navigateInitial()
                 NavigationMenu.Visit -> navigateVisit()
+                NavigationMenu.Smoke -> navigateSmoke()
             }
         }
 
@@ -119,8 +121,20 @@ class InfoInputActivity : BaseActivity<ActivityInfoInputBinding>(R.layout.activi
                     binding.frameProgress06.setBackgroundResource(R.drawable.border_progress_input_info_bar)
                 }
 
-
                 6 -> {
+                    vm.changeMenu(NavigationMenu.Smoke)
+                    vm.btnNextState.postValue(false)
+                    binding.frameProgress01.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                    binding.frameProgress02.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                    binding.frameProgress03.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                    binding.frameProgress04.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                    binding.frameProgress05.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                    binding.frameProgress06.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                    binding.frameProgress07.setBackgroundResource(R.drawable.border_progress_input_info_bar)
+                }
+
+
+                7 -> {
 
                     val birthday = UserInfoTempData.birthday
                     val gender = UserInfoTempData.gender
@@ -129,12 +143,13 @@ class InfoInputActivity : BaseActivity<ActivityInfoInputBinding>(R.layout.activi
                     val screeningNum = UserInfoTempData.screeningNum
                     val initial = UserInfoTempData.initial
                     val visit = UserInfoTempData.visit
+                    val smoke = UserInfoTempData.smoke
 
                     Log.d(
                         "InfoInput",
-                        "Birthday: $birthday, Gender: $gender, Height: $height, Weight: $weight, 스크리닝 : $screeningNum, 이니셜 : $initial, 방문일 : $visit"
+                        "Birthday: $birthday, Gender: $gender, Height: $height, Weight: $weight, 스크리닝 : $screeningNum, 이니셜 : $initial, 방문일 : $visit 흡연 여부 : $smoke"
                     )
-                    vm.saveBirthday(birthday, gender, height, weight,screeningNum, initial,visit)
+                    vm.saveBirthday(birthday, gender, height, weight,screeningNum, initial,visit,smoke)
 
                     getSharedPreferences("tutorial", Context.MODE_PRIVATE).edit()
                         .putInt("isClear", 1).apply()
@@ -209,6 +224,14 @@ class InfoInputActivity : BaseActivity<ActivityInfoInputBinding>(R.layout.activi
         changeFragment(VisitFragment(), bundle)
 
     }
+
+    /** 흡연 여부 프래그먼트 **/
+    private fun navigateSmoke(bundle: Bundle? = null) {
+        changeFragment(SmokingFragment(), bundle)
+
+    }
+
+
 
     fun changeFragment(fragment: Fragment, bundle: Bundle? = null) {
         bundle?.let { b -> fragment.apply { arguments = b } }

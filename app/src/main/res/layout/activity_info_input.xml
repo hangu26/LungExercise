@@ -121,6 +121,13 @@
                 android:layout_weight="1"
                 android:background="@color/linear_progress_bar"/>
 
+            <FrameLayout
+                android:id="@+id/frame_progress_07"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/linear_progress_bar"/>
+
         </LinearLayout>
 
         <FrameLayout

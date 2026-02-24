@@ -383,7 +383,6 @@
                 android:orientation="horizontal"
                 android:paddingStart="@dimen/padding_side_linear_birth"
                 android:paddingEnd="@dimen/padding_side_linear_birth"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tx_gender">
@@ -429,6 +428,85 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="여성"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_edt_year"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tx_smoke"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_tx_basic_info"
+                android:layout_marginTop="@dimen/margin_top_tx_gender_constraint"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/tx_is_smoke"
+                android:textColor="@color/tx_birth"
+                android:textSize="@dimen/size_tx_birth"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linear_gender" />
+
+            <LinearLayout
+                android:id="@+id/linear_smoke"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_linear_birth"
+                android:layout_marginBottom="@dimen/margin_bottom_linear_gender"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/padding_side_linear_birth"
+                android:paddingEnd="@dimen/padding_side_linear_birth"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tx_smoke">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_non_smoke"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_linear_gender"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_constraint_gender"
+                    android:onClick="@{() -> viewmodel.btnNonSmoke()}">
+
+                    <TextView
+                        android:id="@+id/btn_non_smoke"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/tx_non_smoke"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_edt_year"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Space
+                    android:layout_width="@dimen/space_width_constraint_gender"
+                    android:layout_height="match_parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_smoke"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_linear_gender"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_constraint_gender_not"
+                    android:onClick="@{() -> viewmodel.btnSmoke()}">
+
+                    <TextView
+                        android:id="@+id/btn_smoke"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/tx_smoke"
                         android:textColor="@color/black"
                         android:textSize="@dimen/size_edt_year"
                         app:layout_constraintBottom_toBottomOf="parent"

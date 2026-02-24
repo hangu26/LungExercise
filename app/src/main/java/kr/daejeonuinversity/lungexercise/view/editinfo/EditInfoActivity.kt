@@ -85,6 +85,10 @@ class EditInfoActivity : BaseActivity<ActivityEditInfoBinding>(R.layout.activity
             setGenderBackground(gender == "man")
         }
 
+        vm.smokeState.observe(this@EditInfoActivity) { smoke ->
+            setSmokeBackground(smoke == "비흡연")
+        }
+
         vm.edtDayClickState.observe(this) {
             showNumberPickerDialog(
                 title = "일 선택",
@@ -126,6 +130,7 @@ class EditInfoActivity : BaseActivity<ActivityEditInfoBinding>(R.layout.activity
                 val screeningStr = binding.edtScreening.text.toString()
                 val initialStr = binding.edtInitial.text.toString()
                 val visitStr = binding.edtVisit.text.toString()
+                val smokeStr = vm.smokeState.value ?: "비흡연"
 
                 if (yearStr.isBlank() || monthStr.isBlank() || dayStr.isBlank()) {
                     Toast.makeText(this, "년, 월, 일을 모두 입력해주세요.", Toast.LENGTH_SHORT).show()
@@ -149,7 +154,8 @@ class EditInfoActivity : BaseActivity<ActivityEditInfoBinding>(R.layout.activity
                     height = heightStr.toInt(),
                     screeningNum = screeningStr,
                     initial = initialStr,
-                    visit = visitStr
+                    visit = visitStr,
+                    smoke = smokeStr
                 )
 
                 vm.saveData(userInfo)
@@ -259,6 +265,39 @@ class EditInfoActivity : BaseActivity<ActivityEditInfoBinding>(R.layout.activity
             binding.constraintWoman.background =
                 ContextCompat.getDrawable(this, R.drawable.border_constraint_gender)
             binding.btnWoman.setTextColor(ContextCompat.getColor(this, R.color.white))
+        }
+    }
+
+    private fun setSmokeBackground(isNonSmokerSelected: Boolean) {
+
+        // 비흡연 선택됨
+        if (isNonSmokerSelected) {
+            binding.constraintNonSmoke.background =
+                ContextCompat.getDrawable(this, R.drawable.border_constraint_gender)
+            binding.btnNonSmoke.setTextColor(
+                ContextCompat.getColor(this, R.color.white)
+            )
+        } else {
+            binding.constraintNonSmoke.background =
+                ContextCompat.getDrawable(this, R.drawable.border_constraint_gender_not)
+            binding.btnNonSmoke.setTextColor(
+                ContextCompat.getColor(this, R.color.black)
+            )
+        }
+
+        // 흡연 선택됨
+        if (!isNonSmokerSelected) {
+            binding.constraintSmoke.background =
+                ContextCompat.getDrawable(this, R.drawable.border_constraint_gender)
+            binding.btnSmoke.setTextColor(
+                ContextCompat.getColor(this, R.color.white)
+            )
+        } else {
+            binding.constraintSmoke.background =
+                ContextCompat.getDrawable(this, R.drawable.border_constraint_gender_not)
+            binding.btnSmoke.setTextColor(
+                ContextCompat.getColor(this, R.color.black)
+            )
         }
     }
 

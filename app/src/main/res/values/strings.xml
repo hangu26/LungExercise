@@ -196,6 +196,11 @@
     <string name="tx_screening_number">스크리닝 번호</string>
     <string name="tx_initial">이니셜</string>
     <string name="tx_visit">방문일</string>
+    <string name="tx_smoke">흡연</string>
+    <string name="tx_smoke_detail">현재 흡연 중</string>
+    <string name="tx_non_smoke_detail">현재 흡연하지 않음</string>
+    <string name="tx_non_smoke">비흡연</string>
+    <string name="tx_is_smoke">흡연 여부</string>
 
 
 </resources>

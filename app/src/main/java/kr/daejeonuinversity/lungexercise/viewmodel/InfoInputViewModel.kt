@@ -30,10 +30,10 @@ class InfoInputViewModel(private val repository : InfoRepository, application: A
 
     }
 
-    fun saveBirthday(birthdayDate : String, gender : String, stature : Int, weight : Int, screeningNum : String, initial : String, visit : String){
+    fun saveBirthday(birthdayDate : String, gender : String, stature : Int, weight : Int, screeningNum : String, initial : String, visit : String, smoke : String){
         viewModelScope.launch {
 
-            repository.insertUserInfo(birthdayDate,gender,stature,weight, screeningNum, initial, visit)
+            repository.insertUserInfo(birthdayDate,gender,stature,weight, screeningNum, initial, visit, smoke)
 
         }
     }

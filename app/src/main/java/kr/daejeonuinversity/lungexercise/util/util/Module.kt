@@ -21,6 +21,7 @@ import kr.daejeonuinversity.lungexercise.viewmodel.LungExerciseViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.MainViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.ScreeningViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.SettingViewModel
+import kr.daejeonuinversity.lungexercise.viewmodel.SmokingViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.SplashViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.VideoViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.VisitViewModel
@@ -53,6 +54,7 @@ val module = module {
     viewModel { BreathingViewModel(get(), androidApplication()) }
     viewModel { HistoryViewModel(get(), get(), androidApplication()) }
     viewModel { VideoViewModel(androidApplication()) }
+    viewModel { SmokingViewModel(androidApplication()) }
     viewModel { EditInfoViewModel(get(), androidApplication()) }
     viewModel { HistoryRecordViewModel(get(),androidApplication()) }
     viewModel { WalkHistoryViewModel(get(),get(),get(), androidApplication()) }

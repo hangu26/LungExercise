@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="fragment"
+            type="kr.daejeonuinversity.lungexercise.view.infoinput.fragment.SmokingFragment" />
+
+        <variable
+            name="viewmodel"
+            type="kr.daejeonuinversity.lungexercise.viewmodel.SmokingViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <!-- 제목 -->
+        <TextView
+            android:id="@+id/tx_select_smoking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_start_frag_tx_birth"
+            android:layout_marginTop="@dimen/margin_top_frag_tx_birth"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="흡연 여부 선택"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_tx_input_birth"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- 서브 텍스트 -->
+        <TextView
+            android:id="@+id/tx_select_your_smoking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_tx_select_your_gender"
+            android:text="본인의 흡연 여부를 선택해주세요"
+            android:textColor="@color/color_tx_select_your_gender"
+            android:textSize="@dimen/size_tx_select_your_gender"
+            app:layout_constraintStart_toStartOf="@id/tx_select_smoking"
+            app:layout_constraintTop_toBottomOf="@id/tx_select_smoking" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_smoking_select"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_side_constraint_gender_select"
+            android:layout_marginTop="@dimen/margin_top_constraint_gender_select"
+            android:layout_marginEnd="@dimen/margin_side_constraint_gender_select"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tx_select_your_smoking">
+
+            <!-- 비흡연 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_non_smoker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_constraint_man"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="@{() -> viewmodel.btnNonSmoker()}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/icon_non_smoker"
+                    android:layout_width="@dimen/size_icon_gender_man"
+                    android:layout_height="@dimen/size_icon_gender_man"
+                    android:layout_marginTop="@dimen/margin_top_icon_man"
+                    android:src="@drawable/ic_no_smoke"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:id="@+id/tx_non_smoker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top_tx_gender"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="@string/tx_non_smoke"
+                    android:textSize="@dimen/size_tx_man"
+                    app:layout_constraintTop_toBottomOf="@id/icon_non_smoker"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:id="@+id/tx_non_smoker_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top_tx_man_detail"
+                    android:layout_marginBottom="@dimen/margin_bottom_tx_man_detail"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="@string/tx_non_smoke_detail"
+                    android:textColor="@color/color_tx_man_detail"
+                    android:textSize="@dimen/size_tx_man_detail"
+                    app:layout_constraintTop_toBottomOf="@id/tx_non_smoker"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 흡연 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_smoker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_constraint_woman"
+                android:background="@drawable/border_constraint_man"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="@{() -> viewmodel.btnSmoker()}"
+                app:layout_constraintTop_toBottomOf="@id/constraint_non_smoker"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/icon_smoker"
+                    android:layout_width="@dimen/size_icon_gender_man"
+                    android:layout_height="@dimen/size_icon_gender_man"
+                    android:layout_marginTop="@dimen/margin_top_icon_man"
+                    android:src="@drawable/ic_smoke"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:id="@+id/tx_smoker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top_tx_gender"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="@string/tx_smoke"
+                    android:textSize="@dimen/size_tx_man"
+                    app:layout_constraintTop_toBottomOf="@id/icon_smoker"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:id="@+id/tx_smoker_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top_tx_man_detail"
+                    android:layout_marginBottom="@dimen/margin_bottom_tx_man_detail"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="@string/tx_smoke_detail"
+                    android:textColor="@color/color_tx_man_detail"
+                    android:textSize="@dimen/size_tx_man_detail"
+                    app:layout_constraintTop_toBottomOf="@id/tx_smoker"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

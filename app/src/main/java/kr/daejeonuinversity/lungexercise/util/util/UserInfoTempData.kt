@@ -8,6 +8,7 @@ object UserInfoTempData {
     var screeningNum: String = ""
     var initial: String = ""
     var visit: String = ""
+    var smoke: String = ""
 
     fun clear() {
         birthday = ""

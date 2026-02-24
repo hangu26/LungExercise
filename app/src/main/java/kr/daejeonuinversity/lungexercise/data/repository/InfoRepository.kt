@@ -5,7 +5,7 @@ import kr.daejeonuinversity.lungexercise.data.local.entity.UserInfo
 
 class InfoRepository(private val dao : UserInfoDao) {
 
-    suspend fun insertUserInfo(birthdayDate : String, gender : String, stature : Int, weight : Int, screeningNum : String, initial : String, visit : String){
+    suspend fun insertUserInfo(birthdayDate : String, gender : String, stature : Int, weight : Int, screeningNum : String, initial : String, visit : String, smoke : String){
 
         val userInfo = UserInfo(
             birthday = birthdayDate,
@@ -14,7 +14,8 @@ class InfoRepository(private val dao : UserInfoDao) {
             weight = weight,
             screeningNum = screeningNum,
             initial = initial,
-            visit = visit
+            visit = visit,
+            smoke = smoke
         )
 
         dao.insert(userInfo)

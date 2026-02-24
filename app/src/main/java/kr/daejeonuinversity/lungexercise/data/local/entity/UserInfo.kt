@@ -12,5 +12,6 @@ data class UserInfo(
     val weight: Int,
     val screeningNum : String = "",
     val initial : String = "",
-    val visit : String = ""
+    val visit : String = "",
+    val smoke : String = ""
 )

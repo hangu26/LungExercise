@@ -31,6 +31,9 @@ class EditInfoViewModel(private val repository: InfoRepository, application: App
     private var _txVisit = MutableLiveData<String>()
     val txVisit: LiveData<String> = _txVisit
 
+    private var _txSmoke = MutableLiveData<String>()
+    val txSmoke: LiveData<String> = _txSmoke
+
     private var _txMonth = MutableLiveData<String>()
     val txMonth: LiveData<String> = _txMonth
 
@@ -51,6 +54,9 @@ class EditInfoViewModel(private val repository: InfoRepository, application: App
 
     private var _genderState = MutableLiveData<String>()
     val genderState: LiveData<String> = _genderState
+    
+    private var _smokeState = MutableLiveData<String>()
+    val smokeState: LiveData<String> = _smokeState
 
     private var _edtDayClickState = MutableLiveData<Boolean>()
     val edtDayClickState: LiveData<Boolean> = _edtDayClickState
@@ -105,6 +111,15 @@ class EditInfoViewModel(private val repository: InfoRepository, application: App
     fun btnWoman() {
         _genderState.value = "woman"
     }
+    fun btnNonSmoke() {
+        _smokeState.value = "비흡연"
+    }
+
+    fun btnSmoke() {
+        _smokeState.value = "흡연"
+    }
+
+    
 
     fun saveData(userInfo: UserInfo) {
 
@@ -116,7 +131,8 @@ class EditInfoViewModel(private val repository: InfoRepository, application: App
                 userInfo.weight,
                 userInfo.screeningNum,
                 userInfo.initial,
-                userInfo.visit
+                userInfo.visit,
+                userInfo.smoke
             )
         }
     }
@@ -130,6 +146,7 @@ class EditInfoViewModel(private val repository: InfoRepository, application: App
             _txScreening.value = data?.screeningNum ?: ""
             _txInitial.value = data?.initial ?: ""
             _txVisit.value = data?.visit ?: ""
+            _txSmoke.value = data?.smoke ?: "흡연"
 
             val birthday = data?.birthday ?: ""
             if (birthday.length == 8) {
@@ -145,6 +162,9 @@ class EditInfoViewModel(private val repository: InfoRepository, application: App
             val gender = data?.gender ?: "woman"
 
             _genderState.value = gender
+
+            val smoke = data?.smoke ?: "비흡연"
+            _smokeState.value = smoke
 
             val weight = data?.weight
             val height = data?.height

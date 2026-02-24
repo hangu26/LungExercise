@@ -16,7 +16,8 @@ val databaseModule = module {
             .addMigrations(
                 MIGRATION_10_11,
                 MIGRATION_11_12,
-                MIGRATION_12_13
+                MIGRATION_12_13,
+                MIGRATION_13_14
             )
             .build()
     }
@@ -73,6 +74,14 @@ val MIGRATION_12_13 = object : Migration(12, 13) {
                 expPressure REAL
             )
             """.trimIndent()
+        )
+    }
+}
+
+val MIGRATION_13_14 = object : Migration(13, 14) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL(
+            "ALTER TABLE user_info ADD COLUMN smoke TEXT NOT NULL DEFAULT ''"
         )
     }
 }

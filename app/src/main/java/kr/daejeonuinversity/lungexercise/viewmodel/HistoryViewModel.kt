@@ -79,6 +79,8 @@ class HistoryViewModel(private val repository: BreathRepository, private val use
 
     private val _weight = MutableLiveData<Int>()
 
+    private val _smoke = MutableLiveData<String>()
+
     private var lastClickedDate: LocalDate? = null
 
     init {
@@ -127,6 +129,7 @@ class HistoryViewModel(private val repository: BreathRepository, private val use
             _visit.value = userData?.visit
             _height.value = userData?.height
             _weight.value = userData?.weight
+            _smoke.value = userData?.smoke
 
             /** 주간 데이터 **/
             val map = dateStrings.associateWith { date ->
@@ -196,9 +199,10 @@ class HistoryViewModel(private val repository: BreathRepository, private val use
             "성별",
             "만 나이",
             "연령대",
-            "방문차수",
+            "방문일",
             "키(cm)",
             "몸무게(kg)",
+            "흡연 여부",
 
             //  호흡 기록 요약
             "총횟수",
@@ -221,6 +225,7 @@ class HistoryViewModel(private val repository: BreathRepository, private val use
             _visit.value ?: "",
             _height.value?.toString() ?: "",
             _weight.value?.toString() ?: "",
+            _smoke.value?.toString() ?: "",
 
             //  호흡 기록 요약
             _txTotalCount.value ?: "",
