@@ -75,8 +75,15 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
             if (it) {
                 val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
-                vm.saveBreathData(time, userSeconds, date)
-
+                vm.saveBreathData(
+                    time,
+                    userSeconds,
+                    date,
+                    fvc,
+                    fev1,
+                    ratio,
+                    pressure
+                )
             }
         }
 

@@ -13,7 +13,10 @@ val databaseModule = module {
             BreathDatabase::class.java,
             "breath_database"
         )
-            .addMigrations(MIGRATION_10_11) // 마이그레이션 추가
+            .addMigrations(
+                MIGRATION_10_11,
+                MIGRATION_11_12
+            )
             .build()
     }
 
@@ -31,6 +34,24 @@ val MIGRATION_10_11 = object : Migration(10, 11) {
         database.execSQL("ALTER TABLE user_info ADD COLUMN screeningNum TEXT NOT NULL DEFAULT ''")
         database.execSQL("ALTER TABLE user_info ADD COLUMN initial TEXT NOT NULL DEFAULT ''")
         database.execSQL("ALTER TABLE user_info ADD COLUMN visit TEXT NOT NULL DEFAULT ''")
+    }
+}
+
+val MIGRATION_11_12 = object : Migration(11, 12) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+
+        database.execSQL(
+            "ALTER TABLE breath_record ADD COLUMN avgFvc REAL"
+        )
+        database.execSQL(
+            "ALTER TABLE breath_record ADD COLUMN avgFev1 REAL"
+        )
+        database.execSQL(
+            "ALTER TABLE breath_record ADD COLUMN avgFev1Fvc REAL"
+        )
+        database.execSQL(
+            "ALTER TABLE breath_record ADD COLUMN avgExpPressure REAL"
+        )
     }
 }
 

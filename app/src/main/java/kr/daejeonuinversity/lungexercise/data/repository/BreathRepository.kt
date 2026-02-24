@@ -24,11 +24,18 @@ class BreathRepository(private val dao: BreathRecordDao) {
 
     }
 
-    suspend fun insertOrUpdateBreathRecord(time: Int, isClear: Int, date: String) {
+    suspend fun insertOrUpdateBreathRecord(
+        time: Int,
+        isClear: Int,
+        date: String,
+        fvc: Double?,
+        fev1: Double?,
+        fev1Fvc: Double?,
+        expPressure: Double?
+    ) {
         val existingRecord = dao.getRecordByDate(date)
 
         if (existingRecord != null) {
-            // 기존 데이터 업데이트
             val newTotalCount = existingRecord.totalCount + 1
             val newTotalTime = existingRecord.totalTime + time
             val newAverage = newTotalTime / newTotalCount
@@ -38,21 +45,40 @@ class BreathRepository(private val dao: BreathRecordDao) {
                 totalCount = newTotalCount,
                 totalTime = newTotalTime,
                 average = newAverage,
-                clear = newClear
+                clear = newClear,
+
+                // 🔽 폐기능 평균값 갱신
+                avgFvc = mergeAvg(existingRecord.avgFvc, fvc),
+                avgFev1 = mergeAvg(existingRecord.avgFev1, fev1),
+                avgFev1Fvc = mergeAvg(existingRecord.avgFev1Fvc, fev1Fvc),
+                avgExpPressure = mergeAvg(existingRecord.avgExpPressure, expPressure)
             )
 
             dao.insertOrUpdate(updatedRecord)
 
         } else {
-            // 새 데이터 생성
             val newRecord = BreathRecord(
                 date = date,
                 totalCount = 1,
                 totalTime = time,
                 average = time,
-                clear = isClear
+                clear = isClear,
+
+                avgFvc = fvc,
+                avgFev1 = fev1,
+                avgFev1Fvc = fev1Fvc,
+                avgExpPressure = expPressure
             )
+
             dao.insertOrUpdate(newRecord)
         }
     }
+
+    private fun mergeAvg(old: Double?, new: Double?): Double? =
+        when {
+            new == null -> old
+            old == null -> new
+            else -> (old + new) / 2
+        }
+
 }

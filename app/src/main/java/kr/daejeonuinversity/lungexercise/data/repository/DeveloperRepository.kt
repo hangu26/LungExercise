@@ -43,6 +43,7 @@ class DeveloperRepository(private val userDao : UserInfoDao, private val breathD
 
     }
 
+    /**
     suspend fun insertOrUpdateBreathRecord(time: Int, isClear: Int, date: String) {
         val existingRecord = breathDao.getRecordByDate(date)
 
@@ -74,5 +75,5 @@ class DeveloperRepository(private val userDao : UserInfoDao, private val breathD
             breathDao.insertOrUpdate(newRecord)
         }
     }
-
+**/
 }

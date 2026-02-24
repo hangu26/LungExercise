@@ -136,9 +136,27 @@ class BreathingViewModel(private val repository: BreathRepository, application: 
         exhaleCountJob = null
     }
 
-    fun saveBreathData(normalSeconds: Int, userSeconds: Int, date: String) = viewModelScope.launch {
+    fun saveBreathData(
+        normalSeconds: Int,
+        userSeconds: Int,
+        date: String,
+        fvc: Double?,
+        fev1: Double?,
+        fev1Fvc: Double?,
+        expPressure: Double?
+    ) = viewModelScope.launch {
+
         val clearCount = if (normalSeconds <= userSeconds) 1 else 0
-        repository.insertOrUpdateBreathRecord(userSeconds, clearCount, date)
+
+        repository.insertOrUpdateBreathRecord(
+            time = userSeconds,
+            isClear = clearCount,
+            date = date,
+            fvc = fvc,
+            fev1 = fev1,
+            fev1Fvc = fev1Fvc,
+            expPressure = expPressure
+        )
     }
 
     fun disconnect() {

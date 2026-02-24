@@ -17,7 +17,7 @@ import kr.daejeonuinversity.lungexercise.data.local.entity.UserInfo
 
 @Database(
     entities = [BreathRecord::class, UserInfo::class, SixMinuteWalkTest::class, HeartRateWarning::class, FitResult::class, StepIntervalEntity::class],
-    version = 11
+    version = 12
 )
 abstract class BreathDatabase : RoomDatabase() {
     abstract fun breathRecordDao(): BreathRecordDao
