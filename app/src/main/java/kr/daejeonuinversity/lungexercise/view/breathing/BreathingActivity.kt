@@ -32,6 +32,10 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
     private var userProgressAnimator: ObjectAnimator? = null
     private val time = 8000
     private var userSeconds = 7000
+    private var fvc : Double = 0.0
+    private var fev1 : Double = 0.0
+    private var ratio : Double = 0.0
+    private var pressure : Double = 0.0
     private var hasExhaleHandled = false
     private val backPressedCallback = BackPressedCallback(this)
 
@@ -101,6 +105,10 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
                             resources.getString(R.string.tx_user_time_detail)
                         vm.btnReset()
                         userSeconds = exhale.duration.toInt()
+                        fvc = exhale.fvc
+                        fev1 = exhale.fev1
+                        ratio = exhale.ratio
+                        pressure = exhale.pressure
                         hasExhaleHandled = true
                     }
                 }

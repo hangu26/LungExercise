@@ -107,7 +107,7 @@ class BreathingViewModel(private val repository: BreathRepository, application: 
         if (!isStarted) return
 
         // 이벤트로 전송 (필요 시 ExhaleEvent.End에 fvc, fev1, ratio, pressure를 포함하도록 나중에 수정하세요)
-        _exhaleEvent.postValue(Event(ExhaleEvent.End(durationMs)))
+        _exhaleEvent.postValue(Event(ExhaleEvent.End(durationMs,fvc,fev1,ratio,pressure)))
 
         stopExhaleCounting()
         _isResultAvailable.postValue(true)
