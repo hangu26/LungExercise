@@ -9,13 +9,14 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import kr.daejeonuinversity.lungexercise.R
 import kr.daejeonuinversity.lungexercise.data.repository.BreathRepository
+import kr.daejeonuinversity.lungexercise.data.repository.InfoRepository
 import kr.daejeonuinversity.lungexercise.model.CalendarDay
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
-class HistoryViewModel(private val repository: BreathRepository, application: Application) :
+class HistoryViewModel(private val repository: BreathRepository, private val userRepository: InfoRepository, application: Application) :
     AndroidViewModel(application) {
 
     private val _backClicked = MutableLiveData<Boolean>()
@@ -55,16 +56,28 @@ class HistoryViewModel(private val repository: BreathRepository, application: Ap
     val txClearCount: LiveData<String> get() = _txClearCount
 
     private val _avgFvc = MutableLiveData<Double?>()
-    val avgFvc: LiveData<Double?> get() = _avgFvc
 
     private val _avgFev1 = MutableLiveData<Double?>()
-    val avgFev1: LiveData<Double?> get() = _avgFev1
 
     private val _avgFev1Fvc = MutableLiveData<Double?>()
-    val avgFev1Fvc: LiveData<Double?> get() = _avgFev1Fvc
 
     private val _avgExpPressure = MutableLiveData<Double?>()
-    val avgExpPressure: LiveData<Double?> get() = _avgExpPressure
+
+    private val _screeningNum = MutableLiveData<String>()
+
+    private val _initial = MutableLiveData<String>()
+
+    private val _visit = MutableLiveData<String>()
+
+    private val _gender = MutableLiveData<String>()
+
+    private val _birth = MutableLiveData<String>()
+
+    private val _ageRange = MutableLiveData<String>()
+
+    private val _height = MutableLiveData<Int>()
+
+    private val _weight = MutableLiveData<Int>()
 
     private var lastClickedDate: LocalDate? = null
 
@@ -101,6 +114,19 @@ class HistoryViewModel(private val repository: BreathRepository, application: Ap
             val dateStrings = datesOfWeek.map { it.toString() } // "yyyy-MM-dd"
 
             val records = repository.getBreathRecordsByDates(dateStrings)
+            val userData = userRepository.getUserDates()
+
+            _screeningNum.value = userData?.screeningNum
+            _initial.value = userData?.initial
+            _gender.value = userData?.gender
+            if (userData != null) {
+                val age = calculateAge(userData.birthday).toString()
+                _birth.value = age
+                _ageRange.value = calculateAgeGroup(age.toInt())
+            }
+            _visit.value = userData?.visit
+            _height.value = userData?.height
+            _weight.value = userData?.weight
 
             /** 주간 데이터 **/
             val map = dateStrings.associateWith { date ->
@@ -162,7 +188,19 @@ class HistoryViewModel(private val repository: BreathRepository, application: Ap
     }
 
     fun createExcelContent(): List<List<String>> {
+
         val headers = listOf(
+            //  사용자 정보
+            "스크리닝 번호",
+            "이니셜",
+            "성별",
+            "만 나이",
+            "연령대",
+            "방문차수",
+            "키(cm)",
+            "몸무게(kg)",
+
+            //  호흡 기록 요약
             "총횟수",
             "평균시간(s)",
             "총시간(s)",
@@ -174,6 +212,17 @@ class HistoryViewModel(private val repository: BreathRepository, application: Ap
         )
 
         val values = listOf(
+            //  사용자 정보
+            _screeningNum.value ?: "",
+            _initial.value ?: "",
+            _gender.value ?: "",
+            _birth.value ?: "",        // 이미 String
+            _ageRange.value ?: "",
+            _visit.value ?: "",
+            _height.value?.toString() ?: "",
+            _weight.value?.toString() ?: "",
+
+            //  호흡 기록 요약
             _txTotalCount.value ?: "",
             _txAverageTime.value ?: "",
             _txTotalTime.value ?: "",
@@ -187,7 +236,7 @@ class HistoryViewModel(private val repository: BreathRepository, application: Ap
         val data = mutableListOf<List<String>>()
         data.add(headers)
 
-        // 데이터가 모두 비어있으면 빈 행 추가
+        // 값이 전부 비어있으면 빈 행 추가
         if (values.all { it.isBlank() }) {
             data.add(List(headers.size) { "" })
         } else {
@@ -196,7 +245,6 @@ class HistoryViewModel(private val repository: BreathRepository, application: Ap
 
         return data
     }
-
     fun removeClickedData(isClickedDate: LocalDate) {
 
         viewModelScope.launch {
@@ -230,6 +278,39 @@ class HistoryViewModel(private val repository: BreathRepository, application: Ap
         }
 
         _calendarDays.value = days
+    }
+
+    fun calculateAge(birth: String): Int {
+        // birth: "20000101"
+        val birthYear = birth.substring(0, 4).toInt()
+        val birthMonth = birth.substring(4, 6).toInt()
+        val birthDay = birth.substring(6, 8).toInt()
+
+        val today = LocalDate.now()
+
+        var age = today.year - birthYear
+
+        // 아직 생일 안 지났으면 -1
+        if (today.monthValue < birthMonth ||
+            (today.monthValue == birthMonth && today.dayOfMonth < birthDay)
+        ) {
+            age--
+        }
+
+        return age
+    }
+
+    fun calculateAgeGroup(age: Int): String {
+        return when (age) {
+            in 0..9 -> "10대 미만"
+            in 10..19 -> "10대"
+            in 20..29 -> "20대"
+            in 30..39 -> "30대"
+            in 40..49 -> "40대"
+            in 50..59 -> "50대"
+            in 60..69 -> "60대"
+            else -> "70대 이상"
+        }
     }
 
 }

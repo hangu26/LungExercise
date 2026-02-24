@@ -51,7 +51,7 @@ val module = module {
     viewModel { LungExerciseViewModel(androidApplication()) }
     viewModel { WalkingTestViewModel(get(), get(), androidApplication()) }
     viewModel { BreathingViewModel(get(), androidApplication()) }
-    viewModel { HistoryViewModel(get(), androidApplication()) }
+    viewModel { HistoryViewModel(get(), get(), androidApplication()) }
     viewModel { VideoViewModel(androidApplication()) }
     viewModel { EditInfoViewModel(get(), androidApplication()) }
     viewModel { HistoryRecordViewModel(get(),androidApplication()) }

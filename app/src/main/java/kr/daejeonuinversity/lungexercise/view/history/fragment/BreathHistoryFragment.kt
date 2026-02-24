@@ -97,6 +97,14 @@ class BreathHistoryFragment :
 
                 // Android-safe 컬럼 너비 설정
                 val columnWidths = listOf(
+                    11 * 256,
+                    11 * 256,
+                    11 * 256,
+                    11 * 256,
+                    11 * 256,
+                    11 * 256,
+                    11 * 256,
+                    11 * 256,
                     18 * 256, // 총횟수
                     18 * 256, // 평균시간
                     18 * 256, // 총시간
