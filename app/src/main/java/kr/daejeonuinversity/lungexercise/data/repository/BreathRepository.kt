@@ -1,10 +1,13 @@
 package kr.daejeonuinversity.lungexercise.data.repository
 
+import kr.daejeonuinversity.lungexercise.data.local.dao.BreathRawRecordDao
 import kr.daejeonuinversity.lungexercise.data.local.dao.BreathRecordDao
+import kr.daejeonuinversity.lungexercise.data.local.entity.BreathRawRecord
 import kr.daejeonuinversity.lungexercise.data.local.entity.BreathRecord
 import java.time.LocalDate
 
-class BreathRepository(private val dao: BreathRecordDao) {
+class BreathRepository(private val dao: BreathRecordDao, private val rawDao : BreathRawRecordDao) {
+
 
     suspend fun getAllRecordedDates(): List<String> {
         return dao.getAllDates()
@@ -33,6 +36,21 @@ class BreathRepository(private val dao: BreathRecordDao) {
         fev1Fvc: Double?,
         expPressure: Double?
     ) {
+
+        // ✅ 1. 원본 먼저 저장
+        rawDao.insert(
+            BreathRawRecord(
+                date = date,
+                timestamp = System.currentTimeMillis(),
+                exhaleTime = time,
+                isClear = isClear,
+                fvc = fvc,
+                fev1 = fev1,
+                fev1Fvc = fev1Fvc,
+                expPressure = expPressure
+            )
+        )
+
         val existingRecord = dao.getRecordByDate(date)
 
         if (existingRecord != null) {

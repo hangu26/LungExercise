@@ -12,7 +12,7 @@ import org.koin.core.scope.get
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    single { BreathRepository(get()) }
+    single { BreathRepository(get(), get()) }
     single { InfoRepository(get()) }
     single { PreferenceRepo(get()) }
     single { DeveloperRepository(get(), get()) }

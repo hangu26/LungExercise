@@ -15,7 +15,8 @@ val databaseModule = module {
         )
             .addMigrations(
                 MIGRATION_10_11,
-                MIGRATION_11_12
+                MIGRATION_11_12,
+                MIGRATION_12_13
             )
             .build()
     }
@@ -26,6 +27,7 @@ val databaseModule = module {
     single { get<BreathDatabase>().heartRateWarning() }
     single { get<BreathDatabase>().fitResult() }
     single { get<BreathDatabase>().stepIntervalDao() }
+    single { get<BreathDatabase>().breathRawRecordDao() }
 }
 
 val MIGRATION_10_11 = object : Migration(10, 11) {
@@ -51,6 +53,26 @@ val MIGRATION_11_12 = object : Migration(11, 12) {
         )
         database.execSQL(
             "ALTER TABLE breath_record ADD COLUMN avgExpPressure REAL"
+        )
+    }
+}
+
+val MIGRATION_12_13 = object : Migration(12, 13) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL(
+            """
+            CREATE TABLE IF NOT EXISTS breath_raw_record (
+                id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                date TEXT NOT NULL,
+                timestamp INTEGER NOT NULL,
+                exhaleTime INTEGER NOT NULL,
+                isClear INTEGER NOT NULL,
+                fvc REAL,
+                fev1 REAL,
+                fev1Fvc REAL,
+                expPressure REAL
+            )
+            """.trimIndent()
         )
     }
 }
