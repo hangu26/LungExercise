@@ -54,6 +54,18 @@ class HistoryViewModel(private val repository: BreathRepository, application: Ap
     private val _txClearCount = MutableLiveData<String>()
     val txClearCount: LiveData<String> get() = _txClearCount
 
+    private val _avgFvc = MutableLiveData<Double?>()
+    val avgFvc: LiveData<Double?> get() = _avgFvc
+
+    private val _avgFev1 = MutableLiveData<Double?>()
+    val avgFev1: LiveData<Double?> get() = _avgFev1
+
+    private val _avgFev1Fvc = MutableLiveData<Double?>()
+    val avgFev1Fvc: LiveData<Double?> get() = _avgFev1Fvc
+
+    private val _avgExpPressure = MutableLiveData<Double?>()
+    val avgExpPressure: LiveData<Double?> get() = _avgExpPressure
+
     private var lastClickedDate: LocalDate? = null
 
     init {
@@ -108,6 +120,10 @@ class HistoryViewModel(private val repository: BreathRepository, application: Ap
                     res.getString(R.string.tx_total_time_format, clickedDateData.totalTime / 1000)
                 _txClearCount.value =
                     res.getString(R.string.tx_clear_count_format) + " ${clickedDateData.clear}" + "회" + " / " + (clickedDateData.totalCount) + "회"
+                _avgFvc.value = clickedDateData.avgFvc
+                _avgFev1.value = clickedDateData.avgFev1
+                _avgFev1Fvc.value = clickedDateData.avgFev1Fvc
+                _avgExpPressure.value = clickedDateData.avgExpPressure
             } else {
                 _txTotalCount.value = res.getString(R.string.tx_total_count_empty)
                 _txAverageTime.value = res.getString(R.string.tx_average_time_empty)
@@ -146,13 +162,26 @@ class HistoryViewModel(private val repository: BreathRepository, application: Ap
     }
 
     fun createExcelContent(): List<List<String>> {
-        val headers = listOf("총횟수", "평균시간(s)", "총시간(s)", "클리어/총횟수")
+        val headers = listOf(
+            "총횟수",
+            "평균시간(s)",
+            "총시간(s)",
+            "클리어/총횟수",
+            "평균 FVC",
+            "평균 FEV1",
+            "평균 FEV1/FVC",
+            "평균 호기압력"
+        )
 
         val values = listOf(
             _txTotalCount.value ?: "",
             _txAverageTime.value ?: "",
             _txTotalTime.value ?: "",
-            _txClearCount.value ?: ""
+            _txClearCount.value ?: "",
+            _avgFvc.value?.toString() ?: "",
+            _avgFev1.value?.toString() ?: "",
+            _avgFev1Fvc.value?.toString() ?: "",
+            _avgExpPressure.value?.toString() ?: ""
         )
 
         val data = mutableListOf<List<String>>()
@@ -160,7 +189,7 @@ class HistoryViewModel(private val repository: BreathRepository, application: Ap
 
         // 데이터가 모두 비어있으면 빈 행 추가
         if (values.all { it.isBlank() }) {
-            data.add(listOf("", "", "", ""))
+            data.add(List(headers.size) { "" })
         } else {
             data.add(values)
         }

@@ -95,6 +95,23 @@ class BreathHistoryFragment :
                     }
                 }
 
+                // Android-safe 컬럼 너비 설정
+                val columnWidths = listOf(
+                    18 * 256, // 총횟수
+                    18 * 256, // 평균시간
+                    18 * 256, // 총시간
+                    18 * 256, // 클리어/총횟수
+                    18 * 256, // 평균 FVC
+                    18 * 256, // 평균 FEV1
+                    18 * 256, // 평균 FEV1/FVC
+                    18 * 256  // 평균 호기압력
+                )
+
+                for (i in columnWidths.indices) {
+                    sheet.setColumnWidth(i, columnWidths[i])
+                }
+
+
                 // 파일로 저장
                 FileOutputStream(file).use { fos ->
                     workbook.write(fos)
