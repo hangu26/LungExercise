@@ -16,7 +16,6 @@ import kr.daejeonuinversity.lungexercise.data.local.entity.StepIntervalEntity
 import kr.daejeonuinversity.lungexercise.data.repository.InfoRepository
 import kr.daejeonuinversity.lungexercise.data.repository.TotalStepRepository
 import kr.daejeonuinversity.lungexercise.model.CalendarDay
-import kr.daejeonuinversity.lungexercise.util.util.StepReceiver
 import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.time.LocalDate

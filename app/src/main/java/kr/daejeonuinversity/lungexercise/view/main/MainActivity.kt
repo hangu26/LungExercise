@@ -71,13 +71,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun onStart() = mViewModel.let{ vm ->
         super.onStart()
-        vm.startReceiving()
-        vm.requestStepsFromWatch()
+//        vm.startReceiving()
+//        vm.requestStepsFromWatch()
     }
 
     override fun onStop() {
         super.onStop()
-        mViewModel.stopReceiving()
+//        mViewModel.stopReceiving()
     }
 
     private fun handleRapidClicks(

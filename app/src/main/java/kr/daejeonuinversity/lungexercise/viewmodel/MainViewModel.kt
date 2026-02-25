@@ -44,41 +44,42 @@ class MainViewModel(private val dao: StepIntervalDao, application: Application) 
         _btnHistoryClicked.value = true
     }
 
+    /**
     val stepReceiver = StepReceiver(application, dao) { steps, intervalStart ->
-        // intervalStart 구간에 steps가 들어올 때마다 로그
-        val cal = Calendar.getInstance().apply { timeInMillis = intervalStart }
-        val startStr =
-            String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE))
-        val endCal = cal.clone() as Calendar
-        endCal.add(Calendar.MINUTE, 30)
-        val endStr = String.format(
-            "%02d:%02d",
-            endCal.get(Calendar.HOUR_OF_DAY),
-            endCal.get(Calendar.MINUTE)
-        )
+    // intervalStart 구간에 steps가 들어올 때마다 로그
+    val cal = Calendar.getInstance().apply { timeInMillis = intervalStart }
+    val startStr =
+    String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE))
+    val endCal = cal.clone() as Calendar
+    endCal.add(Calendar.MINUTE, 30)
+    val endStr = String.format(
+    "%02d:%02d",
+    endCal.get(Calendar.HOUR_OF_DAY),
+    endCal.get(Calendar.MINUTE)
+    )
 
-        Log.d("StepReceiver", "📱 실시간 로그: $startStr ~ $endStr 걸음수: $steps")
+    Log.d("StepReceiver", "📱 실시간 로그: $startStr ~ $endStr 걸음수: $steps")
     }
 
     fun requestStepsFromWatch() {
-        val nodeClient = Wearable.getNodeClient(application)
-        nodeClient.connectedNodes.addOnSuccessListener { nodes ->
-            nodes.forEach { node ->
-                Wearable.getMessageClient(application)
-                    .sendMessage(node.id, "/request_steps", byteArrayOf())
-                    .addOnSuccessListener { Log.d("MainActivity", "워치로 요청 전송 성공") }
-            }
-        }
+    val nodeClient = Wearable.getNodeClient(application)
+    nodeClient.connectedNodes.addOnSuccessListener { nodes ->
+    nodes.forEach { node ->
+    Wearable.getMessageClient(application)
+    .sendMessage(node.id, "/request_steps", byteArrayOf())
+    .addOnSuccessListener { Log.d("MainActivity", "워치로 요청 전송 성공") }
+    }
+    }
     }
 
     fun startReceiving() {
-        stepReceiver.register()
+    stepReceiver.register()
     }
 
     fun stopReceiving() {
-        stepReceiver.unregister()
+    stepReceiver.unregister()
     }
-
+     **/
     private val _breathData = MutableLiveData<String>()
     val breathData: LiveData<String> = _breathData
 

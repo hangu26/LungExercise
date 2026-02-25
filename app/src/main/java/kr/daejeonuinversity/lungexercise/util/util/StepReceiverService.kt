@@ -64,18 +64,42 @@ class StepReceiver(
                     val steps = dataMap.getInt("steps")
                     val intervalStart = dataMap.getLong("intervalStart")
 
-                    saveToRoom(intervalStart, steps)
-                    onStepReceived(steps, intervalStart)
-                    logStep(steps, intervalStart)
+                    // 이미 DB에 interval이 있으면 무시
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val existing = dao.getIntervalsByDate(
+                            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                                .format(intervalStart)
+                        ).firstOrNull { it.intervalStart == intervalStart }
+
+                        if (existing == null) {
+                            val dateKey = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                                .format(intervalStart)
+                            dao.insertOrUpdate(
+                                StepIntervalEntity(intervalStart, dateKey, steps)
+                            )
+                        }
+                    }
                 }
             }
     }
 
     private fun saveToRoom(intervalStart: Long, steps: Int) {
         val dateKey = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(intervalStart)
-        val entity = StepIntervalEntity(intervalStart, dateKey, steps)
+
         CoroutineScope(Dispatchers.IO).launch {
-            dao.insertOrUpdate(entity) // Insert or Replace
+            // 1️⃣ 기존 데이터 조회
+            val existing = dao.getIntervalsByDate(dateKey)
+                .firstOrNull { it.intervalStart == intervalStart }
+
+            val totalSteps = if (existing != null) {
+                existing.steps + steps // 기존 값에 합산
+            } else {
+                steps
+            }
+
+            // 2️⃣ 합산 결과를 insertOrUpdate 호출
+            val entity = StepIntervalEntity(intervalStart, dateKey, totalSteps)
+            dao.insertOrUpdate(entity)
         }
     }
 
@@ -97,9 +121,3 @@ class StepReceiver(
         Log.d("StepReceiver", "📥 $startTimeStr 부터 $endTimeStr 까지 걸음수: $steps")
     }
 }
-
-
-
-
-
-
