@@ -125,20 +125,26 @@ object MaskBluetoothManager {
 
     private fun startPolling() {
         pollingThread = Thread {
-            while (isConnected) {
+            // 소켓이 실제로 연결되어 있는지 이중 체크
+            while (isConnected && bluetoothSocket?.isConnected == true) {
                 sendBoardDataRequest()
                 try { Thread.sleep(POLLING_INTERVAL_MS) } catch (e: InterruptedException) { break }
             }
-        }
-        pollingThread?.start()
+        }.apply { start() }
     }
 
     private fun sendBoardDataRequest() {
         val command = byteArrayOf(0xf0.toByte(), 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0d)
         try {
-            bluetoothSocket?.outputStream?.write(command)
-        } catch (e: IOException) {
+            // ?.let을 사용하여 소켓과 스트림이 확실히 존재할 때만 write 실행
+            bluetoothSocket?.let { socket ->
+                if (socket.isConnected) {
+                    socket.outputStream?.write(command)
+                }
+            }
+        } catch (e: Exception) { // IOException뿐만 아니라 모든 예외 방어
             Log.e("마스크 응답", "명령어 전송 실패: ${e.message}")
+            isConnected = false // 에러 발생 시 연결 끊김으로 간주하여 폴링 중단
         }
     }
 
