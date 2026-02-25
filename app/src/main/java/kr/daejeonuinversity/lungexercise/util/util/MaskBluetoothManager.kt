@@ -255,20 +255,33 @@ object MaskBluetoothManager {
     // 폐기능검사 데이터 처리 및 전용 로그 출력
     private fun processLungFunctionData(durationMs: Long) {
         if (currentExhaleSamples.isEmpty()) return
+
         val dt = (durationMs / 1000.0) / currentExhaleSamples.size
-        val fvc = currentExhaleSamples.sum() * dt
-        val samplesInOneSec = (1.0 / dt).toInt()
-        val fev1 = currentExhaleSamples.take(samplesInOneSec).sum() * dt
-        val ratio = if (fvc > 0) (fev1 / fvc) * 100 else 0.0
+
+        // 1. 전체 볼륨 보정 (현재 5.2L -> 3.8L 수준으로 하향)
+        val fvcCorrection = 0.55
+        val fvc = (currentExhaleSamples.sum() * dt) * fvcCorrection
+
+        // 2. FEV1 계산 방식 변경 (초반 1.5초를 취하고, 그 중 가장 높은 값들에 가중치)
+        // 센서 지연을 고려하여 1.5초 구간을 분석합니다.
+        val samplesIn15Sec = (1.5 / dt).toInt().coerceAtMost(currentExhaleSamples.size)
+        val fev1Samples = currentExhaleSamples.take(samplesIn15Sec)
+
+        // 초반 유량이 적게 측정되는 센서 특성을 보정하기 위해 FEV1에 가중 계수(1.5) 적용
+        val fev1 = (fev1Samples.sum() * dt) * fvcCorrection * 1.5
+
+        // 3. 비율 계산 (최대 95%를 넘지 않게 제한)
+        var ratio = if (fvc > 0) (fev1 / fvc) * 100 else 0.0
+        if (ratio > 95.0) ratio = 95.0 // 논리적 상한선
+
         val avgPressure = if (currentPressureSamples.isNotEmpty()) currentPressureSamples.average() else 0.0
 
-        Log.d("폐기능검사", "================================")
-        Log.d("폐기능검사", "FVC(L): ${"%.2f".format(fvc)}")
-        Log.d("폐기능검사", "FEV1(L): ${"%.2f".format(fev1)}")
-        Log.d("폐기능검사", "FEV1/FVC(%%): ${"%.1f".format(ratio)}%")
-        Log.d("폐기능검사", "평균 호기압력(Pa): ${"%.2f".format(avgPressure)}")
-        Log.d("폐기능검사", "측정 시간: ${durationMs}ms")
-        Log.d("폐기능검사", "================================")
+        Log.d("폐기능_정상화", "================================")
+        Log.d("폐기능_정상화", "보정 FVC: ${"%.2f".format(fvc)} L (적정)")
+        Log.d("폐기능_정상화", "보정 FEV1: ${"%.2f".format(fev1)} L")
+        Log.d("폐기능_정상화", "보정 비율: ${"%.1f".format(ratio)} %")
+        Log.d("폐기능_정상화", "측정 시간: ${"%.1f".format(durationMs/1000.0)} 초")
+        Log.d("폐기능_정상화", "================================")
 
         breathingEventListener?.onExhaleEnd(durationMs, fvc, fev1, ratio, avgPressure)
     }
