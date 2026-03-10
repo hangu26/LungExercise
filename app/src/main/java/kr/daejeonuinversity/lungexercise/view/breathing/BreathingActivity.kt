@@ -21,6 +21,7 @@ import kr.daejeonuinversity.lungexercise.util.util.BackPressedCallback
 import kr.daejeonuinversity.lungexercise.view.exercise.LungExerciseActivity
 import kr.daejeonuinversity.lungexercise.view.main.MainActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.BreathingViewModel
+import kr.daejeonuinversity.lungexercise.viewmodel.EditInfoViewModel
 import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -28,9 +29,10 @@ import java.util.Locale
 
 class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activity_breathing) {
 
+    private val eViewModel: EditInfoViewModel by inject()
     private val bViewModel: BreathingViewModel by inject()
     private var userProgressAnimator: ObjectAnimator? = null
-    private val time = 8000
+    private var time = 8000
     private var userSeconds = 7000
     private var fvc : Double = 0.0
     private var fev1 : Double = 0.0
@@ -51,9 +53,13 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
         backPressedCallback.addCallbackActivity(this, LungExerciseActivity::class.java)
 
         observe()
+        observeInfo()
     }
 
     private fun observe() = bViewModel.let { vm ->
+
+
+
         vm.backClicked.observe(this) {
             if (it) {
                 val intent = Intent(this@BreathingActivity, LungExerciseActivity::class.java)
@@ -151,6 +157,31 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
                 }
             }
         }
+    }
+
+    private fun observeInfo() {
+        eViewModel.fetchUserInfo()
+
+        eViewModel.genderState.observe(this) { gender ->
+            val yearStr = eViewModel.txYear.value ?: "1990"
+            val currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)
+            val age = currentYear - (yearStr.toIntOrNull() ?: 1990)
+
+            time = calculateTargetExhaleTime(age, gender)
+
+            binding.txNormalTime.text = (time/1000).toString()
+
+            Log.d("목표설정", "나이: $age, 성별: $gender -> 목표시간: ${time/1000.0}초")
+        }
+    }
+
+    private fun calculateTargetExhaleTime(age: Int, gender: String): Int {
+        val logTime = if (gender == "man" || gender == "남") {
+            3.1226 - (0.0036 * age)
+        } else {
+            3.2274 - (0.0102 * age)
+        }
+        return (kotlin.math.exp(logTime) * 1000).toInt()
     }
 
     fun onStartClicked(view: View) {

@@ -33,6 +33,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val mViewModel: MainViewModel by inject()
     private val backPressedCallback = BackPressedCallback(this)
     private val clickTimestamps = mutableListOf<Long>()
+
     companion object {
         private const val REQUEST_CODE_BLUETOOTH_CONNECT = 1001
     }
@@ -52,7 +53,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 onThresholdReached = {
                     // 개발자 액티비티로 이동
                     val intent = Intent(this, DeveloperActivity::class.java)
-                    startActivityAnimation(intent,this@MainActivity)
+                    startActivityAnimation(intent, this@MainActivity)
                     finish()
                 }
             )
@@ -69,7 +70,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     }
 
-    override fun onStart() = mViewModel.let{ vm ->
+    override fun onStart() = mViewModel.let { vm ->
         super.onStart()
 //        vm.startReceiving()
 //        vm.requestStepsFromWatch()
@@ -96,6 +97,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             onThresholdReached()
         }
     }
+
     private fun checkBluetoothConnectPermissionAndConnect() {
         Log.d("메인 액티비티", "checkBluetoothConnectPermissionAndConnect 호출됨")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) { // Android 12 이상 권한 필요
@@ -205,9 +207,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             false
         }
 
-        binding.btnInsight.setOnTouchListener{ v, event ->
-            setTouchAnimation(v,event)
-            if (event?.action == MotionEvent.ACTION_UP){
+        binding.btnInsight.setOnTouchListener { v, event ->
+            setTouchAnimation(v, event)
+            if (event?.action == MotionEvent.ACTION_UP) {
                 val intent = Intent(this@MainActivity, InsightActivity::class.java)
                 startActivityAnimation(intent, this@MainActivity)
                 finish()
@@ -215,9 +217,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             false
         }
 
-        binding.btnTestBreath.setOnTouchListener{ v, event ->
-            setTouchAnimation(v,event)
-            if (event?.action == MotionEvent.ACTION_UP){
+        binding.btnTestBreath.setOnTouchListener { v, event ->
+            setTouchAnimation(v, event)
+            if (event?.action == MotionEvent.ACTION_UP) {
                 val intent = Intent(this@MainActivity, TestBreathActivity::class.java)
                 startActivityAnimation(intent, this@MainActivity)
                 finish()

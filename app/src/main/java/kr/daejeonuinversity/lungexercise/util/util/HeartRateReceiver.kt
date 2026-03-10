@@ -48,17 +48,35 @@ class HeartRateReceiver(
                 when {
                     path.startsWith("/heart_rate") -> {
                         val heartRate = dataMap.getFloat("heart_rate")
-                        onDataReceived(mapOf("type" to "heart_rate", "value" to heartRate, "timestamp" to timestamp))
+                        onDataReceived(
+                            mapOf(
+                                "type" to "heart_rate",
+                                "value" to heartRate,
+                                "timestamp" to timestamp
+                            )
+                        )
                     }
 
                     path.startsWith("/step_count") -> {
                         val steps = dataMap.getInt("step_count")
-                        onDataReceived(mapOf("type" to "step_count", "value" to steps, "timestamp" to timestamp))
+                        onDataReceived(
+                            mapOf(
+                                "type" to "step_count",
+                                "value" to steps,
+                                "timestamp" to timestamp
+                            )
+                        )
                     }
 
                     path.startsWith("/spo2") -> {
                         val spo2 = dataMap.getFloat("spo2")
-                        onDataReceived(mapOf("type" to "spo2", "value" to spo2, "timestamp" to timestamp))
+                        onDataReceived(
+                            mapOf(
+                                "type" to "spo2",
+                                "value" to spo2,
+                                "timestamp" to timestamp
+                            )
+                        )
                     }
 
                     else -> {

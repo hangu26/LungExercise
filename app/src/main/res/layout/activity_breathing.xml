@@ -367,9 +367,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/linear_start_and_result"
+            android:layout_marginTop="@dimen/margin_top_linear_start_and_result"
             android:layout_marginEnd="@dimen/linear_start_and_result"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/margin_top_linear_start_and_result"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraint_progress_user">
@@ -389,11 +389,11 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:gravity="center">
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
                         android:id="@+id/icon_start_breath"

@@ -18,8 +18,15 @@ object MaskBluetoothManager {
 
     interface BreathingEventListener {
         fun onExhaleStart()
+
         // fvc, fev1, ratio에 이어 pressure(압력) 추가
-        fun onExhaleEnd(durationMs: Long, fvc: Double, fev1: Double, ratio: Double, pressure: Double)
+        fun onExhaleEnd(
+            durationMs: Long,
+            fvc: Double,
+            fev1: Double,
+            ratio: Double,
+            pressure: Double
+        )
     }
 
     private var breathingEventListener: BreathingEventListener? = null
@@ -79,7 +86,11 @@ object MaskBluetoothManager {
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(
+                        context,
+                        Manifest.permission.BLUETOOTH_CONNECT
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
                     Log.d("마스크 응답", "BLUETOOTH_CONNECT 권한 없음")
                     connectCallback?.onConnectFailed("블루투스 권한이 없습니다")
                     return@Thread
@@ -100,11 +111,26 @@ object MaskBluetoothManager {
         }.start()
     }
 
+    fun calculateTargetExhaleTime(age: Int, gender: String): Double {
+        // gender_n: 남성=0, 여성=1 (PDF 기준)
+        return if (gender == "남" || gender == "Male") {
+            // 남성 공식: exp(3.1226 - 0.0036 * age)
+            kotlin.math.exp(3.1226 - (0.0036 * age))
+        } else {
+            // 여성 공식: exp(3.2274 - 0.0102 * age)
+            kotlin.math.exp(3.2274 - (0.0102 * age))
+        }
+    }
+
     @SuppressLint("CommitPrefEdits")
     private fun connecting(device: BluetoothDevice, context: Context) {
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) return
+                if (ActivityCompat.checkSelfPermission(
+                        context,
+                        Manifest.permission.BLUETOOTH_CONNECT
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) return
             }
             bluetoothSocket = device.createRfcommSocketToServiceRecord(uuid)
             bluetoothSocket?.connect()
@@ -128,13 +154,18 @@ object MaskBluetoothManager {
             // 소켓이 실제로 연결되어 있는지 이중 체크
             while (isConnected && bluetoothSocket?.isConnected == true) {
                 sendBoardDataRequest()
-                try { Thread.sleep(POLLING_INTERVAL_MS) } catch (e: InterruptedException) { break }
+                try {
+                    Thread.sleep(POLLING_INTERVAL_MS)
+                } catch (e: InterruptedException) {
+                    break
+                }
             }
         }.apply { start() }
     }
 
     private fun sendBoardDataRequest() {
-        val command = byteArrayOf(0xf0.toByte(), 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0d)
+        val command =
+            byteArrayOf(0xf0.toByte(), 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0d)
         try {
             // ?.let을 사용하여 소켓과 스트림이 확실히 존재할 때만 write 실행
             bluetoothSocket?.let { socket ->
@@ -213,7 +244,10 @@ object MaskBluetoothManager {
         }
         if (isInhaling && deviation <= sensorThreshold) {
             isInhaling = false
-            Log.d("숨 감지", "들이마심 종료, 지속시간: ${(System.currentTimeMillis() - inhaleStartTime) / 1000.0} 초")
+            Log.d(
+                "숨 감지",
+                "들이마심 종료, 지속시간: ${(System.currentTimeMillis() - inhaleStartTime) / 1000.0} 초"
+            )
         }
 
         // 내쉬기 감지 (기존 유지 + 데이터 수집 추가)
@@ -262,6 +296,17 @@ object MaskBluetoothManager {
     private fun processLungFunctionData(durationMs: Long) {
         if (currentExhaleSamples.isEmpty()) return
 
+        val userAge = 40
+        val userGender = "남"
+        val targetSeconds = calculateTargetExhaleTime(userAge, userGender)
+        val actualSeconds = durationMs / 1000.0
+
+        if (actualSeconds >= targetSeconds) {
+            Log.d("훈련결과", "목표 달성! (목표: ${targetSeconds}초, 실제: ${actualSeconds}초)")
+        } else {
+            Log.d("훈련결과", "조금 더 길게 불어보세요.")
+        }
+
         val dt = (durationMs / 1000.0) / currentExhaleSamples.size
 
         // 1. 전체 볼륨 보정 (현재 5.2L -> 3.8L 수준으로 하향)
@@ -280,13 +325,14 @@ object MaskBluetoothManager {
         var ratio = if (fvc > 0) (fev1 / fvc) * 100 else 0.0
         if (ratio > 95.0) ratio = 95.0 // 논리적 상한선
 
-        val avgPressure = if (currentPressureSamples.isNotEmpty()) currentPressureSamples.average() else 0.0
+        val avgPressure =
+            if (currentPressureSamples.isNotEmpty()) currentPressureSamples.average() else 0.0
 
         Log.d("폐기능_정상화", "================================")
         Log.d("폐기능_정상화", "보정 FVC: ${"%.2f".format(fvc)} L (적정)")
         Log.d("폐기능_정상화", "보정 FEV1: ${"%.2f".format(fev1)} L")
         Log.d("폐기능_정상화", "보정 비율: ${"%.1f".format(ratio)} %")
-        Log.d("폐기능_정상화", "측정 시간: ${"%.1f".format(durationMs/1000.0)} 초")
+        Log.d("폐기능_정상화", "측정 시간: ${"%.1f".format(durationMs / 1000.0)} 초")
         Log.d("폐기능_정상화", "================================")
 
         breathingEventListener?.onExhaleEnd(durationMs, fvc, fev1, ratio, avgPressure)
@@ -300,7 +346,15 @@ object MaskBluetoothManager {
         var v = ((idleRaw - rawVelocity) / (idleRaw - minRaw)) * maxVelocity
         v = v.coerceIn(0.0, maxVelocity)
         val pressure = 0.5 * rho * v.pow(2.0)
-        Log.d("PressureSensor", "Raw: ${rawVelocity.toInt()} -> 속도: ${String.format("%.2f", v)} m/s -> 압력: ${String.format("%.2f", pressure)} Pa")
+        Log.d(
+            "PressureSensor",
+            "Raw: ${rawVelocity.toInt()} -> 속도: ${
+                String.format(
+                    "%.2f",
+                    v
+                )
+            } m/s -> 압력: ${String.format("%.2f", pressure)} Pa"
+        )
     }
 
     fun disconnect() {
@@ -309,7 +363,8 @@ object MaskBluetoothManager {
         pollingThread?.interrupt()
         try {
             bluetoothSocket?.close()
-        } catch (_: IOException) {}
+        } catch (_: IOException) {
+        }
         bluetoothSocket = null
     }
 }

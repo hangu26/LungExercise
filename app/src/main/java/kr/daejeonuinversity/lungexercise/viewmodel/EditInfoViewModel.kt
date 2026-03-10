@@ -54,7 +54,7 @@ class EditInfoViewModel(private val repository: InfoRepository, application: App
 
     private var _genderState = MutableLiveData<String>()
     val genderState: LiveData<String> = _genderState
-    
+
     private var _smokeState = MutableLiveData<String>()
     val smokeState: LiveData<String> = _smokeState
 
@@ -70,28 +70,27 @@ class EditInfoViewModel(private val repository: InfoRepository, application: App
     private var _btnVisitState = MutableLiveData<Boolean>()
     val btnVisitState = _btnVisitState
 
-    fun btnVisitClicked(){
+    fun btnVisitClicked() {
         _btnVisitState.value = true
     }
 
-    fun edtDayClicked(){
+    fun edtDayClicked() {
 
         _edtDayClickState.value = true
 
     }
 
-    fun edtMonthClicked(){
+    fun edtMonthClicked() {
 
         _edtMonthClickState.value = true
 
     }
 
-    fun edtYearClicked(){
+    fun edtYearClicked() {
 
         _edtYearClickState.value = true
 
     }
-
 
 
     fun btnBack() {
@@ -111,6 +110,7 @@ class EditInfoViewModel(private val repository: InfoRepository, application: App
     fun btnWoman() {
         _genderState.value = "woman"
     }
+
     fun btnNonSmoke() {
         _smokeState.value = "비흡연"
     }
@@ -119,7 +119,6 @@ class EditInfoViewModel(private val repository: InfoRepository, application: App
         _smokeState.value = "흡연"
     }
 
-    
 
     fun saveData(userInfo: UserInfo) {
 

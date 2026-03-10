@@ -67,9 +67,9 @@ class EditInfoActivity : BaseActivity<ActivityEditInfoBinding>(R.layout.activity
             }
         }
 
-        vm.btnVisitState.observe(this@EditInfoActivity){
+        vm.btnVisitState.observe(this@EditInfoActivity) {
 
-            if (it){
+            if (it) {
 
                 val showCustomDatePicker = ShowCustomDatePicker()
 
