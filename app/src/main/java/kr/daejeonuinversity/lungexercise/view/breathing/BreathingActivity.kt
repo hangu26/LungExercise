@@ -1,25 +1,21 @@
 package kr.daejeonuinversity.lungexercise.view.breathing
 
-import android.Manifest
 import android.animation.ObjectAnimator
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AlertDialog
 import kr.daejeonuinversity.lungexercise.R
 import kr.daejeonuinversity.lungexercise.databinding.ActivityBreathingBinding
 import kr.daejeonuinversity.lungexercise.util.base.BaseActivity
 import kr.daejeonuinversity.lungexercise.util.event.ExhaleEvent
 import kr.daejeonuinversity.lungexercise.util.event.ResultEvent
 import kr.daejeonuinversity.lungexercise.util.util.BackPressedCallback
+import kr.daejeonuinversity.lungexercise.util.util.MaskBluetoothManager
 import kr.daejeonuinversity.lungexercise.view.exercise.LungExerciseActivity
-import kr.daejeonuinversity.lungexercise.view.main.MainActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.BreathingViewModel
 import kr.daejeonuinversity.lungexercise.viewmodel.EditInfoViewModel
 import org.koin.android.ext.android.inject
@@ -38,6 +34,7 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
     private var fev1 : Double = 0.0
     private var ratio : Double = 0.0
     private var pressure : Double = 0.0
+    private var isMicMeasureMode = false
     private var hasExhaleHandled = false
     private val backPressedCallback = BackPressedCallback(this)
 
@@ -57,8 +54,6 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
     }
 
     private fun observe() = bViewModel.let { vm ->
-
-
 
         vm.backClicked.observe(this) {
             if (it) {
@@ -184,12 +179,39 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
         return (kotlin.math.exp(logTime) * 1000).toInt()
     }
 
-    fun onStartClicked(view: View) {
-        bViewModel.btnStart()
+    fun onStartClicked(_view: View) {
+        if (MaskBluetoothManager.isConnectedPublic) {
+            isMicMeasureMode = false
+            bViewModel.btnStart()
+            return
+        }
+
+        showMicConnectDialog()
     }
 
-    fun onStopClicked(view: View) {
+    fun onStopClicked(_view: View) {
         bViewModel.btnStop()
+    }
+
+    private fun showMicConnectDialog() {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.dialog_mic_connect_title))
+            .setMessage(getString(R.string.dialog_mic_connect_message))
+            .setPositiveButton(R.string.dialog_mic_connect_yes) { _, _ ->
+                isMicMeasureMode = true
+                bViewModel.btnStart()
+                Toast.makeText(
+                    this,
+                    getString(R.string.toast_mic_measurement_placeholder),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            .setNegativeButton(R.string.dialog_mic_connect_no) { _, _ ->
+                val intent = Intent(this, LungExerciseActivity::class.java)
+                startActivityAnimation(intent, this)
+                finish()
+            }
+            .show()
     }
 
     private fun resetProgressBar() {

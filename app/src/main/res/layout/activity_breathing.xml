@@ -383,7 +383,7 @@
                 android:elevation="@dimen/elevation_btn_start_and_result"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
-                android:onClick="@{() -> viewmodel.btnStart()}"
+                android:onClick="@{activity::onStartClicked}"
                 android:visibility="visible">
 
                 <LinearLayout
@@ -431,7 +431,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
-                android:onClick="@{() -> viewmodel.btnStop()}"
+                android:onClick="@{activity::onStopClicked}"
                 android:visibility="gone">
 
                 <LinearLayout

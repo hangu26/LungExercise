@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LungExercise</string>
+    <string name="app_name">호흡ON</string>
     <string name="tx_app_name">건강 관리</string>
     <string name="tx_app_bar_input_info">사용자 정보 입력</string>
     <string name="tx_btn_next">다음으로</string>
@@ -201,6 +201,13 @@
     <string name="tx_non_smoke_detail">현재 흡연하지 않음</string>
     <string name="tx_non_smoke">비흡연</string>
     <string name="tx_is_smoke">흡연 여부</string>
+
+    <string name="dialog_mic_connect_title">마이크 연결</string>
+    <string name="dialog_mic_connect_message">블루투스 마스크가 연결되어 있지 않습니다.
+마이크와 연결하시겠습니까?</string>
+    <string name="dialog_mic_connect_yes">예</string>
+    <string name="dialog_mic_connect_no">아니오</string>
+    <string name="toast_mic_measurement_placeholder">마이크 호흡 측정을 시작합니다.</string>
 
 
 </resources>
