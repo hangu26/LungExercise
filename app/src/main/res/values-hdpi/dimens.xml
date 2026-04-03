@@ -492,6 +492,11 @@
     <dimen name="margin_bottom_cl_today_target">19dp</dimen>
     <dimen name="margin_side_ll_six_walk_calendar">15dp</dimen>
     <dimen name="height_linear_bluetooth_list">250dp</dimen>
+    <dimen name="padding_side_dialog_mic_blow">24dp</dimen>
+    <dimen name="padding_vertical_dialog_mic_blow">28dp</dimen>
+    <dimen name="size_anim_blow">180dp</dimen>
+    <dimen name="size_tx_mic_blow_guide">15sp</dimen>
+    <dimen name="size_tx_countdown">52sp</dimen>
 
 
 </resources>

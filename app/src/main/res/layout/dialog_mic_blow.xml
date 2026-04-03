@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_result_breathing"
+    android:paddingStart="@dimen/padding_side_dialog_mic_blow"
+    android:paddingEnd="@dimen/padding_side_dialog_mic_blow"
+    android:paddingTop="@dimen/padding_vertical_dialog_mic_blow"
+    android:paddingBottom="@dimen/padding_vertical_dialog_mic_blow">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_blow"
+        android:layout_width="@dimen/size_anim_blow"
+        android:layout_height="@dimen/size_anim_blow"
+        app:lottie_rawRes="@raw/anim_blow"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tx_mic_blow_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/pretendard_semibold"
+        android:gravity="center"
+        android:text="@string/dialog_mic_blow_guide"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_tx_mic_blow_guide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lottie_blow" />
+
+    <TextView
+        android:id="@+id/tx_countdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="5"
+        android:textColor="@color/app_color"
+        android:textSize="@dimen/size_tx_countdown"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tx_mic_blow_guide" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

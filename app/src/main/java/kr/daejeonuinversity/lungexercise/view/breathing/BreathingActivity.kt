@@ -1,13 +1,17 @@
 package kr.daejeonuinversity.lungexercise.view.breathing
 
+import android.Manifest
 import android.animation.ObjectAnimator
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import kr.daejeonuinversity.lungexercise.R
 import kr.daejeonuinversity.lungexercise.databinding.ActivityBreathingBinding
 import kr.daejeonuinversity.lungexercise.util.base.BaseActivity
@@ -37,6 +41,7 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
     private var isMicMeasureMode = false
     private var hasExhaleHandled = false
     private val backPressedCallback = BackPressedCallback(this)
+    private val RECORD_AUDIO_REQUEST = 2001
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +62,7 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
 
         vm.backClicked.observe(this) {
             if (it) {
+                if (isMicMeasureMode) bViewModel.stopMicListening()
                 val intent = Intent(this@BreathingActivity, LungExerciseActivity::class.java)
                 startActivityAnimation(intent, this@BreathingActivity)
                 finish()
@@ -190,6 +196,7 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
     }
 
     fun onStopClicked(_view: View) {
+        if (isMicMeasureMode) bViewModel.stopMicListening()
         bViewModel.btnStop()
     }
 
@@ -199,12 +206,17 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
             .setMessage(getString(R.string.dialog_mic_connect_message))
             .setPositiveButton(R.string.dialog_mic_connect_yes) { _, _ ->
                 isMicMeasureMode = true
-                bViewModel.btnStart()
-                Toast.makeText(
-                    this,
-                    getString(R.string.toast_mic_measurement_placeholder),
-                    Toast.LENGTH_SHORT
-                ).show()
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+                    == PackageManager.PERMISSION_GRANTED
+                ) {
+                    showMicBlowDialog()
+                } else {
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(Manifest.permission.RECORD_AUDIO),
+                        RECORD_AUDIO_REQUEST
+                    )
+                }
             }
             .setNegativeButton(R.string.dialog_mic_connect_no) { _, _ ->
                 val intent = Intent(this, LungExerciseActivity::class.java)
@@ -212,6 +224,31 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
                 finish()
             }
             .show()
+    }
+
+    private fun showMicBlowDialog() {
+        val dialog = MicBlowDialog(this) {
+            // 5초 카운트 종료 → 측정 시작
+            bViewModel.btnStart()
+            bViewModel.startMicListening()
+        }
+        dialog.show()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == RECORD_AUDIO_REQUEST) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (isMicMeasureMode) showMicBlowDialog()
+            } else {
+                isMicMeasureMode = false
+                Toast.makeText(this, "마이크 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun resetProgressBar() {

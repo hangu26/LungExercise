@@ -24,6 +24,7 @@ import kr.daejeonuinversity.lungexercise.util.event.Event
 import kr.daejeonuinversity.lungexercise.util.event.ExhaleEvent
 import kr.daejeonuinversity.lungexercise.util.event.ResultEvent
 import kr.daejeonuinversity.lungexercise.util.util.MaskBluetoothManager
+import kr.daejeonuinversity.lungexercise.util.util.MicBreathingManager
 import java.io.IOException
 import java.util.UUID
 
@@ -161,6 +162,22 @@ class BreathingViewModel(private val repository: BreathRepository, application: 
 
     fun disconnect() {
         MaskBluetoothManager.disconnect()
+    }
+
+    /** 마이크 호흡 감지 시작 (isMicMeasureMode 시 사용) */
+    fun startMicListening() {
+        MicBreathingManager.setListener(this)
+        MicBreathingManager.start(application)
+    }
+
+    /** 마이크 호흡 감지 중지 */
+    fun stopMicListening() {
+        MicBreathingManager.stop()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        MicBreathingManager.stop()
     }
 
     open class Event<out T>(private val content: T) {

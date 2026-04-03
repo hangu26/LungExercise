@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_bottom_tx_app_name"
             android:fontFamily="@font/crimson_bold"
-            android:text="BreathFit"
+            android:text="@string/tx_app_name"
             android:textColor="@color/white"
             android:textSize="@dimen/size_tx_app_name"
             app:layout_constraintBottom_toBottomOf="parent"
