@@ -15,10 +15,16 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         android:background="@color/background_main">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_main">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -67,7 +73,7 @@
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_air_quality"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -483,8 +489,67 @@
 
             </LinearLayout>
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/btn_pdf_guide"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_constraint_insight"
+                android:layout_marginTop="@dimen/margin_constraint_insight"
+                android:layout_marginEnd="@dimen/margin_constraint_insight"
+                android:onClick="@{() -> activity.onPdfGuideClick()}"
+                android:text="@string/tx_insight_pdf_button"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cl_air_quality" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_pdf_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_constraint_insight"
+                android:layout_marginTop="@dimen/margin_constraint_insight"
+                android:layout_marginEnd="@dimen/margin_constraint_insight"
+                android:layout_marginBottom="@dimen/margin_constraint_insight"
+                android:background="@drawable/border_cl_air_quality"
+                android:paddingStart="@dimen/padding_side_cl_air_quality"
+                android:paddingTop="@dimen/padding_vertical_cl_air_quality"
+                android:paddingEnd="@dimen/padding_side_cl_air_quality"
+                android:paddingBottom="@dimen/padding_vertical_cl_air_quality"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_pdf_guide">
+
+                <TextView
+                    android:id="@+id/tv_pdf_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="@string/tx_insight_pdf_title"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_tx_air_quality"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/ll_pdf_pages"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_pdf_title" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </layout>

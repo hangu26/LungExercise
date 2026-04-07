@@ -3,21 +3,27 @@ package kr.daejeonuinversity.lungexercise.view.insight
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Address
 import android.location.Geocoder
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.Matrix
+import android.graphics.pdf.PdfRenderer
 import android.os.Bundle
+import android.os.ParcelFileDescriptor
 import android.util.Log
+import android.view.View
+import android.widget.LinearLayout
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.LocationServices
 import kr.daejeonuinversity.lungexercise.R
 import kr.daejeonuinversity.lungexercise.databinding.ActivityInsightBinding
-import kr.daejeonuinversity.lungexercise.model.AirItem
 import kr.daejeonuinversity.lungexercise.util.base.BaseActivity
 import kr.daejeonuinversity.lungexercise.util.util.BackPressedCallback
 import kr.daejeonuinversity.lungexercise.view.main.MainActivity
 import kr.daejeonuinversity.lungexercise.viewmodel.InsightViewModel
 import org.koin.android.ext.android.inject
+import java.io.File
 import java.io.IOException
 import java.util.Locale
 
@@ -25,6 +31,12 @@ class InsightActivity : BaseActivity<ActivityInsightBinding>(R.layout.activity_i
 
     private val iViewModel: InsightViewModel by inject()
     private val backPressedCallback = BackPressedCallback(this)
+    private var isPdfRendered = false
+
+    companion object {
+        private const val PDF_FILE_NAME = "insight.pdf"
+        private const val PDF_ASSET_PATH = "insight/insight.pdf"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +49,20 @@ class InsightActivity : BaseActivity<ActivityInsightBinding>(R.layout.activity_i
         observe()
         backPressedCallback.addCallbackActivity(this, MainActivity::class.java)
         fetchAirDataByCurrentLocation()
+        setupPdfPreview()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (binding.clPdfSection.visibility == View.VISIBLE && !isPdfRendered) {
+            refreshPdfPreview()
+            isPdfRendered = true
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
     private fun observe() = iViewModel.let { vm ->
@@ -149,6 +174,100 @@ class InsightActivity : BaseActivity<ActivityInsightBinding>(R.layout.activity_i
                 }
             }
         }
+    }
+
+    private fun setupPdfPreview() {
+        binding.clPdfSection.visibility = View.GONE
+        binding.llPdfPages.removeAllViews()
+        isPdfRendered = false
+    }
+
+    fun onPdfGuideClick() {
+        binding.clPdfSection.visibility = View.VISIBLE
+        if (!isPdfRendered) {
+            refreshPdfPreview()
+            isPdfRendered = true
+        }
+    }
+
+    private fun refreshPdfPreview() {
+        val pdfFile = copyBundledPdfToCache()
+        if (!pdfFile.exists()) {
+            binding.llPdfPages.removeAllViews()
+            return
+        }
+
+        renderPdfPages(pdfFile)
+    }
+
+    private fun copyBundledPdfToCache(): File {
+        val cacheFile = File(cacheDir, PDF_FILE_NAME)
+        return try {
+            assets.open(PDF_ASSET_PATH).use { input ->
+                cacheFile.outputStream().use { output ->
+                    input.copyTo(output)
+                }
+            }
+            cacheFile
+        } catch (e: Exception) {
+            Log.e("InsightActivity", "Bundled PDF load error: ${e.message}", e)
+            File(cacheDir, "missing_$PDF_FILE_NAME")
+        }
+    }
+
+    private fun renderPdfPages(pdfFile: File) {
+        try {
+            binding.llPdfPages.removeAllViews()
+            ParcelFileDescriptor.open(pdfFile, ParcelFileDescriptor.MODE_READ_ONLY).use { pfd ->
+                PdfRenderer(pfd).use { renderer ->
+                    for (pageIndex in 0 until renderer.pageCount) {
+                        renderer.openPage(pageIndex).use { page ->
+                            val targetWidth = (resources.displayMetrics.widthPixels - dpToPx(56)).coerceAtLeast(1)
+                            val scale = targetWidth.toFloat() / page.width.toFloat()
+                            val targetHeight = (page.height * scale).toInt().coerceAtLeast(1)
+
+                            val bitmap = Bitmap.createBitmap(
+                                targetWidth,
+                                targetHeight,
+                                Bitmap.Config.ARGB_8888
+                            )
+                            bitmap.eraseColor(Color.WHITE)
+
+                            val matrix = Matrix().apply { postScale(scale, scale) }
+                            page.render(
+                                bitmap,
+                                null,
+                                matrix,
+                                PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY
+                            )
+
+                            val imageView = AppCompatImageView(this@InsightActivity).apply {
+                                adjustViewBounds = true
+                                setImageBitmap(bitmap)
+                                setBackgroundColor(Color.WHITE)
+                                layoutParams = LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.MATCH_PARENT,
+                                    LinearLayout.LayoutParams.WRAP_CONTENT
+                                ).apply {
+                                    if (pageIndex < renderer.pageCount - 1) {
+                                        bottomMargin = dpToPx(12)
+                                    }
+                                }
+                            }
+
+                            binding.llPdfPages.addView(imageView)
+                        }
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("InsightActivity", "PDF render error: ${e.message}", e)
+            binding.llPdfPages.removeAllViews()
+        }
+    }
+
+    private fun dpToPx(dp: Int): Int {
+        return (dp * resources.displayMetrics.density).toInt()
     }
 
     override fun onRequestPermissionsResult(

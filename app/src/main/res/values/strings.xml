@@ -210,5 +210,10 @@
     <string name="toast_mic_measurement_placeholder">마이크 호흡 측정을 시작합니다.</string>
     <string name="dialog_mic_blow_guide">마이크에 입을 가져다 대고\n숨을 내 뱉으세요</string>
 
+    <string name="tx_insight_pdf_title">호흡 가이드 PDF</string>
+    <string name="tx_insight_pdf_button">호흡 가이드 PDF 보기</string>
+    <string name="tx_pdf_loaded">불러온 파일: %1$s</string>
+    <string name="tx_pdf_load_error">PDF를 불러오지 못했습니다.</string>
+
 
 </resources>
