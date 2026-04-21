@@ -61,6 +61,8 @@ class BreathingViewModel(private val repository: BreathRepository, application: 
 
     private var exhaleCountJob: Job? = null
 
+    private var targetExhaleTimeMs: Long = 8000L
+
     private var isStarted = false
 
     init {
@@ -72,6 +74,7 @@ class BreathingViewModel(private val repository: BreathRepository, application: 
         _btnStartState.value = true
         _isResultAvailable.value = false
         _userTime.value = "0 초"
+        _txPercent.value = "0 %"
     }
 
     fun btnStop() {
@@ -88,6 +91,10 @@ class BreathingViewModel(private val repository: BreathRepository, application: 
 
     fun btnBack() {
         _backClicked.value = true
+    }
+
+    fun setTargetExhaleTime(targetTimeMs: Int) {
+        targetExhaleTimeMs = targetTimeMs.toLong().coerceAtLeast(1L)
     }
 
     fun btnResult() {
@@ -124,7 +131,8 @@ class BreathingViewModel(private val repository: BreathRepository, application: 
             var seconds = 0
             while (true) {
                 _userTime.postValue("$seconds 초")
-                val percent = ((seconds * 100) / 8).coerceAtMost(100)
+                val elapsedMs = seconds * 1000L
+                val percent = ((elapsedMs * 100) / targetExhaleTimeMs).coerceAtMost(100)
                 _txPercent.postValue("$percent %")
                 seconds++
                 delay(1000L)

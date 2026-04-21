@@ -169,8 +169,10 @@ class BreathingActivity : BaseActivity<ActivityBreathingBinding>(R.layout.activi
             val age = currentYear - (yearStr.toIntOrNull() ?: 1990)
 
             time = calculateTargetExhaleTime(age, gender)
+            bViewModel.setTargetExhaleTime(time)
 
             binding.txNormalTime.text = (time/1000).toString()
+            binding.txEightSecond.text = "${time / 1000}초"
 
             Log.d("목표설정", "나이: $age, 성별: $gender -> 목표시간: ${time/1000.0}초")
         }
